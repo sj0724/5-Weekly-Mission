@@ -26,6 +26,12 @@
   --Gray-10: #E7EFFB;
   --Gray-cta: #F5F5F5;
   --Background: #F0F6FF;
+  --Gradient-purpleblue-to-skyblue: linear-gradient(91deg, var(--Primary) 0.12%, #6AE3FE 101.84%);
+  --Gradient-yellow-to-blue: linear-gradient(277deg, #6FBAFF 59.22%, #FFD88B 93.66%);
+  --Gradient-blue-to-white: linear-gradient(99deg, #6D7CCD 19.76%, rgba(82, 136, 133, 0.22) 52.69%);
+  --Gradient-blue-to-pink: linear-gradient(271deg, #FE578F -9.84%, #68E8F9 107.18%);
+  --Slogan-gradient: linear-gradient(91deg, var(--Primary) 17.28%, #FF9F9F 74.98%);
+  --TextBox-gradient: linear-gradient(96deg, #FE8A8A 1.72%, #A4CEFF 74.97%);
 }
 
 *{
@@ -46,7 +52,7 @@ nav{
   gap: 8px;
   width: 100%;
   top: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 .navModal{
@@ -70,7 +76,7 @@ a{
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  background: var(--gra-purpleblue-to-skyblue, linear-gradient(91deg, var(--Primary) 0.12%, #6AE3FE 101.84%));
+  background: var(--Gradient-purpleblue-to-skyblue);
   color: var(--Gray-cta);
   padding: 16px 20px;
   font-family: Pretendard;
@@ -133,7 +139,7 @@ header {
 }
 
 .slogan_gradient{
-  background: linear-gradient(91deg, var(--Primary) 17.28%, #FF9F9F 74.98%);
+  background: var(--Slogan-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -153,33 +159,28 @@ header {
 }
 
 main{
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
+  padding: 120px 0;
   width: 100%;
   background-color: var(--Section);
+  gap: 100px;
+}
+
+main section:nth-child(even){
+  flex-direction: row-reverse;
 }
 
 section{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 100px;
-}
-
-section:first-child{
-  margin-top: 120px;
-}
-
-section:last-child{
-  margin-bottom: 120px;
-}
-
-article{
-  display: flex;
-  align-items: center;
   gap: 157px;
+  margin: 0 auto;
 }
 
-.article__textBox{
+.section__textBox{
   display: flex;
   width: 291px;
   flex-direction: column;
@@ -198,13 +199,13 @@ article{
 }
 
 .textBox__title-1__gradient{
-  background: linear-gradient(96deg, #FE8A8A 1.72%, #A4CEFF 74.97%);
+  background: var(--TextBox-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.article__contents{
+.section__contents{
   position: relative;
   display: flex;
   width: 550px;
@@ -213,16 +214,16 @@ article{
   background: var(--Background);
 }
 
-.article__contents__container{
+.section__contents__container{
   display: inline-flex;
   align-items: center;
 }
 
-.article__contents__container img{
+.section__contents__container img{
   margin-right: -12px;
 }
 
-.article__contents__emptyContent{
+.section__contents__emptyContent{
   position: absolute;
   width: 244px;
   height: 239px;
@@ -232,7 +233,7 @@ article{
   margin: 102px 154px 109px 152px; 
 }
 
-.article__contents__emptyContent img{
+.section__contents__emptyContent img{
   position: absolute;
   object-fit: contain;
   top: 210px;
@@ -244,14 +245,14 @@ article{
 }
 
 .textBox__title-2__gradient{
-  background: linear-gradient(277deg, #6FBAFF 59.22%, #FFD88B 93.66%);
+  background: var(--Gradient-yellow-to-blue);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .textBox__title-3__gradient{
-  background: linear-gradient(99deg, #6D7CCD 19.76%, rgba(82, 136, 133, 0.22) 52.69%);
+  background: var(--Gradient-blue-to-white);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -294,7 +295,7 @@ article{
 }
 
 .textBox__title-4__gradient{
-  background: var(--Fandom-K-gra-blue-to-pink, linear-gradient(271deg, #FE578F -9.84%, #68E8F9 107.18%));
+  background: var(--Gradient-blue-to-pink);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

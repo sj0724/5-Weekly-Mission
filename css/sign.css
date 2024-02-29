@@ -7,6 +7,12 @@
   --Black: #000000;
   --Primary: #6D6AFE;
   --Backgournd: #F0F6FF;
+  --Linkbrary-white: #FFFFFF;
+  --Grey-Light: #F5F5F5;
+  --Linkbrary-gray20: #CCD5E3;
+  --Linkbrary-gray10: #E7EFFB;
+  --Linkbrary-gray100: #373740;
+  --Gradient-purpleblue-to-skyblue: linear-gradient(91deg, #6D6AFE 0.12%, #6AE3FE 101.84%);
 }
 
 *{
@@ -14,12 +20,16 @@
 }
 
 body{
+  padding: 200px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 0 auto;
   background: var(--Backgournd);
 }
 
 section{
-  margin: 238px 0 auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,7 +54,11 @@ a{
   line-height: normal;
 }
 
-.mainLogin{
+button{
+  cursor: pointer;
+}
+
+.signMain{
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -54,7 +68,7 @@ a{
   width: fit-content;
 }
 
-.mainLogin__signinLogo{
+.signMain__logo{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -62,19 +76,19 @@ a{
   gap: 16px;
 }
 
-.mainLogin__signinQusetion{
+.signMain__qusetion{
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
-.mainLogin__signinQusetion span{
+.signMain__qusetion span{
   font-size: 16px;
   line-height: normal;
 }
 
-.mainLogin__signinInput{
+.signMain__signForm{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -82,6 +96,7 @@ a{
 }
 
 .inputModal{
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -95,8 +110,8 @@ input{
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  border: 1px solid var(--Linkbrary-gray20, #CCD5E3);
-  background: var(--Linkbrary-white, #FFF);
+  border: 1px solid var(--Linkbrary-gray20);
+  background: var(--Linkbrary-white);
   font-size: 16px;
   line-height: 24px;
 }
@@ -105,24 +120,23 @@ input:focus{
   border: 1px solid var(--Primary);
 }
 
-form{
-  position: relative;
+.eyeBtn{
+  position: absolute;
+  border: none;
+  margin: 0;
+  padding: 0;
+  right: 15px;
+  bottom: 20px;
+  height: 16px;
 }
 
-.mainLogin__loginBtn{
-  cursor: pointer;
-  display: flex;
+.signMain__modalBtn{
   width: 400px;
   padding: 16px 20px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  border: none;
   border-radius: 8px;
-  background: var(--gra-purpleblue-to-skyblue, linear-gradient(91deg, #6D6AFE 0.12%, #6AE3FE 101.84%));
-}
-
-.mainLogin__loginBtn span{
-  color: var(--Grey-Light, #F5F5F5);
+  background: var(--Gradient-purpleblue-to-skyblue);
+  color: var(--Grey-Light);
   font-family: Pretendard;
   font-size: 18px;
   font-style: normal;
@@ -130,38 +144,28 @@ form{
   line-height: normal;
 }
 
-.snsLogin{
+.socialLogin{
   display: flex;
   width: 400px;
   padding: 12px 24px;
   justify-content: space-between;
   align-items: center;
   border-radius: 8px;
-  border: 1px solid var(--Linkbrary-gray20, #CCD5E3);
-  background: var(--Linkbrary-gray10, #E7EFFB);
+  border: 1px solid var(--Linkbrary-gray20);
+  background: var(--Linkbrary-gray10);
+  color: var(--Linkbrary-gray100);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
-.snsLogin span{
-  color: var(--Linkbrary-gray100, #373740);
-}
-
-.snsLogin__snsLogo{
+.socialLogin__logo{
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
-}
-
-.logo{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 42px;
-  width: 42px;
-  background-size: cover;
-  background-position: center;
-  padding: 10px;
 }
 
 .mainLogo{
@@ -169,6 +173,19 @@ form{
   height: 22px;
 }
 
-.snsLogo a{
-  position: absolute;
+.socialLogin__logo a{
+  display: flex;
+  height: 42px;
+  width: 42px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.google {
+  background-color: var(--Linkbrary-white);
+}
+
+.kakao {
+ background-color: #F5E14B;
 }
