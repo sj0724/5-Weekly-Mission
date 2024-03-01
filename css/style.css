@@ -107,6 +107,7 @@ header {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding-top: 70px;
 }
 
 .header__contents{
@@ -115,7 +116,6 @@ header {
   justify-content: flex-end;
   align-items: center;
   gap: 40px;
-  padding-top: 70px;
 }
 
 .header__contents img{
@@ -145,7 +145,7 @@ header {
   padding: 50px 40px 0 40px;
   margin: 0 auto;
   width: 1200px;
-  height: 590px;
+  aspect-ratio: 2;
   overflow: hidden;
 }
 
@@ -176,9 +176,12 @@ section{
   margin: 0 auto;
 }
 
+section img{
+  width: 100%;
+}
+
 .section__textBox{
   display: flex;
-  width: 291px;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
@@ -205,39 +208,9 @@ section{
   position: relative;
   display: flex;
   width: 550px;
-  height: 450px;
+  aspect-ratio: 1.2;
   border-radius: 15px;
   background: var(--Background);
-}
-
-.section__contents__container{
-  display: inline-flex;
-  align-items: center;
-}
-
-.section__contents__container img{
-  margin-right: -12px;
-}
-
-.section__contents__emptyContent{
-  position: absolute;
-  width: 244px;
-  height: 239px;
-  flex-shrink: 0;
-  border-radius: 11px;
-  border: 2px solid var(--Primary);
-  margin: 102px 154px 109px 152px; 
-}
-
-.section__contents__emptyContent img{
-  position: absolute;
-  object-fit: contain;
-  top: 210px;
-  left: 210px;
-}
-
-.folderSection{
-  padding: 114px 68px 66px 68px;
 }
 
 .textBox__title-2__gradient{
@@ -252,42 +225,6 @@ section{
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.shareSection{
-  position: relative;
-  padding: 114px 68px 66px 68px;
-  border-radius: 25px;
-  box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.08);
-  background-image: url(/image/image\ 25.png);
-  background-size: 160%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.shareDark{
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.shareSection img{
-  z-index: 1;
-}
-
-.searchSection{
-  overflow: hidden;
-}
-
-.searchSection__Image{
-  position: relative;
-  top: 55px;
-  left: 60px;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  background-image: url(/image/스크린샷\ 2023-03-17\ 오후\ 3.22\ 1.png);
-  background-size: cover;
 }
 
 .textBox__title-4__gradient{
@@ -342,10 +279,50 @@ footer{
   nav{
     padding: 20px 32px;
   }
+
+  header{
+    padding-top: 40px;
+  }
+
+  .header__image{
+    width: 698px;
+  }
+
+  section{
+    gap: 51px;
+  }
+
+  .section__contents{
+    width: 385px;
+  }
 }
 
 @media(max-width: 768px){
   html {
     font-size: 8px;
+  }
+
+  header{
+    padding: 0 32px;
+  }
+
+  main{
+    padding: 40px 32px
+  }
+
+  .header__image{
+    width: 100%;
+  }
+
+  section{
+    flex-direction: column;
+  }
+
+  .section__contents{
+    width: 100%;
+  }
+
+  .description{
+    font-size: 2rem;
   }
 }
