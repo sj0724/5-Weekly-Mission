@@ -246,7 +246,7 @@ footer{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .footer__menu__modal{
@@ -258,7 +258,7 @@ footer{
 .footer__menu__modal a{
   color: #CFCFCF;
   font-family: Pretendard;
-  font-size: 1rem;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -302,6 +302,10 @@ footer{
     font-size: 8px;
   }
 
+  main section:nth-child(even){
+    flex-direction: column;
+  }
+  
   header{
     padding: 0 32px;
   }
@@ -324,5 +328,9 @@ footer{
 
   .description{
     font-size: 2rem;
+  }
+
+  footer{
+    padding: 32px 32px 64px;
   }
 }
