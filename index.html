@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <meta property="og:url" content="https://week2-sangjun.netlify.app/">
+  <meta property="og:title" content="Linkbrary">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/image/image 25.png">
+  <meta property="og:description" content="세상의 모든 정보를 쉽게 저장하고 관리해 보세요">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/css/color.css">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +19,7 @@
 <body>
   <nav>
     <div class="navModal">
-      <a href="/index.html"><img src="image/logo.svg" alt="Linkbrary nav logo"></a>
+      <a href="/"><img src="/image/logo.svg" alt="Linkbrary nav logo"></a>
       <a href="/signin.html" class="cta cta-short">로그인</a>
     </div>
   </nav>
@@ -25,102 +31,96 @@
       </h1>
         <a href="/signup.html" class="cta cta-long">링크 추가하기</a>
       <div class="header__image">
-        <img src="image/image 25.png" alt="hedaer image">
+        <img src="/image/image 25.png" alt="hedaer image">
       </div>
     </div>
   </header>
   <main>
     <section>
-      <article>
-        <div class="article__textBox">
+        <div class="section__textBox">
           <h2 class="textBox__title">
-            <span class="textBox__title-1__gradient">원하는 링크</span>를<br>
+            <span class="textBox__title-1__gradient">원하는 링크</span>를
             저장하세요
           </h2>
           <p class="description">
-            나중에 읽고 싶은 글, 다시 보고 싶은 영상,<br>
-            사고 싶은 옷, 기억하고 싶은 모든 것을<br>
+            나중에 읽고 싶은 글, 다시 보고 싶은 영상,
+            사고 싶은 옷, 기억하고 싶은 모든 것을
             한 공간에 저장하세요.
           </p>  
         </div>
-        <div class="article__contents">
-          <div class="article__contents__container">
-            <img src="image/Card 1.png" alt="first section image left">
-            <img src="image/Card.png" alt="seconde section image middle">
-            <img src="image/Card-1.png" alt="third section image right">
-            <div class="article__contents__emptyContent">
-              <img src="image/Group 20.svg" alt="download image">
+        <div class="section__contents">
+          <!-- <div class="section__contents__container">
+            <img src="/image/Card 1.png" alt="first section image left">
+            <img src="/image/Card.png" alt="seconde section image middle">
+            <img src="/image/Card-1.png" alt="third section image right">
+            <div class="section__contents__emptyContent">
+              <img src="/image/Group 20.svg" alt="download image">
             </div>
-          </div>
+          </div> -->
+          <img src="/image/img_1.png" alt="first section image">
         </div>
-      </article>
     </section>
     <section>
-      <article>
-        <div class="article__contents folderSection">
-          <img src="image/디스크립션 없는 팝업 1.png" alt="seconde section image">
-        </div>
-        <div class="article__textBox">
+        <div class="section__textBox">
           <h2 class="textBox__title">
             링크를 폴더로
             <span class="textBox__title-2__gradient">관리</span>하세요
           </h2>
           <p class="description">
-            나만의 폴더를 무제한으로 만들고<br>
+            나만의 폴더를 무제한으로 만들고
             다양하게 활용할 수 있습니다.
           </p>
         </div>
-      </article>
+        <div class="section__contents">
+          <img src="/image/img_2.png" alt="seconde section image">
+        </div>
     </section>
     <section>
-      <article>
-        <div class="article__textBox">
+        <div class="section__textBox">
           <h2 class="textBox__title">
-            저장한 링크를<br>
-            <span class="textBox__title-3__gradient">공유</span>해 보세요.  
+            저장한 링크를
+            <span class="textBox__title-3__gradient">공유</span>해 보세요
           </h2>
           <p class="description">
-            여러 링크를 폴더에 담고 공유할 수 있습니다.<br>
-            가족, 친구, 동료들에게 쉽고 빠르게 링크를<br>
+            여러 링크를 폴더에 담고 공유할 수 있습니다.
+            가족, 친구, 동료들에게 쉽고 빠르게 링크를
             공유해 보세요.
           </p>
         </div>
-        <div class="article__contents shareSection">
-          <div class="article__contents shareDark"></div>
-          <img src="image/폴더 공유하기 팝업 1.png" alt="third section image">
+        <div class="section__contents">
+          <!-- <div class="section__contents shareDark"></div> -->
+          <img src="/image/img_3.png" alt="third section image">
         </div>
-      </article>
     </section>
     <section>
-      <article>
-        <div class="article__contents searchSection">
-          <div class="searchSection__Image">
-          </div>
-        </div>
-        <div class="article__textBox searchSection">
+        <div class="section__textBox">
           <h2 class="textBox__title">
-            저장한 링크를<br>
+            저장한 링크를
             <span class="textBox__title-4__gradient">검색</span>해 보세요.
           </h2>
           <p class="description">
             중요한 정보들을 검색으로 쉽게 찾아보세요.
           </p>
         </div>
-      </article>
+        <div class="section__contents">
+          <!-- <div class="searchSection__Image">
+          </div> -->
+          <img src="/image/img_4.png" alt="fourth section image">
+        </div>
     </section>
   </main>
   <footer>
     <div class="footer__menu">
-      <p class="description">©codeit - 2023</p>
+      <p class="description codeit">©codeit - 2023</p>
       <div class="footer__menu__modal">
-        <a href="privacy.html">Privacy Polic</a>
-        <a href="faq.html">FAQ</a>
+        <a href="/privacy.html">Privacy Polic</a>
+        <a href="/faq.html">FAQ</a>
       </div>
       <div class="footer__menu__icon">
-        <a href="https://www.facebook.com/?locale=ko_KR" target="_blank"><img src="image/akar-icons_facebook-fill.png" alt="facebook icon"></a>
-        <a href="https://twitter.com/?lang=ko" target="_blank"><img src="image/akar-icons_twitter-fill.png" alt="twitter icon"></a>
-        <a href="https://www.youtube.com/" target="_blank"><img src="image/akar-icons_youtube-fill.png" alt="youtube icon"></a>
-        <a href="https://www.instagram.com/" target="_blank"><img src="image/ant-design_instagram-filled.png" alt="instagram icon"></a>
+        <a href="https://www.facebook.com/?locale=ko_KR" target="_blank"><img src="/image/akar-icons_facebook-fill.png" alt="facebook icon"></a>
+        <a href="https://twitter.com/?lang=ko" target="_blank"><img src="/image/akar-icons_twitter-fill.png" alt="twitter icon"></a>
+        <a href="https://www.youtube.com/" target="_blank"><img src="/image/akar-icons_youtube-fill.png" alt="youtube icon"></a>
+        <a href="https://www.instagram.com/" target="_blank"><img src="/image/ant-design_instagram-filled.png" alt="instagram icon"></a>
       </div>
     </div>
   </footer>
