@@ -110,6 +110,11 @@ input:focus{
   border: 1px solid var(--Primary);
 }
 
+.warningMessage{
+  color: var(--ErrorMessage );
+  display: none;
+}
+
 .eyeBtn{
   position: absolute;
   border: none;
@@ -118,6 +123,16 @@ input:focus{
   right: 15px;
   bottom: 20px;
   height: 16px;
+}
+
+.passwordImg{
+  width: 16px;
+  height: 16px;
+  background-image: url(/image/eye-off.svg);
+}
+
+.open{
+  background-image: url(/image/eye-on.svg);
 }
 
 .signMain__modalBtn{

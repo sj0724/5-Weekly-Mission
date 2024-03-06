@@ -90,7 +90,6 @@ a{
 header {
   background: var(--Background);
   width: 100%;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -132,7 +131,6 @@ header {
 
 .header__image{
   padding: 3.1rem 2.5rem 0 2.5rem;
-  margin: 0 auto;
   width: 1200px;
   aspect-ratio: 2;
   overflow: hidden;

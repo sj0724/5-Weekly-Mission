@@ -21,13 +21,15 @@
       <form id="signMain__signForm">
         <div class="inputModal">
           <label for="email">이메일</label>
-          <input type="text" placeholder="이메일" id="email">
+          <input type="text" placeholder="이메일" id="email" autoComplete="off">
+          <div class="warningMessage">이메일을 입력해 주세요</div>
         </div>
         <div class="inputModal">
           <label for="password">비밀번호</label>
-          <input type="password" placeholder="비밀번호" id="password">
+          <input type="password" placeholder="비밀번호" id="password" autoComplete="off">
+          <div class="warningMessage">비밀번호를 입력해 주세요</div>
           <button class="eyeBtn" type="button">
-            <img src="/image/eye-off.svg" class="eyeImg">
+            <div class="passwordImg"></div>
           </button>
         </div>
       </form>
@@ -43,5 +45,6 @@
       </div>
     </div>
   </section>
+  <script src="/js/main.js"></script>
 </body>
 </html>
