@@ -112,7 +112,7 @@ input:focus{
 
 .warningMessage{
   color: var(--ErrorMessage );
-  display: none;
+  font-size: 0.8rem;
 }
 
 .eyeBtn{
@@ -121,7 +121,7 @@ input:focus{
   margin: 0;
   padding: 0;
   right: 15px;
-  bottom: 20px;
+  top: 55px;
   height: 16px;
 }
 
@@ -131,7 +131,7 @@ input:focus{
   background-image: url(/image/eye-off.svg);
 }
 
-.open{
+.hidden{
   background-image: url(/image/eye-on.svg);
 }
 
