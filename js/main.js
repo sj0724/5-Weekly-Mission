@@ -1,9 +1,9 @@
-const inputForm = document.querySelector('#signMain__signForm');
+const inputForm = document.querySelector('#form__inputForm');
 const emailInput = document.querySelector('#email');
 const passwordInput = document.querySelector('#password');
 const eyeImg = document.querySelector('.passwordImg');
 const eyeBtn = document.querySelector('.eyeBtn');
-const loginBtn = document.querySelector('.signMain__modalBtn');
+const loginBtn = document.querySelector('.form__loginButton');
 
 
 let data = [
@@ -19,7 +19,7 @@ errorEmail.classList = 'warningMessage'
 const errorPassword = document.createElement('div');
 errorPassword.classList = 'warningMessage'
 
-function eyeOpen(){ //password 숨김버튼
+function passwordHidden(){ //password 숨김버튼
   eyeImg.classList.toggle('hidden')
   if(passwordInput.type == 'text'){
     passwordInput.type = 'password'
@@ -30,8 +30,8 @@ function eyeOpen(){ //password 숨김버튼
 
 function emailCheck(){ //이메일 형식 검사
   emailValue = emailInput.value;
-  const emailChecking = emailValue.indexOf('@');
-  if(emailChecking < 0){
+  const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
+  if(emailPattern.test(emailValue) === false){
     errorEmail.textContent = '올바른 이메일 주소가 아닙니다.';
     inputForm.firstElementChild.append(errorEmail)
   }else{
@@ -66,7 +66,8 @@ function warningPassword(e){ //패스워드 input 경고 메세지
   }
 }
 
-function login(){ //로그인
+function login(e){ //로그인
+  e.preventDefault();
   emailValue = emailInput.value;
   passwordValue = passwordInput.value;
   const dataEmail = data.find((user) => { //이메일이 데이터에 있나 검사
@@ -77,18 +78,18 @@ function login(){ //로그인
       window.open("/folder.html") //folder이동
     }else{ //이메일은 맞는데 비밀번호가 다를때
       errorPassword.textContent = '비밀번호를 확인해주세요';
-      inputForm.lastElementChild.append(errorPassword);
+      inputForm.children[1].append(errorPassword);
     }
   }else{ //이메일이 데이터에 없을때 경고 문구
     errorEmail.textContent = '이메일을 확인해주세요';
     inputForm.firstElementChild.append(errorEmail)
     errorPassword.textContent = '비밀번호를 확인해주세요';
-    inputForm.lastElementChild.append(errorPassword);
+    inputForm.children[1].append(errorPassword);
   }
 }
 
-eyeBtn.addEventListener('click', eyeOpen)
+eyeBtn.addEventListener('click', passwordHidden)
 loginBtn.addEventListener('click', login)
-inputForm.addEventListener('keypress', (e) => e.code === 'Enter' && login()) //폼에 있는 요소에서 enter입력되면 동작
+inputForm.addEventListener('keypress', (e) => e.code === 'Enter' && login(e)) //폼에 있는 요소에서 enter입력되면 동작
 emailInput.addEventListener('focusout', warningEmail)
 passwordInput.addEventListener('focusout', warningPassword)

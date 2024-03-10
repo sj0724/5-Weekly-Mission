@@ -1,8 +1,4 @@
-@font-face {
-  font-family: Pretendard;
-  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
-}
-@import url(/css/color.css);
+@import url(/css/global.css);
 
 *{
   box-sizing: border-box;
@@ -48,7 +44,7 @@ button{
   cursor: pointer;
 }
 
-.signMain{
+.sign__form{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,7 +53,7 @@ button{
   width: 100%;
 }
 
-.signMain__logo{
+.form__logo{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -66,19 +62,19 @@ button{
   margin: 0 auto;
 }
 
-.signMain__qusetion{
+.question{
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
-.signMain__qusetion span{
+.question span{
   font-size: 16px;
   line-height: normal;
 }
 
-#signMain__signForm{
+#form__inputForm{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -135,7 +131,7 @@ input:focus{
   background-image: url(/image/eye-on.svg);
 }
 
-.signMain__modalBtn{
+.form__loginButton{
   width: 400px;
   padding: 16px 20px;
   border: none;
@@ -196,11 +192,11 @@ input:focus{
 }
 
 @media(max-width: 767px){
-  .signMain{
+  .sign__form{
     max-width: 400px;
   }
 
-  #signMain__signForm{
+  #form__inputForm{
     width: 100%;
   }
 
@@ -208,7 +204,7 @@ input:focus{
     width: 100%;
   }
 
-  .signMain__modalBtn{
+  .form__loginButton{
     width: 100%;
   }
 
