@@ -33,6 +33,7 @@ function emailCheck(){ //이메일 형식 검사
   const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
   if(emailPattern.test(emailValue) === false){
     errorEmail.textContent = '올바른 이메일 주소가 아닙니다.';
+    emailInput.style.borderColor = "var(--ErrorMessage)"
     inputForm.firstElementChild.append(errorEmail)
   }else{
     console.log('correct')
@@ -43,11 +44,13 @@ function warningEmail(e){ //이메일 input 경고 메세지
   if(e.target.value){ //input에 정보가 있을때
     if(e.target.parentNode.lastElementChild.className === 'warningMessage'){
       e.target.parentNode.lastElementChild.remove();
+      emailInput.style.borderColor = ""
       emailCheck()
     }else{
       emailCheck()
     }
   }else{ //input에 정보가 없을때
+    emailInput.style.borderColor = "var(--ErrorMessage)"
     errorEmail.textContent = `${e.target.alt}를 입력해주세요`;
     e.target.parentNode.append(errorEmail)
   }
@@ -57,11 +60,13 @@ function warningPassword(e){ //패스워드 input 경고 메세지
   if(e.target.value){ //input에 정보가 있을때
     if(e.target.parentNode.lastElementChild.className === 'warningMessage'){
       e.target.parentNode.lastElementChild.remove();
+      passwordInput.style.borderColor = ""
     }else{
       return;
     }
   }else{ //input에 정보가 없을때
     errorPassword.textContent = `${e.target.alt}를 입력해주세요`;
+    passwordInput.style.borderColor = "var(--ErrorMessage)"
     e.target.parentNode.append(errorPassword);
   }
 }
@@ -78,12 +83,15 @@ function login(e){ //로그인
       window.open("/folder.html") //folder이동
     }else{ //이메일은 맞는데 비밀번호가 다를때
       errorPassword.textContent = '비밀번호를 확인해주세요';
+      passwordInput.style.borderColor = "var(--ErrorMessage)"
       inputForm.children[1].append(errorPassword);
     }
   }else{ //이메일이 데이터에 없을때 경고 문구
     errorEmail.textContent = '이메일을 확인해주세요';
+    emailInput.style.borderColor = "var(--ErrorMessage)"
     inputForm.firstElementChild.append(errorEmail)
     errorPassword.textContent = '비밀번호를 확인해주세요';
+    passwordInput.style.borderColor = "var(--ErrorMessage)"
     inputForm.children[1].append(errorPassword);
   }
 }
