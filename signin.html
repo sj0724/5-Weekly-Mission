@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="/css/sign.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" type="text/css" href="/css/sign.css"/>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
   <title>Singin</title>
 </head>
@@ -20,14 +20,16 @@
       <form id="form__inputForm">
         <div class="inputModal">
           <label for="email">이메일</label>
-          <input type="text" placeholder="이메일" id="email" autoComplete="off" alt="이메일">
+          <input type="text" placeholder="이메일" id="email" autoComplete="off" alt="이메일"/>
+          <p id="email-errorMessage" class="warningMessage"></p>
         </div>
         <div class="inputModal">
           <label for="password">비밀번호</label>
-          <input type="password" placeholder="비밀번호" id="password" autoComplete="off" alt="비밀번호">
+          <input type="password" placeholder="비밀번호" id="password" autoComplete="off" alt="비밀번호"/>
           <button class="eyeBtn" type="button">
             <div class="passwordImg"></div>
           </button>
+          <p id="password-errorMessage" class="warningMessage"></p>
         </div>
         <button class="form__loginButton" type="submit">
           로그인
@@ -42,6 +44,6 @@
       </div>
     </div>
   </section>
-  <script src="/js/main.js"></script>
+  <script src="/js/sign.js"></script>
 </body>
 </html>

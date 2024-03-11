@@ -106,9 +106,19 @@ input:focus{
   border: 1px solid var(--Primary);
 }
 
+.input--error{
+  border: 1px solid var(--ErrorMessage );
+}
+
 .warningMessage{
+  display: none;
   color: var(--ErrorMessage );
-  font-size: 0.8rem;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.on {
+  display: inline-block;
 }
 
 .eyeBtn{
