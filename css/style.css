@@ -1,14 +1,4 @@
-@font-face {
-  font-family: Pretendard;
-  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
-}
-@import url(/css/color.css);
-
-.abel-regular {
-  font-family: "Abel", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
+@import url(/css/global.css);
 
 *{
   box-sizing: border-box;
@@ -19,11 +9,10 @@ html{
 }
 
 body{
-  background-color: var(--Background);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 nav{
@@ -32,6 +21,7 @@ nav{
   width: 100%;
   top: 0;
   z-index: 2;
+  background-color: var(--Background);
 }
 
 .navModal{
@@ -82,12 +72,13 @@ a{
   font-weight: 400;
   line-height: 150%; /* 24px */
   margin: 0;
+  grid-area: description;
+  align-self: flex-start;
 }
 
 header {
   background: var(--Background);
   width: 100%;
-  margin: 0 auto;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -100,6 +91,7 @@ header {
   justify-content: flex-end;
   align-items: center;
   gap: 2.5rem;
+  width: 100%;
 }
 
 .header__contents img{
@@ -128,7 +120,6 @@ header {
 
 .header__image{
   padding: 3.1rem 2.5rem 0 2.5rem;
-  margin: 0 auto;
   width: 1200px;
   aspect-ratio: 2;
   overflow: hidden;
@@ -142,33 +133,33 @@ header {
 main{
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
   padding: 7.5rem 0;
-  width: 100%;
   background-color: var(--Section-white);
   gap: 100px;
 }
 
 main section:nth-child(even){
-  flex-direction: row-reverse;
+  grid-template: 
+  "image header"
+  "image description"
+  /550px 291px;
 }
 
 section{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 157px;
-  margin: 0 auto;
+  display: grid;
+  grid-template: 
+  "header image"
+  "description image"
+  /291px 550px;
+  row-gap: 10px;
+  column-gap: 157px;
+  width: 100%;
+  height: fit-content;
 }
 
 section img{
   width: 100%;
-}
-
-.section__textBox{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  grid-area: image;
 }
 
 .textBox__title{
@@ -180,6 +171,8 @@ section img{
   line-height: normal;
   letter-spacing: -0.3px;
   margin: 0;
+  grid-area: header;
+  align-self: flex-end;
 }
 
 .textBox__title-1__gradient{
@@ -187,15 +180,6 @@ section img{
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.section__contents{
-  position: relative;
-  display: flex;
-  width: 550px;
-  aspect-ratio: 1.2;
-  border-radius: 15px;
-  background: var(--Background);
 }
 
 .textBox__title-2__gradient{
@@ -277,30 +261,31 @@ footer{
     width: 698px;
   }
 
-  .slogan{
-    width: 30rem;
-  }
-
   main{
     padding-top: 5rem;
   }
 
   section{
-    gap: 51px;
+    grid-template: 
+    "header image"
+    "description image"
+    /262px 385px;
+    row-gap: 10px;
+    column-gap: 51px;
   }
 
-  .section__contents{
-    width: 385px;
+  main section:nth-child(even){
+    grid-template: 
+    "image header"
+    "image description"
+    /385px 262px;
   }
+  
 }
 
 @media(max-width: 768px){
   html {
     font-size: 8px;
-  }
-
-  main section:nth-child(even){
-    flex-direction: column;
   }
   
   header{
@@ -311,29 +296,34 @@ footer{
     gap: 3rem;
   }
 
-  main{
-    padding: 5rem 4rem;
-  }
-
   .header__image{
     width: 100%;
   }
 
+  main{
+    gap: 0;
+  }
+
   section{
-    flex-direction: column;
-    gap: 3rem;
+    grid-template: 
+    "header"
+    "image"
+    "description";
+    row-gap: 10px;
+    column-gap: 51px;
+    justify-content: center;
+    padding: 5rem 4rem;
   }
 
-  .section__contents{
-    width: 100%;
-  }
-
-  .section__textBox{
-    width: 100%;
-  }
-
-  .textBox__title{
-    width: 100%;
+  main section:nth-child(even){
+    grid-template: 
+    "header"
+    "image"
+    "description";
+    row-gap: 10px;
+    column-gap: 51px;
+    justify-content: center;
+    padding: 5rem 4rem;
   }
 
   .description{

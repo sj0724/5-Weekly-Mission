@@ -1,52 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/css/sign.css">
-  <link rel="stylesheet" type="text/css" href="/css/color.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" type="text/css" href="/css/sign.css"/>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
   <title>Singin</title>
 </head>
 <body>
   <section>
-    <div class="signMain">
-      <div class="signMain__logo">
-        <a href="/"><img src="/image/logo.svg"></a>
-        <div class="signMain__qusetion">
+    <div class="sign__form">
+      <div class="form__logo">
+        <a href="/"><img src="/image/logo.svg"/></a>
+        <div class="question">
           <span>이미 회원이신가요?</span>
           <a href="/signin.html">로그인 하기</a>
         </div>
       </div>
-      <form id="signMain__signForm">
+      <form id="form__inputForm">
         <div class="inputModal">
           <label for="email">이메일</label>
-          <input type="text" placeholder="이메일" id="email">
+          <input type="text" placeholder="이메일" id="email" autoComplete="off" alt="이메일"/>
+          <p id="email-errorMessage" class="warningMessage"></p>
         </div>
         <div class="inputModal">
           <label for="password">비밀번호</label>
-          <input type="password" placeholder="비밀번호" id="password">
+          <input type="password" placeholder="비밀번호" id="password" autoComplete="off" alt="비밀번호"/>
           <button class="eyeBtn" type="button">
-            <img src="/image/eye-off.svg" class="eyeImg">
+            <img src="/image/eye-off.svg" class="eyeImg"/>
           </button>
+          <p id="password-errorMessage" class="warningMessage"></p>
         </div>
         <div class="inputModal">
           <label for="doublePassword">비밀번호 확인</label>
-          <input type="password" placeholder="비밀번호" id="doublePassword">
+          <input type="password" placeholder="비밀번호" id="doublePassword" autoComplete="off" alt="비밀번호"/>
           <button class="eyeBtn" type="button">
-            <img src="/image/eye-off.svg" class="eyeImg">
+            <img src="/image/eye-off.svg" class="eyeImg"/>
           </button>
+          <p id="password-errorMessage" class="warningMessage"></p>
         </div>
+        <button class="form__loginButton" type="submit">
+          로그인
+        </button>
       </form>
-      <button class="signMain__modalBtn">
-        로그인
-      </button>
     </div>
     <div class="socialLogin">
       다른 방식으로 가입하기
       <div class="socialLogin__logo">
-        <a href="https://www.google.com/" class="google"><img src="/image/logo_google.png" class="mainLogo"></a>
-        <a href="https://www.kakaocorp.com/page/" class="kakao"><img src="/image/logo_kakao.svg" class="mainLogo"></a>
+        <a href="https://www.google.com/" class="google" target="_blank" rel="external"><img src="/image/logo_google.png" class="mainLogo"/></a>
+        <a href="https://www.kakaocorp.com/page/" class="kakao" target="_blank" rel="external"><img src="/image/logo_kakao.svg" class="mainLogo"/></a>
       </div>
     </div>
   </section>
