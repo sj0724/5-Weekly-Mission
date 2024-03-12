@@ -42,27 +42,15 @@ function passwordHidden(){ //password 숨김버튼
 
 function emailCheck(){ //이메일 형식 검사
   emailValue = emailInput.value;
-  if(emailPattern.test(emailValue) === false){
-    addError(emailInput, emailError, '올바른 이메일 주소가 아닙니다.');
-  }else{
-    removeError(emailInput, emailError);
-  }
+  return emailValue ? removeError(emailInput, emailError) : addError(emailInput, emailError, '올바른 이메일 주소가 아닙니다.');
 };
 
 function warningEmail(e){ //이메일 input 경고 메세지
-  if(e.target.value){ //input에 정보가 있을때
-    emailCheck();
-  }else{ //input에 정보가 없을때
-    addError(emailInput,  emailError, '이메일을 입력해주세요');
-  }
+  return e.target.value ?  emailCheck() :  addError(emailInput,  emailError, '이메일을 입력해주세요');
 };
 
 function warningPassword(e){ //패스워드 input 경고 메세지
-  if(e.target.value){ //input에 정보가 있을때
-    removeError(passwordInput, passwordError);
-  }else{ //input에 정보가 없을때
-    addError(passwordInput, passwordError, '비밀번호을 입력해주세요');
-  }
+  return e.target.value ? removeError(passwordInput, passwordError) : addError(passwordInput, passwordError, '비밀번호을 입력해주세요');
 };
 
 function login(e){ //로그인
