@@ -1,6 +1,5 @@
 const eyeImg = document.querySelector('.passwordImg');
-export const passwordInput = document.querySelector('#password');
-export const emailInput = document.querySelector('#email');
+const passwordInput = document.querySelector('#password');
 const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
 
 export let users = [
@@ -20,4 +19,24 @@ export function passwordHidden(){ //password 숨김버튼
 
 export function emailCheck(email){ //이메일 형식 검사
   return emailPattern.test(email);
+};
+
+export function validateInfo(email, password, passwordConfirm){
+  let result = {}
+  if(email === ''){
+    result.ok = false;
+    result.emailError = '이메일을 입력해주세요';
+  }else if(emailCheck(email) === false){
+    result.ok = false;
+    result.emailError = '올바른 이메일 주소가 아닙니다.';
+  };
+  if(password === ''){
+    result.ok = false;
+    result.passwordError = '비밀번호을 입력해주세요.';
+  };
+  if(passwordConfirm && passwordConfirm !== password){
+    result.ok = false;
+    result.passwordConfirmError = '비밀번호가 다릅니다.';
+  };
+  return result;
 };
