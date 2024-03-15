@@ -21,23 +21,19 @@
         <div class="inputModal">
           <label for="email">이메일</label>
           <input type="text" placeholder="이메일" id="email" autoComplete="off" alt="이메일"/>
-          <p id="email-errorMessage" class="warningMessage"></p>
+          <p class="warningMessage email-errorMessage"></p>
         </div>
         <div class="inputModal">
           <label for="password">비밀번호</label>
           <input type="password" placeholder="비밀번호" id="password" autoComplete="off" alt="비밀번호"/>
-          <button class="eyeBtn" type="button">
-            <img src="/image/eye-off.svg" class="eyeImg"/>
-          </button>
-          <p id="password-errorMessage" class="warningMessage"></p>
+          <button class="eyeBtn" type="button"></button>
+          <p class="warningMessage password-errorMessage" ></p>
         </div>
         <div class="inputModal">
-          <label for="doublePassword">비밀번호 확인</label>
+          <label for="passwordConfirm">비밀번호 확인</label>
           <input type="password" placeholder="비밀번호" id="passwordConfirm" autoComplete="off" alt="비밀번호"/>
-          <button class="eyeBtn" type="button">
-            <img src="/image/eye-off.svg" class="eyeImg"/>
-          </button>
-          <p id="password-errorMessage" class="warningMessage"></p>
+          <button class="eyeBtn" type="button"></button>
+          <p class="warningMessage passwordConfirm-errorMessage"></p>
         </div>
         <button class="form__loginButton" type="submit">
           로그인
@@ -52,5 +48,6 @@
       </div>
     </div>
   </section>
+  <script src="/js/signup.js" type="module"></script>
 </body>
 </html>

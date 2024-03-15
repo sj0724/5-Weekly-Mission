@@ -129,9 +129,6 @@ input:focus{
   right: 15px;
   top: 55px;
   height: 16px;
-}
-
-.passwordImg{
   width: 16px;
   height: 16px;
   background-image: url(/image/eye-off.svg);

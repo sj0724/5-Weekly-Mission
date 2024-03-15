@@ -1,19 +1,18 @@
-const eyeImg = document.querySelector('.passwordImg');
-const passwordInput = document.querySelector('#password');
 const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
 
 export let users = [
   {name: 'test', email: 'test@codeit.com', password: 'codeit101'},
   {name: 'admin', email: 'sj07245@naver.com', password: 'sj07245'},
   {name: 'user1', email: '1234@gmail.com', password: '1234'},
-]
+];
 
-export function passwordHidden(){ //password 숨김버튼
-  eyeImg.classList.toggle('hidden');
-  if(passwordInput.type == 'text'){
-    passwordInput.type = 'password';
+export function passwordHidden(e){ //password 숨김버튼
+  console.log(e.target.previousElementSibling)
+  e.target.classList.toggle('hidden');
+  if(e.target.previousElementSibling.type == 'text'){
+    e.target.previousElementSibling.type = 'password';
   }else{
-    passwordInput.type = 'text';
+    e.target.previousElementSibling.type = 'text';
   }
 }
 
