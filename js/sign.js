@@ -38,7 +38,8 @@ function formHanddle(e){ //로그인
   const emailValue = $email.value;
   const passwordValue = $password.value;
   const validate = validateInfo(emailValue, passwordValue);
-  if(!validate.ok){
+  console.log(validate)
+  if(validate.ok){
     const dataEmail = users.find((user) => user.email === emailValue);
     if(dataEmail){ //이메일이 데이터에 있을때
       if(passwordValue === dataEmail.password){
@@ -53,9 +54,8 @@ function formHanddle(e){ //로그인
       addError($password, passwordError, '비밀번호을 확인해주세요');
     }
   }else{
-    alert('아이디와 비밀번호를 확인해주세요!');
-    addError($email, emailError, validate.emailError);
-    addError($password, passwordError, validate.passwordError);
+    addError($email, emailError, '아이디를 입력해주세요.');
+    addError($password, passwordError, '비밀번호를 입력해주세요.');
   };
 };
 

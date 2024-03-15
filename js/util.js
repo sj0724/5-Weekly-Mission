@@ -7,7 +7,6 @@ export let users = [
 ];
 
 export function passwordHidden(e){ //password 숨김버튼
-  console.log(e.target.previousElementSibling)
   e.target.classList.toggle('hidden');
   if(e.target.previousElementSibling.type == 'text'){
     e.target.previousElementSibling.type = 'password';
@@ -21,7 +20,7 @@ export function emailCheck(email){ //이메일 형식 검사
 };
 
 export function validateInfo(email, password, passwordConfirm){
-  let result = {}
+  let result = {ok: true}
   if(email === ''){
     result.ok = false;
     result.emailError = '이메일을 입력해주세요';
