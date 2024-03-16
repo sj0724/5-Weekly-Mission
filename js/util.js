@@ -19,6 +19,11 @@ export function emailCheck(email){ //이메일 형식 검사
   return emailPattern.test(email);
 };
 
+export function emailConfirm(e){
+  const userEmail = users.find((user) => user.email === e);
+  return userEmail;
+};
+
 export function validateInfo(email, password, passwordConfirm){
   let result = {ok: true};
   if(email === ''){

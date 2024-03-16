@@ -1,4 +1,4 @@
-import { passwordHidden, emailCheck, users, validateInfo, removeError, addError } from "./util.js";
+import { passwordHidden, emailCheck, users, validateInfo, removeError, addError, emailConfirm } from "./util.js";
 
 const formElement = document.querySelector('#form__inputForm');
 const emailError = document.querySelector('.email-errorMessage');
@@ -27,9 +27,9 @@ function formHanddle(e){ //로그인
   const passwordValue = $password.value;
   const validate = validateInfo(emailValue, passwordValue);
   if(validate.ok){
-    const dataEmail = users.find((user) => user.email === emailValue);
-    if(dataEmail){ //이메일이 데이터에 있을때
-      if(passwordValue === dataEmail.password){
+    const userEmail = emailConfirm(emailValue)
+    if(userEmail){ //이메일이 데이터에 있을때
+      if(passwordValue === userEmail.password){
         location.assign("/folder.html"); //folder이동
       }else{ //이메일은 맞는데 비밀번호가 다를때
         alert('비밀번호를 확인해주세요!');
@@ -41,8 +41,12 @@ function formHanddle(e){ //로그인
       addError($password, passwordError, '비밀번호을 확인해주세요');
     }
   }else{
-    addError($email, emailError, validate.emailError);
-    addError($password, passwordError, validate.passwordError);
+    if(validate.emailError){
+      addError($email, emailError, validate.emailError);
+    }
+    if(validate.passwordError){
+      addError($password, passwordError, validate.passwordError);
+    }
   };
 };
 

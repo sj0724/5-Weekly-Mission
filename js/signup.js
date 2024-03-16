@@ -1,4 +1,4 @@
-import { passwordHidden, emailCheck, users, validateInfo, removeError, addError } from "./util.js";
+import { passwordHidden, emailCheck, validateInfo, removeError, addError, emailConfirm } from "./util.js";
 
 const eyeBtn = document.querySelectorAll('.eyeBtn');
 const formElement = document.querySelector('#form__inputForm');
@@ -9,17 +9,12 @@ const passwordConfirmError = document.querySelector('.passwordConfirm-errorMessa
 const numberPattern = /[0-9]/;
 const englishPattern = /[a-zA-Z]/;
 
-function emailConfirm(e){
-  const userEmail = users.find((user) => user.email === e);
-  return userEmail;
-}
-
 function warningEmail(e){ //이메일 input 경고 메세지
-  const email = e.target.value;
-  if(email){
-    if(emailCheck(email)){
+  const emailValue = e.target.value;
+  if(emailValue){
+    if(emailCheck(emailValue)){
       removeError(e.target, emailError);
-      if(emailConfirm(email)){
+      if(emailConfirm(emailValue)){
         addError(e.target, emailError, '이미 사용 중인 이메일입니다.');
       }
     }else{
@@ -56,7 +51,7 @@ function warningPasswordConfirm(e){
   }else{
     addError(e.target, passwordConfirmError, '비밀번호를 다시 입력해주세요.');
   }
-}
+};
 
 function signup(e){
   e.preventDefault();
