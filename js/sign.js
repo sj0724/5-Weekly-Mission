@@ -1,26 +1,14 @@
-import { passwordHidden, emailCheck, users, validateInfo } from "./util.js";
+import { passwordHidden, emailCheck, users, validateInfo, removeError, addError } from "./util.js";
 
 const formElement = document.querySelector('#form__inputForm');
 const emailError = document.querySelector('.email-errorMessage');
 const passwordError = document.querySelector('.password-errorMessage');
 const eyeBtn = document.querySelector('.eyeBtn');
 
-function addError(input, errormessage, message){
-  input.classList.add('input--error');
-  errormessage.classList.add('on');
-  errormessage.textContent = message;
-};
-
-function removeError(input, errormessage){
-  input.classList.remove('input--error');
-  errormessage.classList.remove('on');
-  errormessage.textContent = '';
-};
-
 function warningEmail(e){ //이메일 input 경고 메세지
   if(e.target.value){
-    return emailCheck(e.target.value) 
-    ? removeError(e.target, emailError) 
+    return emailCheck(e.target.value)
+    ? removeError(e.target, emailError)
     : addError(e.target, emailError, '올바른 이메일 주소가 아닙니다.');
   }else{
     addError(e.target, emailError, '이메일을 입력해주세요');
@@ -38,7 +26,6 @@ function formHanddle(e){ //로그인
   const emailValue = $email.value;
   const passwordValue = $password.value;
   const validate = validateInfo(emailValue, passwordValue);
-  console.log(validate)
   if(validate.ok){
     const dataEmail = users.find((user) => user.email === emailValue);
     if(dataEmail){ //이메일이 데이터에 있을때
@@ -54,8 +41,8 @@ function formHanddle(e){ //로그인
       addError($password, passwordError, '비밀번호을 확인해주세요');
     }
   }else{
-    addError($email, emailError, '아이디를 입력해주세요.');
-    addError($password, passwordError, '비밀번호를 입력해주세요.');
+    addError($email, emailError, validate.emailError);
+    addError($password, passwordError, validate.passwordError);
   };
 };
 
