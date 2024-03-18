@@ -18,14 +18,9 @@ function warningEmail(e){ //이메일 input 경고 메세지
         headers: {"Content-Type" : "application/json"},
         body: JSON.stringify({email: emailValue})
       })
-        .then((response)=>response.text())
-        .then((result) => {
-          const emailCheck = JSON.parse(result);
-          return emailCheck;
-        })
-        .then((email)=>{
-          console.log(email)
-          if(email.data){
+        .then((response)=>response.json())
+        .then((result)=>{
+          if(result.data){
             removeError(e.target, emailError);
           }else{
             addError(e.target, emailError, '이미 사용중인 이메일입니다.');
@@ -83,23 +78,15 @@ function signup(e){
       headers: {"Content-Type" : "application/json"},
       body: JSON.stringify({email: emailValue})
     })
-      .then((response)=>response.text())
-      .then((result) => {
-        const emailCheck = JSON.parse(result);
-        return emailCheck;
-      })
-      .then((email)=>{
-        if(email.data){
+      .then((response)=>response.json())
+      .then((result)=>{
+        if(result.data){
           fetch("https://bootcamp-api.codeit.kr/api/sign-up", {
             method: "POST",
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify(signUpUser)
           })
-            .then((response)=>response.text())
-            .then((result)=>{
-              const newUser = JSON.parse(result);
-              return newUser;
-            })
+            .then((response)=>response.json())
             .then((user)=>{
               if(user.data){
                 location.assign("/folder.html"); //folder이동

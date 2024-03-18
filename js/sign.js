@@ -33,13 +33,10 @@ function formHanddle(e){ //로그인
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(signInUser),
     })
-      .then((response) => response.text())
-      .then((result)=> {
-        const user = JSON.parse(result);
-        return user;  
-      })
-      .then((user)=>{
-        if(user.data){
+      .then((response) => response.json())
+      .then((result)=>{
+        console.log(result)
+        if(result.data){
           location.assign("/folder.html"); //folder이동
         }else{
           addError($email, emailError, '이메일을 확인해주세요');
