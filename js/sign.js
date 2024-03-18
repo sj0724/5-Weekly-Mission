@@ -1,4 +1,4 @@
-import { passwordHidden, emailCheck, validateInfo, removeError, addError, emailConfirm } from "./util.js";
+import { passwordHidden, emailCheck, validateInfo, removeError, addError } from "./util.js";
 
 const formElement = document.querySelector('#form__inputForm');
 const emailError = document.querySelector('.email-errorMessage');
@@ -42,7 +42,6 @@ function formHanddle(e){ //로그인
         if(user.data){
           location.assign("/folder.html"); //folder이동
         }else{
-          alert('일치하는 계정이 없습니다!');
           addError($email, emailError, '이메일을 확인해주세요');
           addError($password, passwordError, '비밀번호을 확인해주세요');
         }

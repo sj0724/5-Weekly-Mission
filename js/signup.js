@@ -1,4 +1,4 @@
-import { passwordHidden, emailCheck, validateInfo, removeError, addError, emailConfirm } from "./util.js";
+import { passwordHidden, emailCheck, validateInfo, removeError, addError } from "./util.js";
 
 const eyeBtn = document.querySelectorAll('.eyeBtn');
 const formElement = document.querySelector('#form__inputForm');
@@ -13,11 +13,25 @@ function warningEmail(e){ //이메일 input 경고 메세지
   const emailValue = e.target.value;
   if(emailValue){
     if(emailCheck(emailValue)){
-      removeError(e.target, emailError);
-      if(emailConfirm(emailValue)){
-        addError(e.target, emailError, '이미 사용 중인 이메일입니다.');
-      }
-    }else{
+      fetch('https://bootcamp-api.codeit.kr/api/check-email', {
+        method: "POST",
+        headers: {"Content-Type" : "application/json"},
+        body: JSON.stringify({email: emailValue})
+      })
+        .then((response)=>response.text())
+        .then((result) => {
+          const emailCheck = JSON.parse(result);
+          return emailCheck;
+        })
+        .then((email)=>{
+          console.log(email)
+          if(email.data){
+            removeError(e.target, emailError);
+          }else{
+            addError(e.target, emailError, '이미 사용중인 이메일입니다.');
+          }
+        })
+      }else{
       addError(e.target, emailError, '올바른 이메일 주소가 아닙니다.');
     }
   }else{
@@ -93,6 +107,7 @@ function signup(e){
                 addError($email, emailError, '이메일 형식이 올바르지 않습니다.');
               }
             })
+            .catch((e)=>console.log(e))
         }else{
           addError($email, emailError, '이미 사용중인 이메일입니다.');
         }
