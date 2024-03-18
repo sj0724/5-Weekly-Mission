@@ -1,4 +1,4 @@
-import { passwordHidden, emailCheck, users, validateInfo, removeError, addError, emailConfirm } from "./util.js";
+import { passwordHidden, emailCheck, validateInfo, removeError, addError, emailConfirm } from "./util.js";
 
 const formElement = document.querySelector('#form__inputForm');
 const emailError = document.querySelector('.email-errorMessage');
@@ -25,21 +25,29 @@ function formHanddle(e){ //로그인
   const $password = e.target.password;
   const emailValue = $email.value;
   const passwordValue = $password.value;
+  const signInUser = {email: emailValue, password: passwordValue}
   const validate = validateInfo(emailValue, passwordValue);
   if(validate.ok){
-    const userEmail = emailConfirm(emailValue)
-    if(userEmail){ //이메일이 데이터에 있을때
-      if(passwordValue === userEmail.password){
-        location.assign("/folder.html"); //folder이동
-      }else{ //이메일은 맞는데 비밀번호가 다를때
-        alert('비밀번호를 확인해주세요!');
-        addError($password, passwordError, '비밀번호을 확인해주세요');
-      }
-    }else{ //이메일이 데이터에 없을때 경고 문구
-      alert('일치하는 계정이 없습니다!');
-      addError($email, emailError, '이메일을 확인해주세요');
-      addError($password, passwordError, '비밀번호을 확인해주세요');
-    }
+    fetch("https://bootcamp-api.codeit.kr/api/sign-in", {
+      method: 'POST',
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(signInUser),
+    })
+      .then((response) => response.text())
+      .then((result)=> {
+        const user = JSON.parse(result);
+        return user;  
+      })
+      .then((user)=>{
+        if(user.data){
+          location.assign("/folder.html"); //folder이동
+        }else{
+          alert('일치하는 계정이 없습니다!');
+          addError($email, emailError, '이메일을 확인해주세요');
+          addError($password, passwordError, '비밀번호을 확인해주세요');
+        }
+      })
+      .catch((e)=>{console.log(e);})
   }else{
     if(validate.emailError){
       addError($email, emailError, validate.emailError);

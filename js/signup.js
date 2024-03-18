@@ -62,12 +62,42 @@ function signup(e){
   const passwordValue = $password.value;
   const passwordConfirmValue = $passwordConfirm.value;
   const validate = validateInfo(emailValue, passwordValue, passwordConfirmValue);
+  const signUpUser = {email: emailValue, password: passwordValue};
   if(validate.ok){
-    if(emailConfirm(emailValue)){
-      addError($email, emailError, '이미 사용중인 이메일입니다.');
-    }else{
-      location.assign("/folder.html"); //folder이동
-    }
+    fetch('https://bootcamp-api.codeit.kr/api/check-email', {
+      method: "POST",
+      headers: {"Content-Type" : "application/json"},
+      body: JSON.stringify({email: emailValue})
+    })
+      .then((response)=>response.text())
+      .then((result) => {
+        const emailCheck = JSON.parse(result);
+        return emailCheck;
+      })
+      .then((email)=>{
+        if(email.data){
+          fetch("https://bootcamp-api.codeit.kr/api/sign-up", {
+            method: "POST",
+            headers: {"Content-Type" : "application/json"},
+            body: JSON.stringify(signUpUser)
+          })
+            .then((response)=>response.text())
+            .then((result)=>{
+              const newUser = JSON.parse(result);
+              return newUser;
+            })
+            .then((user)=>{
+              if(user.data){
+                location.assign("/folder.html"); //folder이동
+              }else{
+                addError($email, emailError, '이메일 형식이 올바르지 않습니다.');
+              }
+            })
+        }else{
+          addError($email, emailError, '이미 사용중인 이메일입니다.');
+        }
+      })
+      .catch((e)=>console.log(e))
   }else{
     if(validate.emailError){
       addError($email, emailError, validate.emailError);
