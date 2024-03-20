@@ -6,7 +6,7 @@ import {
   addError,
 } from "./util.js";
 
-const eyeBtn = document.querySelectorAll(".eyeBtn");
+const eyeBtns = document.querySelectorAll(".eyeBtn");
 const formElement = document.querySelector("#form__inputForm");
 const emailError = document.querySelector(".email-errorMessage");
 const passwordError = document.querySelector(".password-errorMessage");
@@ -17,24 +17,33 @@ const passwordConfirmError = document.querySelector(
 const numberPattern = /[0-9]/;
 const englishPattern = /[a-zA-Z]/;
 
+async function checkEmail(e) {
+  try {
+    const response = await fetch(
+      "https://bootcamp-api.codeit.kr/api/check-email",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: e }),
+      }
+    );
+    const result = await response.json();
+    if (result.data) {
+      removeError(formElement.email, emailError);
+    } else {
+      addError(formElement.email, emailError, "이미 사용중인 이메일입니다.");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function warningEmail(e) {
   //이메일 input 경고 메세지
   const emailValue = e.target.value;
   if (emailValue) {
     if (emailCheck(emailValue)) {
-      fetch("https://bootcamp-api.codeit.kr/api/check-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: emailValue }),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.data) {
-            removeError(e.target, emailError);
-          } else {
-            addError(e.target, emailError, "이미 사용중인 이메일입니다.");
-          }
-        });
+      checkEmail(emailValue);
     } else {
       addError(e.target, emailError, "올바른 이메일 주소가 아닙니다.");
     }
@@ -80,42 +89,33 @@ function warningPasswordConfirm(e) {
   }
 }
 
-async function userSignUp() {
-  const signUpUser = {
-    email: formElement.email.value,
-    password: formElement.password.value,
-  };
-  const response = await fetch("https://bootcamp-api.codeit.kr/api/sign-up", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(signUpUser),
-  });
-  const result = await response.json();
-  if (result.data) {
-    location.assign("/folder.html"); //folder이동
-  } else {
-    addError($email, emailError, "이메일 형식이 올바르지 않습니다.");
-  }
-}
-
-async function checkEmail() {
-  const response = await fetch(
-    "https://bootcamp-api.codeit.kr/api/check-email",
-    {
+async function signUp() {
+  try {
+    const signUpUser = {
+      email: formElement.email.value,
+      password: formElement.password.value,
+    };
+    const response = await fetch("https://bootcamp-api.codeit.kr/api/sign-up", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: formElement.email.value }),
+      body: JSON.stringify(signUpUser),
+    });
+    const result = await response.json();
+    if (result.data) {
+      location.assign("/folder.html"); //folder이동
+    } else {
+      addError(
+        formElement.email,
+        emailError,
+        "이메일 형식이 올바르지 않습니다."
+      );
     }
-  );
-  const result = await response.json();
-  if (result.data) {
-    signUpUser();
-  } else {
-    addError($email, emailError, "이미 사용중인 이메일입니다.");
+  } catch (error) {
+    console.log(error);
   }
 }
 
-function signup(e) {
+function formHanddle(e) {
   e.preventDefault();
   const $email = e.target.email;
   const $password = e.target.password;
@@ -129,7 +129,7 @@ function signup(e) {
     passwordConfirmValue
   );
   if (validate.ok) {
-    checkEmail();
+    signUp();
   } else {
     if (validate.emailError) {
       addError($email, emailError, validate.emailError);
@@ -147,9 +147,8 @@ function signup(e) {
   }
 }
 
-eyeBtn[0].addEventListener("click", passwordHidden);
-eyeBtn[1].addEventListener("click", passwordHidden);
-formElement.addEventListener("submit", signup);
+eyeBtns.forEach((e) => e.addEventListener("click", passwordHidden));
+formElement.addEventListener("submit", formHanddle);
 formElement.email.addEventListener("focusout", warningEmail);
 formElement.password.addEventListener("focusout", warningPassword);
 formElement.passwordConfirm.addEventListener(

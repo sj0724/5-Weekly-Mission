@@ -34,18 +34,21 @@ async function login() {
     email: formElement.email.value,
     password: formElement.password.value,
   };
-
-  const response = await fetch("https://bootcamp-api.codeit.kr/api/sign-in", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(signInUser),
-  });
-  const result = await response.json();
-  if (result.data) {
-    location.assign("/folder.html"); //folder이동
-  } else {
-    addError($email, emailError, "이메일을 확인해주세요");
-    addError($password, passwordError, "비밀번호을 확인해주세요");
+  try {
+    const response = await fetch("https://bootcamp-api.codeit.kr/api/sign-in", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(signInUser),
+    });
+    const result = await response.json();
+    if (result.data) {
+      location.assign("/folder.html"); //folder이동
+    } else {
+      addError($email, emailError, "이메일을 확인해주세요");
+      addError($password, passwordError, "비밀번호을 확인해주세요");
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
 

@@ -1,11 +1,5 @@
 const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
 
-export let users = [
-  { name: "test", email: "test@codeit.com", password: "codeit101" },
-  { name: "admin", email: "sj07245@naver.com", password: "sj07245" },
-  { name: "user1", email: "1234@gmail.com", password: "1234" },
-];
-
 export function passwordHidden(e) {
   //password 숨김버튼
   e.target.classList.toggle("hidden");
@@ -22,11 +16,16 @@ export function emailCheck(email) {
 }
 
 export function validateInfo(email, password, passwordConfirm) {
-  let result = { ok: true };
+  let result = {
+    ok: true,
+    emailError: "",
+    passwordError: "",
+    passwordConfirmError: "",
+  };
   if (email === "") {
     result.ok = false;
     result.emailError = "이메일을 입력해주세요";
-  } else if (emailCheck(email) === false) {
+  } else if (!emailCheck(email)) {
     result.ok = false;
     result.emailError = "올바른 이메일 주소가 아닙니다.";
   }
@@ -45,14 +44,14 @@ export function validateInfo(email, password, passwordConfirm) {
   return result;
 }
 
-export function addError(input, errormessage, message) {
+export function addError(input, errorMessage, message) {
   input.classList.add("input--error");
-  errormessage.classList.add("on");
-  errormessage.textContent = message;
+  errorMessage.classList.add("on");
+  errorMessage.textContent = message;
 }
 
-export function removeError(input, errormessage) {
+export function removeError(input, errorMessage) {
   input.classList.remove("input--error");
-  errormessage.classList.remove("on");
-  errormessage.textContent = "";
+  errorMessage.classList.remove("on");
+  errorMessage.textContent = "";
 }
