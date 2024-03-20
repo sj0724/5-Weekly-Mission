@@ -1,21 +1,41 @@
-:root{
-  --Primary: #6D6AFE;
-  --ErrorMessage: #FF5B56;
+:root {
+  --Primary: #6d6afe;
+  --ErrorMessage: #ff5b56;
   --Footer-black: #111322;
   --Sign-black: #000000;
-  --Section-white: #FFFFFF;
+  --Section-white: #ffffff;
   --Linkbrary-gray100: #373740;
-  --Linkbrary-gray60: #9FA6B2;
-  --Linkbrary-gray20: #CCD5E3;
-  --Linkbarary-gray10: #E7EFFB;
-  --Gray-cta: #F5F5F5;
-  --Background: #F0F6FF;
-  --Description: #6B6B6B;
-  --Gradient-purpleblue-to-skyblue: linear-gradient(91deg, var(--Primary) 0.12%, #6AE3FE 101.84%);
-  --Gradient-yellow-to-blue: linear-gradient(277deg, #6FBAFF 59.22%, #FFD88B 93.66%);
-  --Gradient-blue-to-white: linear-gradient(99deg, #6D7CCD 19.76%, rgba(82, 136, 133, 0.22) 52.69%);
-  --Gradient-blue-to-pink: linear-gradient(271deg, #FE578F -9.84%, #68E8F9 107.18%);
-  --Slogan-gradient: linear-gradient(91deg, var(--Primary) 17.28%, #FF9F9F 74.98%);
-  --TextBox-gradient: linear-gradient(96deg, #FE8A8A 1.72%, #A4CEFF 74.97%);
-  --Kakao-logo-color: #F5E14B;
+  --Linkbrary-gray60: #9fa6b2;
+  --Linkbrary-gray20: #ccd5e3;
+  --Linkbarary-gray10: #e7effb;
+  --Gray-cta: #f5f5f5;
+  --Background: #f0f6ff;
+  --Description: #6b6b6b;
+  --Gradient-purpleblue-to-skyblue: linear-gradient(
+    91deg,
+    var(--Primary) 0.12%,
+    #6ae3fe 101.84%
+  );
+  --Gradient-yellow-to-blue: linear-gradient(
+    277deg,
+    #6fbaff 59.22%,
+    #ffd88b 93.66%
+  );
+  --Gradient-blue-to-white: linear-gradient(
+    99deg,
+    #6d7ccd 19.76%,
+    rgba(82, 136, 133, 0.22) 52.69%
+  );
+  --Gradient-blue-to-pink: linear-gradient(
+    271deg,
+    #fe578f -9.84%,
+    #68e8f9 107.18%
+  );
+  --Slogan-gradient: linear-gradient(
+    91deg,
+    var(--Primary) 17.28%,
+    #ff9f9f 74.98%
+  );
+  --TextBox-gradient: linear-gradient(96deg, #fe8a8a 1.72%, #a4ceff 74.97%);
+  --Kakao-logo-color: #f5e14b;
 }
