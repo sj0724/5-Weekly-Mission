@@ -4,6 +4,7 @@ import {
   validateInfo,
   removeError,
   addError,
+  url,
 } from "./util.js";
 
 const eyeBtns = document.querySelectorAll(".eyeBtn");
@@ -19,14 +20,11 @@ const englishPattern = /[a-zA-Z]/;
 
 async function checkEmail(e) {
   try {
-    const response = await fetch(
-      "https://bootcamp-api.codeit.kr/api/check-email",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: e }),
-      }
-    );
+    const response = await fetch(`${url}/check-email`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: e }),
+    });
     const result = await response.json();
     if (result.data) {
       removeError(formElement.email, emailError);
@@ -95,7 +93,7 @@ async function signUp() {
       email: formElement.email.value,
       password: formElement.password.value,
     };
-    const response = await fetch("https://bootcamp-api.codeit.kr/api/sign-up", {
+    const response = await fetch(`${url}/sign-up`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(signUpUser),

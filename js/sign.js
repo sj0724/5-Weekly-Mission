@@ -4,6 +4,7 @@ import {
   validateInfo,
   removeError,
   addError,
+  url,
 } from "./util.js";
 
 const formElement = document.querySelector("#form__inputForm");
@@ -35,7 +36,7 @@ async function login() {
     password: formElement.password.value,
   };
   try {
-    const response = await fetch("https://bootcamp-api.codeit.kr/api/sign-in", {
+    const response = await fetch(`${url}/sign-in`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(signInUser),

@@ -10,6 +10,8 @@ export function passwordHidden(e) {
   }
 }
 
+export const url = "https://bootcamp-api.codeit.kr/api";
+
 export function emailCheck(email) {
   //이메일 형식 검사
   return emailPattern.test(email);
