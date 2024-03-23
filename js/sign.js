@@ -12,6 +12,12 @@ const emailError = document.querySelector(".email-errorMessage");
 const passwordError = document.querySelector(".password-errorMessage");
 const eyeBtn = document.querySelector(".eyeBtn");
 
+const accessToken = window.localStorage.getItem("token");
+
+if (accessToken) {
+  location.assign("/folder.html"); //folder이동
+}
+
 function warningEmail(e) {
   //이메일 input 경고 메세지
   if (e.target.value) {
@@ -43,10 +49,11 @@ async function login() {
     });
     const result = await response.json();
     if (result.data) {
+      window.localStorage.setItem("token", result.data.accessToken);
       location.assign("/folder.html"); //folder이동
     } else {
-      addError($email, emailError, "이메일을 확인해주세요");
-      addError($password, passwordError, "비밀번호을 확인해주세요");
+      addError(formElement.email, emailError, "이메일을 확인해주세요");
+      addError(formElement.password, passwordError, "비밀번호을 확인해주세요");
     }
   } catch (error) {
     console.log(error);

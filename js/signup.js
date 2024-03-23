@@ -15,6 +15,12 @@ const passwordConfirmError = document.querySelector(
   ".passwordConfirm-errorMessage"
 );
 
+const accessToken = window.localStorage.getItem("token");
+
+if (accessToken) {
+  location.assign("/folder.html"); //folder이동
+}
+
 const numberPattern = /[0-9]/;
 const englishPattern = /[a-zA-Z]/;
 
@@ -100,6 +106,7 @@ async function signUp() {
     });
     const result = await response.json();
     if (result.data) {
+      window.localStorage.setItem("token", result.data.accessToken);
       location.assign("/folder.html"); //folder이동
     } else {
       addError(
