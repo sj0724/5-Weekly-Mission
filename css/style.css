@@ -1,21 +1,21 @@
 @import url(/css/global.css);
 
-*{
+* {
   box-sizing: border-box;
 }
 
-html{
+html {
   font-size: 16px;
 }
 
-body{
+body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-nav{
+nav {
   position: sticky;
   padding: 20px 200px;
   width: 100%;
@@ -24,22 +24,22 @@ nav{
   background-color: var(--Background);
 }
 
-.navModal{
+.navModal {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-nav img{
+nav img {
   width: 133px;
   height: 24px;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-.cta{
+.cta {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,18 +52,17 @@ a{
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  
 }
 
-.cta-short{
+.cta-short {
   width: 8rem;
 }
 
-.cta-long{
+.cta-long {
   width: 22rem;
 }
 
-.description{
+.description {
   width: 291px;
   color: var(--Description);
   font-family: Abel;
@@ -85,7 +84,7 @@ header {
   padding-top: 4.5rem;
 }
 
-.header__contents{
+.header__contents {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -94,7 +93,7 @@ header {
   width: 100%;
 }
 
-.header__contents img{
+.header__contents img {
   width: 100%;
   border-radius: 25px;
   box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.08);
@@ -111,26 +110,26 @@ header {
   line-height: 5rem; /* 125% */
 }
 
-.slogan_gradient{
+.slogan_gradient {
   background: var(--Slogan-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.header__image{
+.header__image {
   padding: 3.1rem 2.5rem 0 2.5rem;
   width: 1200px;
   aspect-ratio: 2;
   overflow: hidden;
 }
 
-.modalBtn.link{
+.modalBtn.link {
   width: 350px;
   gap: 10px;
 }
 
-main{
+main {
   display: flex;
   flex-direction: column;
   padding: 7.5rem 0;
@@ -138,31 +137,31 @@ main{
   gap: 100px;
 }
 
-main section:nth-child(even){
-  grid-template: 
-  "image header"
-  "image description"
-  /550px 291px;
+main section:nth-child(even) {
+  grid-template:
+    "image header"
+    "image description"
+    /550px 291px;
 }
 
-section{
+section {
   display: grid;
-  grid-template: 
-  "header image"
-  "description image"
-  /291px 550px;
+  grid-template:
+    "header image"
+    "description image"
+    /291px 550px;
   row-gap: 10px;
   column-gap: 157px;
   width: 100%;
   height: fit-content;
 }
 
-section img{
+section img {
   width: 100%;
   grid-area: image;
 }
 
-.textBox__title{
+.textBox__title {
   width: 272px;
   font-family: Pretendard;
   font-size: 3rem;
@@ -175,46 +174,46 @@ section img{
   align-self: flex-end;
 }
 
-.textBox__title-1__gradient{
+.textBox__title-1__gradient {
   background: var(--TextBox-gradient);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.textBox__title-2__gradient{
+.textBox__title-2__gradient {
   background: var(--Gradient-yellow-to-blue);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.textBox__title-3__gradient{
+.textBox__title-3__gradient {
   background: var(--Gradient-blue-to-white);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.textBox__title-4__gradient{
+.textBox__title-4__gradient {
   background: var(--Gradient-blue-to-pink);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-footer{
+footer {
   width: 100%;
   margin: 0 auto;
   background: var(--Footer-black);
   padding: 32px 104px 64px;
 }
 
-.description.codeit{
+.description.codeit {
   width: fit-content;
 }
 
-.footer__menu{
+.footer__menu {
   position: relative;
   margin-bottom: 44px;
   display: flex;
@@ -222,14 +221,14 @@ footer{
   justify-content: space-between;
 }
 
-.footer__menu__modal{
+.footer__menu__modal {
   display: flex;
   gap: 30px;
   align-items: flex-start;
 }
 
-.footer__menu__modal a{
-  color: #CFCFCF;
+.footer__menu__modal a {
+  color: #cfcfcf;
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
@@ -237,119 +236,118 @@ footer{
   line-height: normal;
 }
 
-.footer__menu__icon{
+.footer__menu__icon {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-@media(max-width: 1199px){
+@media (max-width: 1199px) {
   .navModal {
     max-width: 799px;
     margin: 0 auto;
   }
 
-  nav{
+  nav {
     padding: 20px 32px;
   }
 
-  header{
+  header {
     padding-top: 2.5rem;
   }
 
-  .header__image{
+  .header__image {
     width: 698px;
   }
 
-  main{
+  main {
     padding-top: 5rem;
   }
 
-  section{
-    grid-template: 
-    "header image"
-    "description image"
-    /262px 385px;
+  section {
+    grid-template:
+      "header image"
+      "description image"
+      /262px 385px;
     row-gap: 10px;
     column-gap: 51px;
   }
 
-  main section:nth-child(even){
-    grid-template: 
-    "image header"
-    "image description"
-    /385px 262px;
+  main section:nth-child(even) {
+    grid-template:
+      "image header"
+      "image description"
+      /385px 262px;
   }
-  
 }
 
-@media(max-width: 768px){
+@media (max-width: 768px) {
   html {
     font-size: 8px;
   }
-  
-  header{
+
+  header {
     padding: 0 4rem;
   }
 
-  .header__contents{
+  .header__contents {
     gap: 3rem;
   }
 
-  .header__image{
+  .header__image {
     width: 100%;
   }
 
-  main{
+  main {
     gap: 0;
   }
 
-  section{
-    grid-template: 
-    "header"
-    "image"
-    "description";
+  section {
+    grid-template:
+      "header"
+      "image"
+      "description";
     row-gap: 10px;
     column-gap: 51px;
     justify-content: center;
     padding: 5rem 4rem;
   }
 
-  main section:nth-child(even){
-    grid-template: 
-    "header"
-    "image"
-    "description";
+  main section:nth-child(even) {
+    grid-template:
+      "header"
+      "image"
+      "description";
     row-gap: 10px;
     column-gap: 51px;
     justify-content: center;
     padding: 5rem 4rem;
   }
 
-  .description{
+  .description {
     font-size: 2rem;
     width: 100%;
   }
 
-  footer{
+  footer {
     padding: 4rem 4rem 8rem;
   }
 
-  footer .description{
+  footer .description {
     position: absolute;
     left: 0;
     bottom: -60px;
   }
 
-  .cta{
+  .cta {
     padding: 13px 16px;
   }
 
-  .cta-short{
+  .cta-short {
     width: 10rem;
   }
 
-  .cta-long{
+  .cta-long {
     width: 25rem;
   }
 }

@@ -1,56 +1,86 @@
-import { passwordHidden, emailCheck, users, validateInfo, removeError, addError, emailConfirm } from "./util.js";
+import {
+  passwordHidden,
+  emailCheck,
+  validateInfo,
+  removeError,
+  addError,
+  url,
+} from "./util.js";
 
-const formElement = document.querySelector('#form__inputForm');
-const emailError = document.querySelector('.email-errorMessage');
-const passwordError = document.querySelector('.password-errorMessage');
-const eyeBtn = document.querySelector('.eyeBtn');
+const formElement = document.querySelector("#form__inputForm");
+const emailError = document.querySelector(".email-errorMessage");
+const passwordError = document.querySelector(".password-errorMessage");
+const eyeBtn = document.querySelector(".eyeBtn");
 
-function warningEmail(e){ //이메일 input 경고 메세지
-  if(e.target.value){
+const accessToken = window.localStorage.getItem("token");
+
+if (accessToken) {
+  location.assign("/folder.html"); //folder이동
+}
+
+function warningEmail(e) {
+  //이메일 input 경고 메세지
+  if (e.target.value) {
     return emailCheck(e.target.value)
-    ? removeError(e.target, emailError)
-    : addError(e.target, emailError, '올바른 이메일 주소가 아닙니다.');
-  }else{
-    addError(e.target, emailError, '이메일을 입력해주세요');
+      ? removeError(e.target, emailError)
+      : addError(e.target, emailError, "올바른 이메일 주소가 아닙니다.");
+  } else {
+    addError(e.target, emailError, "이메일을 입력해주세요");
   }
-};
+}
 
-function warningPassword(e){ //패스워드 input 경고 메세지
-  return e.target.value ? removeError(e.target, passwordError) : addError(e.target, passwordError, '비밀번호을 입력해주세요');
-};
+function warningPassword(e) {
+  //패스워드 input 경고 메세지
+  return e.target.value
+    ? removeError(e.target, passwordError)
+    : addError(e.target, passwordError, "비밀번호을 입력해주세요");
+}
 
-function formHanddle(e){ //로그인
+async function login() {
+  const signInUser = {
+    email: formElement.email.value,
+    password: formElement.password.value,
+  };
+  try {
+    const response = await fetch(`${url}/sign-in`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(signInUser),
+    });
+    const result = await response.json();
+    if (result.data) {
+      window.localStorage.setItem("token", result.data.accessToken);
+      location.assign("/folder.html"); //folder이동
+    } else {
+      addError(formElement.email, emailError, "이메일을 확인해주세요");
+      addError(formElement.password, passwordError, "비밀번호을 확인해주세요");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function formHanddle(e) {
+  //로그인
   e.preventDefault();
   const $email = e.target.email;
   const $password = e.target.password;
   const emailValue = $email.value;
   const passwordValue = $password.value;
   const validate = validateInfo(emailValue, passwordValue);
-  if(validate.ok){
-    const userEmail = emailConfirm(emailValue)
-    if(userEmail){ //이메일이 데이터에 있을때
-      if(passwordValue === userEmail.password){
-        location.assign("/folder.html"); //folder이동
-      }else{ //이메일은 맞는데 비밀번호가 다를때
-        alert('비밀번호를 확인해주세요!');
-        addError($password, passwordError, '비밀번호을 확인해주세요');
-      }
-    }else{ //이메일이 데이터에 없을때 경고 문구
-      alert('일치하는 계정이 없습니다!');
-      addError($email, emailError, '이메일을 확인해주세요');
-      addError($password, passwordError, '비밀번호을 확인해주세요');
-    }
-  }else{
-    if(validate.emailError){
+  if (validate.ok) {
+    login();
+  } else {
+    if (validate.emailError) {
       addError($email, emailError, validate.emailError);
     }
-    if(validate.passwordError){
+    if (validate.passwordError) {
       addError($password, passwordError, validate.passwordError);
     }
-  };
-};
+  }
+}
 
-eyeBtn.addEventListener('click', passwordHidden);
-formElement.addEventListener('submit', formHanddle);
-formElement.email.addEventListener('focusout', warningEmail);
-formElement.password.addEventListener('focusout', warningPassword);
+eyeBtn.addEventListener("click", passwordHidden);
+formElement.addEventListener("submit", formHanddle);
+formElement.email.addEventListener("focusout", warningEmail);
+formElement.password.addEventListener("focusout", warningPassword);

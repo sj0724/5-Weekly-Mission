@@ -1,10 +1,10 @@
 @import url(/css/global.css);
 
-*{
+* {
   box-sizing: border-box;
 }
 
-body{
+body {
   height: 100vh;
   display: flex;
   align-items: center;
@@ -13,7 +13,7 @@ body{
   padding: 32px;
 }
 
-section{
+section {
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -22,7 +22,7 @@ section{
   gap: 32px;
 }
 
-span{
+span {
   color: var(--Sign-black);
   font-family: Pretendard;
   font-size: 14px;
@@ -31,7 +31,7 @@ span{
   line-height: normal;
 }
 
-a{
+a {
   color: var(--Primary);
   font-family: Pretendard;
   font-size: 16px;
@@ -40,11 +40,11 @@ a{
   line-height: normal;
 }
 
-button{
+button {
   cursor: pointer;
 }
 
-.sign__form{
+.sign__form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,7 +53,7 @@ button{
   width: 100%;
 }
 
-.form__logo{
+.form__logo {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -62,26 +62,26 @@ button{
   margin: 0 auto;
 }
 
-.question{
+.question {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
 
-.question span{
+.question span {
   font-size: 16px;
   line-height: normal;
 }
 
-#form__inputForm{
+#form__inputForm {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 24px;
 }
 
-.inputModal{
+.inputModal {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -89,7 +89,7 @@ button{
   gap: 12px;
 }
 
-input{
+input {
   display: flex;
   width: 400px;
   padding: 18px 15px;
@@ -102,17 +102,17 @@ input{
   line-height: 24px;
 }
 
-input:focus{
+input:focus {
   border: 1px solid var(--Primary);
 }
 
-.input--error{
-  border: 1px solid var(--ErrorMessage );
+.input--error {
+  border: 1px solid var(--ErrorMessage);
 }
 
-.warningMessage{
+.warningMessage {
   display: none;
-  color: var(--ErrorMessage );
+  color: var(--ErrorMessage);
   font-size: 1rem;
   margin: 0;
 }
@@ -121,7 +121,7 @@ input:focus{
   display: inline-block;
 }
 
-.eyeBtn{
+.eyeBtn {
   position: absolute;
   border: none;
   margin: 0;
@@ -134,11 +134,11 @@ input:focus{
   background-image: url(/image/eye-off.svg);
 }
 
-.hidden{
+.hidden {
   background-image: url(/image/eye-on.svg);
 }
 
-.form__loginButton{
+.form__loginButton {
   width: 400px;
   padding: 16px 20px;
   border: none;
@@ -152,7 +152,7 @@ input:focus{
   line-height: normal;
 }
 
-.socialLogin{
+.socialLogin {
   display: flex;
   width: 400px;
   padding: 12px 24px;
@@ -169,19 +169,19 @@ input:focus{
   line-height: normal;
 }
 
-.socialLogin__logo{
+.socialLogin__logo {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
 }
 
-.mainLogo{
+.mainLogo {
   width: 22px;
   height: 22px;
 }
 
-.socialLogin__logo a{
+.socialLogin__logo a {
   display: flex;
   height: 42px;
   width: 42px;
@@ -195,31 +195,31 @@ input:focus{
 }
 
 .kakao {
- background-color: var(--Kakao-logo-color);
+  background-color: var(--Kakao-logo-color);
 }
 
-@media(max-width: 767px){
-  .sign__form{
+@media (max-width: 767px) {
+  .sign__form {
     max-width: 400px;
   }
 
-  #form__inputForm{
+  #form__inputForm {
     width: 100%;
   }
 
-  input{
+  input {
     width: 100%;
   }
 
-  .form__loginButton{
+  .form__loginButton {
     width: 100%;
   }
 
-  .socialLogin{
+  .socialLogin {
     max-width: 400px;
   }
 
-  .socialLogin{
+  .socialLogin {
     width: 100%;
   }
 }
