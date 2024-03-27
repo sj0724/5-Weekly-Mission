@@ -4,16 +4,17 @@ import Footer from "./components/Footer";
 import Nav from "./components/Nav";
 import { getFolder, getUser } from "./api/api";
 import Card from "./components/Card";
+import SearchModal from "./components/SearchModal";
 
 function App() {
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState();
   const [folderInfo, setFolderInfo] = useState({});
   const [linkList, setLinkList] = useState([]);
   const [folderOwner, setFolderOwner] = useState({});
 
   const loadInfo = async () => {
-    let user = await getUser();
-    let result = await getFolder();
+    const user = await getUser();
+    const result = await getFolder();
     const { folder } = result;
     setProfile(user);
     setFolderInfo(folder);
@@ -34,6 +35,7 @@ function App() {
         <p className="folderName">{folderInfo.name}</p>
       </div>
       <div className="mainContent">
+        <SearchModal />
         <div className="contentContainer">
           {linkList.map((item) => (
             <Card item={item} key={item.id} />

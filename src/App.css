@@ -61,12 +61,11 @@ p {
   margin: 0 auto;
   display: flex;
   align-items: center;
-  margin: 40px;
+  flex-direction: column;
 }
 
 .contentContainer {
   gap: 20px;
-  width: 1060px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
