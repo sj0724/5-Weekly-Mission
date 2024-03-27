@@ -1,4 +1,8 @@
+@import url("../utils/color.css");
+@import url("../utils/font.css");
+
 .itemCard {
+  cursor: pointer;
   width: 340px;
   height: 334px;
   display: flex;
@@ -9,16 +13,14 @@
 
 .itemImg {
   height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  overflow: hidden;
+  object-fit: cover;
   border-radius: 15px 15px 0 0;
 }
 
 .itemInfo {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   padding: 15px 20px;
   width: 100%;
   height: 135px;
@@ -26,5 +28,15 @@
 }
 
 .emptyImg {
-  height: 200px;
+  height: 100%;
+  background-color: lightgray;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.itemDate {
+  color: var(--Description);
 }

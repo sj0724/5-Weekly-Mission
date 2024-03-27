@@ -4,42 +4,54 @@ import "./Card.css";
 function Card({ item }) {
   const [createdAt, setCreatedAt] = useState({});
 
-  const style = {
-    backgroundImage: `url(${item.imageSource})`,
-  };
+  const createdText = `${createdAt.time} ${createdAt.result} ago`;
 
   const calculateDate = (date) => {
-    const day = date / (1000 * 60 * 60 * 24);
-    let result;
-    if (day >= 365) {
-      result = day / 365;
-      return { data: `${Math.floor(result)}`, value: "year" };
+    if (date < 60 * 2) {
+      return { time: date, result: "minute" };
     }
-    if (day < 365) {
-      result = day / 30;
-      return { data: `${Math.floor(result)}`, value: "month" };
+    if (date <= 60 * 59) {
+      const minute = Math.floor(date / (60 * 59));
+      return { time: minute, result: "minutes" };
     }
+    if (date < 60 * 60 * 24) {
+      const day = Math.floor(date / (60 * 60 * 24));
+      return { time: day, result: "hours" };
+    }
+    if (date < 60 * 60 * 24 * 30) {
+      const day = Math.floor(date / (60 * 60 * 24));
+      return { time: day, result: "days" };
+    }
+    if (date < 60 * 60 * 24 * 30 * 12) {
+      const month = Math.floor(date / (60 * 60 * 24 * 30));
+      return { time: month, result: "months" };
+    }
+    if (date >= 60 * 60 * 24 * 30 * 12) {
+      const year = Math.floor(date / (60 * 60 * 24 * 30 * 12));
+      return { time: year, result: "years" };
+    }
+  };
+
+  const newPage = (url) => {
+    window.open(url, "_blank");
   };
 
   useEffect(() => {
     const nowDate = new Date();
     const createdate = new Date(item.createdAt);
-    const date = nowDate - createdate;
+    const date = (nowDate - createdate) / 1000;
     setCreatedAt(calculateDate(date));
-  }, []);
+  }, [item]);
 
   return (
-    <div className="itemCard">
+    <div className="itemCard" onClick={() => newPage(item.url)}>
       {item.imageSource ? (
-        <div className="itemImg" style={style}></div>
+        <img className="itemImg" src={item.imageSource} alt="itemImage" />
       ) : (
-        <div className="emptyImg"></div>
+        <div className="emptyImg">이미지가 없습니다</div>
       )}
       <div className="itemInfo">
-        <p>
-          {createdAt.data}
-          {createdAt.value} ago
-        </p>
+        <p className="itemDate">{createdText}</p>
         <p>{item.title}</p>
       </div>
     </div>
