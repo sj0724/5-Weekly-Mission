@@ -35,3 +35,9 @@ a {
   height: 28px;
   border-radius: 14px;
 }
+
+@media (max-width: 1124px) {
+  .nav {
+    padding: 20px 32px;
+  }
+}
