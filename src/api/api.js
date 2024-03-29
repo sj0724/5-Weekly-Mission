@@ -1,15 +1,13 @@
+const url = "https://bootcamp-api.codeit.kr/api/sample";
+
 export async function getUser() {
-  const response = await fetch(
-    "https://bootcamp-api.codeit.kr/api/sample/user"
-  );
+  const response = await fetch(`${url}/user`);
   const result = response.json();
   return result;
 }
 
 export async function getFolder() {
-  const response = await fetch(
-    "https://bootcamp-api.codeit.kr/api/sample/folder"
-  );
+  const response = await fetch(`${url}/folder`);
   const result = response.json();
   return result;
 }

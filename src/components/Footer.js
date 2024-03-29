@@ -6,9 +6,9 @@ import "./Footer.css";
 
 export function Icon({ image, alt }) {
   return (
-    <p>
+    <a>
       <img src={image} alt={`${alt} icon`} />
-    </p>
+    </a>
   );
 }
 

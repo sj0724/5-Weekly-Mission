@@ -1,8 +1,21 @@
 import { useEffect, useState } from "react";
 import "./Card.css";
+import styled from "styled-components";
+
+export const EmptyImg = styled.div`
+  height: 100%;
+  background-color: lightgray;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
 
 function Card({ item }) {
   const [createdAt, setCreatedAt] = useState({});
+
+  const { imageSource, url, title } = item;
 
   const createdText = `${createdAt.time} ${createdAt.result} ago`;
 
@@ -32,10 +45,6 @@ function Card({ item }) {
     }
   };
 
-  const newPage = (url) => {
-    window.open(url, "_blank");
-  };
-
   useEffect(() => {
     const nowDate = new Date();
     const createdate = new Date(item.createdAt);
@@ -44,17 +53,17 @@ function Card({ item }) {
   }, [item]);
 
   return (
-    <div className="itemCard" onClick={() => newPage(item.url)}>
-      {item.imageSource ? (
-        <img className="itemImg" src={item.imageSource} alt="itemImage" />
+    <a className="itemCard" href={url} target="_blank" rel="noreferrer">
+      {imageSource ? (
+        <img className="itemImg" src={imageSource} alt="itemImage" />
       ) : (
-        <div className="emptyImg">이미지가 없습니다</div>
+        <EmptyImg>이미지가 없습니다.</EmptyImg>
       )}
       <div className="itemInfo">
         <p className="itemDate">{createdText}</p>
-        <p>{item.title}</p>
+        <p>{title}</p>
       </div>
-    </div>
+    </a>
   );
 }
 
