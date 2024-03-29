@@ -15,13 +15,13 @@ const Cta = styled.span`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  width: 104px;
+  width: ${(props) => (props.size ? "22rem" : "8rem")};
 `;
 
-function Button({ children }) {
+function Button({ children, size }) {
   return (
     <>
-      <Cta>{children}</Cta>
+      <Cta size={size}>{children}</Cta>
     </>
   );
 }
