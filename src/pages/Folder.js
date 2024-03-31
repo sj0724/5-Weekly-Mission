@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "./Folder.css";
-import Footer from "../components/Footer";
 import { getFolder } from "../api/api";
 import Card from "../components/Card";
 import SearchBar from "../components/SearchBar";
@@ -37,7 +36,6 @@ function Folder() {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

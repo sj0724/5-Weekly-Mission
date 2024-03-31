@@ -19,9 +19,7 @@ function Application() {
   return (
     <>
       <Nav user={profile} />
-      <div>
-        <Outlet />
-      </div>
+      <Outlet />
       <Footer />
     </>
   );
