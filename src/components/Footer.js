@@ -6,7 +6,7 @@ import "./Footer.css";
 
 export function Icon({ image, alt }) {
   return (
-    <a>
+    <a href={`https://www.${alt}.com/`} target="_blank" rel="noreferrer">
       <img src={image} alt={`${alt} icon`} />
     </a>
   );

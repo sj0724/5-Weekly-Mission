@@ -40,3 +40,15 @@
   align-items: center;
   gap: 12px;
 }
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 4rem 4rem 8rem;
+  }
+
+  .footer .description {
+    position: absolute;
+    left: 0;
+    bottom: -60px;
+  }
+}

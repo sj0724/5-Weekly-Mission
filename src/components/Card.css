@@ -12,6 +12,10 @@
   color: #000;
 }
 
+.itemCard:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 .itemImg {
   height: 100%;
   overflow: hidden;

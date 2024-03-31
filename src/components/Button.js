@@ -16,6 +16,10 @@ const Cta = styled.span`
   font-weight: 600;
   line-height: normal;
   width: ${(props) => (props.size ? "22rem" : "8rem")};
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 function Button({ children, size }) {
