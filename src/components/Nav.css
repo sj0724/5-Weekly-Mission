@@ -1,0 +1,36 @@
+.nav {
+  position: sticky;
+  padding: 20px 200px;
+  width: 100%;
+  top: 0;
+  z-index: 2;
+  background-color: var(--Background);
+}
+
+.navModal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navLogo {
+  width: 133px;
+  height: 24px;
+}
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userPicture {
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+}
+
+@media (max-width: 1124px) {
+  .nav {
+    padding: 20px 32px;
+  }
+}
