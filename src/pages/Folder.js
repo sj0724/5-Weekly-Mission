@@ -6,7 +6,7 @@ import { Cta } from "../components/Button";
 import linkIcon from "../assets/link.svg";
 import { useEffect, useState } from "react";
 import { getLink } from "../api/api";
-import Card from "../components/Card";
+import FolderButton from "../components/FolderButton";
 
 const AddButton = styled(Cta)`
   position: absolute;
@@ -60,6 +60,22 @@ const Header = styled.div`
   padding: 20px 0 60px 0;
 `;
 
+const FolderContents = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 1060px;
+`;
+
+const FolderName = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+`;
+
 function Folder() {
   const [link, setLink] = useState([]);
 
@@ -67,7 +83,6 @@ function Folder() {
     const links = await getLink();
     const { data } = links;
     setLink(data);
-    console.log(data);
   };
 
   useEffect(() => {
@@ -84,14 +99,15 @@ function Folder() {
           <AddButton>추가하기</AddButton>
         </HeaderModal>
       </Header>
-      <SearchModal />
-      {link ? (
-        link.map((item) => {
-          <Card item={item} key={item.id} />;
-        })
-      ) : (
+      <FolderContents>
+        <SearchModal />
+        <FolderName>
+          {link.map((item) => (
+            <FolderButton item={item} key={item.id} />
+          ))}
+        </FolderName>
         <EmptyFolder>저장된 링크가 없습니다.</EmptyFolder>
-      )}
+      </FolderContents>
       <Footer />
     </>
   );

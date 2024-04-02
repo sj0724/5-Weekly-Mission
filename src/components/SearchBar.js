@@ -21,7 +21,6 @@ const SearchBarModal = styled.div`
 const SearchForm = styled.form`
   position: relative;
   width: 100%;
-  max-width: 1060px;
   display: flex;
   justify-content: center;
 `;
