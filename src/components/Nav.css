@@ -1,12 +1,3 @@
-.nav {
-  position: sticky;
-  padding: 20px 200px;
-  width: 100%;
-  top: 0;
-  z-index: 2;
-  background-color: var(--Background);
-}
-
 .navModal {
   display: flex;
   justify-content: space-between;
@@ -30,7 +21,7 @@
   border-radius: 14px;
 }
 
-@media (max-width: 1124px) {
+@media (max-width: 1199px) {
   .nav {
     padding: 20px 32px;
   }

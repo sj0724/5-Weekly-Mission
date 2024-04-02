@@ -5,8 +5,10 @@ import facebook from "../assets/akar-icons_facebook-fill.png";
 import "./Footer.css";
 
 export function Icon({ image, alt }) {
+  const snsUrl = `https://www.${alt}.com/`;
+
   return (
-    <a href={`https://www.${alt}.com/`} target="_blank" rel="noreferrer">
+    <a href={snsUrl} target="_blank" rel="noreferrer">
       <img src={image} alt={`${alt} icon`} />
     </a>
   );

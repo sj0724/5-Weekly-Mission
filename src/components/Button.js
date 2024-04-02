@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
-const Cta = styled.span`
+const SIZE = {
+  large: 22,
+  medium: 8,
+  small: 3,
+};
+
+export const Cta = styled.span`
   cursor: pointer;
   text-decoration: none;
   display: flex;
@@ -11,11 +17,12 @@ const Cta = styled.span`
   color: var(--Gray-cta);
   padding: 16px 20px;
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  width: ${(props) => (props.size ? "22rem" : "8rem")};
+  width: ${({ size }) => SIZE[size] ?? SIZE["medium"]}rem;
+  position: relative;
 
   &:hover {
     opacity: 0.8;

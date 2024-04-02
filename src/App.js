@@ -1,7 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Folder from "./pages/Folder";
+import Shared from "./pages/Shared";
 import Main from "./pages/Main";
 import Application from "./components/Application";
+import Folder from "./pages/Folder";
 
 function App() {
   return (
@@ -9,8 +10,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Application />}>
           <Route path="/" element={<Main />} />
-          <Route path="folder" element={<Folder />} />
+          <Route path="shared" element={<Shared />} />
         </Route>
+        <Route path="folder" element={<Folder />} />
       </Routes>
     </BrowserRouter>
   );

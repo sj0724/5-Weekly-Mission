@@ -21,8 +21,8 @@ function Main() {
             <span className="slogan_gradient">세상의 모든 정보</span>를<br />
             쉽게 저장하고 관리해 보세요
           </h1>
-          <Link to="/folder">
-            <Button size={"long"}>링크 추가하기</Button>
+          <Link to="/shared">
+            <Button size="large">링크 추가하기</Button>
           </Link>
           <div className="header__image">
             <img src={headerImage} alt="hedaerimage" />

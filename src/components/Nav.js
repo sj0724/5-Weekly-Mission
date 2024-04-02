@@ -2,6 +2,16 @@ import "./Nav.css";
 import logo from "../assets/logo.svg";
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const NavBar = styled.div`
+  position: ${(props) => (props.position ? "sticky" : "relative")};
+  padding: 20px 200px;
+  width: 100%;
+  top: 0;
+  z-index: 2;
+  background-color: var(--Background);
+`;
 
 function NavUser({ user }) {
   const { profileImageSource, email } = user;
@@ -14,18 +24,22 @@ function NavUser({ user }) {
   );
 }
 
-function Nav({ user }) {
+function Nav({ user, position }) {
   return (
-    <div className="nav">
+    <NavBar position={position}>
       <div className="navModal">
         <Link to="/">
           <img src={logo} alt="Linkbrary nav logo" className="navLogo" />
         </Link>
         <div className="userProfile">
-          {user ? <NavUser user={user} /> : <Button>로그인</Button>}
+          {user ? (
+            <NavUser user={user} />
+          ) : (
+            <Button size="medium">로그인</Button>
+          )}
         </div>
       </div>
-    </div>
+    </NavBar>
   );
 }
 

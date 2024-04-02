@@ -18,7 +18,7 @@ function Application() {
 
   return (
     <>
-      <Nav user={profile} />
+      <Nav user={profile} position={"top"} />
       <Outlet />
       <Footer />
     </>
