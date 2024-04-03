@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Card.css";
 import styled from "styled-components";
-import { calculateDate } from "../utils/util";
+import { ChangeDate, calculateDate } from "../utils/util";
 import kebab from "../assets/kebab.svg";
 
 export const EmptyImg = styled.div`
@@ -16,8 +16,9 @@ export const EmptyImg = styled.div`
 
 function Card({ item }) {
   const [createdAt, setCreatedAt] = useState({});
+  const [fullDate, setFullDate] = useState("");
 
-  const { imageSource, url, title, description } = item;
+  const { imageSource, url, description } = item;
 
   const createdText = `${createdAt.time} ${createdAt.result} ago`;
 
@@ -31,6 +32,7 @@ function Card({ item }) {
     }
     const date = (nowDate - createdate) / 1000;
     setCreatedAt(calculateDate(date));
+    setFullDate(ChangeDate(createdate));
   }, [item]);
 
   return (
@@ -43,7 +45,8 @@ function Card({ item }) {
       <div className="itemInfo">
         <img src={kebab} className="kebabIcon" />
         <p className="itemDate">{createdText}</p>
-        <p>{title}</p>
+        <p className="itemDescription">{description}</p>
+        <p>{fullDate}</p>
       </div>
     </a>
   );
