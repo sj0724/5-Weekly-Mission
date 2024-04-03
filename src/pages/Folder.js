@@ -10,6 +10,10 @@ import FolderButton from "../components/FolderButton";
 import AddIcon from "../assets/add.svg";
 import ContentsContainer from "../components/ContentsContainer";
 import Card from "../components/Card";
+import PenIcon from "../assets/pen.svg";
+import SharedIcon from "../assets/share.svg";
+import DeleteIcon from "../assets/Group36.svg";
+
 const AddButton = styled(Cta)`
   position: absolute;
   width: 5.5rem;
@@ -77,7 +81,7 @@ const FolderButtons = styled.div`
   gap: 8px;
 `;
 
-const FolderModal = styled.div`
+const FolderMenu = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -92,9 +96,43 @@ const AddFolderButton = styled.span`
   color: var(--Primary);
 `;
 
+const FolderModalContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-family: Pretendard;
+  font-weight: 600;
+  font-size: 24px;
+  margin: 24px auto;
+`;
+
+const FolderModal = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`;
+
+const FolderModalIcon = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--Linkbrary-gray60);
+  font-size: 14px;
+`;
+
+function FolderIcon({ image, children }) {
+  return (
+    <FolderModalIcon>
+      <img src={image} alt={`${image}`} />
+      {children}
+    </FolderModalIcon>
+  );
+}
+
 function Folder() {
   const [link, setLink] = useState([]);
   const [linkList, setLinkList] = useState([]);
+  const [folder, setFolder] = useState("전체");
 
   const linkLoad = async () => {
     const links = await getLink();
@@ -119,7 +157,7 @@ function Folder() {
       </Header>
       <FolderContents>
         <SearchModal />
-        <FolderModal>
+        <FolderMenu>
           <FolderButtons>
             <FolderButton />
             {link.map((item) => (
@@ -130,7 +168,15 @@ function Folder() {
             폴더 추가
             <img src={AddIcon} alt="AddIcon" />
           </AddFolderButton>
-        </FolderModal>
+        </FolderMenu>
+        <FolderModalContainer>
+          {folder}
+          <FolderModal>
+            <FolderIcon image={SharedIcon}>공유</FolderIcon>
+            <FolderIcon image={PenIcon}>이름 변경</FolderIcon>
+            <FolderIcon image={DeleteIcon}>삭제</FolderIcon>
+          </FolderModal>
+        </FolderModalContainer>
         <ContentsContainer>
           {linkList.map((item) => (
             <Card item={item} key={item.id} />
