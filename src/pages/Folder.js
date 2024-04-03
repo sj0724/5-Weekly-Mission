@@ -7,7 +7,7 @@ import linkIcon from "../assets/link.svg";
 import { useEffect, useState } from "react";
 import { getLink } from "../api/api";
 import FolderButton from "../components/FolderButton";
-
+import AddIcon from "../assets/add.svg";
 const AddButton = styled(Cta)`
   position: absolute;
   width: 5.5rem;
@@ -66,14 +66,28 @@ const FolderContents = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  width: 1060px;
+  width: 1044px;
 `;
 
-const FolderName = styled.div`
+const FolderButtons = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+`;
+
+const FolderModal = styled.div`
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const AddFolderButton = styled.span`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--Primary);
 `;
 
 function Folder() {
@@ -101,11 +115,17 @@ function Folder() {
       </Header>
       <FolderContents>
         <SearchModal />
-        <FolderName>
-          {link.map((item) => (
-            <FolderButton item={item} key={item.id} />
-          ))}
-        </FolderName>
+        <FolderModal>
+          <FolderButtons>
+            {link.map((item) => (
+              <FolderButton item={item} key={item.id} />
+            ))}
+          </FolderButtons>
+          <AddFolderButton>
+            폴더 추가
+            <img src={AddIcon} />
+          </AddFolderButton>
+        </FolderModal>
         <EmptyFolder>저장된 링크가 없습니다.</EmptyFolder>
       </FolderContents>
       <Footer />
