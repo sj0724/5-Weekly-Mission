@@ -24,14 +24,14 @@ export const calculateDate = (date) => {
   }
 };
 
-export const ChangeDate = (date) => {
+export const changeDate = (date) => {
   const dateFormat2 =
     date.getFullYear() +
-    "-" +
+    "." +
     (date.getMonth() + 1 < 9
       ? "0" + (date.getMonth() + 1)
       : date.getMonth() + 1) +
-    "-" +
+    "." +
     (date.getDate() < 9 ? "0" + date.getDate() : date.getDate());
 
   return dateFormat2;

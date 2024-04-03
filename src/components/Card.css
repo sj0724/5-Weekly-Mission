@@ -7,10 +7,11 @@
   border-radius: 15px;
   text-decoration: none;
   color: #000;
+  position: relative;
 }
 
 .itemCard:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--Background);
 }
 
 .itemImg {
@@ -32,6 +33,7 @@
 
 .itemDate {
   color: var(--Description);
+  font-size: 13px;
 }
 
 .kebabIcon {
@@ -47,5 +49,17 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  word-break: break-all;
+}
+
+.itemFullDate {
+  font-size: 14px;
+}
+
+.starIcon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
