@@ -18,8 +18,9 @@ export async function getLink() {
   return result;
 }
 
-export async function getLinkList() {
-  const response = await fetch(`${url}/users/1/links`);
+export async function getLinkList(id = "") {
+  const query = `?folderId=${id}`;
+  const response = await fetch(`${url}/users/1/links${query}`);
   const result = response.json();
   return result;
 }

@@ -113,6 +113,7 @@ const FolderModal = styled.div`
 `;
 
 const FolderModalIcon = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -132,18 +133,19 @@ function FolderIcon({ image, children }) {
 function Folder() {
   const [link, setLink] = useState([]);
   const [linkList, setLinkList] = useState([]);
-  const [folder, setFolder] = useState("전체");
+  const [folderId, setFolderId] = useState("");
+  const [folderName, setFolderName] = useState("");
 
-  const linkLoad = async () => {
+  const linkLoad = async (id) => {
     const links = await getLink();
-    const linkList = await getLinkList();
+    const linkList = await getLinkList(id);
     setLink(links.data);
     setLinkList(linkList.data);
   };
 
   useEffect(() => {
-    linkLoad();
-  }, []);
+    linkLoad(folderId);
+  }, [folderId, folderName]);
 
   return (
     <>
@@ -159,10 +161,20 @@ function Folder() {
         <SearchModal />
         <FolderMenu>
           <FolderButtons>
-            <FolderButton />
-            {link.map((item) => (
-              <FolderButton item={item} key={item.id} />
-            ))}
+            <FolderButton
+              setFolderId={setFolderId}
+              setFolderName={setFolderName}
+            />
+            {link
+              ? link.map((item) => (
+                  <FolderButton
+                    item={item}
+                    key={item.id}
+                    setFolderId={setFolderId}
+                    setFolderName={setFolderName}
+                  />
+                ))
+              : null}
           </FolderButtons>
           <AddFolderButton>
             폴더 추가
@@ -170,7 +182,7 @@ function Folder() {
           </AddFolderButton>
         </FolderMenu>
         <FolderModalContainer>
-          {folder}
+          {folderName ? folderName : "전체"}
           <FolderModal>
             <FolderIcon image={SharedIcon}>공유</FolderIcon>
             <FolderIcon image={PenIcon}>이름 변경</FolderIcon>
@@ -178,11 +190,12 @@ function Folder() {
           </FolderModal>
         </FolderModalContainer>
         <ContentsContainer>
-          {linkList.map((item) => (
-            <Card item={item} key={item.id} />
-          ))}
+          {linkList.length > 0 ? (
+            linkList.map((item) => <Card item={item} key={item.id} />)
+          ) : (
+            <EmptyFolder>저장된 링크가 없습니다.</EmptyFolder>
+          )}
         </ContentsContainer>
-        <EmptyFolder>저장된 링크가 없습니다.</EmptyFolder>
       </FolderContents>
       <Footer />
     </>

@@ -12,11 +12,19 @@ const FolderName = styled.span`
   height: 35px;
 `;
 
-function FolderButton({ item }) {
+function FolderButton({ item, setFolderId, setFolderName }) {
+  const changeFolder = () => {
+    if (!item) {
+      setFolderId("");
+      setFolderName("");
+    } else {
+      setFolderId(item.id);
+      setFolderName(item.name);
+    }
+  };
+
   return (
-    <>
-      <FolderName>{item ? item.name : "전체"}</FolderName>
-    </>
+    <FolderName onClick={changeFolder}>{item ? item.name : "전체"}</FolderName>
   );
 }
 
