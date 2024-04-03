@@ -5,9 +5,11 @@ import SearchModal from "../components/SearchBar";
 import { Cta } from "../components/Button";
 import linkIcon from "../assets/link.svg";
 import { useEffect, useState } from "react";
-import { getLink } from "../api/api";
+import { getLink, getLinkList } from "../api/api";
 import FolderButton from "../components/FolderButton";
 import AddIcon from "../assets/add.svg";
+import ContentsContainer from "../components/ContentsContainer";
+import Card from "../components/Card";
 const AddButton = styled(Cta)`
   position: absolute;
   width: 5.5rem;
@@ -92,11 +94,13 @@ const AddFolderButton = styled.span`
 
 function Folder() {
   const [link, setLink] = useState([]);
+  const [linkList, setLinkList] = useState([]);
 
   const linkLoad = async () => {
     const links = await getLink();
-    const { data } = links;
-    setLink(data);
+    const linkList = await getLinkList();
+    setLink(links.data);
+    setLinkList(linkList.data);
   };
 
   useEffect(() => {
@@ -117,15 +121,21 @@ function Folder() {
         <SearchModal />
         <FolderModal>
           <FolderButtons>
+            <FolderButton />
             {link.map((item) => (
               <FolderButton item={item} key={item.id} />
             ))}
           </FolderButtons>
           <AddFolderButton>
             폴더 추가
-            <img src={AddIcon} />
+            <img src={AddIcon} alt="AddIcon" />
           </AddFolderButton>
         </FolderModal>
+        <ContentsContainer>
+          {linkList.map((item) => (
+            <Card item={item} key={item.id} />
+          ))}
+        </ContentsContainer>
         <EmptyFolder>저장된 링크가 없습니다.</EmptyFolder>
       </FolderContents>
       <Footer />

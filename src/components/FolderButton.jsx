@@ -15,7 +15,7 @@ const FolderName = styled.span`
 function FolderButton({ item }) {
   return (
     <>
-      <FolderName>{item.name}</FolderName>
+      <FolderName>{item ? item.name : "전체"}</FolderName>
     </>
   );
 }

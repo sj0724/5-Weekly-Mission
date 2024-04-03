@@ -49,25 +49,8 @@
   flex-direction: column;
 }
 
-.contentContainer {
-  gap: 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 0 auto;
-}
-
 @media (max-width: 1199px) {
-  .contentContainer {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .mainContent {
     padding: 0 32px;
-  }
-}
-
-@media (max-width: 767px) {
-  .contentContainer {
-    grid-template-columns: 1fr;
   }
 }

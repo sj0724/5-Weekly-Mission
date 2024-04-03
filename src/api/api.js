@@ -17,3 +17,9 @@ export async function getLink() {
   const result = response.json();
   return result;
 }
+
+export async function getLinkList() {
+  const response = await fetch(`${url}/users/1/links`);
+  const result = response.json();
+  return result;
+}

@@ -11,6 +11,7 @@
   --Gray-cta: #f5f5f5;
   --Background: #f0f6ff;
   --Description: #6b6b6b;
+  --EmptyArea: #dddfff;
   --Gradient-purpleblue-to-skyblue: linear-gradient(
     91deg,
     var(--Primary) 0.12%,

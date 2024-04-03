@@ -3,6 +3,7 @@ import "./Shared.css";
 import { getFolder } from "../api/api";
 import Card from "../components/Card";
 import SearchBar from "../components/SearchBar";
+import ContentsContainer from "../components/ContentsContainer";
 
 function Shared() {
   const [folderInfo, setFolderInfo] = useState({});
@@ -34,11 +35,11 @@ function Shared() {
       </div>
       <div className="mainContent">
         <SearchBar />
-        <div className="contentContainer">
+        <ContentsContainer>
           {linkList.map((item) => (
             <Card item={item} key={item.id} />
           ))}
-        </div>
+        </ContentsContainer>
       </div>
     </div>
   );
