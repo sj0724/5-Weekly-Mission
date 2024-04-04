@@ -1,0 +1,20 @@
+@import url("./utils/color.css");
+@import url("./utils/font.css");
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 8px;
+  }
+}

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Cta } from "../../components/Button";
+import { Cta } from "../../components/Button/Button.styled";
 
 export const AddButton = styled(Cta)`
   position: absolute;

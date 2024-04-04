@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Shared.css";
 import { getSampleFolder } from "../api/api";
-import Card from "../components/Card";
+import Card from "../components/Card/Card";
 import SearchBar from "../components/SearchBar/SearchBar";
 import ContentsContainer from "../components/ContentsContainer";
 

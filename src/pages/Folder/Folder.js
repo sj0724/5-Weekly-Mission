@@ -3,9 +3,9 @@ import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import SearchModal from "../../components/SearchBar/SearchBar";
 import { getFolder, getFolderList, getUser } from "../../api/api";
-import FolderButton from "../../components/FolderButton";
+import FolderButton from "../../components/FolderButton/FolderButton";
 import ContentsContainer from "../../components/ContentsContainer";
-import Card from "../../components/Card";
+import Card from "../../components/Card/Card";
 import linkIcon from "../../assets/link.svg";
 import AddIcon from "../../assets/add.svg";
 import PenIcon from "../../assets/pen.svg";
@@ -30,7 +30,7 @@ function Folder() {
   const [user, setUser] = useState();
   const [userId] = useState(1);
 
-  const loadLink = async (options) => {
+  const loadFolder = async (options) => {
     const links = await getFolder(options.userId);
     const linkList = await getFolderList(options);
     setLink(links.data);
@@ -43,9 +43,8 @@ function Folder() {
   };
 
   useEffect(() => {
-    loadLink({ folderId, userId });
+    loadFolder({ folderId, userId });
     loadUser(userId);
-    console.log(folderId);
   }, [folderId, folderName, userId]);
 
   return (
@@ -93,12 +92,13 @@ function Folder() {
           ) : null}
         </S.FolderModalContainer>
         <ContentsContainer>
-          {linkList.length > 0 ? (
-            linkList.map((item) => <Card item={item} key={item.id} />)
-          ) : (
-            <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
-          )}
+          {linkList.length > 0
+            ? linkList.map((item) => <Card item={item} key={item.id} />)
+            : null}
         </ContentsContainer>
+        {linkList.length > 0 ? null : (
+          <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
+        )}
       </S.FolderContents>
       <Footer />
     </>

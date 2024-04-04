@@ -1,5 +1,5 @@
 import logo from "../../assets/logo.svg";
-import Button from "../Button";
+import Button from "../Button/Button";
 import { Link } from "react-router-dom";
 import * as S from "./Nav.styled";
 import { useEffect, useState } from "react";

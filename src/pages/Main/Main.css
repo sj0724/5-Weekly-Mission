@@ -1,18 +1,3 @@
-@import url("../utils/color.css");
-@import url("../utils/font.css");
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 16px;
-}
-
-p {
-  margin: 0;
-}
-
 .body {
   margin: 0 auto;
   display: flex;

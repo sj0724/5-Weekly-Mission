@@ -25,7 +25,7 @@ export const calculateDate = (date) => {
 };
 
 export const changeDate = (date) => {
-  const dateFormat2 =
+  const dateFormate =
     date.getFullYear() +
     "." +
     (date.getMonth() + 1 < 9
@@ -34,5 +34,5 @@ export const changeDate = (date) => {
     "." +
     (date.getDate() < 9 ? "0" + date.getDate() : date.getDate());
 
-  return dateFormat2;
+  return dateFormate;
 };

@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Shared from "./pages/Shared";
-import Main from "./pages/Main";
+import Main from "./pages/Main/Main";
 import Application from "./components/Layout";
 import Folder from "./pages/Folder/Folder";
+import "./App.css";
 
 function App() {
   return (

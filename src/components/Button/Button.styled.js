@@ -33,13 +33,3 @@ export const Cta = styled.span`
     width: fit-content;
   }
 `;
-
-function Button({ children, size }) {
-  return (
-    <>
-      <Cta size={size}>{children}</Cta>
-    </>
-  );
-}
-
-export default Button;
