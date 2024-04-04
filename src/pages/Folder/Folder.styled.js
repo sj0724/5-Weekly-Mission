@@ -134,6 +134,7 @@ export const FolderModalContainer = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     justify-content: center;
+    gap: 12px;
   }
 `;
 

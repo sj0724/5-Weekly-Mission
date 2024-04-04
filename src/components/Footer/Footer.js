@@ -1,7 +1,7 @@
-import instagram from "../assets/ant-design_instagram-filled.png";
-import youtube from "../assets/akar-icons_youtube-fill.png";
-import twitter from "../assets/akar-icons_twitter-fill.png";
-import facebook from "../assets/akar-icons_facebook-fill.png";
+import instagram from "../../assets/ant-design_instagram-filled.png";
+import youtube from "../../assets/akar-icons_youtube-fill.png";
+import twitter from "../../assets/akar-icons_twitter-fill.png";
+import facebook from "../../assets/akar-icons_facebook-fill.png";
 import "./Footer.css";
 
 export function Icon({ image, alt }) {

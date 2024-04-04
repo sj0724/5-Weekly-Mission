@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Footer from "../../components/Footer";
-import Nav from "../../components/Nav";
+import Footer from "../../components/Footer/Footer";
+import Nav from "../../components/Nav/Nav";
 import SearchModal from "../../components/SearchBar/SearchBar";
-import { getLink, getLinkList, getUser } from "../../api/api";
+import { getFolder, getFolderList, getUser } from "../../api/api";
 import FolderButton from "../../components/FolderButton";
 import ContentsContainer from "../../components/ContentsContainer";
 import Card from "../../components/Card";
@@ -28,11 +28,11 @@ function Folder() {
   const [folderId, setFolderId] = useState("");
   const [folderName, setFolderName] = useState("");
   const [user, setUser] = useState();
-  const [userId, setUserId] = useState(1);
+  const [userId] = useState(1);
 
   const loadLink = async (options) => {
-    const links = await getLink(options.userId);
-    const linkList = await getLinkList(options);
+    const links = await getFolder(options.userId);
+    const linkList = await getFolderList(options);
     setLink(links.data);
     setLinkList(linkList.data);
   };
