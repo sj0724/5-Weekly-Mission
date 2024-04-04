@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import Nav from "../../components/Nav";
-import SearchModal from "../../components/SearchBar";
+import SearchModal from "../../components/SearchBar/SearchBar";
 import { getLink, getLinkList } from "../../api/api";
 import FolderButton from "../../components/FolderButton";
 import ContentsContainer from "../../components/ContentsContainer";
@@ -75,11 +75,13 @@ function Folder() {
         </S.FolderMenu>
         <S.FolderModalContainer>
           {folderName ? folderName : "전체"}
-          <S.FolderModal>
-            <FolderIcon image={SharedIcon}>공유</FolderIcon>
-            <FolderIcon image={PenIcon}>이름 변경</FolderIcon>
-            <FolderIcon image={DeleteIcon}>삭제</FolderIcon>
-          </S.FolderModal>
+          {folderId ? (
+            <S.FolderModal>
+              <FolderIcon image={SharedIcon}>공유</FolderIcon>
+              <FolderIcon image={PenIcon}>이름 변경</FolderIcon>
+              <FolderIcon image={DeleteIcon}>삭제</FolderIcon>
+            </S.FolderModal>
+          ) : null}
         </S.FolderModalContainer>
         <ContentsContainer>
           {linkList.length > 0 ? (

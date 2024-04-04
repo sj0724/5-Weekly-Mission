@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Shared.css";
 import { getFolder } from "../api/api";
 import Card from "../components/Card";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "../components/SearchBar/SearchBar";
 import ContentsContainer from "../components/ContentsContainer";
 
 function Shared() {

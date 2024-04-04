@@ -11,6 +11,10 @@ const NavBar = styled.div`
   top: 0;
   z-index: 2;
   background-color: var(--Background);
+
+  @media (max-width: 1199px) {
+    padding: 20px 32px;
+  }
 `;
 
 function NavUser({ user }) {

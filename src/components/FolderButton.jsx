@@ -10,6 +10,11 @@ const FolderName = styled.span`
   background: #fff;
   cursor: pointer;
   height: 35px;
+  font-size: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+  }
 `;
 
 function FolderButton({ item, setFolderId, setFolderName }) {

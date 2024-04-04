@@ -3,10 +3,14 @@ import { Cta } from "../../components/Button";
 
 export const AddButton = styled(Cta)`
   position: absolute;
-  width: 5.5rem;
+  width: fit-content;
   padding: 10px 16px;
-  font-size: 14px;
+  font-size: 1rem;
   right: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+  }
 `;
 
 export const EmptyFolder = styled.div`
@@ -19,13 +23,17 @@ export const EmptyFolder = styled.div`
 `;
 
 export const AddLinkInput = styled.input`
-  width: 800px;
+  width: 100%;
   height: 69px;
   padding: 16px 40px;
   border-radius: 15px;
   border: 1px solid var(--Primary);
   background: #ffffff;
   font-size: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+  }
 `;
 
 export const LinkIcon = styled.img`
@@ -33,24 +41,36 @@ export const LinkIcon = styled.img`
   height: 20px;
   position: absolute;
   left: 20px;
+  @media (max-width: 768px) {
+    width: 16px;
+    height: 16px;
+  }
 `;
 
 export const HeaderModal = styled.div`
+  width: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   position: relative;
+  padding: 20px 0 60px 0;
+
+  @media (max-width: 1199px) {
+    width: 100%;
+  }
 `;
 
 export const Header = styled.div`
   background-color: var(--Background);
-  width: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px 0 60px 0;
+  @media (max-width: 1199px) {
+    padding: 0 32px;
+  }
 `;
 
 export const FolderContents = styled.div`
@@ -60,6 +80,10 @@ export const FolderContents = styled.div`
   align-items: center;
   margin: 0 auto;
   width: fit-content;
+
+  @media (max-width: 1199px) {
+    padding: 0 32px;
+  }
 `;
 
 export const FolderButtons = styled.div`
@@ -81,6 +105,18 @@ export const AddFolderButton = styled.span`
   align-items: center;
   justify-content: center;
   color: var(--Primary);
+
+  @media (max-width: 768px) {
+    background-color: var(--Primary);
+    color: #fff;
+    z-index: 3;
+    position: fixed;
+    left: 210px;
+    bottom: 101px;
+    padding: 8px 24px;
+    border-radius: 20px;
+    font-size: 1.6rem;
+  }
 `;
 
 export const FolderModalContainer = styled.div`
@@ -91,6 +127,12 @@ export const FolderModalContainer = styled.div`
   font-weight: 600;
   font-size: 24px;
   margin: 24px auto;
+  position: relative;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 export const FolderModal = styled.div`

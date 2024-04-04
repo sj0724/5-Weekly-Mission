@@ -17,7 +17,7 @@ export const Cta = styled.span`
   color: var(--Gray-cta);
   padding: 16px 20px;
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -26,6 +26,11 @@ export const Cta = styled.span`
 
   &:hover {
     opacity: 0.8;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+    width: fit-content;
   }
 `;
 
