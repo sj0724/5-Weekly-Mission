@@ -28,7 +28,7 @@ function Folder() {
   const [folderId, setFolderId] = useState("");
   const [folderName, setFolderName] = useState("");
 
-  const linkLoad = async (id) => {
+  const loadLink = async (id) => {
     const links = await getLink();
     const linkList = await getLinkList(id);
     setLink(links.data);
@@ -36,7 +36,7 @@ function Folder() {
   };
 
   useEffect(() => {
-    linkLoad(folderId);
+    loadLink(folderId);
   }, [folderId, folderName]);
 
   return (

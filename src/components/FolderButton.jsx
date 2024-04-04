@@ -11,6 +11,7 @@ const FolderName = styled.span`
   cursor: pointer;
   height: 35px;
   font-size: 1rem;
+  white-space: nowrap;
 
   @media (max-width: 768px) {
     font-size: 1.6rem;

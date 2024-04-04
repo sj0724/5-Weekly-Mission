@@ -10,7 +10,7 @@ function Shared() {
   const [linkList, setLinkList] = useState([]);
   const [folderOwner, setFolderOwner] = useState({});
 
-  const loadInfo = async () => {
+  const infoLoad = async () => {
     const result = await getFolder();
     const { folder } = result;
     setFolderInfo(folder);
@@ -19,7 +19,7 @@ function Shared() {
   };
 
   useEffect(() => {
-    loadInfo();
+    infoLoad();
   }, []);
 
   return (

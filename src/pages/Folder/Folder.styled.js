@@ -89,7 +89,8 @@ export const FolderContents = styled.div`
 export const FolderButtons = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  flex-wrap: wrap;
 `;
 
 export const FolderMenu = styled.div`
@@ -105,13 +106,15 @@ export const AddFolderButton = styled.span`
   align-items: center;
   justify-content: center;
   color: var(--Primary);
+  white-space: nowrap;
+  margin-left: 12px;
 
   @media (max-width: 768px) {
     background-color: var(--Primary);
     color: #fff;
     z-index: 3;
     position: fixed;
-    left: 210px;
+    left: 40%;
     bottom: 101px;
     padding: 8px 24px;
     border-radius: 20px;
@@ -127,7 +130,6 @@ export const FolderModalContainer = styled.div`
   font-weight: 600;
   font-size: 24px;
   margin: 24px auto;
-  position: relative;
 
   @media (max-width: 768px) {
     flex-direction: column;

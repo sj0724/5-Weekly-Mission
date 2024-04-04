@@ -7,13 +7,13 @@ import { getUser } from "../api/api";
 function Application() {
   const [profile, setProfile] = useState();
 
-  const userLoad = async () => {
+  const loadUser = async () => {
     const reuslt = await getUser();
     setProfile(reuslt);
   };
 
   useEffect(() => {
-    userLoad();
+    loadUser();
   }, []);
 
   return (

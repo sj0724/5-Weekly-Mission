@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MainSectionCard from "../components/MainSectionCard";
 import { sectionDescription } from "../api/sectionDescription";
 import "./Main.css";
-import headerImage from "../assets/image 25.png";
+import headerImage from "../assets/image25.png";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
 

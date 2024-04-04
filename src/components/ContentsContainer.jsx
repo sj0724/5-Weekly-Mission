@@ -5,6 +5,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
+  position: relative;
 
   @media (max-width: 1199px) {
     grid-template-columns: 1fr 1fr;
