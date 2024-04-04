@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Shared from "./pages/Shared";
 import Main from "./pages/Main";
 import Application from "./components/Application";
-import Folder from "./pages/Folder";
+import Folder from "./pages/Folder/Folder";
 
 function App() {
   return (

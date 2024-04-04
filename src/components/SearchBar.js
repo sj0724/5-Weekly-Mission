@@ -11,7 +11,7 @@ const SearchBarInput = styled.input`
 `;
 
 const SearchBarModal = styled.div`
-  width: 100%;
+  width: 1044px;
   margin: 40px auto;
   display: flex;
   justify-content: center;
