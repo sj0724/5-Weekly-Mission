@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import Nav from "../../components/Nav";
 import SearchModal from "../../components/SearchBar/SearchBar";
-import { getLink, getLinkList } from "../../api/api";
+import { getLink, getLinkList, getUser } from "../../api/api";
 import FolderButton from "../../components/FolderButton";
 import ContentsContainer from "../../components/ContentsContainer";
 import Card from "../../components/Card";
@@ -27,21 +27,30 @@ function Folder() {
   const [linkList, setLinkList] = useState([]);
   const [folderId, setFolderId] = useState("");
   const [folderName, setFolderName] = useState("");
+  const [user, setUser] = useState();
+  const [userId, setUserId] = useState(1);
 
-  const loadLink = async (id) => {
-    const links = await getLink();
-    const linkList = await getLinkList(id);
+  const loadLink = async (options) => {
+    const links = await getLink(options.userId);
+    const linkList = await getLinkList(options);
     setLink(links.data);
     setLinkList(linkList.data);
   };
 
+  const loadUser = async (id) => {
+    const user = await getUser(id);
+    setUser(user.data[0]);
+  };
+
   useEffect(() => {
-    loadLink(folderId);
-  }, [folderId, folderName]);
+    loadLink({ folderId, userId });
+    loadUser(userId);
+    console.log(folderId);
+  }, [folderId, folderName, userId]);
 
   return (
     <>
-      <Nav />
+      <Nav user={user} />
       <S.Header>
         <S.HeaderModal>
           <S.LinkIcon src={linkIcon}></S.LinkIcon>

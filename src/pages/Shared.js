@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Shared.css";
-import { getFolder } from "../api/api";
+import { getSampleFolder } from "../api/api";
 import Card from "../components/Card";
 import SearchBar from "../components/SearchBar/SearchBar";
 import ContentsContainer from "../components/ContentsContainer";
@@ -11,7 +11,7 @@ function Shared() {
   const [folderOwner, setFolderOwner] = useState({});
 
   const infoLoad = async () => {
-    const result = await getFolder();
+    const result = await getSampleFolder();
     const { folder } = result;
     setFolderInfo(folder);
     setFolderOwner(folder.owner);
