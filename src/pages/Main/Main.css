@@ -103,6 +103,19 @@ section img {
   align-self: flex-end;
 }
 
+.description {
+  width: 291px;
+  color: var(--Description);
+  font-family: Abel;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+  margin: 0;
+  grid-area: description;
+  align-self: flex-start;
+}
+
 @media (max-width: 1199px) {
   header {
     padding-top: 2.5rem;
