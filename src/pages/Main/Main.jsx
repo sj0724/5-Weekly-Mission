@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import MainSectionCard from "../../components/MainSectionCard";
+import MainSectionCard from "../../components/MainSectionCard/MainSectionCard";
 import { sectionDescription } from "../../api/sectionDescription";
-import "./Main.css";
+import * as S from "./Main.styled";
+
 import headerImage from "../../assets/image25.png";
 import Button from "../../components/Button/Button";
 import { Link } from "react-router-dom";
@@ -14,27 +15,27 @@ function Main() {
   }, []);
 
   return (
-    <div className="body">
-      <header>
-        <div className="header__contents">
-          <h1 className="slogan">
-            <span className="slogan_gradient">세상의 모든 정보</span>를<br />
+    <S.Main>
+      <S.Main__Header>
+        <S.Header__contents>
+          <S.Slogan>
+            <S.Slogan_gradient>세상의 모든 정보</S.Slogan_gradient>를<br />
             쉽게 저장하고 관리해 보세요
-          </h1>
+          </S.Slogan>
           <Link to="/shared">
             <Button size="large">링크 추가하기</Button>
           </Link>
-          <div className="header__image">
-            <img src={headerImage} alt="hedaerimage" />
-          </div>
-        </div>
-      </header>
-      <main>
+          <S.Header__image>
+            <S.HeaderImage src={headerImage} alt="hedaerimage" />
+          </S.Header__image>
+        </S.Header__contents>
+      </S.Main__Header>
+      <S.Main__contents>
         {sectionList.map((item) => (
           <MainSectionCard item={item} key={item.id} />
         ))}
-      </main>
-    </div>
+      </S.Main__contents>
+    </S.Main>
   );
 }
 

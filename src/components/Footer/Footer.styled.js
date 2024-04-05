@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Description } from "../../pages/Main/Main.styled";
+import { Description } from "../MainSectionCard/MainSectionCard.styled";
 
 export const Footer = styled.div`
   width: 100%;
@@ -30,6 +30,7 @@ export const FooterDescrption = styled(Description)`
   width: fit-content;
 
   @media (max-width: 768px) {
+    font-size: 2rem;
     position: absolute;
     left: 0;
     bottom: -60px;
