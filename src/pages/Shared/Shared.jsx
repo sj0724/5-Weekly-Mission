@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import "./Shared.css";
-import { getSampleFolder } from "../api/api";
-import Card from "../components/Card/Card";
-import SearchBar from "../components/SearchBar/SearchBar";
-import ContentsContainer from "../components/ContentsContainer";
+import * as S from "./Shared.styled.";
+import { getSampleFolder } from "../../api/api";
+import Card from "../../components/Card/Card";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import ContentsContainer from "../../components/ContentsContainer";
 
 function Shared() {
   const [folderInfo, setFolderInfo] = useState({});
@@ -23,25 +23,24 @@ function Shared() {
   }, []);
 
   return (
-    <div className="folder">
-      <div className="header">
-        <img
+    <S.Shared>
+      <S.OwnerProfile>
+        <S.OwnerProfileImage
           src={folderOwner.profileImageSource}
           alt="ownerImg"
-          className="userProfileImage"
         />
-        <p className="ownerName">{folderOwner.name}</p>
-        <p className="folderName">{folderInfo.name}</p>
-      </div>
-      <div className="mainContent">
+        <S.OwnerName>{folderOwner.name}</S.OwnerName>
+        <S.FolderName>{folderInfo.name}</S.FolderName>
+      </S.OwnerProfile>
+      <S.SharedContent>
         <SearchBar />
         <ContentsContainer>
           {linkList.map((item) => (
             <Card item={item} key={item.id} />
           ))}
         </ContentsContainer>
-      </div>
-    </div>
+      </S.SharedContent>
+    </S.Shared>
   );
 }
 
