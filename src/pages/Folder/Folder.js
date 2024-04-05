@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import Nav from "../../components/Nav/Nav";
 import SearchModal from "../../components/SearchBar/SearchBar";
@@ -12,6 +12,7 @@ import PenIcon from "../../assets/pen.svg";
 import SharedIcon from "../../assets/share.svg";
 import DeleteIcon from "../../assets/Group36.svg";
 import * as S from "./Folder.styled";
+import UserContext from "../../contexts/UserContext";
 
 function FolderIcon({ image, children }) {
   return (
@@ -28,7 +29,8 @@ function Folder() {
   const [folderId, setFolderId] = useState("");
   const [folderName, setFolderName] = useState("");
   const [user, setUser] = useState();
-  const [userId] = useState(1);
+
+  const userId = useContext(UserContext);
 
   const loadFolder = async (options) => {
     const links = await getFolder(options.userId);
