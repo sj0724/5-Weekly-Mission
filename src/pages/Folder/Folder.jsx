@@ -1,18 +1,18 @@
-import { useContext, useEffect, useState } from "react";
-import Footer from "../../components/Footer/Footer";
-import Nav from "../../components/Nav/Nav";
-import SearchModal from "../../components/SearchBar/SearchBar";
-import { getFolder, getFolderList, getUser } from "../../api/api";
-import FolderButton from "../../components/FolderButton/FolderButton";
-import ContentsContainer from "../../components/ContentsContainer";
-import Card from "../../components/Card/Card";
-import linkIcon from "../../assets/link.svg";
-import AddIcon from "../../assets/add.svg";
-import PenIcon from "../../assets/pen.svg";
-import SharedIcon from "../../assets/share.svg";
-import DeleteIcon from "../../assets/Group36.svg";
-import * as S from "./Folder.styled";
-import UserContext from "../../contexts/UserContext";
+import { useContext, useEffect, useState } from 'react';
+import Footer from '../../components/Footer/Footer';
+import Nav from '../../components/Nav/Nav';
+import SearchModal from '../../components/SearchBar/SearchBar';
+import { getFolder, getFolderList, getUser } from '../../api/api';
+import FolderButton from '../../components/FolderButton/FolderButton';
+import ContentsContainer from '../../components/ContentsContainer';
+import Card from '../../components/Card/Card';
+import linkIcon from '../../assets/link.svg';
+import AddIcon from '../../assets/add.svg';
+import PenIcon from '../../assets/pen.svg';
+import SharedIcon from '../../assets/share.svg';
+import DeleteIcon from '../../assets/Group36.svg';
+import * as S from './Folder.styled';
+import UserContext from '../../contexts/UserContext';
 
 function FolderIcon({ image, children }) {
   return (
@@ -26,10 +26,11 @@ function FolderIcon({ image, children }) {
 function Folder() {
   const [link, setLink] = useState([]);
   const [linkList, setLinkList] = useState([]);
-  const [folderId, setFolderId] = useState("");
-  const [folderName, setFolderName] = useState("");
+  const [folderId, setFolderId] = useState('');
+  const [folderName, setFolderName] = useState('');
   const [user, setUser] = useState();
   const [linkSelected, setLinkSelected] = useState(false);
+  const [totalBtn, setTotalBtn] = useState(true);
 
   const userId = useContext(UserContext);
 
@@ -49,6 +50,15 @@ function Folder() {
     const booleanArr = link.fill(false);
     booleanArr[index] = true;
     setLinkSelected(booleanArr);
+    setTotalBtn(false);
+  };
+
+  const setTotal = () => {
+    const totalArr = link.fill(false);
+    setLinkSelected(totalArr);
+    setFolderId('');
+    setFolderName('');
+    setTotalBtn(true);
   };
 
   useEffect(() => {
@@ -70,15 +80,14 @@ function Folder() {
         <SearchModal />
         <S.FolderMenu>
           <S.FolderButtons>
-            <FolderButton
-              setFolderId={setFolderId}
-              setFolderName={setFolderName}
-            />
+            <S.TotalFolderButton onClick={setTotal} $select={totalBtn}>
+              전체
+            </S.TotalFolderButton>
             {link
               ? link.map((item, index) => (
                   <FolderButton
                     item={item}
-                    key={item.id}
+                    key={item.name}
                     setFolderId={setFolderId}
                     setFolderName={setFolderName}
                     isSelected={linkSelected[index]}
@@ -94,7 +103,7 @@ function Folder() {
           </S.AddFolderButton>
         </S.FolderMenu>
         <S.FolderModalContainer>
-          {folderName ? folderName : "전체"}
+          {folderName ? folderName : '전체'}
           {folderId ? (
             <S.FolderModal>
               <FolderIcon image={SharedIcon}>공유</FolderIcon>

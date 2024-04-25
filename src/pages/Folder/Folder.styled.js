@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { Cta } from "../../components/Button/Button.styled";
+import styled from 'styled-components';
+import { Cta } from '../../components/Button/Button.styled';
+import { FolderName } from '../../components/FolderButton/FolderButton.styled';
 
 export const AddButton = styled(Cta)`
   position: absolute;
@@ -94,6 +95,8 @@ export const FolderButtons = styled.div`
   flex-wrap: wrap;
 `;
 
+export const TotalFolderButton = styled(FolderName)``;
+
 export const FolderMenu = styled.div`
   width: 100%;
   display: flex;
@@ -109,17 +112,20 @@ export const AddFolderButton = styled.span`
   color: var(--Primary);
   white-space: nowrap;
   margin-left: 12px;
+  gap: 6px;
 
   @media (max-width: 768px) {
     background-color: var(--Primary);
     color: #fff;
     z-index: 3;
     position: fixed;
-    left: 40%;
+    left: 50%;
+    transform: translate(-50%, 0);
     bottom: 101px;
     padding: 8px 24px;
     border-radius: 20px;
     font-size: 1.6rem;
+    margin: 0;
   }
 `;
 
