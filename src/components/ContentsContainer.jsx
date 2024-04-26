@@ -1,14 +1,15 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   gap: 20px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: ${(props) =>
+    props.length > 0 ? 'repeat(3, 1fr)' : '1fr'};
   margin: 0 auto;
   position: relative;
 
   @media (max-width: 1199px) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: ${(props) => (props.length > 0 ? '1fr 1fr' : '1fr')};
   }
 
   @media (max-width: 767px) {
@@ -16,8 +17,8 @@ const Container = styled.div`
   }
 `;
 
-function ContentsContainer({ children }) {
-  return <Container>{children}</Container>;
+function ContentsContainer({ children, content }) {
+  return <Container empty={content}>{children}</Container>;
 }
 
 export default ContentsContainer;
