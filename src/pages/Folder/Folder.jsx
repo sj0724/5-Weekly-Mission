@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import Nav from '../../components/Nav/Nav';
 import SearchModal from '../../components/SearchBar/SearchBar';
-import { getFolder, getFolderList, getUser } from '../../api/api';
 import FolderButton from '../../components/FolderButton/FolderButton';
 import ContentsContainer from '../../components/ContentsContainer';
 import Card from '../../components/Card/Card';
@@ -14,6 +13,7 @@ import DeleteIcon from '../../assets/Group36.svg';
 import * as S from './Folder.styled';
 import UserContext from '../../contexts/UserContext';
 import useGetUser from '../../hooks/useGetUser';
+import useGetFolder from '../../hooks/useGetFolder';
 
 function FolderIcon({ image, children }) {
   return (
@@ -26,20 +26,12 @@ function FolderIcon({ image, children }) {
 
 function Folder() {
   const userId = useContext(UserContext);
-  const [link, setLink] = useState([]);
-  const [linkList, setLinkList] = useState([]);
   const [folderId, setFolderId] = useState('');
   const [folderName, setFolderName] = useState('');
   const [linkSelected, setLinkSelected] = useState(false);
   const [totalBtn, setTotalBtn] = useState(true);
   const { user } = useGetUser(userId);
-
-  const loadFolder = async (options) => {
-    const links = await getFolder(options.userId);
-    const linkList = await getFolderList(options);
-    setLink(links.data);
-    setLinkList(linkList.data);
-  };
+  const { link, linkList } = useGetFolder({ folderId, userId });
 
   const handleMenuClick = (index) => {
     const booleanArr = link.fill(false);
@@ -55,10 +47,6 @@ function Folder() {
     setFolderName('');
     setTotalBtn(true);
   };
-
-  useEffect(() => {
-    loadFolder({ folderId, userId });
-  }, [folderId, folderName, userId, linkSelected]);
 
   return (
     <>

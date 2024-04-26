@@ -11,7 +11,7 @@ function useGetUser(userId) {
     };
 
     loadUser();
-  }, []);
+  }, [userId]);
 
   return { user };
 }
