@@ -4,12 +4,12 @@ const Container = styled.div`
   gap: 20px;
   display: grid;
   grid-template-columns: ${(props) =>
-    props.length > 0 ? 'repeat(3, 1fr)' : '1fr'};
+    props.empty > 0 ? 'repeat(3, 1fr)' : 'none'};
   margin: 0 auto;
   position: relative;
 
   @media (max-width: 1199px) {
-    grid-template-columns: ${(props) => (props.length > 0 ? '1fr 1fr' : '1fr')};
+    grid-template-columns: ${(props) => (props.empty > 0 ? '1fr 1fr' : '1fr')};
   }
 
   @media (max-width: 767px) {

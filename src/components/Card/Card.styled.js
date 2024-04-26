@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const EmptyImg = styled.div`
   height: 100%;
@@ -22,7 +22,7 @@ export const ItemImg = styled.div`
   }
 `;
 
-export const ItemCard = styled.a`
+export const ItemCard = styled.div`
   width: 340px;
   height: 334px;
   display: flex;
@@ -63,6 +63,7 @@ export const ItemInfo = styled.div`
 `;
 
 export const KebabIcon = styled.img`
+  cursor: pointer;
   width: 21px;
   height: 17px;
   flex-shrink: 0;
@@ -80,6 +81,11 @@ export const ItemDescription = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
 `;
 
 export const ItemFullDate = styled.p`

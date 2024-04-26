@@ -59,7 +59,7 @@ function Folder() {
             </S.FolderModal>
           )}
         </S.FolderModalContainer>
-        <ContentsContainer content={linkList}>
+        <ContentsContainer content={linkList.length}>
           {linkList.length > 0 ? (
             linkList.map((item) => <Card item={item} key={item.id} />)
           ) : (

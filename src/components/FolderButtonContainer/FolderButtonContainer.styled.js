@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { FolderName } from '../../components/FolderButton/FolderButton.styled';
+import AddIcon from '../../assets/add.svg';
+import AddIconPurple from '../../assets/addPurple.svg';
 
 export const FolderMenu = styled.div`
   width: 100%;
@@ -20,12 +22,18 @@ export const TotalFolderButton = styled(FolderName)``;
 export const AddFolderButton = styled.span`
   cursor: pointer;
   display: flex;
-  align-items: center;
   justify-content: center;
   color: var(--Primary);
   white-space: nowrap;
   margin-left: 12px;
   gap: 6px;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.3px;
 
   @media (max-width: 768px) {
     background-color: var(--Primary);
@@ -39,5 +47,15 @@ export const AddFolderButton = styled.span`
     border-radius: 20px;
     font-size: 1.6rem;
     margin: 0;
+  }
+`;
+
+export const PlusIcon = styled.div`
+  width: 16px;
+  height: 16px;
+  background-image: url(${AddIconPurple});
+
+  @media (max-width: 768px) {
+    background-image: url(${AddIcon});
   }
 `;

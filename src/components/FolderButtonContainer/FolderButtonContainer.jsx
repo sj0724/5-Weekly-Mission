@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import * as S from './FolderButtonContainer.styled';
 import FolderButton from '../FolderButton/FolderButton';
-import AddIcon from '../../assets/add.svg';
 
 function FolderButtonContainer({ link, setFolderName, setFolderId }) {
   const [linkSelected, setLinkSelected] = useState(false);
@@ -44,7 +43,7 @@ function FolderButtonContainer({ link, setFolderName, setFolderId }) {
       </S.FolderButtons>
       <S.AddFolderButton>
         폴더 추가
-        <img src={AddIcon} alt="AddIcon" />
+        <S.PlusIcon />
       </S.AddFolderButton>
     </S.FolderMenu>
   );
