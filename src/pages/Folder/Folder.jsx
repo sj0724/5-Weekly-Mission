@@ -13,6 +13,7 @@ import SharedIcon from '../../assets/share.svg';
 import DeleteIcon from '../../assets/Group36.svg';
 import * as S from './Folder.styled';
 import UserContext from '../../contexts/UserContext';
+import useGetUser from '../../hooks/useGetUser';
 
 function FolderIcon({ image, children }) {
   return (
@@ -24,26 +25,20 @@ function FolderIcon({ image, children }) {
 }
 
 function Folder() {
+  const userId = useContext(UserContext);
   const [link, setLink] = useState([]);
   const [linkList, setLinkList] = useState([]);
   const [folderId, setFolderId] = useState('');
   const [folderName, setFolderName] = useState('');
-  const [user, setUser] = useState();
   const [linkSelected, setLinkSelected] = useState(false);
   const [totalBtn, setTotalBtn] = useState(true);
-
-  const userId = useContext(UserContext);
+  const { user } = useGetUser(userId);
 
   const loadFolder = async (options) => {
     const links = await getFolder(options.userId);
     const linkList = await getFolderList(options);
     setLink(links.data);
     setLinkList(linkList.data);
-  };
-
-  const loadUser = async (id) => {
-    const user = await getUser(id);
-    setUser(user.data[0]);
   };
 
   const handleMenuClick = (index) => {
@@ -63,7 +58,6 @@ function Folder() {
 
   useEffect(() => {
     loadFolder({ folderId, userId });
-    loadUser(userId);
   }, [folderId, folderName, userId, linkSelected]);
 
   return (
@@ -113,7 +107,7 @@ function Folder() {
           ) : null}
         </S.FolderModalContainer>
         <ContentsContainer>
-          {linkList.length > 0 ? (
+          {linkList ? (
             linkList.map((item) => <Card item={item} key={item.id} />)
           ) : (
             <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
