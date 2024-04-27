@@ -17,7 +17,7 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/shared" element={<Shared />} />
           </Route>
-          <Route path="/folder" element={<Folder />} />
+          <Route path="/folder/:id" element={<Folder />} />
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>

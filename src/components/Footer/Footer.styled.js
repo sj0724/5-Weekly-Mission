@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Description } from "../MainSectionCard/MainSectionCard.styled";
+import styled from 'styled-components';
+import { Description } from '../MainSectionCard/MainSectionCard.styled';
 
 export const Footer = styled.div`
   width: 100%;

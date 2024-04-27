@@ -15,6 +15,7 @@ export const AddButton = styled(Cta)`
 `;
 
 export const EmptyFolder = styled.div`
+  height: 300px;
   font-size: 16px;
   margin: 0 auto;
   display: flex;

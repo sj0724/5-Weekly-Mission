@@ -1,12 +1,12 @@
-import axios from "../instance/axiosInstance";
+import axios from '../instance/axiosInstance';
 
 export async function getSampleUser() {
-  const { data } = await axios.get("/sample/user");
+  const { data } = await axios.get('/sample/user');
   return data;
 }
 
 export async function getSampleFolder() {
-  const { data } = await axios.get("/sample/folder");
+  const { data } = await axios.get('/sample/folder');
   return data;
 }
 
@@ -15,8 +15,8 @@ export async function getFolder(id) {
   return data;
 }
 
-export async function getFolderList({ folderId = "", userId }) {
-  const query = `/${userId}/links?folderId=${folderId}`;
+export async function getFolderList(folderId, id) {
+  const query = `/${id}/links?folderId=${folderId}`;
   const { data } = await axios.get(`/users${query}`);
   return data;
 }

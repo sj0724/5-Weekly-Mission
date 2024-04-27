@@ -3,7 +3,6 @@ import * as S from './Shared.styled.';
 import { getSampleFolder } from '../../api/api';
 import Card from '../../components/Card/Card';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import ContentsContainer from '../../components/ContentsContainer';
 
 function Shared() {
   const [folderInfo, setFolderInfo] = useState({});

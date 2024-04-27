@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import Nav from '../../components/Nav/Nav';
 import SearchModal from '../../components/SearchBar/SearchBar';
@@ -9,11 +9,11 @@ import PenIcon from '../../assets/pen.svg';
 import SharedIcon from '../../assets/share.svg';
 import DeleteIcon from '../../assets/Group36.svg';
 import * as S from './Folder.styled';
-import UserContext from '../../contexts/UserContext';
 import useGetUser from '../../hooks/useGetUser';
 import useGetFolder from '../../hooks/useGetFolder';
 import useGetFolderList from '../../hooks/useGetFolderList';
 import FolderButtonContainer from '../../components/FolderButtonContainer/FolderButtonContainer';
+import { useParams } from 'react-router-dom';
 
 function FolderIcon({ image, children }) {
   return (
@@ -25,12 +25,12 @@ function FolderIcon({ image, children }) {
 }
 
 function Folder() {
-  const userId = useContext(UserContext);
+  const { id } = useParams();
   const [folderId, setFolderId] = useState('');
   const [folderName, setFolderName] = useState('');
-  const { user } = useGetUser(userId);
-  const { linkList } = useGetFolder({ folderId, userId });
-  const { link } = useGetFolderList(userId);
+  const { user } = useGetUser(id);
+  const { linkList } = useGetFolder(folderId, id);
+  const { link } = useGetFolderList(id);
 
   return (
     <>
