@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import MainSectionCard from "../../components/MainSectionCard/MainSectionCard";
-import { sectionDescription } from "../../api/sectionDescription";
-import * as S from "./Main.styled";
+import { useEffect, useState } from 'react';
+import MainSectionCard from '../../components/MainSectionCard/MainSectionCard';
+import { sectionDescription } from '../../api/sectionDescription';
+import * as S from './Main.styled';
 
-import headerImage from "../../assets/image25.png";
-import Button from "../../components/Button/Button";
-import { Link } from "react-router-dom";
+import headerImage from '../../assets/image25.png';
+import Button from '../../components/Button/Button';
+import { Link } from 'react-router-dom';
 
 function Main() {
   const [sectionList, setSectionList] = useState([]);

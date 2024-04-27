@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Shared = styled.div`
   margin: 0 auto;
@@ -35,7 +35,7 @@ export const OwnerName = styled.p`
 export const FolderName = styled.p`
   color: #000;
   text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
+  font-feature-settings: 'clig' off, 'liga' off;
   font-family: Pretendard;
   font-size: 40px;
   font-style: normal;
@@ -52,5 +52,21 @@ export const SharedContent = styled.div`
 
   @media (max-width: 1199px) {
     padding: 0 32px;
+  }
+`;
+
+export const Container = styled.div`
+  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 auto;
+  position: relative;
+
+  @media (max-width: 1199px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
   }
 `;

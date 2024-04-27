@@ -1,10 +1,10 @@
-import { Outlet } from "react-router-dom";
-import Footer from "./Footer/Footer";
-import Nav from "./Nav/Nav";
-import { useEffect, useState } from "react";
-import { getSampleUser } from "../api/api";
+import { Outlet } from 'react-router-dom';
+import Footer from './Footer/Footer';
+import Nav from './Nav/Nav';
+import { useEffect, useState } from 'react';
+import { getSampleUser } from '../api/api';
 
-function Application() {
+function Layout() {
   const [profile, setProfile] = useState();
 
   const loadUser = async () => {
@@ -18,11 +18,11 @@ function Application() {
 
   return (
     <>
-      <Nav user={profile} position={"top"} />
+      <Nav user={profile} position={'top'} />
       <Outlet />
       <Footer />
     </>
   );
 }
 
-export default Application;
+export default Layout;
