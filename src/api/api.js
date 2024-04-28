@@ -7,6 +7,10 @@ export async function getSampleUser() {
 
 export async function getSampleFolder() {
   const { data } = await axios.get('/sample/folder');
+  for (let i = 1; i < data.folder.count; i++) {
+    data.folder.links[i].image_source = data.folder.links[i].imageSource;
+    delete data.folder.links[i].imageSource;
+  }
   return data;
 }
 

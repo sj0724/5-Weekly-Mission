@@ -5,10 +5,10 @@ import star from '../../assets/star.svg';
 import * as S from './Card.styled';
 import KebabMenu from '../KebabMenu/KebabMenu';
 
-function Card({ item }) {
+function Card({ item, toggleModal }) {
   const [createdAt, setCreatedAt] = useState({});
   const [fullDate, setFullDate] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl] = useState(item.image_source);
   const [kebabView, setKebaView] = useState(false);
 
   const { url, description } = item;
@@ -26,14 +26,6 @@ function Card({ item }) {
     const date = (nowDate - createdate) / 1000;
     setCreatedAt(calculateDate(date));
     setFullDate(changeDate(createdate));
-  }, [item]);
-
-  useEffect(() => {
-    if (item.imageSource) {
-      setImageUrl(item.imageSource);
-    } else if (item.image_source) {
-      setImageUrl(item.image_source);
-    }
   }, [item]);
 
   return (
@@ -58,7 +50,7 @@ function Card({ item }) {
         </S.ItemDescription>
         <S.ItemFullDate>{fullDate}</S.ItemFullDate>
       </S.ItemInfo>
-      {kebabView && <KebabMenu />}
+      {kebabView && <KebabMenu toggleModal={toggleModal} item={item} />}
     </S.ItemCard>
   );
 }

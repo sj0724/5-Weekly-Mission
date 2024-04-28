@@ -1,15 +1,15 @@
-import * as S from './EditModal.styled';
+import * as S from '../EditModal/EditModal.styled';
 import closeIcon from '../../../assets/close.svg';
 
-function EditModal({ setModal }) {
+function AddFolderModal({ setModal }) {
   return (
     <S.Background>
       <S.Body>
-        <p>폴더이름 변경</p>
+        <p>폴더 추가</p>
         <S.ModalForm>
           <S.ModalInput placeholder="내용 입력" type="text" />
           <S.ModalButton onClick={(e) => e.preventDefault()}>
-            변경하기
+            추가하기
           </S.ModalButton>
         </S.ModalForm>
         <S.CloseIcon
@@ -22,4 +22,4 @@ function EditModal({ setModal }) {
   );
 }
 
-export default EditModal;
+export default AddFolderModal;

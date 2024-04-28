@@ -46,7 +46,7 @@ function FolderButtonContainer({
             ))
           : null}
       </S.FolderButtons>
-      <S.AddFolderButton onClick={() => toggleModal('add')}>
+      <S.AddFolderButton onClick={() => toggleModal('addFolder')}>
         폴더 추가
         <S.PlusIcon />
       </S.AddFolderButton>

@@ -97,7 +97,14 @@ function Folder() {
         </S.FolderModalContainer>
         <ContentsContainer content={linkList.length}>
           {linkList.length > 0 ? (
-            linkList.map((item) => <Card item={item} key={item.id} />)
+            linkList.map((item) => (
+              <Card
+                item={item}
+                key={item.id}
+                toggleModal={toggleModal}
+                setModal={setModal}
+              />
+            ))
           ) : (
             <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
           )}
@@ -108,6 +115,7 @@ function Folder() {
           modalType={modalType}
           setModal={setModal}
           folderName={folderName}
+          link={link}
         />
       )}
       <Footer />

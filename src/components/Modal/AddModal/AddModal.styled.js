@@ -67,7 +67,7 @@ export const FolderButton = styled.div`
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  background: ${(props) => props.check && 'var(--Background)'};
+  background: ${(props) => props.$check && 'var(--Background)'};
 `;
 
 export const FolderInfo = styled.div`

@@ -3,9 +3,21 @@ import closeIcon from '../../../assets/close.svg';
 import checkIcon from '../../../assets/check.svg';
 import { useState } from 'react';
 
-function AddModal({ setModal }) {
+function FolderButton({ item }) {
   const [check, setCheck] = useState(false);
 
+  return (
+    <S.FolderButton $check={check} onClick={() => setCheck(!check)}>
+      <S.FolderInfo>
+        <h2>{item.name}</h2>
+        <p>{item.link.count}개의 링크</p>
+      </S.FolderInfo>
+      {check && <img src={checkIcon} alt="체크 아이콘" />}
+    </S.FolderButton>
+  );
+}
+
+function AddModal({ setModal, link }) {
   return (
     <S.Background>
       <S.Body>
@@ -14,13 +26,9 @@ function AddModal({ setModal }) {
           <span>폴더명</span>
         </S.Header>
         <S.FolderContainer>
-          <S.FolderButton check={check} onClick={() => setCheck(!check)}>
-            <S.FolderInfo>
-              <h2>폴더이름</h2>
-              <p>링크 갯수</p>
-            </S.FolderInfo>
-            {check && <img src={checkIcon} alt="체크 아이콘" />}
-          </S.FolderButton>
+          {link.map((item) => (
+            <FolderButton key={item.id} item={item} />
+          ))}
         </S.FolderContainer>
         <S.AddButton>추가하기</S.AddButton>
         <S.CloseIcon

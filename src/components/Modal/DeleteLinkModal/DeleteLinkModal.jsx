@@ -1,12 +1,11 @@
-import * as S from './DeleteModal.styled';
+import * as S from '../DeleteModal/DeleteModal.styled';
 import closeIcon from '../../../assets/close.svg';
 
-function DeleteModal({ setModal, folderName }) {
+function DeleteLinkModal({ setModal }) {
   return (
     <S.Background>
       <S.Body>
-        <p>폴더 삭제</p>
-        <span>{folderName}</span>
+        <p>링크 삭제</p>
         <S.ModalButton onClick={(e) => e.preventDefault()}>
           삭제하기
         </S.ModalButton>
@@ -20,4 +19,4 @@ function DeleteModal({ setModal, folderName }) {
   );
 }
 
-export default DeleteModal;
+export default DeleteLinkModal;
