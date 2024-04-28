@@ -1,7 +1,7 @@
 import * as S from './EditModal.styled';
 import closeIcon from '../../../assets/close.svg';
 
-function EditModal({ children }) {
+function EditModal({ children, setModal }) {
   return (
     <S.Background>
       <S.Body>
@@ -12,7 +12,11 @@ function EditModal({ children }) {
             변경하기
           </S.ModalButton>
         </S.ModalForm>
-        <S.CloseIcon src={closeIcon} alt="닫기버튼" />
+        <S.CloseIcon
+          src={closeIcon}
+          alt="닫기버튼"
+          onClick={() => setModal(false)}
+        />
       </S.Body>
     </S.Background>
   );

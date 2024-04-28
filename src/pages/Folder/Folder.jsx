@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import Nav from '../../components/Nav/Nav';
 import SearchModal from '../../components/SearchBar/SearchBar';
@@ -14,10 +14,11 @@ import useGetFolder from '../../hooks/useGetFolder';
 import useGetFolderList from '../../hooks/useGetFolderList';
 import FolderButtonContainer from '../../components/FolderButtonContainer/FolderButtonContainer';
 import { useParams } from 'react-router-dom';
+import Modals from '../../components/Modal/Modals/Modals';
 
-function FolderIcon({ image, children }) {
+function FolderIcon({ image, children, toggleModal, type }) {
   return (
-    <S.FolderModalIcon>
+    <S.FolderModalIcon onClick={() => toggleModal(`${type}`)}>
       <img src={image} alt={`${image}`} />
       {children}
     </S.FolderModalIcon>
@@ -31,6 +32,26 @@ function Folder() {
   const { user } = useGetUser(id);
   const { linkList } = useGetFolder(folderId, id);
   const { link } = useGetFolderList(id);
+  const [modal, setModal] = useState(false);
+  const [modalType, setModalType] = useState('');
+
+  const toggleModal = (type) => {
+    if (modal) {
+      setModal(false);
+      setModalType('');
+    }
+    setModal(true);
+    setModalType(`${type}`);
+  };
+
+  useEffect(() => {
+    if (modal) {
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [modal]);
 
   return (
     <>
@@ -48,14 +69,29 @@ function Folder() {
           link={link}
           setFolderId={setFolderId}
           setFolderName={setFolderName}
+          toggleModal={toggleModal}
         />
         <S.FolderModalContainer>
           {folderName ? folderName : '전체'}
           {folderId && (
             <S.FolderModal>
-              <FolderIcon image={SharedIcon}>공유</FolderIcon>
-              <FolderIcon image={PenIcon}>이름 변경</FolderIcon>
-              <FolderIcon image={DeleteIcon}>삭제</FolderIcon>
+              <FolderIcon
+                image={SharedIcon}
+                toggleModal={toggleModal}
+                type="share"
+              >
+                공유
+              </FolderIcon>
+              <FolderIcon image={PenIcon} toggleModal={toggleModal} type="edit">
+                이름 변경
+              </FolderIcon>
+              <FolderIcon
+                image={DeleteIcon}
+                toggleModal={toggleModal}
+                type="delete"
+              >
+                삭제
+              </FolderIcon>
             </S.FolderModal>
           )}
         </S.FolderModalContainer>
@@ -67,6 +103,7 @@ function Folder() {
           )}
         </ContentsContainer>
       </S.FolderContents>
+      {modal && <Modals modalType={modalType} setModal={setModal} />}
       <Footer />
     </>
   );

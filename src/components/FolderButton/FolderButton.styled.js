@@ -12,6 +12,7 @@ export const FolderName = styled.span`
   height: 35px;
   font-size: 1rem;
   white-space: nowrap;
+  color: ${(props) => (props.$select ? '#fff' : '#000')};
 
   @media (max-width: 768px) {
     font-size: 1.6rem;

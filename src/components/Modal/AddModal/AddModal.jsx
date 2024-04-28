@@ -3,14 +3,14 @@ import closeIcon from '../../../assets/close.svg';
 import checkIcon from '../../../assets/check.svg';
 import { useState } from 'react';
 
-function AddModal({ children }) {
+function AddModal({ children, setModal }) {
   const [check, setCheck] = useState(false);
 
   return (
     <S.Background>
       <S.Body>
         <S.Header>
-          <p>폴더 삭제</p>
+          <p>폴더에 추가</p>
           <span>폴더명</span>
         </S.Header>
         <S.FolderContainer>
@@ -23,7 +23,11 @@ function AddModal({ children }) {
           </S.FolderButton>
         </S.FolderContainer>
         <S.AddButton>추가하기</S.AddButton>
-        <S.CloseIcon src={closeIcon} alt="닫기버튼" />
+        <S.CloseIcon
+          src={closeIcon}
+          alt="닫기버튼"
+          onClick={() => setModal(false)}
+        />
       </S.Body>
     </S.Background>
   );

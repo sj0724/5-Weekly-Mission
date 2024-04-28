@@ -2,7 +2,12 @@ import { useState } from 'react';
 import * as S from './FolderButtonContainer.styled';
 import FolderButton from '../FolderButton/FolderButton';
 
-function FolderButtonContainer({ link, setFolderName, setFolderId }) {
+function FolderButtonContainer({
+  link,
+  setFolderName,
+  setFolderId,
+  toggleModal,
+}) {
   const [linkSelected, setLinkSelected] = useState(false);
   const [totalBtn, setTotalBtn] = useState(true);
 
@@ -41,7 +46,7 @@ function FolderButtonContainer({ link, setFolderName, setFolderId }) {
             ))
           : null}
       </S.FolderButtons>
-      <S.AddFolderButton>
+      <S.AddFolderButton onClick={() => toggleModal('add')}>
         폴더 추가
         <S.PlusIcon />
       </S.AddFolderButton>
