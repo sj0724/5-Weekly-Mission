@@ -1,12 +1,12 @@
 import * as S from './DeleteModal.styled';
 import closeIcon from '../../../assets/close.svg';
 
-function DeleteModal({ children, setModal }) {
+function DeleteModal({ children, setModal, folderName }) {
   return (
     <S.Background>
       <S.Body>
         <p>폴더 삭제</p>
-        <span>삭제 대상</span>
+        <span>{folderName}</span>
         <S.ModalButton onClick={(e) => e.preventDefault()}>
           삭제하기
         </S.ModalButton>

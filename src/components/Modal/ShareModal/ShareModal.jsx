@@ -4,13 +4,13 @@ import KakaoIcon from '../../../assets/Kakao.svg';
 import FaceBookIcon from '../../../assets/Facebook.svg';
 import LinkIcon from '../../../assets/link.svg';
 
-function ShareModal({ children, setModal }) {
+function ShareModal({ folderName, setModal }) {
   return (
     <S.Background>
       <S.Body>
         <S.Header>
-          <p>폴더 삭제</p>
-          <span>폴더명</span>
+          <p>폴더 공유</p>
+          <span>{folderName}</span>
         </S.Header>
         <S.ButtonContainer>
           <S.ShareButtonBody $color="#FEE500">

@@ -103,7 +103,13 @@ function Folder() {
           )}
         </ContentsContainer>
       </S.FolderContents>
-      {modal && <Modals modalType={modalType} setModal={setModal} />}
+      {modal && (
+        <Modals
+          modalType={modalType}
+          setModal={setModal}
+          folderName={folderName}
+        />
+      )}
       <Footer />
     </>
   );

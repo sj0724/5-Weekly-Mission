@@ -3,7 +3,7 @@ import closeIcon from '../../../assets/close.svg';
 import checkIcon from '../../../assets/check.svg';
 import { useState } from 'react';
 
-function AddModal({ children, setModal }) {
+function AddModal({ setModal }) {
   const [check, setCheck] = useState(false);
 
   return (
