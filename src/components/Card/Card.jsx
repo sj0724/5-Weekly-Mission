@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { changeDate, calculateDate } from '../../utils/util';
 import kebab from '../../assets/kebab.svg';
 import star from '../../assets/star.svg';
@@ -10,6 +10,7 @@ function Card({ item, toggleModal }) {
   const [fullDate, setFullDate] = useState('');
   const [imageUrl] = useState(item.image_source);
   const [kebabView, setKebaView] = useState(false);
+  const kebabRef = useRef();
 
   const { url, description } = item;
 
@@ -27,6 +28,23 @@ function Card({ item, toggleModal }) {
     setCreatedAt(calculateDate(date));
     setFullDate(changeDate(createdate));
   }, [item]);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        kebabView &&
+        kebabRef.current &&
+        !kebabRef.current.contains(event.target)
+      ) {
+        setKebaView(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [kebabView]);
 
   return (
     <S.ItemCard>
@@ -50,7 +68,9 @@ function Card({ item, toggleModal }) {
         </S.ItemDescription>
         <S.ItemFullDate>{fullDate}</S.ItemFullDate>
       </S.ItemInfo>
-      {kebabView && <KebabMenu toggleModal={toggleModal} item={item} />}
+      {kebabView && (
+        <KebabMenu toggleModal={toggleModal} item={item} menuRef={kebabRef} />
+      )}
     </S.ItemCard>
   );
 }

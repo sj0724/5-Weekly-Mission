@@ -5,8 +5,8 @@ export const SearchBarInput = styled.input`
   padding: 15px 32px;
   width: 100%;
   border-radius: 10px;
-  background-color: #dddddd;
-  border: 1px solid #dddddd;
+  background-color: var(--Gray-cta);
+  border: none;
 `;
 
 export const SearchBarModal = styled.div`

@@ -60,7 +60,14 @@ function Folder() {
         <S.HeaderModal>
           <S.LinkIcon src={linkIcon}></S.LinkIcon>
           <S.AddLinkInput placeholder="링크를 추가해보세요." />
-          <S.AddButton>추가하기</S.AddButton>
+          <S.AddButton
+            onClick={() => {
+              setModal(true);
+              setModalType('add');
+            }}
+          >
+            추가하기
+          </S.AddButton>
         </S.HeaderModal>
       </S.Header>
       <S.FolderContents>

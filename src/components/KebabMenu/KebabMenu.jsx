@@ -1,8 +1,8 @@
 import * as S from './KebabMenu.styled';
 
-function KebabMenu({ toggleModal }) {
+function KebabMenu({ toggleModal, menuRef }) {
   return (
-    <S.ModalBody>
+    <S.ModalBody ref={menuRef}>
       <S.ModalButton onClick={() => toggleModal('deleteLink')}>
         삭제하기
       </S.ModalButton>
