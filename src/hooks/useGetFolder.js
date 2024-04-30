@@ -7,9 +7,22 @@ function useGetFolder(folderId, id, searchKeyword) {
   const search = (list) => {
     let arr = [];
     for (let i = 0; i < list.length; i++) {
-      let result = list[i].url.indexOf(searchKeyword);
-      if (result > 0) {
-        arr = [...arr, list[i]];
+      if (list[i].title) {
+        if (list[i].title.includes(searchKeyword)) {
+          arr = [...arr, list[i]];
+          break;
+        }
+      }
+      if (list[i].description) {
+        if (list[i].description.includes(searchKeyword)) {
+          arr = [...arr, list[i]];
+          break;
+        }
+      }
+      if (list[i].url) {
+        if (list[i].url.includes(searchKeyword)) {
+          arr = [...arr, list[i]];
+        }
       }
     }
     return arr;
