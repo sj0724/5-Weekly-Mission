@@ -4,12 +4,18 @@ import searchIconPurple from '../../assets/SearchPurple.svg';
 import closeIcon from '../../assets/close.svg';
 import * as S from './SearchBar.styled';
 
-function SearchModal({ linkList }) {
-  const [text, setText] = useState();
+function SearchModal({ setSearchKeyWord }) {
+  const [text, setText] = useState('');
   const [inputImage, setInputImage] = useState();
 
   const searchLink = (e) => {
     e.preventDefault();
+    setSearchKeyWord(text);
+  };
+
+  const cancelSearch = () => {
+    setText('');
+    setSearchKeyWord('');
   };
 
   useEffect(() => {
@@ -29,12 +35,12 @@ function SearchModal({ linkList }) {
           id="word"
           value={text}
         />
-        <S.SearchIcon src={inputImage} alt="serachIcon" />
+        <S.SearchIcon src={inputImage} alt="돋보기 아이콘" />
         {text && (
           <S.CloseIcon
             src={closeIcon}
-            alt="닫기 버튼"
-            onClick={() => setText('')}
+            alt="닫기 아이콘"
+            onClick={cancelSearch}
           />
         )}
       </S.SearchForm>

@@ -30,7 +30,8 @@ function Folder() {
   const [folderId, setFolderId] = useState('');
   const [folderName, setFolderName] = useState('');
   const { user } = useGetUser(id);
-  const { linkList } = useGetFolder(folderId, id);
+  const [searchKeyword, setSearchKeyWord] = useState('');
+  const { linkList } = useGetFolder(folderId, id, searchKeyword);
   const { link } = useGetFolderList(id);
   const [modal, setModal] = useState(false);
   const [modalType, setModalType] = useState('');
@@ -71,7 +72,12 @@ function Folder() {
         </S.HeaderModal>
       </S.Header>
       <S.FolderContents>
-        <SearchBar linkList={linkList} />
+        <SearchBar setSearchKeyWord={setSearchKeyWord} />
+        {searchKeyword && (
+          <S.SearchResult>
+            <p>{searchKeyword}</p>으로 검색한 결과입니다.
+          </S.SearchResult>
+        )}
         <FolderButtonContainer
           link={link}
           setFolderId={setFolderId}
