@@ -2,14 +2,17 @@ import { useEffect, useRef, useState } from 'react';
 import { changeDate, calculateDate } from '../../utils/util';
 import kebab from '../../assets/kebab.svg';
 import star from '../../assets/star.svg';
+import fullStar from '../../assets/full_star.svg';
 import * as S from './Card.styled';
 import KebabMenu from '../KebabMenu/KebabMenu';
+import logoIcon from '../../assets/logo.svg';
 
 function Card({ item, toggleModal }) {
   const [createdAt, setCreatedAt] = useState({});
   const [fullDate, setFullDate] = useState('');
   const [imageUrl] = useState(item.image_source);
   const [kebabView, setKebaView] = useState(false);
+  const [like, setLike] = useState(false);
   const kebabRef = useRef();
 
   const { url, description } = item;
@@ -48,11 +51,19 @@ function Card({ item, toggleModal }) {
 
   return (
     <S.ItemCard>
-      <S.StarIcon src={star} alt="starIcon" />
+      <S.StarIcon
+        src={like ? fullStar : star}
+        alt="starIcon"
+        onClick={() => {
+          setLike(!like);
+        }}
+      />
       {imageUrl ? (
         <S.ItemImg image={imageUrl} alt="itemImage" />
       ) : (
-        <S.EmptyImg>이미지가 없습니다.</S.EmptyImg>
+        <S.EmptyImg>
+          <img src={logoIcon} alt="빈 이미지" />
+        </S.EmptyImg>
       )}
       <S.ItemInfo>
         <S.KebabIcon

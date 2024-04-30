@@ -8,6 +8,12 @@ export const EmptyImg = styled.div`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+
+  img {
+    opacity: 0.2;
+    width: 133px;
+    height: 24px;
+  }
 `;
 
 export const ItemImg = styled.div`
