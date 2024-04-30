@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import Nav from '../../components/Nav/Nav';
-import SearchModal from '../../components/SearchBar/SearchBar';
+import SearchBar from '../../components/SearchBar/SearchBar';
 import ContentsContainer from '../../components/ContentsContainer';
 import Card from '../../components/Card/Card';
 import linkIcon from '../../assets/link.svg';
@@ -71,7 +71,7 @@ function Folder() {
         </S.HeaderModal>
       </S.Header>
       <S.FolderContents>
-        <SearchModal />
+        <SearchBar linkList={linkList} />
         <FolderButtonContainer
           link={link}
           setFolderId={setFolderId}

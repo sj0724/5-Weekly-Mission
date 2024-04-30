@@ -30,3 +30,11 @@ export const SearchIcon = styled.img`
   top: 15px;
   left: 10px;
 `;
+
+export const CloseIcon = styled.img`
+  position: absolute;
+  right: 16px;
+  top: 11px;
+  width: 24px;
+  height: 24px;
+`;
