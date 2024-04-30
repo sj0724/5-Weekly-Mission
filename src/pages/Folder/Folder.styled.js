@@ -58,7 +58,7 @@ export const HeaderModal = styled.div`
   align-items: center;
   margin: 0 auto;
   position: relative;
-  padding: 20px 0 60px 0;
+  padding: 20px 0;
 `;
 
 export const Header = styled.div`
@@ -69,7 +69,9 @@ export const Header = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-
+  position: ${(props) => props.$view && 'fixed'};
+  bottom: ${(props) => props.$view && '0'};
+  z-index: 10;
   @media (max-width: 1199px) {
     padding: 0 32px;
   }

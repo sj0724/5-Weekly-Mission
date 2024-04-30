@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import Nav from '../../components/Nav/Nav';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -31,10 +31,12 @@ function Folder() {
   const [folderName, setFolderName] = useState('');
   const { user } = useGetUser(id);
   const [searchKeyword, setSearchKeyWord] = useState('');
-  const { linkList } = useGetFolder(folderId, id, searchKeyword);
+  const { linkList, loading } = useGetFolder(folderId, id, searchKeyword);
   const { link } = useGetFolderList(id);
   const [modal, setModal] = useState(false);
   const [modalType, setModalType] = useState('');
+  const obsRef = useRef(null);
+  const [toggleInput, setToggleInput] = useState(true);
 
   const toggleModal = (type) => {
     if (modal) {
@@ -45,10 +47,26 @@ function Folder() {
     setModalType(`${type}`);
   };
 
+  const handleObserver = (entries) => {
+    if (entries[0].isIntersecting) {
+      setToggleInput(false);
+    } else {
+      setToggleInput(true);
+    }
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleObserver, { threshold: 1 });
+    if (!loading && obsRef.current) observer.observe(obsRef.current);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <Nav user={user} />
-      <S.Header>
+      <S.Header $view={toggleInput}>
         <S.HeaderModal>
           <S.LinkIcon src={linkIcon}></S.LinkIcon>
           <S.AddLinkInput placeholder="링크를 추가해보세요." />
@@ -62,6 +80,7 @@ function Folder() {
           </S.AddButton>
         </S.HeaderModal>
       </S.Header>
+      <div ref={obsRef}></div>
       <S.FolderContents>
         <SearchBar setSearchKeyWord={setSearchKeyWord} />
         {searchKeyword && (

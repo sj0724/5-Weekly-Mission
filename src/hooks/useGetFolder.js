@@ -3,6 +3,7 @@ import { getFolderList } from '../api/api';
 
 function useGetFolder(folderId, id, searchKeyword) {
   const [linkList, setLinkList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const search = (list) => {
     let arr = [];
@@ -29,20 +30,27 @@ function useGetFolder(folderId, id, searchKeyword) {
   };
 
   useEffect(() => {
-    const loadFolder = async () => {
-      const result = await getFolderList(folderId, id);
-      const list = result.data;
-      if (searchKeyword) {
-        setLinkList(search(list));
-      } else {
-        setLinkList(list);
-      }
-    };
-    setLinkList([]);
-    loadFolder();
+    try {
+      setLoading(true);
+      const loadFolder = async () => {
+        const result = await getFolderList(folderId, id);
+        const list = result.data;
+        if (searchKeyword) {
+          setLinkList(search(list));
+        } else {
+          setLinkList(list);
+        }
+      };
+      setLinkList([]);
+      loadFolder();
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
   }, [folderId, id, searchKeyword]);
 
-  return { linkList };
+  return { linkList, loading };
 }
 
 export default useGetFolder;
