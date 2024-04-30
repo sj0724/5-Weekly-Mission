@@ -45,15 +45,6 @@ function Folder() {
     setModalType(`${type}`);
   };
 
-  useEffect(() => {
-    if (modal) {
-      document.body.style.overflow = 'hidden';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [modal]);
-
   return (
     <>
       <Nav user={user} />
