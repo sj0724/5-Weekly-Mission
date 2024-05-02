@@ -39,7 +39,6 @@ export const Header = styled.div`
   }
 
   span {
-    width: 42px;
     height: 42px;
     color: var(--Linkbrary-gray60);
     text-align: center;

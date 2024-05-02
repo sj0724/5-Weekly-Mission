@@ -11,13 +11,13 @@ function useGetFolder(folderId, id, searchKeyword) {
       if (list[i].title) {
         if (list[i].title.includes(searchKeyword)) {
           arr = [...arr, list[i]];
-          break;
+          continue;
         }
       }
       if (list[i].description) {
         if (list[i].description.includes(searchKeyword)) {
           arr = [...arr, list[i]];
-          break;
+          continue;
         }
       }
       if (list[i].url) {

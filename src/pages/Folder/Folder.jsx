@@ -48,6 +48,7 @@ function Folder() {
   };
 
   const handleObserver = (entries) => {
+    console.log(entries);
     if (entries[0].isIntersecting) {
       setToggleInput(false);
     } else {
@@ -56,7 +57,7 @@ function Folder() {
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(handleObserver, { threshold: 1 });
+    const observer = new IntersectionObserver(handleObserver);
     if (!loading && obsRef.current) observer.observe(obsRef.current);
     return () => {
       observer.disconnect();
