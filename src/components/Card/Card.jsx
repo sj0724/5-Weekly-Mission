@@ -53,7 +53,7 @@ function Card({ item }) {
     <S.ItemCard>
       <S.StarIcon
         src={like ? fullStar : star}
-        alt="starIcon"
+        alt="별 이미지"
         onClick={() => {
           setLike(!like);
         }}
