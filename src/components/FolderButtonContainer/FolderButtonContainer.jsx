@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import * as S from './FolderButtonContainer.styled';
 import FolderButton from '../FolderButton/FolderButton';
+import { useModal } from '../../contexts/ModalContext';
 
-function FolderButtonContainer({
-  link,
-  setFolderName,
-  setFolderId,
-  toggleModal,
-}) {
+function FolderButtonContainer({ link, setFolderName, setFolderId }) {
   const [linkSelected, setLinkSelected] = useState([]);
   const [totalBtn, setTotalBtn] = useState(true);
+  const { openModal } = useModal();
 
   const handleMenuClick = (index) => {
     const booleanArr = [...link].fill('white');
@@ -49,7 +46,7 @@ function FolderButtonContainer({
             ))
           : null}
       </S.FolderButtons>
-      <S.AddFolderButton onClick={() => toggleModal('addFolder')}>
+      <S.AddFolderButton onClick={() => openModal('addFolder')}>
         폴더 추가
         <S.PlusIcon />
       </S.AddFolderButton>

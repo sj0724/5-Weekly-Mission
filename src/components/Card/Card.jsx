@@ -7,7 +7,7 @@ import * as S from './Card.styled';
 import KebabMenu from '../KebabMenu/KebabMenu';
 import logoIcon from '../../assets/logo.svg';
 
-function Card({ item, toggleModal }) {
+function Card({ item }) {
   const [createdAt, setCreatedAt] = useState({});
   const [fullDate, setFullDate] = useState('');
   const [imageUrl] = useState(item.image_source);
@@ -79,9 +79,7 @@ function Card({ item, toggleModal }) {
         </S.ItemDescription>
         <S.ItemFullDate>{fullDate}</S.ItemFullDate>
       </S.ItemInfo>
-      {kebabView && (
-        <KebabMenu toggleModal={toggleModal} item={item} menuRef={kebabRef} />
-      )}
+      {kebabView && <KebabMenu menuRef={kebabRef} />}
     </S.ItemCard>
   );
 }

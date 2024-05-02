@@ -1,7 +1,7 @@
 import * as S from '../EditModal/EditModal.styled';
 import closeIcon from '../../../assets/close.svg';
 
-function AddFolderModal({ setModal }) {
+function AddFolderModal({ onClose }) {
   return (
     <S.Background>
       <S.Body>
@@ -12,11 +12,7 @@ function AddFolderModal({ setModal }) {
             추가하기
           </S.ModalButton>
         </S.ModalForm>
-        <S.CloseIcon
-          src={closeIcon}
-          alt="닫기버튼"
-          onClick={() => setModal(false)}
-        />
+        <S.CloseIcon src={closeIcon} alt="닫기버튼" onClick={onClose} />
       </S.Body>
     </S.Background>
   );

@@ -1,7 +1,7 @@
 import * as S from './DeleteModal.styled';
 import closeIcon from '../../../assets/close.svg';
 
-function DeleteModal({ setModal, folderName }) {
+function DeleteModal({ folderName, onClose }) {
   return (
     <S.Background>
       <S.Body>
@@ -10,11 +10,7 @@ function DeleteModal({ setModal, folderName }) {
         <S.ModalButton onClick={(e) => e.preventDefault()}>
           삭제하기
         </S.ModalButton>
-        <S.CloseIcon
-          src={closeIcon}
-          alt="닫기버튼"
-          onClick={() => setModal(false)}
-        />
+        <S.CloseIcon src={closeIcon} alt="닫기버튼" onClick={onClose} />
       </S.Body>
     </S.Background>
   );

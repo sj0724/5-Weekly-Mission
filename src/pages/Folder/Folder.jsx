@@ -14,11 +14,16 @@ import useGetFolder from '../../hooks/useGetFolder';
 import useGetFolderList from '../../hooks/useGetFolderList';
 import FolderButtonContainer from '../../components/FolderButtonContainer/FolderButtonContainer';
 import { useParams } from 'react-router-dom';
-import Modals from '../../components/Modal/Modals/Modals';
+import { useModal } from '../../contexts/ModalContext';
+import AddModal from '../../components/Modal/AddModal/AddModal';
+import ShareModal from '../../components/Modal/ShareModal/ShareModal';
+import EditModal from '../../components/Modal/EditModal/EditModal';
+import DeleteModal from '../../components/Modal/DeleteModal/DeleteModal';
+import AddfolderModal from '../../components/Modal/AddFolderModal/AddFolderModal';
 
-function FolderIcon({ image, children, toggleModal, type }) {
+function FolderIcon({ image, children, onOpen }) {
   return (
-    <S.FolderModalIcon onClick={() => toggleModal(`${type}`)}>
+    <S.FolderModalIcon onClick={onOpen}>
       <img src={image} alt={`${image}`} />
       {children}
     </S.FolderModalIcon>
@@ -33,22 +38,11 @@ function Folder() {
   const [searchKeyword, setSearchKeyWord] = useState('');
   const { linkList, loading } = useGetFolder(folderId, id, searchKeyword);
   const { link } = useGetFolderList(id);
-  const [modal, setModal] = useState(false);
-  const [modalType, setModalType] = useState('');
   const obsRef = useRef(null);
   const [toggleInput, setToggleInput] = useState(true);
-
-  const toggleModal = (type) => {
-    if (modal) {
-      setModal(false);
-      setModalType('');
-    }
-    setModal(true);
-    setModalType(`${type}`);
-  };
+  const { modalState, openModal, closeModal } = useModal();
 
   const handleObserver = (entries) => {
-    console.log(entries);
     if (entries[0].isIntersecting) {
       setToggleInput(false);
     } else {
@@ -71,14 +65,7 @@ function Folder() {
         <S.HeaderModal>
           <S.LinkIcon src={linkIcon}></S.LinkIcon>
           <S.AddLinkInput placeholder="링크를 추가해보세요." />
-          <S.AddButton
-            onClick={() => {
-              setModal(true);
-              setModalType('add');
-            }}
-          >
-            추가하기
-          </S.AddButton>
+          <S.AddButton onClick={() => openModal('add')}>추가하기</S.AddButton>
         </S.HeaderModal>
       </S.Header>
       <div ref={obsRef}></div>
@@ -93,27 +80,18 @@ function Folder() {
           link={link}
           setFolderId={setFolderId}
           setFolderName={setFolderName}
-          toggleModal={toggleModal}
         />
         <S.FolderModalContainer>
           {folderName ? folderName : '전체'}
           {folderId && (
             <S.FolderModal>
-              <FolderIcon
-                image={SharedIcon}
-                toggleModal={toggleModal}
-                type="share"
-              >
+              <FolderIcon image={SharedIcon} onOpen={() => openModal('share')}>
                 공유
               </FolderIcon>
-              <FolderIcon image={PenIcon} toggleModal={toggleModal} type="edit">
+              <FolderIcon image={PenIcon} onOpen={() => openModal('edit')}>
                 이름 변경
               </FolderIcon>
-              <FolderIcon
-                image={DeleteIcon}
-                toggleModal={toggleModal}
-                type="delete"
-              >
+              <FolderIcon image={DeleteIcon} onOpen={() => openModal('delete')}>
                 삭제
               </FolderIcon>
             </S.FolderModal>
@@ -121,27 +99,31 @@ function Folder() {
         </S.FolderModalContainer>
         <ContentsContainer content={linkList.length}>
           {linkList.length > 0 ? (
-            linkList.map((item) => (
-              <Card
-                item={item}
-                key={item.id}
-                toggleModal={toggleModal}
-                setModal={setModal}
-              />
-            ))
+            linkList.map((item) => <Card item={item} key={item.id} />)
           ) : (
             <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
           )}
         </ContentsContainer>
+        {modalState.add && (
+          <AddModal onClose={() => closeModal('add')} link={link} />
+        )}
+        {modalState.share && (
+          <ShareModal
+            onClose={() => closeModal('share')}
+            folderName={folderName}
+          />
+        )}
+        {modalState.edit && <EditModal onClose={() => closeModal('edit')} />}
+        {modalState.delete && (
+          <DeleteModal onClose={() => closeModal('delete')} />
+        )}
+        {modalState.addFolder && (
+          <AddfolderModal onClose={() => closeModal('addFolder')} />
+        )}
+        {modalState.deleteLink && (
+          <DeleteModal onClose={() => closeModal('deleteLink')} />
+        )}
       </S.FolderContents>
-      {modal && (
-        <Modals
-          modalType={modalType}
-          setModal={setModal}
-          folderName={folderName}
-          link={link}
-        />
-      )}
       <Footer />
     </>
   );

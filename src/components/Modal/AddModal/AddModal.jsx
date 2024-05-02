@@ -17,7 +17,7 @@ function FolderButton({ item }) {
   );
 }
 
-function AddModal({ setModal, link }) {
+function AddModal({ link, onClose }) {
   return (
     <S.Background>
       <S.Body>
@@ -31,11 +31,7 @@ function AddModal({ setModal, link }) {
           ))}
         </S.FolderContainer>
         <S.AddButton>추가하기</S.AddButton>
-        <S.CloseIcon
-          src={closeIcon}
-          alt="닫기버튼"
-          onClick={() => setModal(false)}
-        />
+        <S.CloseIcon src={closeIcon} alt="닫기버튼" onClick={onClose} />
       </S.Body>
     </S.Background>
   );

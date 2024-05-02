@@ -2,10 +2,13 @@ import styled from 'styled-components';
 import { ModalButton } from '../EditModal/EditModal.styled';
 
 export const Background = styled.div`
+  z-index: 50;
+  position: fixed;
+  top: 0;
   display: flex;
   width: 100%;
   height: 100vh;
-  flex-direction: center;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);

@@ -4,7 +4,7 @@ import KakaoIcon from '../../../assets/Kakao.svg';
 import FaceBookIcon from '../../../assets/Facebook.svg';
 import LinkIcon from '../../../assets/link.svg';
 
-function ShareModal({ folderName, setModal }) {
+function ShareModal({ folderName, onClose }) {
   return (
     <S.Background>
       <S.Body>
@@ -32,11 +32,7 @@ function ShareModal({ folderName, setModal }) {
             <p>링크 복사</p>
           </S.ShareButtonBody>
         </S.ButtonContainer>
-        <S.CloseIcon
-          src={closeIcon}
-          alt="닫기버튼"
-          onClick={() => setModal(false)}
-        />
+        <S.CloseIcon src={closeIcon} alt="닫기버튼" onClick={onClose} />
       </S.Body>
     </S.Background>
   );
