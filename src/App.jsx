@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import Folder from './pages/Folder/Folder';
 import './App.css';
 import UserContext from './contexts/UserContext';
+import { ModalProvider } from './contexts/ModalContext';
 
 function App() {
   const userId = 1;
@@ -12,13 +13,15 @@ function App() {
   return (
     <BrowserRouter>
       <UserContext.Provider value={userId}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Main />} />
-            <Route path="/shared" element={<Shared />} />
-          </Route>
-          <Route path="/folder/:id" element={<Folder />} />
-        </Routes>
+        <ModalProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="/" element={<Main />} />
+              <Route path="/shared" element={<Shared />} />
+            </Route>
+            <Route path="/folder/:id" element={<Folder />} />
+          </Routes>
+        </ModalProvider>
       </UserContext.Provider>
     </BrowserRouter>
   );

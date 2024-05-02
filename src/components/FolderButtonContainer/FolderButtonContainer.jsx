@@ -18,7 +18,7 @@ function FolderButtonContainer({
     setTotalBtn(false);
   };
 
-  const setTotal = () => {
+  const handleClickTotalButton = () => {
     const totalArr = [...link].fill('white');
     setLinkSelected(totalArr);
     setFolderId('');
@@ -29,7 +29,10 @@ function FolderButtonContainer({
   return (
     <S.FolderMenu>
       <S.FolderButtons>
-        <S.TotalFolderButton onClick={setTotal} $select={totalBtn}>
+        <S.TotalFolderButton
+          onClick={handleClickTotalButton}
+          $select={totalBtn}
+        >
           전체
         </S.TotalFolderButton>
         {link
