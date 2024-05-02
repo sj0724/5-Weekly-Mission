@@ -117,7 +117,10 @@ function Folder() {
           )}
           {modalState.edit && <EditModal onClose={() => closeModal('edit')} />}
           {modalState.delete && (
-            <DeleteModal onClose={() => closeModal('delete')} />
+            <DeleteModal
+              onClose={() => closeModal('delete')}
+              folderName={folderName}
+            />
           )}
           {modalState.addFolder && (
             <AddfolderModal onClose={() => closeModal('addFolder')} />
