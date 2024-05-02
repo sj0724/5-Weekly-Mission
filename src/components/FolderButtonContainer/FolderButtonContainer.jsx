@@ -8,18 +8,18 @@ function FolderButtonContainer({
   setFolderId,
   toggleModal,
 }) {
-  const [linkSelected, setLinkSelected] = useState(false);
+  const [linkSelected, setLinkSelected] = useState([]);
   const [totalBtn, setTotalBtn] = useState(true);
 
   const handleMenuClick = (index) => {
-    const booleanArr = [...link].fill(false);
-    booleanArr[index] = true;
+    const booleanArr = [...link].fill('white');
+    booleanArr[index] = 'select';
     setLinkSelected(booleanArr);
     setTotalBtn(false);
   };
 
   const setTotal = () => {
-    const totalArr = [...link].fill(false);
+    const totalArr = [...link].fill('white');
     setLinkSelected(totalArr);
     setFolderId('');
     setFolderName('');

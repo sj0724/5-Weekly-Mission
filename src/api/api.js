@@ -1,31 +1,60 @@
 import axios from '../instance/axiosInstance';
 
 export async function getSampleUser() {
-  const { data } = await axios.get('/sample/user');
-  return data;
+  try {
+    const { data } = await axios.get('/sample/user');
+    return data;
+  } catch (error) {
+    console.error('Error fetching sample user:', error);
+    throw error;
+  }
 }
 
 export async function getSampleFolder() {
-  const { data } = await axios.get('/sample/folder');
-  for (let i = 1; i < data.folder.count; i++) {
-    data.folder.links[i].image_source = data.folder.links[i].imageSource;
-    delete data.folder.links[i].imageSource;
+  try {
+    const { data } = await axios.get('/sample/folder');
+    if (data && data.folder && data.folder.links) {
+      data.folder.links.forEach((link) => {
+        if (link.imageSource) {
+          link.image_source = link.imageSource;
+          delete link.imageSource;
+        }
+      });
+    }
+    return data;
+  } catch (error) {
+    console.error('Error fetching sample folder:', error);
+    throw error;
   }
-  return data;
 }
 
 export async function getFolder(id) {
-  const { data } = await axios.get(`/users/${id}/folders`);
-  return data;
+  try {
+    const { data } = await axios.get(`/users/${id}/folders`);
+    return data;
+  } catch (error) {
+    console.error('Error fetching folder:', error);
+    throw error;
+  }
 }
 
 export async function getFolderList(folderId, id) {
-  const query = `/${id}/links?folderId=${folderId}`;
-  const { data } = await axios.get(`/users${query}`);
-  return data;
+  try {
+    const query = `/${id}/links?folderId=${folderId}`;
+    const { data } = await axios.get(`/users${query}`);
+    return data;
+  } catch (error) {
+    console.error('Error fetching folderList:', error);
+    throw error;
+  }
 }
 
 export async function getUser(id) {
-  const { data } = await axios.get(`/users/${id}`);
-  return data;
+  try {
+    const { data } = await axios.get(`/users/${id}`);
+    return data;
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    throw error;
+  }
 }
