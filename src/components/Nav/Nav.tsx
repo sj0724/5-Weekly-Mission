@@ -24,7 +24,13 @@ function Nav() {
           <S.NavLogo src={logo} alt="Linkbrary nav logo" />
         </Link>
         <S.UserProfile>
-          {user ? <NavUser user={user} /> : <Button size={8}>로그인</Button>}
+          {user ? (
+            <NavUser user={user} />
+          ) : (
+            <Link to="/signin">
+              <Button size={8}>로그인</Button>
+            </Link>
+          )}
         </S.UserProfile>
       </S.NavModal>
     </S.NavBar>

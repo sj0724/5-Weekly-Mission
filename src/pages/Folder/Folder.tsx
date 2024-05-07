@@ -69,7 +69,7 @@ function Folder() {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [loading]);
 
   return (
     <>

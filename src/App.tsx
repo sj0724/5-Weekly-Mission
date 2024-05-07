@@ -7,6 +7,8 @@ import Folder from './pages/Folder/Folder';
 import './App.css';
 import UserContext from './contexts/UserContext';
 import { ModalProvider } from './contexts/ModalContext';
+import SignIn from 'pages/SignIn/SignIn';
+import SignUp from 'pages/SignUp/SignUp';
 
 function App() {
   const userId: number = 1;
@@ -21,6 +23,8 @@ function App() {
               <Route path="/shared" element={<Shared />} />
               <Route path="/folder/:id" element={<Folder />} />
             </Route>
+            <Route path="/signin" element={<SignIn />}></Route>
+            <Route path="/signup" element={<SignUp />}></Route>
           </Routes>
         </ModalProvider>
       </UserContext.Provider>
