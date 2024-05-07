@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch } from 'react';
+import React, { ChangeEvent, Dispatch, FormEvent } from 'react';
 import { useEffect, useState } from 'react';
 import searchIcon from '../../assets/Search.svg';
 import searchIconPurple from '../../assets/SearchPurple.svg';
@@ -13,7 +13,7 @@ function SearchModal({ setSearchKeyWord }: PropsType) {
   const [text, setText] = useState('');
   const [inputImage, setInputImage] = useState('');
 
-  const searchLink = (e: ChangeEvent) => {
+  const searchLink = (e: FormEvent) => {
     e.preventDefault();
     setSearchKeyWord(text);
   };
@@ -33,7 +33,7 @@ function SearchModal({ setSearchKeyWord }: PropsType) {
 
   return (
     <S.SearchBarModal>
-      <S.SearchForm onSubmit={() => searchLink}>
+      <S.SearchForm onSubmit={searchLink}>
         <S.SearchBarInput
           placeholder="링크를 검색해 보세요"
           onChange={(e) => setText(e.target.value)}
