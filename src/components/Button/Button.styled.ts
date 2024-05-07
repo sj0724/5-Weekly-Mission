@@ -13,7 +13,7 @@ export const Cta = styled.span<{ size?: number }>`
   font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 700;
   line-height: normal;
   width: ${(props) => props.size ?? 8}rem;
   position: relative;

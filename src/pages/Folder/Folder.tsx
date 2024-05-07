@@ -19,18 +19,21 @@ import DeleteModal from '../../components/Modal/DeleteModal/DeleteModal';
 import AddfolderModal from '../../components/Modal/AddFolderModal/AddFolderModal';
 import ModalPortal from '../../Portal';
 import * as S from './Folder.styled';
+import DeleteLinkModal from 'components/Modal/DeleteLinkModal/DeleteLinkModal';
 
 function FolderIcon({
   image,
   children,
   onOpen,
+  state,
 }: {
   image: string;
   children: ReactNode;
   onOpen: (modalName: string) => void;
+  state: string;
 }) {
   return (
-    <S.FolderModalIcon onClick={() => onOpen}>
+    <S.FolderModalIcon onClick={() => onOpen(`${state}`)}>
       <img src={image} alt={`${image}`} />
       {children}
     </S.FolderModalIcon>
@@ -92,15 +95,19 @@ function Folder() {
         />
         <S.FolderModalContainer>
           {folderName ? folderName : '전체'}
-          {folderId && (
+          {folderId > 0 && (
             <S.FolderModal>
-              <FolderIcon image={SharedIcon} onOpen={() => openModal('share')}>
+              <FolderIcon image={SharedIcon} onOpen={openModal} state={'share'}>
                 공유
               </FolderIcon>
-              <FolderIcon image={PenIcon} onOpen={() => openModal('edit')}>
+              <FolderIcon image={PenIcon} onOpen={openModal} state={'edit'}>
                 이름 변경
               </FolderIcon>
-              <FolderIcon image={DeleteIcon} onOpen={() => openModal('delete')}>
+              <FolderIcon
+                image={DeleteIcon}
+                onOpen={openModal}
+                state={'delete'}
+              >
                 삭제
               </FolderIcon>
             </S.FolderModal>
@@ -123,9 +130,7 @@ function Folder() {
             <DeleteModal onClose={closeModal} folderName={folderName} />
           )}
           {modalState.addFolder && <AddfolderModal onClose={closeModal} />}
-          {modalState.deleteLink && (
-            <DeleteModal onClose={closeModal} folderName={folderName} />
-          )}
+          {modalState.deleteLink && <DeleteLinkModal onClose={closeModal} />}
         </ModalPortal>
       </S.FolderContents>
     </>

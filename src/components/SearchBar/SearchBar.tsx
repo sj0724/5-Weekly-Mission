@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, FormEvent } from 'react';
+import React, { Dispatch, FormEvent } from 'react';
 import { useEffect, useState } from 'react';
 import searchIcon from '../../assets/Search.svg';
 import searchIconPurple from '../../assets/SearchPurple.svg';
