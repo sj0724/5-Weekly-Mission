@@ -27,7 +27,7 @@ function AddModal({
   onClose: (modalName: string) => void;
 }) {
   return (
-    <BaseModal onClose={onClose}>
+    <BaseModal onClose={onClose} state={'add'}>
       <S.Header>
         <p>폴더에 추가</p>
         <span>폴더명</span>

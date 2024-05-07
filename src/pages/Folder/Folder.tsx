@@ -20,14 +20,6 @@ import AddfolderModal from '../../components/Modal/AddFolderModal/AddFolderModal
 import ModalPortal from '../../Portal';
 import * as S from './Folder.styled';
 
-type Observer = {
-  isIntersecting: boolean;
-};
-
-interface ObserverEntries {
-  IntersectionObserverEntry: Observer;
-}
-
 function FolderIcon({
   image,
   children,
@@ -56,17 +48,20 @@ function Folder() {
   const [toggleInput, setToggleInput] = useState(true);
   const { modalState, openModal, closeModal }: ContextValue = useModal();
 
-  const handleObserver = (entries: ObserverEntries) => {
-    const { IntersectionObserverEntry } = entries;
-    if (IntersectionObserverEntry.isIntersecting) {
-      setToggleInput(false);
-    } else {
-      setToggleInput(true);
-    }
+  const handleObserver = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setToggleInput(false);
+        return;
+      } else {
+        setToggleInput(true);
+        return;
+      }
+    });
   };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(() => handleObserver);
+    const observer = new IntersectionObserver(handleObserver);
     if (!loading && obsRef.current) observer.observe(obsRef.current);
     return () => {
       observer.disconnect();
@@ -119,30 +114,17 @@ function Folder() {
           )}
         </ContentsContainer>
         <ModalPortal>
-          {modalState.add && (
-            <AddModal onClose={() => closeModal('add')} link={link} />
-          )}
+          {modalState.add && <AddModal onClose={closeModal} link={link} />}
           {modalState.share && (
-            <ShareModal
-              onClose={() => closeModal('share')}
-              folderName={folderName}
-            />
+            <ShareModal onClose={closeModal} folderName={folderName} />
           )}
-          {modalState.edit && <EditModal onClose={() => closeModal('edit')} />}
+          {modalState.edit && <EditModal onClose={closeModal} />}
           {modalState.delete && (
-            <DeleteModal
-              onClose={() => closeModal('delete')}
-              folderName={folderName}
-            />
+            <DeleteModal onClose={closeModal} folderName={folderName} />
           )}
-          {modalState.addFolder && (
-            <AddfolderModal onClose={() => closeModal('addFolder')} />
-          )}
+          {modalState.addFolder && <AddfolderModal onClose={closeModal} />}
           {modalState.deleteLink && (
-            <DeleteModal
-              onClose={() => closeModal('deleteLink')}
-              folderName={folderName}
-            />
+            <DeleteModal onClose={closeModal} folderName={folderName} />
           )}
         </ModalPortal>
       </S.FolderContents>

@@ -13,7 +13,7 @@ function ShareModal({
   onClose: (modalName: string) => void;
 }) {
   return (
-    <BaseModal onClose={onClose}>
+    <BaseModal onClose={onClose} state={'share'}>
       <S.Header>
         <p>폴더 공유</p>
         <span>{folderName}</span>

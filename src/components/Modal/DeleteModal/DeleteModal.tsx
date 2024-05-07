@@ -10,7 +10,7 @@ function DeleteModal({
   onClose: (modalName: string) => void;
 }) {
   return (
-    <BaseModal onClose={onClose}>
+    <BaseModal onClose={onClose} state={'delete'}>
       <S.Title>폴더 삭제</S.Title>
       <S.Name>{folderName}</S.Name>
       <S.ModalButton onClick={(e) => e.preventDefault()}>

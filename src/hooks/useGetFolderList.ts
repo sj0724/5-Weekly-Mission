@@ -22,7 +22,7 @@ function useGetFolderList(userId: number) {
   useEffect(() => {
     const loadFolderList = async () => {
       const links = await getFolder(userId);
-      setLink(links);
+      setLink(links.data);
     };
     loadFolderList();
   }, [userId]);
