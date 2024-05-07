@@ -74,7 +74,7 @@ export async function getFolderList(id: number, folderId: number) {
 export async function getUser(id: number) {
   try {
     const { data } = await axios.get(`/users/${id}`);
-    return data[0];
+    return data.data;
   } catch (error) {
     console.error('Error fetching user:', error);
     throw error;

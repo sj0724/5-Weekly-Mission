@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getUser } from '../api/api';
 
-interface User {
+export interface User {
   id: number;
   created_at: Date;
   name: string;
@@ -11,19 +11,12 @@ interface User {
 }
 
 function useGetUser(userId: number) {
-  const [user, setUser] = useState<User>({
-    id: 0,
-    created_at: new Date(),
-    name: '',
-    image_source: '',
-    email: '',
-    auth_id: '',
-  });
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
     const loadUser = async () => {
       const response = await getUser(userId);
-      setUser(response);
+      setUser(response[0]);
     };
 
     loadUser();

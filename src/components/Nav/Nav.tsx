@@ -1,18 +1,9 @@
 import React from 'react';
 import logo from '../../assets/logo.svg';
 import Button from '../Button/Button';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as S from './Nav.styled';
-import useGetUser from '../../hooks/useGetUser';
-
-interface User {
-  id: number;
-  created_at: Date;
-  name: string;
-  image_source: string;
-  email: string;
-  auth_id: string;
-}
+import useGetUser, { User } from '../../hooks/useGetUser';
 
 function NavUser({ user }: { user: User }) {
   return (
