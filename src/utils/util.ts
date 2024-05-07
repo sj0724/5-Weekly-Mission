@@ -37,3 +37,42 @@ export const changeDate = (date: Date) => {
 
   return dateFormate;
 };
+
+const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
+
+export function emailCheck(email: string) {
+  return emailPattern.test(email);
+}
+
+export function validateInfo(
+  email: string,
+  password: string,
+  passwordConfirm?: string
+) {
+  let result = {
+    ok: true,
+    emailError: '',
+    passwordError: '',
+    passwordConfirmError: '',
+  };
+  if (email === '') {
+    result.ok = false;
+    result.emailError = '이메일을 입력해주세요';
+  } else if (!emailCheck(email)) {
+    result.ok = false;
+    result.emailError = '올바른 이메일 주소가 아닙니다.';
+  }
+  if (password === '') {
+    result.ok = false;
+    result.passwordError = '비밀번호을 입력해주세요.';
+  }
+  if (passwordConfirm === '') {
+    result.ok = false;
+    result.passwordConfirmError = '비밀번호를 다시 입력해주세요.';
+  }
+  if (passwordConfirm && passwordConfirm !== password) {
+    result.ok = false;
+    result.passwordConfirmError = '비밀번호가 일치하지 않습니다.';
+  }
+  return result;
+}

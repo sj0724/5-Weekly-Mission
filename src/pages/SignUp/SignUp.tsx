@@ -1,7 +1,7 @@
 import mainLogo from '../../assets/logo.svg';
 import googleIcon from '../../assets/googleIcon.png';
 import kakaoIcon from '../../assets/Kakao.svg';
-import * as S from './SignUp.styled';
+import * as S from '../SignIn/SignIn.styled';
 import { Link } from 'react-router-dom';
 import SignForm from 'components/SignForm/SignForm';
 import { useState } from 'react';
