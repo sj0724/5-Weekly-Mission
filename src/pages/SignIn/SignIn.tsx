@@ -4,13 +4,28 @@ import kakaoIcon from '../../assets/Kakao.svg';
 import * as S from './SignIn.styled';
 import { Link } from 'react-router-dom';
 import SignForm from 'components/SignForm/SignForm';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
+import useValidate from 'hooks/useValidate';
 
 function SignIn() {
   const [textHidden, setTextHidden] = useState(true);
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  const { emailError, passwordError, validateEmail, validatePassword } =
+    useValidate();
 
   const hiddenText = () => {
     setTextHidden(!textHidden);
+  };
+
+  const changeEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmailValue(e.target.value);
+    validateEmail(emailValue);
+  };
+
+  const changePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setPasswordValue(e.target.value);
+    validatePassword(passwordValue);
   };
 
   return (
@@ -36,9 +51,13 @@ function SignIn() {
                 placeholder="이메일"
                 id="email"
                 autoComplete="off"
+                onChange={changeEmailInput}
+                onBlur={changeEmailInput}
               />
-              <S.WarningMessage></S.WarningMessage>
             </S.InputModal>
+            <S.TextArea>
+              {emailError && <S.WarningMessage>{emailError}</S.WarningMessage>}
+            </S.TextArea>
             <S.InputModal>
               <label htmlFor="password">비밀번호</label>
               <S.Input
@@ -46,10 +65,16 @@ function SignIn() {
                 placeholder="비밀번호"
                 id="password"
                 autoComplete="off"
+                onChange={changePasswordInput}
+                onBlur={changePasswordInput}
               />
               <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
-              <S.WarningMessage></S.WarningMessage>
             </S.InputModal>
+            <S.TextArea>
+              {passwordError && (
+                <S.WarningMessage>{passwordError}</S.WarningMessage>
+              )}
+            </S.TextArea>
           </SignForm>
         </S.SignFormBody>
         <S.SnsLogin>

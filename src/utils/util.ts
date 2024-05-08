@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 export const calculateDate = (date: number) => {
   if (date < 60 * 2) {
     return { time: date, result: 'minute' };
@@ -38,17 +40,22 @@ export const changeDate = (date: Date) => {
   return dateFormate;
 };
 
-const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
+const emailPattern =
+  /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
 
 export function emailCheck(email: string) {
   return emailPattern.test(email);
 }
 
-export function validateInfo(
-  email: string,
-  password: string,
-  passwordConfirm?: string
-) {
+export function validateInfo({
+  email,
+  password,
+  passwordConfirm,
+}: {
+  email: string;
+  password?: string;
+  passwordConfirm?: string;
+}) {
   let result = {
     ok: true,
     emailError: '',

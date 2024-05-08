@@ -100,9 +100,8 @@ export const Input = styled.input`
 `;
 
 export const WarningMessage = styled.p`
-  display: none;
   color: var(--ErrorMessage);
-  font-size: 1rem;
+  font-size: 14px;
   margin: 0;
 `;
 
@@ -182,4 +181,11 @@ export const Google = styled.a`
 
 export const Kakao = styled.a`
   background-color: var(--Kakao-logo-color);
+`;
+
+export const TextArea = styled.div`
+  height: 30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;

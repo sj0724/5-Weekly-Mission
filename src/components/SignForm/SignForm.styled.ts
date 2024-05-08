@@ -4,7 +4,6 @@ export const SignForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 24px;
 `;
 
 export const LoginButton = styled.button`
