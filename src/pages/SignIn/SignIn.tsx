@@ -53,6 +53,7 @@ function SignIn() {
                 autoComplete="off"
                 onChange={changeEmailInput}
                 onBlur={changeEmailInput}
+                error={emailError}
               />
             </S.InputModal>
             <S.TextArea>
@@ -67,6 +68,7 @@ function SignIn() {
                 autoComplete="off"
                 onChange={changePasswordInput}
                 onBlur={changePasswordInput}
+                error={passwordError}
               />
               <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
             </S.InputModal>

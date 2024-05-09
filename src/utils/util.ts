@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 export const calculateDate = (date: number) => {
   if (date < 60 * 2) {
     return { time: date, result: 'minute' };

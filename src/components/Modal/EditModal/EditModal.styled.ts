@@ -7,15 +7,20 @@ export const ModalForm = styled.form`
   gap: 15px;
 `;
 
-export const ModalInput = styled.input`
+export const ModalInput = styled.input<{ $error: boolean }>`
   display: flex;
   width: 280px;
   padding: 18px 15px;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  border: 1px solid var(--Primary);
+  border: 1px solid
+    var(${(props) => (props.$error ? '--ErrorMessage' : '--Linkbrary-gray20')});
   background: #fff;
+
+  &:focus {
+    border: 1px solid var(--Primary);
+  }
 `;
 
 export const ModalButton = styled.button`

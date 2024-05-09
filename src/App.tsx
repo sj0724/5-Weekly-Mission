@@ -11,7 +11,7 @@ import SignIn from 'pages/SignIn/SignIn';
 import SignUp from 'pages/SignUp/SignUp';
 
 function App() {
-  const userId: number = 1;
+  const userId = 1;
 
   return (
     <BrowserRouter>

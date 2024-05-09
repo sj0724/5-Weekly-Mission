@@ -16,7 +16,6 @@ export const Header = styled.div`
 
   span {
     width: 42px;
-    height: 42px;
     color: var(--Linkbrary-gray60);
     text-align: center;
     font-family: Pretendard;
@@ -31,6 +30,8 @@ export const FolderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 200px;
+  overflow: auto;
 `;
 
 export const FolderButton = styled.div<{ $check: boolean }>`

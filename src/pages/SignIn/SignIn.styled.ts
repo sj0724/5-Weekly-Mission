@@ -82,14 +82,15 @@ export const InputModal = styled.div`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ error: string }>`
   display: flex;
   width: 400px;
   padding: 18px 15px;
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  border: 1px solid var(--Linkbrary-gray20);
+  border: 1px solid
+    var(${(props) => (props.error ? '--ErrorMessage' : '--Linkbrary-gray20')});
   background: var(--Section-white);
   font-size: 16px;
   line-height: 24px;
@@ -111,7 +112,7 @@ export const TextHiddenButton = styled.span<{ $hidden: boolean }>`
   margin: 0;
   padding: 0;
   right: 15px;
-  top: 55px;
+  top: 52px;
   height: 16px;
   width: 16px;
   height: 16px;
@@ -121,20 +122,6 @@ export const TextHiddenButton = styled.span<{ $hidden: boolean }>`
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
-`;
-
-export const LoginButton = styled.button`
-  width: 400px;
-  padding: 16px 20px;
-  border: none;
-  border-radius: 8px;
-  background: var(--Gradient-purpleblue-to-skyblue);
-  color: var(--Gray-cta);
-  font-family: Pretendard;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 `;
 
 export const SnsLogin = styled.div`

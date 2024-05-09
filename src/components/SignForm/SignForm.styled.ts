@@ -8,6 +8,7 @@ export const SignForm = styled.form`
 
 export const LoginButton = styled.button`
   width: 400px;
+  margin-top: 10px;
   padding: 16px 20px;
   border: none;
   border-radius: 8px;

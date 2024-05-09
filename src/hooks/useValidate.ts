@@ -28,12 +28,20 @@ function useValidate() {
     }
   };
 
-  const validatePasswordConfirm = (passwordConfirm: string) => {
+  const validatePasswordConfirm = (
+    passwordConfirm: string,
+    password: string
+  ) => {
     if (passwordConfirm === '') {
       setOk(false);
       setPasswordConfirmError('비밀번호를 다시 입력해주세요.');
-    } else {
-      setPasswordConfirmError('');
+    } else if (passwordConfirm) {
+      if (passwordConfirm && passwordConfirm !== password) {
+        setOk(false);
+        setPasswordConfirmError('비밀번호가 일치하지 않습니다.');
+      } else if (password === passwordConfirm) {
+        setPasswordConfirmError('');
+      }
     }
   };
 
