@@ -15,15 +15,15 @@ export const Background = styled.div`
 
 export const Body = styled.div`
   position: relative;
-  width: 360px;
+  width: 36rem;
   height: fit-content;
   display: flex;
-  padding: 32px 40px;
+  padding: 3.2rem 4rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 24px;
-  border-radius: 15px;
+  gap: 2.4rem;
+  border-radius: 1.5rem;
   border: 1px solid var(--Linkbrary-gray20);
   background: #fff;
 `;
@@ -31,9 +31,9 @@ export const Body = styled.div`
 export const CloseIcon = styled.img`
   cursor: pointer;
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 24px;
-  height: 24px;
+  top: 1.6rem;
+  right: 1.6rem;
+  width: 2.4rem;
+  height: 2.4rem;
   z-index: 10;
 `;

@@ -4,6 +4,7 @@ import checkIcon from '../../../assets/check.svg';
 import { useState } from 'react';
 import BaseModal from '../BaseModal/BaseModal';
 import { Folder, Folders } from '../../../hooks/useGetFolderList';
+import { Button } from 'components/Button/Button';
 
 function FolderButton({ item }: { item: Folder }) {
   const [check, setCheck] = useState(false);
@@ -37,7 +38,7 @@ function AddModal({
           <FolderButton key={item.id} item={item} />
         ))}
       </S.FolderContainer>
-      <S.AddButton>추가하기</S.AddButton>
+      <Button size="md">추가하기</Button>
     </BaseModal>
   );
 }

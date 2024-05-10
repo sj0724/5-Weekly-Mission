@@ -13,7 +13,7 @@ function DeleteModal({
     <BaseModal onClose={onClose} state={'delete'}>
       <S.Title>폴더 삭제</S.Title>
       <S.Name>{folderName}</S.Name>
-      <S.ModalButton onClick={(e) => e.preventDefault()}>
+      <S.ModalButton size="md" onClick={(e) => e.preventDefault()}>
         삭제하기
       </S.ModalButton>
     </BaseModal>

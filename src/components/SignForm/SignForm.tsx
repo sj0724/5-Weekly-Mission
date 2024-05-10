@@ -1,5 +1,6 @@
 import { FormEvent, ReactNode } from 'react';
 import * as S from './SignForm.styled';
+import { Button } from 'components/Button/Button';
 
 function SignForm({ children }: { children: ReactNode }) {
   const submitForm = (e: FormEvent) => {
@@ -9,7 +10,9 @@ function SignForm({ children }: { children: ReactNode }) {
   return (
     <S.SignForm onSubmit={submitForm}>
       {children}
-      <S.LoginButton type="submit">로그인</S.LoginButton>
+      <Button size={'lg'} type="submit">
+        로그인
+      </Button>
     </S.SignForm>
   );
 }

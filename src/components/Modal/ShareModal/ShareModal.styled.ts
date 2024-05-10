@@ -4,66 +4,56 @@ export const Header = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
 
   p {
-    font-size: 20px;
+    font-size: 2rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
   }
 
   span {
-    height: 42px;
+    height: 4.2rem;
     color: var(--Linkbrary-gray60);
     text-align: center;
     font-family: Pretendard;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 22px; /* 157.143% */
+    line-height: 2.2rem; /* 157.143% */
   }
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 32px;
+  gap: 3.2rem;
 `;
 
 export const ShareButtonBody = styled.div<{ $color: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
 
   p {
     color: var(--Linkbrary-gray100);
     text-align: center;
     font-family: Inter;
-    font-size: 13px;
+    font-size: 1.3rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 15px; /* 115.385% */
+    line-height: 1.5rem; /* 115.385% */
   }
 
   span {
     display: flex;
-    padding: 12px;
+    padding: 1.2rem;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 1rem;
     border-radius: 50%;
     background-color: ${(props) => props.$color};
   }
-`;
-
-export const CloseIcon = styled.img`
-  cursor: pointer;
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 24px;
-  height: 24px;
-  z-index: 10;
 `;

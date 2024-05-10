@@ -10,7 +10,7 @@ function DeleteLinkModal({
   return (
     <BaseModal onClose={onClose} state={'deleteLink'}>
       <p>링크 삭제</p>
-      <S.ModalButton onClick={(e) => e.preventDefault()}>
+      <S.ModalButton size="md" onClick={(e) => e.preventDefault()}>
         삭제하기
       </S.ModalButton>
     </BaseModal>

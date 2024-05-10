@@ -3,9 +3,9 @@ import { ButtonProps } from './Button';
 
 const buttonSize = {
   xs: '4.8',
-  sm: '13',
+  sm: '10',
   md: '28',
-  lg: '35',
+  lg: '40',
 };
 
 export const Cta = styled.span<ButtonProps>`
@@ -31,7 +31,6 @@ export const Cta = styled.span<ButtonProps>`
   }
 
   @media (max-width: 768px) {
-    font-size: 1.2rem;
-    width: fit-content;
+    font-size: 1.4rem;
   }
 `;

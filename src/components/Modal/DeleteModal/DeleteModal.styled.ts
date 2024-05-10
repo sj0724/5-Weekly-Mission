@@ -1,7 +1,8 @@
+import { Cta } from 'components/Button/Button.styled';
 import styled from 'styled-components';
 
 export const Title = styled.p`
-  font-size: 20px;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -11,46 +12,31 @@ export const Name = styled.span`
   color: var(--Linkbrary-gray60);
   text-align: center;
   font-family: Pretendard;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 22px; /* 157.143% */
+  line-height: 2.2rem; /* 157.143% */
 `;
 
 export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 1.5rem;
 `;
 
 export const ModalInput = styled.input`
   display: flex;
-  width: 280px;
-  padding: 18px 15px;
+  width: 28rem;
+  padding: 1.8rem 1.5rem;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   border: 1px solid var(--Primary);
   background: #fff;
 `;
 
-export const ModalButton = styled.button`
-  cursor: pointer;
-  width: 280px;
-  border-radius: 8px;
+export const ModalButton = styled(Cta)`
   background: var(--ErrorMessage);
-  display: flex;
-  width: 280px;
-  padding: 16px 20px;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border: none;
   color: var(--Gray-cta);
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
 `;

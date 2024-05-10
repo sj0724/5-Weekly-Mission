@@ -27,8 +27,8 @@ function Nav() {
           {user ? (
             <NavUser user={user} />
           ) : (
-            <Link to="/signin">
-              <Button size={'sm'}>로그인</Button>
+            <Link to="/signin" style={{ textDecoration: 'none' }}>
+              <Button size="sm">로그인</Button>
             </Link>
           )}
         </S.UserProfile>
