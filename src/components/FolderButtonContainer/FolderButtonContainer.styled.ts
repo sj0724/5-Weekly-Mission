@@ -13,7 +13,7 @@ export const FolderMenu = styled.div`
 export const FolderButtons = styled.div`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 1.2rem;
   flex-wrap: wrap;
 `;
 
@@ -25,11 +25,11 @@ export const AddFolderButton = styled.span`
   justify-content: center;
   color: var(--Primary);
   white-space: nowrap;
-  margin-left: 12px;
-  gap: 6px;
+  margin-left: 1.2rem;
+  gap: 0.6rem;
   text-align: center;
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -42,17 +42,17 @@ export const AddFolderButton = styled.span`
     position: fixed;
     left: 50%;
     transform: translate(-50%, 0);
-    bottom: 101px;
-    padding: 8px 24px;
-    border-radius: 20px;
-    font-size: 1.6rem;
+    bottom: 12rem;
+    padding: 0.8rem 2.4rem;
+    border-radius: 2rem;
+    font-size: 1.2rem;
     margin: 0;
   }
 `;
 
 export const PlusIcon = styled.div`
-  width: 16px;
-  height: 16px;
+  width: 1.6rem;
+  height: 1.6rem;
   background-image: url(${AddIconPurple});
 
   @media (max-width: 768px) {

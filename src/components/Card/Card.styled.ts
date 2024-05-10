@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const EmptyImg = styled.div`
   height: 100%;
   background-color: var(--EmptyArea);
-  border-radius: 15px 15px 0 0;
+  border-radius: 1.5rem 1.5rem 0 0;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -11,15 +11,15 @@ export const EmptyImg = styled.div`
 
   img {
     opacity: 0.2;
-    width: 133px;
-    height: 24px;
+    width: 13.3rem;
+    height: 2.4rem;
   }
 `;
 
 export const ItemImg = styled.div<{ image: string }>`
   height: 100%;
   background-image: url(${(props) => props.image});
-  border-radius: 15px 15px 0 0;
+  border-radius: 1.5rem 1.5rem 0 0;
   background-size: cover;
   background-position: center;
 
@@ -29,58 +29,58 @@ export const ItemImg = styled.div<{ image: string }>`
 `;
 
 export const ItemCard = styled.div`
-  width: 340px;
-  height: 334px;
+  width: 34rem;
+  height: 33.4rem;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.08);
-  border-radius: 15px;
+  border-radius: 1.5rem;
   text-decoration: none;
   color: #000;
   position: relative;
-  font-size: 1rem;
+  font-size: 1.6rem;
 
   &:hover {
     background-color: var(--Background);
   }
 
   @media (max-width: 768px) {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
   }
 `;
 
 export const StarIcon = styled.img`
-  width: 34px;
-  height: 34px;
+  width: 3.4rem;
+  height: 3rem;
   flex-shrink: 0;
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 1.5rem;
+  right: 1.5rem;
 `;
 
 export const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 15px 20px;
+  padding: 1.5rem 2rem;
   width: 100%;
-  height: 135px;
-  gap: 10px;
+  height: 13.5rem;
+  gap: 1rem;
   position: relative;
 `;
 
 export const KebabIcon = styled.img`
   cursor: pointer;
-  width: 21px;
-  height: 17px;
+  width: 2.1rem;
+  height: 1.7rem;
   flex-shrink: 0;
   position: absolute;
-  right: 20px;
-  top: 15px;
+  right: 2rem;
+  top: 1.5rem;
 `;
 
 export const ItemDate = styled.p`
   color: var(--Description);
-  font-size: 13px;
+  font-size: 1.3rem;
 `;
 
 export const ItemDescription = styled.p`
@@ -95,5 +95,5 @@ export const ItemDescription = styled.p`
 `;
 
 export const ItemFullDate = styled.p`
-  font-size: 14px;
+  font-size: 1.4rem;
 `;

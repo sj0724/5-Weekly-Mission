@@ -15,21 +15,21 @@ export const OwnerProfile = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px 0 60px 0;
+  padding: 2rem 0 6rem 0;
 `;
 
 export const OwnerProfileImage = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 6rem;
+  height: 6rem;
 `;
 
 export const OwnerName = styled.p`
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px;
-  margin-top: 12px;
+  line-height: 2.4rem;
+  margin-top: 1.2rem;
 `;
 
 export const FolderName = styled.p`
@@ -37,11 +37,11 @@ export const FolderName = styled.p`
   text-align: center;
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Pretendard;
-  font-size: 40px;
+  font-size: 4rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin-top: 20px;
+  margin-top: 2rem;
 `;
 
 export const SharedContent = styled.div`
@@ -51,12 +51,12 @@ export const SharedContent = styled.div`
   flex-direction: column;
 
   @media (max-width: 1199px) {
-    padding: 0 32px;
+    padding: 0 3.2rem;
   }
 `;
 
 export const Container = styled.div`
-  gap: 20px;
+  gap: 2rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;

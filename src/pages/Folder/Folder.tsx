@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ContentsContainer from '../../components/ContentsContainer';

@@ -8,7 +8,7 @@ export const SignBody = styled.div`
   align-items: center;
   margin: 0 auto;
   background: var(--Background);
-  padding: 32px;
+  padding: 3.2rem;
 `;
 
 export const SignContent = styled.div`
@@ -17,7 +17,7 @@ export const SignContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 3.2rem;
 `;
 
 export const SignFormBody = styled.div`
@@ -25,7 +25,7 @@ export const SignFormBody = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  gap: 3rem;
   width: 100%;
 `;
 
@@ -34,7 +34,7 @@ export const FormLogo = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 1.6rem;
   margin: 0 auto;
 `;
 
@@ -42,24 +42,24 @@ export const SignForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 24px;
+  gap: 2.4rem;
 `;
 
 export const Question = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 0.8rem;
 
   span {
-    font-size: 16px;
+    font-size: 1.6rem;
     line-height: normal;
   }
 
   p {
     color: var(--Linkbrary-primary-color, #6d6afe);
     font-family: Pretendard;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -72,11 +72,11 @@ export const InputModal = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 1.2rem;
 
   label {
     font-family: Pretendard;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-style: normal;
     font-weight: 400;
   }
@@ -84,16 +84,16 @@ export const InputModal = styled.div`
 
 export const Input = styled.input<{ error: string }>`
   display: flex;
-  width: 400px;
-  padding: 18px 15px;
+  width: 40rem;
+  padding: 1.8rem 1.5rem;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   border: 1px solid
     var(${(props) => (props.error ? '--ErrorMessage' : '--Linkbrary-gray20')});
   background: var(--Section-white);
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
 
   &:focus {
     border: 1px solid var(--Primary);
@@ -102,7 +102,7 @@ export const Input = styled.input<{ error: string }>`
 
 export const WarningMessage = styled.p`
   color: var(--ErrorMessage);
-  font-size: 14px;
+  font-size: 1.4rem;
   margin: 0;
 `;
 
@@ -111,11 +111,11 @@ export const TextHiddenButton = styled.span<{ $hidden: boolean }>`
   border: none;
   margin: 0;
   padding: 0;
-  right: 15px;
-  top: 52px;
-  height: 16px;
-  width: 16px;
-  height: 16px;
+  right: 1.5rem;
+  top: 5.2rem;
+  height: 1.6rem;
+  width: 1.6rem;
+  height: 1.6rem;
   background-image: ${(props) =>
     props.$hidden ? `url(${EyeOff})` : `url(${EyeOn})`};
   background-size: contain;
@@ -126,16 +126,16 @@ export const TextHiddenButton = styled.span<{ $hidden: boolean }>`
 
 export const SnsLogin = styled.div`
   display: flex;
-  width: 400px;
-  padding: 12px 24px;
+  width: 40rem;
+  padding: 1.2rem 2.4rem;
   justify-content: space-between;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   border: 1px solid var(--Linkbrary-gray20);
   background: var(--Linkbrary-gray10);
   color: var(--Linkbrary-gray100);
   font-family: Pretendard;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -145,12 +145,12 @@ export const SnsIcons = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 1.6rem;
 
   a {
     display: flex;
-    height: 42px;
-    width: 42px;
+    height: 4.2rem;
+    width: 4.2rem;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
@@ -161,8 +161,8 @@ export const Google = styled.a`
   background-color: var(--Section-white);
 
   img {
-    with: 22px;
-    height: 22px;
+    with: 2.2rem;
+    height: 2.2rem;
   }
 `;
 
@@ -171,7 +171,7 @@ export const Kakao = styled.a`
 `;
 
 export const TextArea = styled.div`
-  height: 30px;
+  height: 3rem;
   width: 100%;
   display: flex;
   align-items: center;

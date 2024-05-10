@@ -1,8 +1,8 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div<{ empty: number }>`
-  gap: 20px;
+  gap: 2rem;
   display: grid;
   grid-template-columns: ${(props) =>
     props.empty > 0 ? 'repeat(3, 1fr)' : 'none'};

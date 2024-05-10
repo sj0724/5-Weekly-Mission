@@ -7,15 +7,15 @@ export const SignForm = styled.form`
 `;
 
 export const LoginButton = styled.button`
-  width: 400px;
-  margin-top: 10px;
-  padding: 16px 20px;
+  width: 40rem;
+  margin-top: 1rem;
+  padding: 1.6rem 2rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   background: var(--Gradient-purpleblue-to-skyblue);
   color: var(--Gray-cta);
   font-family: Pretendard;
-  font-size: 18px;
+  font-size: 1.8rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;

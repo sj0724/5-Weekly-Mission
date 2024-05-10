@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { ButtonProps } from './Button';
 
 const buttonSize = {
-  xs: '6',
-  sm: '8',
-  md: '17.5',
-  lg: '22',
+  xs: '4.8',
+  sm: '13',
+  md: '28',
+  lg: '35',
 };
 
 export const Cta = styled.span<ButtonProps>`
@@ -14,12 +14,12 @@ export const Cta = styled.span<ButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   background: var(--Gradient-purpleblue-to-skyblue);
   color: var(--Gray-cta);
-  padding: 16px 20px;
+  padding: 1.6rem 2rem;
   font-family: Pretendard;
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -31,7 +31,7 @@ export const Cta = styled.span<ButtonProps>`
   }
 
   @media (max-width: 768px) {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     width: fit-content;
   }
 `;

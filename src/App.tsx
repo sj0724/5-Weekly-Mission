@@ -3,7 +3,7 @@ import Shared from './pages/Shared/Shared';
 import Main from './pages/Main/Main';
 import Layout from './components/Layout';
 import Folder from './pages/Folder/Folder';
-import './App.css';
+import './styles/common.css';
 import UserContext from './contexts/UserContext';
 import { ModalProvider } from './contexts/ModalContext';
 import SignIn from 'pages/SignIn/SignIn';

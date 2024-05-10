@@ -1,41 +1,41 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SectionCard = styled.div`
   display: grid;
   grid-template:
-    "header image"
-    "description image"
-    /291px 550px;
-  row-gap: 10px;
-  column-gap: 157px;
+    'header image'
+    'description image'
+    /29.1rem 55rem;
+  row-gap: 1rem;
+  column-gap: 15.7rem;
   width: 100%;
   height: fit-content;
 
   @media (max-width: 1199px) {
     grid-template:
-      "header image"
-      "description image"
-      /262px 385px;
-    row-gap: 10px;
-    column-gap: 51px;
+      'header image'
+      'description image'
+      /26.2rem 38.5rem;
+    row-gap: 1rem;
+    column-gap: 5.1rem;
   }
 
   @media (max-width: 768px) {
     grid-template:
-      "header"
-      "image"
-      "description";
-    row-gap: 10px;
-    column-gap: 51px;
+      'header'
+      'image'
+      'description';
+    row-gap: 0.5rem;
+    column-gap: 2.6rem;
     justify-content: center;
-    padding: 5rem 4rem;
+    padding: 4rem 3.2rem;
   }
 `;
 
 export const TextBox__title = styled.h2`
-  width: 272px;
+  width: 27.2rem;
   font-family: Pretendard;
-  font-size: 3rem;
+  font-size: 4.8rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -43,10 +43,15 @@ export const TextBox__title = styled.h2`
   margin: 0;
   grid-area: header;
   align-self: flex-end;
+
+  @media (max-width: 768px) {
+    font-size: 3rem;
+    width: 100%;
+  }
 `;
 
 export const Description = styled.p`
-  width: 291px;
+  width: 29.1rem;
   color: var(--Description);
   font-family: Abel;
   font-size: 1rem;
@@ -58,7 +63,7 @@ export const Description = styled.p`
   align-self: flex-start;
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 1.6rem;
     width: 100%;
   }
 `;
