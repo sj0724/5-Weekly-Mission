@@ -12,22 +12,6 @@ export const ModalForm = styled.form`
   }
 `;
 
-export const ModalInput = styled.input<{ $error: string }>`
-  display: flex;
-  width: 28rem;
-  padding: 1.8rem 1.5rem;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.8rem;
-  border: 1px solid
-    var(${(props) => (props.$error ? '--ErrorMessage' : '--Linkbrary-gray20')});
-  background: #fff;
-
-  &:focus {
-    border: 1px solid var(--Primary);
-  }
-`;
-
 export const ModalButton = styled.button`
   cursor: pointer;
   width: 28rem;

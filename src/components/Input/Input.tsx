@@ -1,13 +1,14 @@
 import { ChangeEvent, HtmlHTMLAttributes } from 'react';
 import InputModal from './Input.styled';
 
-interface InputProps extends HtmlHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends HtmlHTMLAttributes<HTMLInputElement> {
   type: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   error: string;
+  size: 'sm' | 'md' | 'lg';
 }
 
-function Input({ id, placeholder, type, onChange, error }: InputProps) {
+function Input({ id, placeholder, type, onChange, error, size }: InputProps) {
   return (
     <>
       <InputModal
@@ -17,7 +18,8 @@ function Input({ id, placeholder, type, onChange, error }: InputProps) {
         placeholder={placeholder}
         onChange={onChange}
         onBlur={onChange}
-        $error={error}
+        error={error}
+        size={size}
       />
     </>
   );

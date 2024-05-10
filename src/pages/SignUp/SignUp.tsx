@@ -65,6 +65,7 @@ function SignUp() {
                 placeholder="이메일"
                 onChange={changeEmailInput}
                 error={emailError}
+                size="md"
               />
             </S.InputModal>
             <S.TextArea>
@@ -78,6 +79,7 @@ function SignUp() {
                 placeholder="비밀번호"
                 onChange={changePasswordInput}
                 error={passwordError}
+                size="md"
               />
               <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
             </S.InputModal>
@@ -95,6 +97,7 @@ function SignUp() {
                 id="password"
                 onChange={changeConfirmInput}
                 error={passwordConfirmError}
+                size="md"
               />
               <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
             </S.InputModal>
