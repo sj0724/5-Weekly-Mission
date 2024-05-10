@@ -7,7 +7,7 @@ export const ModalForm = styled.form`
   gap: 15px;
 `;
 
-export const ModalInput = styled.input<{ $error: boolean }>`
+export const ModalInput = styled.input<{ $error: string }>`
   display: flex;
   width: 280px;
   padding: 18px 15px;

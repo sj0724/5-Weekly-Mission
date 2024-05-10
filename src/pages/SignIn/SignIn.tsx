@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import SignForm from 'components/SignForm/SignForm';
 import { ChangeEvent, useState } from 'react';
 import useValidate from 'hooks/useValidate';
+import Input from 'components/Input/Input';
 
 function SignIn() {
   const [textHidden, setTextHidden] = useState(true);
@@ -46,13 +47,11 @@ function SignIn() {
           <SignForm>
             <S.InputModal>
               <label htmlFor="email">이메일</label>
-              <S.Input
+              <Input
                 type="text"
-                placeholder="이메일"
                 id="email"
-                autoComplete="off"
+                text="이메일"
                 onChange={changeEmailInput}
-                onBlur={changeEmailInput}
                 error={emailError}
               />
             </S.InputModal>
@@ -61,13 +60,11 @@ function SignIn() {
             </S.TextArea>
             <S.InputModal>
               <label htmlFor="password">비밀번호</label>
-              <S.Input
+              <Input
                 type={textHidden ? 'password' : 'text'}
-                placeholder="비밀번호"
                 id="password"
-                autoComplete="off"
+                text="비밀번호"
                 onChange={changePasswordInput}
-                onBlur={changePasswordInput}
                 error={passwordError}
               />
               <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />

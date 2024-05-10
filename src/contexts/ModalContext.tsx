@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { createContext, useContext, useReducer } from 'react';
 
 export type ModalState = {
@@ -22,7 +22,7 @@ const ModalContext = createContext<ContextValue>({
   closeModal: () => {},
 });
 
-const modalReducer = (state: object, action: ModalAction) => {
+const modalReducer = (state: ModalState, action: ModalAction) => {
   switch (action.type) {
     case 'OPEN_MODAL':
       return { ...state, [action.modalName]: true };

@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Shared from './pages/Shared/Shared';
 import Main from './pages/Main/Main';

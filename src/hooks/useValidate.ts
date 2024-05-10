@@ -3,9 +3,20 @@ import { emailCheck } from 'utils/util';
 
 function useValidate() {
   const [ok, setOk] = useState(true);
+  const [textError, setTextError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordConfirmError, setPasswordConfirmError] = useState('');
+
+  const checkText = (text: string) => {
+    if (text === '') {
+      setOk(false);
+      setTextError('내용을 다시 입력해주세요');
+    } else {
+      setOk(false);
+      setTextError('');
+    }
+  };
 
   const validateEmail = (email: string) => {
     if (email === '') {
@@ -15,6 +26,7 @@ function useValidate() {
       setOk(false);
       setEmailError('올바른 이메일 주소가 아닙니다.');
     } else if (email && emailCheck(email)) {
+      setOk(true);
       setEmailError('');
     }
   };
@@ -24,6 +36,7 @@ function useValidate() {
       setOk(false);
       setPasswordError('비밀번호을 입력해주세요.');
     } else {
+      setOk(true);
       setPasswordError('');
     }
   };
@@ -40,6 +53,7 @@ function useValidate() {
         setOk(false);
         setPasswordConfirmError('비밀번호가 일치하지 않습니다.');
       } else if (password === passwordConfirm) {
+        setOk(true);
         setPasswordConfirmError('');
       }
     }
@@ -47,9 +61,11 @@ function useValidate() {
 
   return {
     ok,
+    textError,
     emailError,
     passwordError,
     passwordConfirmError,
+    checkText,
     validateEmail,
     validatePassword,
     validatePasswordConfirm,
