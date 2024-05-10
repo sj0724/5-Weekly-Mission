@@ -4,10 +4,10 @@ import { FolderName } from '../../components/FolderButton/FolderButton.styled';
 
 export const AddButton = styled(Cta)`
   position: absolute;
-  width: fit-content;
   padding: 10px 16px;
   font-size: 1rem;
   right: 20px;
+  white-space: nowrap;
 
   @media (max-width: 768px) {
     font-size: 1.6rem;

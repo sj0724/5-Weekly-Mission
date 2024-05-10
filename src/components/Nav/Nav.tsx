@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from '../../assets/logo.svg';
-import Button from '../Button/Button';
+import { Button } from '../Button/Button';
 import { Link } from 'react-router-dom';
 import * as S from './Nav.styled';
 import useGetUser, { User } from '../../hooks/useGetUser';
@@ -28,7 +28,7 @@ function Nav() {
             <NavUser user={user} />
           ) : (
             <Link to="/signin">
-              <Button size={8}>로그인</Button>
+              <Button size={'sm'}>로그인</Button>
             </Link>
           )}
         </S.UserProfile>

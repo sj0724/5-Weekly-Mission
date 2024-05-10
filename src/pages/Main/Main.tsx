@@ -4,7 +4,7 @@ import MainSectionCard from '../../components/MainSectionCard/MainSectionCard';
 import { sectionDescription } from '../../api/sectionDescription';
 import * as S from './Main.styled';
 import headerImage from '../../assets/image25.png';
-import Button from '../../components/Button/Button';
+import { Button } from '../../components/Button/Button';
 import { Link } from 'react-router-dom';
 
 function Main() {
@@ -23,7 +23,7 @@ function Main() {
             쉽게 저장하고 관리해 보세요
           </S.Slogan>
           <Link to="/shared" style={{ textDecoration: 'none' }}>
-            <Button size={22}>링크 추가하기</Button>
+            <Button size={'lg'}>링크 추가하기</Button>
           </Link>
           <S.Header__image>
             <S.HeaderImage src={headerImage} alt="hedaerimage" />

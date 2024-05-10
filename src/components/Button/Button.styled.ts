@@ -1,6 +1,14 @@
 import styled from 'styled-components';
+import { ButtonProps } from './Button';
 
-export const Cta = styled.span<{ size?: number }>`
+const buttonSize = {
+  xs: '6',
+  sm: '8',
+  md: '17.5',
+  lg: '22',
+};
+
+export const Cta = styled.span<ButtonProps>`
   cursor: pointer;
   text-decoration: none;
   display: flex;
@@ -15,7 +23,7 @@ export const Cta = styled.span<{ size?: number }>`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  width: ${(props) => props.size ?? 8}rem;
+  width: ${({ size }) => buttonSize[size]}rem;
   position: relative;
 
   &:hover {

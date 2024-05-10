@@ -62,7 +62,7 @@ function SignUp() {
               <Input
                 type="text"
                 id="email"
-                text="이메일"
+                placeholder="이메일"
                 onChange={changeEmailInput}
                 error={emailError}
               />
@@ -75,7 +75,7 @@ function SignUp() {
               <Input
                 type={textHidden ? 'password' : 'text'}
                 id="password"
-                text="비밀번호"
+                placeholder="비밀번호"
                 onChange={changePasswordInput}
                 error={passwordError}
               />
@@ -91,7 +91,7 @@ function SignUp() {
               <label htmlFor="password">비밀번호 확인</label>
               <Input
                 type={textHidden ? 'password' : 'text'}
-                text="비밀번호"
+                placeholder="비밀번호"
                 id="password"
                 onChange={changeConfirmInput}
                 error={passwordConfirmError}

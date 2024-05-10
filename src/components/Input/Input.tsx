@@ -1,22 +1,20 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, HtmlHTMLAttributes } from 'react';
 import InputModal from './Input.styled';
 
-interface InputProps {
-  id: string;
-  text: string;
+interface InputProps extends HtmlHTMLAttributes<HTMLInputElement> {
   type: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   error: string;
 }
 
-function Input({ id, text, type, onChange, error }: InputProps) {
+function Input({ id, placeholder, type, onChange, error }: InputProps) {
   return (
     <>
       <InputModal
         type={type}
         autoCapitalize="off"
         id={id}
-        placeholder={text}
+        placeholder={placeholder}
         onChange={onChange}
         onBlur={onChange}
         $error={error}

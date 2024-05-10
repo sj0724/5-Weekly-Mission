@@ -50,7 +50,7 @@ function SignIn() {
               <Input
                 type="text"
                 id="email"
-                text="이메일"
+                placeholder="이메일"
                 onChange={changeEmailInput}
                 error={emailError}
               />
@@ -63,7 +63,7 @@ function SignIn() {
               <Input
                 type={textHidden ? 'password' : 'text'}
                 id="password"
-                text="비밀번호"
+                placeholder="비밀번호"
                 onChange={changePasswordInput}
                 error={passwordError}
               />
