@@ -16,7 +16,7 @@ export interface Folder {
 
 export interface Folders extends Array<Folder> {}
 
-function useGetFolderList(userId: number) {
+function useGetFolderList(userId: string) {
   const [link, setLink] = useState<Folders>([]);
 
   useEffect(() => {

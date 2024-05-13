@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import * as S from '../styles/folder.styled';
 import SearchBar from '../components/SearchBar/SearchBar';
@@ -16,6 +16,7 @@ import AddfolderModal from '../components/Modal/AddFolderModal/AddFolderModal';
 import DeleteLinkModal from '../components/Modal/DeleteLinkModal/DeleteLinkModal';
 import ModalPortal from '../Portal';
 import Image from 'next/image';
+import { UserContext } from '@/contexts/UserContext';
 
 function FolderIcon({
   image,
@@ -37,7 +38,7 @@ function FolderIcon({
 }
 
 function Folder() {
-  const id = 1;
+  const id = useContext(UserContext);
   const [folderId, setFolderId] = useState(0);
   const [folderName, setFolderName] = useState('');
   const [searchKeyword, setSearchKeyWord] = useState('');

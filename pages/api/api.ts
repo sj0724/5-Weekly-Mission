@@ -39,7 +39,7 @@ export async function getSampleFolder() {
   }
 }
 
-export async function getFolder(id: number) {
+export async function getFolder(id: string) {
   try {
     const { data } = await axios.get(`/users/${id}/folders`);
     return data;
@@ -49,7 +49,7 @@ export async function getFolder(id: number) {
   }
 }
 
-export async function getFolderList(id: number, folderId: number) {
+export async function getFolderList(id: string, folderId: number) {
   if (folderId) {
     try {
       const query = `/${id}/links?folderId=${folderId}`;
