@@ -5,17 +5,40 @@ import { UserContext } from '@/contexts/UserContext';
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import { getUser } from './api/api';
+import { User } from '@/hooks/useGetUser';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const id = '1';
+  const [user, setUser] = useState<User>({
+    id: '',
+    created_at: new Date(),
+    name: '',
+    image_source: '',
+    email: '',
+    auth_id: '',
+  });
+
+  useEffect(() => {
+    const userAccess = localStorage.getItem('token');
+    if (userAccess) {
+      const loadUser = async () => {
+        const response = await getUser(userAccess);
+        setUser(response[0]);
+      };
+      loadUser();
+    } else {
+      return;
+    }
+  }, []);
 
   return (
     <>
       <Head>
         <title>Linkbrary</title>
       </Head>
-      <UserContext.Provider value={id}>
-        <Nav />
+      <UserContext.Provider value={user.id}>
+        <Nav user={user} />
         <ModalProvider>
           <Component {...pageProps} />
         </ModalProvider>

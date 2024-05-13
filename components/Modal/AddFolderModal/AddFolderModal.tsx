@@ -13,7 +13,7 @@ function AddFolderModal({ onClose }: { onClose: (modalName: string) => void }) {
         <Input
           placeholder="내용 입력"
           type="text"
-          error={textError}
+          $error={textError}
           onChange={(e) => checkText(e.target.value)}
           size="sm"
         />

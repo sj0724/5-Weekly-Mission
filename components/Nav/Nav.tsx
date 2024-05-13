@@ -1,6 +1,6 @@
 import { Button } from '../Button/Button';
 import * as S from './Nav.styled';
-import useGetUser, { User } from '../../hooks/useGetUser';
+import { User } from '../../hooks/useGetUser';
 import Link from 'next/link';
 
 function NavUser({ user }: { user: User }) {
@@ -14,9 +14,7 @@ function NavUser({ user }: { user: User }) {
   );
 }
 
-function Nav() {
-  const { user } = useGetUser(1);
-
+function Nav({ user }: { user: User }) {
   return (
     <S.NavBar>
       <S.NavModal>

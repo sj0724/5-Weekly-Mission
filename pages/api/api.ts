@@ -71,9 +71,13 @@ export async function getFolderList(id: string, folderId: number) {
   }
 }
 
-export async function getUser(id: number) {
+export async function getUser(accessToken: string) {
   try {
-    const { data } = await axios.get(`/users/${id}`);
+    const { data } = await axios.get('/users', {
+      headers: {
+        Authorization: accessToken,
+      },
+    });
     return data.data;
   } catch (error) {
     console.error('Error fetching user:', error);

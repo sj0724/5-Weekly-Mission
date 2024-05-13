@@ -14,7 +14,7 @@ type Owner = {
 };
 
 type Link = {
-  id: number;
+  id: string;
   created_at: Date;
   url: string;
   title: string;
