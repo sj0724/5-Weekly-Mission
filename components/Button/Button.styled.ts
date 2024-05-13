@@ -8,7 +8,7 @@ const buttonSize = {
   lg: '40',
 };
 
-export const Cta = styled.span<ButtonProps>`
+export const Cta = styled.button<ButtonProps>`
   cursor: pointer;
   text-decoration: none;
   display: flex;

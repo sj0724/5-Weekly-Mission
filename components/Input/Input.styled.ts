@@ -15,7 +15,7 @@ const InputModal = styled.input<InputProps>`
   align-items: center;
   border-radius: 0.8rem;
   border: 1px solid
-    var(${({ error }) => (error ? '--ErrorMessage' : '--Linkbrary-gray20')});
+    var(${({ $error }) => ($error ? '--ErrorMessage' : '--Linkbrary-gray20')});
   background: var(--Section-white);
   font-size: 1.6rem;
   line-height: 2.4rem;

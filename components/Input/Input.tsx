@@ -4,11 +4,11 @@ import InputModal from './Input.styled';
 export interface InputProps extends HtmlHTMLAttributes<HTMLInputElement> {
   type: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  error: string;
+  $error: string;
   size: 'sm' | 'md' | 'lg';
 }
 
-function Input({ id, placeholder, type, onChange, error, size }: InputProps) {
+function Input({ id, placeholder, type, onChange, $error, size }: InputProps) {
   return (
     <>
       <InputModal
@@ -18,7 +18,7 @@ function Input({ id, placeholder, type, onChange, error, size }: InputProps) {
         placeholder={placeholder}
         onChange={onChange}
         onBlur={onChange}
-        error={error}
+        $error={$error}
         size={size}
       />
     </>

@@ -1,10 +1,10 @@
 import * as S from '@/styles/signin.styled';
-import SignForm from '@/components/SignForm/SignForm';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import useValidate from '@/hooks/useValidate';
 import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Button } from '@/components/Button/Button';
 
 function SignUp() {
   const [textHidden, setTextHidden] = useState(true);
@@ -12,6 +12,7 @@ function SignUp() {
   const [passwordValue, setPasswordValue] = useState('');
   const [confirmValue, setConfirmValue] = useState('');
   const {
+    ok,
     emailError,
     passwordError,
     passwordConfirmError,
@@ -20,23 +21,36 @@ function SignUp() {
     validatePasswordConfirm,
   } = useValidate();
 
+  const submitForm = (e: FormEvent) => {
+    e.preventDefault();
+    if (emailValue && passwordValue && confirmValue) {
+      if (ok) {
+        console.log('ok');
+      } else {
+        console.log('no');
+      }
+    } else {
+      alert('값을 입력하지 않았습니다! 다시 확인해주세요!');
+    }
+  };
+
   const hiddenText = () => {
     setTextHidden(!textHidden);
   };
 
   const changeEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
     setEmailValue(e.target.value);
-    validateEmail(emailValue);
+    validateEmail(e.target.value);
   };
 
   const changePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
     setPasswordValue(e.target.value);
-    validatePassword(passwordValue);
+    validatePassword(e.target.value);
   };
 
   const changeConfirmInput = (e: ChangeEvent<HTMLInputElement>) => {
     setConfirmValue(e.target.value);
-    validatePasswordConfirm(confirmValue, passwordValue);
+    validatePasswordConfirm(e.target.value, passwordValue);
   };
 
   return (
@@ -49,12 +63,12 @@ function SignUp() {
             </Link>
             <S.Question>
               <span>이미 회원이신가요?</span>
-              <Link href="sign/signin" style={{ textDecoration: 'none' }}>
+              <Link href="/signin" style={{ textDecoration: 'none' }}>
                 <p>로그인하기</p>
               </Link>
             </S.Question>
           </S.FormLogo>
-          <SignForm>
+          <S.SignForm onSubmit={submitForm}>
             <S.InputModal>
               <label htmlFor="email">이메일</label>
               <Input
@@ -62,7 +76,7 @@ function SignUp() {
                 id="email"
                 placeholder="이메일"
                 onChange={changeEmailInput}
-                error={emailError}
+                $error={emailError}
                 size="md"
               />
             </S.InputModal>
@@ -76,7 +90,7 @@ function SignUp() {
                 id="password"
                 placeholder="비밀번호"
                 onChange={changePasswordInput}
-                error={passwordError}
+                $error={passwordError}
                 size="md"
               />
               <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
@@ -86,15 +100,14 @@ function SignUp() {
                 <S.WarningMessage>{passwordError}</S.WarningMessage>
               )}
             </S.TextArea>
-
             <S.InputModal>
               <label htmlFor="password">비밀번호 확인</label>
               <Input
                 type={textHidden ? 'password' : 'text'}
                 placeholder="비밀번호"
-                id="password"
+                id="confirmPassword"
                 onChange={changeConfirmInput}
-                error={passwordConfirmError}
+                $error={passwordConfirmError}
                 size="md"
               />
               <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
@@ -104,7 +117,10 @@ function SignUp() {
                 <S.WarningMessage>{passwordConfirmError}</S.WarningMessage>
               )}
             </S.TextArea>
-          </SignForm>
+            <Button size={'lg'} type="submit">
+              로그인
+            </Button>
+          </S.SignForm>
         </S.SignFormBody>
         <S.SnsLogin>
           다른 방식으로 가입하기

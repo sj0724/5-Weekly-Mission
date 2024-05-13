@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { emailCheck } from '@/util/util';
 
 function useValidate() {
-  const [ok, setOk] = useState(true);
+  const [ok, setOk] = useState(false);
   const [textError, setTextError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
@@ -13,7 +13,6 @@ function useValidate() {
       setOk(false);
       setTextError('내용을 다시 입력해주세요');
     } else {
-      setOk(false);
       setTextError('');
     }
   };

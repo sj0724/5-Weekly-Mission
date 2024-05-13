@@ -36,13 +36,6 @@ export const FormLogo = styled.div`
   margin: 0 auto;
 `;
 
-export const SignForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 2.4rem;
-`;
-
 export const Question = styled.div`
   display: flex;
   align-items: center;
@@ -155,4 +148,10 @@ export const TextArea = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+`;
+
+export const SignForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;

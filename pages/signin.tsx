@@ -1,17 +1,30 @@
 import * as S from '@/styles/signin.styled';
-import SignForm from '@/components/SignForm/SignForm';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import useValidate from '@/hooks/useValidate';
 import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Button } from '@/components/Button/Button';
 
 function SignIn() {
   const [textHidden, setTextHidden] = useState(true);
   const [emailValue, setEmailValue] = useState('');
   const [passwordValue, setPasswordValue] = useState('');
-  const { emailError, passwordError, validateEmail, validatePassword } =
+  const { ok, emailError, passwordError, validateEmail, validatePassword } =
     useValidate();
+
+  const submitForm = (e: FormEvent) => {
+    e.preventDefault();
+    if (emailValue && passwordValue) {
+      if (ok) {
+        console.log('ok');
+      } else {
+        console.log('no');
+      }
+    } else {
+      alert('값을 입력하지 않았습니다! 다시 확인해주세요!');
+    }
+  };
 
   const hiddenText = () => {
     setTextHidden(!textHidden);
@@ -19,12 +32,12 @@ function SignIn() {
 
   const changeEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
     setEmailValue(e.target.value);
-    validateEmail(emailValue);
+    validateEmail(e.target.value);
   };
 
   const changePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
     setPasswordValue(e.target.value);
-    validatePassword(passwordValue);
+    validatePassword(e.target.value);
   };
 
   return (
@@ -42,7 +55,7 @@ function SignIn() {
               </Link>
             </S.Question>
           </S.FormLogo>
-          <SignForm>
+          <S.SignForm onSubmit={submitForm}>
             <S.InputModal>
               <label htmlFor="email">이메일</label>
               <Input
@@ -50,7 +63,7 @@ function SignIn() {
                 id="email"
                 placeholder="이메일"
                 onChange={changeEmailInput}
-                error={emailError}
+                $error={emailError}
                 size="md"
               />
             </S.InputModal>
@@ -64,7 +77,7 @@ function SignIn() {
                 id="password"
                 placeholder="비밀번호"
                 onChange={changePasswordInput}
-                error={passwordError}
+                $error={passwordError}
                 size="md"
               />
               <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
@@ -74,7 +87,10 @@ function SignIn() {
                 <S.WarningMessage>{passwordError}</S.WarningMessage>
               )}
             </S.TextArea>
-          </SignForm>
+            <Button size={'lg'} type="submit">
+              로그인
+            </Button>
+          </S.SignForm>
         </S.SignFormBody>
         <S.SnsLogin>
           소셜 로그인
