@@ -5,6 +5,7 @@ import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/Button/Button';
+import { postSignIn } from './api/api';
 
 function SignIn() {
   const [textHidden, setTextHidden] = useState(true);
@@ -17,7 +18,7 @@ function SignIn() {
     e.preventDefault();
     if (emailValue && passwordValue) {
       if (ok) {
-        console.log('ok');
+        postSignIn(emailValue, passwordValue);
       } else {
         console.log('no');
       }

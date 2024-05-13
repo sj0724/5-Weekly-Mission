@@ -80,3 +80,16 @@ export async function getUser(id: number) {
     throw error;
   }
 }
+
+export async function postSignIn(id: string, password: string) {
+  try {
+    const { data } = await axios.post('/sign-in', {
+      email: id,
+      password: password,
+    });
+    localStorage.setItem('token', data.data.accessToken);
+  } catch (error) {
+    console.error('Error fetching sign-in:', error);
+    throw error;
+  }
+}
