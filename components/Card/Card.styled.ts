@@ -56,6 +56,7 @@ export const StarIcon = styled.img`
   position: absolute;
   top: 1.5rem;
   right: 1.5rem;
+  z-index: 10;
 `;
 
 export const ItemInfo = styled.div`

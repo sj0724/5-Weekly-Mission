@@ -51,7 +51,7 @@ export const AddFolderButton = styled.span`
 export const PlusIcon = styled.div`
   width: 1.6rem;
   height: 1.6rem;
-  background-image: url('/addPurple.svg);
+  background-image: url('/addPurple.svg');
 
   @media (max-width: 768px) {
     background-image: url('/add.svg');

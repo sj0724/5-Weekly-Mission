@@ -55,7 +55,7 @@ function Card({ item }: { item: Link }) {
         <S.ItemImg image={image_source} />
       ) : (
         <S.EmptyImg>
-          <Image src="/logo.svg" alt="빈 이미지" fill />
+          <Image src="/logo.svg" alt="빈 이미지" width={133} height={24} />
         </S.EmptyImg>
       )}
       <S.ItemInfo>

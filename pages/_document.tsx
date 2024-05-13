@@ -6,12 +6,14 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
 
 class MyDocument extends Document {
   static async getInitialProps(
     ctx: DocumentContext
   ): Promise<DocumentInitialProps> {
     const originalRenderPage = ctx.renderPage;
+    const sheet = new ServerStyleSheet();
 
     // Run the React rendering logic synchronously
     ctx.renderPage = () =>
@@ -25,7 +27,15 @@ class MyDocument extends Document {
     // Run the parent `getInitialProps`, it now includes the custom `renderPage`
     const initialProps = await Document.getInitialProps(ctx);
 
-    return initialProps;
+    return {
+      ...initialProps,
+      styles: [
+        <>
+          {initialProps.styles}
+          {sheet.getStyleElement()}
+        </>,
+      ],
+    };
   }
 
   render() {

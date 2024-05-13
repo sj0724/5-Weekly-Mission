@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import * as S from '../pages/index.styled';
+import * as S from '../styles/index.styled';
 import MainSectionCard from '../components/MainSectionCard/MainSectionCard';
 import { sectionDescription } from '../util/sectionDescription';
 import { Button } from '../components/Button/Button';

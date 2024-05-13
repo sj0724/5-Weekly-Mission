@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import EyeOff from '../../assets/eye_off.svg';
-import EyeOn from '../../assets/eye-on.svg';
 
 export const SignBody = styled.div`
   height: 100vh;
@@ -98,8 +96,8 @@ export const TextHiddenButton = styled.span<{ $hidden: boolean }>`
   height: 1.6rem;
   width: 1.6rem;
   height: 1.6rem;
-  background-image: ${(props) =>
-    props.$hidden ? `url(${EyeOff})` : `url(${EyeOn})`};
+  background-image: url(${(props) =>
+    props.$hidden ? '/eye_off.svg' : '/eye-on.svg'});
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

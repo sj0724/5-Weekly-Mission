@@ -1,12 +1,10 @@
-import mainLogo from '../../assets/logo.svg';
-import googleIcon from '../../assets/googleIcon.png';
-import kakaoIcon from '../../assets/Kakao.svg';
 import * as S from '@/styles/signin.styled';
 import SignForm from '@/components/SignForm/SignForm';
 import { ChangeEvent, useState } from 'react';
 import useValidate from '@/hooks/useValidate';
 import Input from '@/components/Input/Input';
 import Link from 'next/link';
+import Image from 'next/image';
 
 function SignIn() {
   const [textHidden, setTextHidden] = useState(true);
@@ -35,11 +33,11 @@ function SignIn() {
         <S.SignFormBody>
           <S.FormLogo>
             <Link href="/">
-              <img src={mainLogo} alt="메인로고" />
+              <Image src="/logo.svg" alt="메인로고" width={210} height={38} />
             </Link>
             <S.Question>
               <span>회원이 아니신가요?</span>
-              <Link href="/sign/signup" style={{ textDecoration: 'none' }}>
+              <Link href="/signup" style={{ textDecoration: 'none' }}>
                 <p>회원 가입하기</p>
               </Link>
             </S.Question>
@@ -82,10 +80,20 @@ function SignIn() {
           소셜 로그인
           <S.SnsIcons>
             <S.Google href="https://www.google.com/" target="_blank">
-              <img src={googleIcon} alt="구글아이콘" />
+              <Image
+                src="/googleIcon.png"
+                alt="구글아이콘"
+                width={22}
+                height={22}
+              />
             </S.Google>
             <S.Kakao href="https://www.kakaocorp.com/page/" target="_blank">
-              <img src={kakaoIcon} alt="카카오아이콘" />
+              <Image
+                src="/Kakao.svg"
+                alt="카카오아이콘"
+                width={26}
+                height={24}
+              />
             </S.Kakao>
           </S.SnsIcons>
         </S.SnsLogin>

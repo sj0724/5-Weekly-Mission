@@ -76,6 +76,11 @@ function Folder() {
           <S.AddButton size="sm" onClick={() => openModal('add')}>
             추가하기
           </S.AddButton>
+          {modalState.add && (
+            <ModalPortal>
+              <AddModal onClose={closeModal} link={link} />
+            </ModalPortal>
+          )}
         </S.HeaderModal>
       </S.Header>
       <div ref={obsRef}></div>
@@ -98,9 +103,19 @@ function Folder() {
               <FolderIcon image="/share.svg" onOpen={openModal} state={'share'}>
                 공유
               </FolderIcon>
+              {modalState.share && (
+                <ModalPortal>
+                  <ShareModal onClose={closeModal} folderName={folderName} />
+                </ModalPortal>
+              )}
               <FolderIcon image="/pen.svg" onOpen={openModal} state={'edit'}>
                 이름 변경
               </FolderIcon>
+              {modalState.edit && (
+                <ModalPortal>
+                  <EditModal onClose={closeModal} />
+                </ModalPortal>
+              )}
               <FolderIcon
                 image="/Group36.svg"
                 onOpen={openModal}
@@ -108,6 +123,11 @@ function Folder() {
               >
                 삭제
               </FolderIcon>
+              {modalState.delete && (
+                <ModalPortal>
+                  <DeleteModal onClose={closeModal} folderName={folderName} />
+                </ModalPortal>
+              )}
             </S.FolderModal>
           )}
         </S.FolderModalContainer>
@@ -118,18 +138,16 @@ function Folder() {
             <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
           )}
         </ContentsContainer>
-        <ModalPortal>
-          {modalState.add && <AddModal onClose={closeModal} link={link} />}
-          {modalState.share && (
-            <ShareModal onClose={closeModal} folderName={folderName} />
-          )}
-          {modalState.edit && <EditModal onClose={closeModal} />}
-          {modalState.delete && (
-            <DeleteModal onClose={closeModal} folderName={folderName} />
-          )}
-          {modalState.addFolder && <AddfolderModal onClose={closeModal} />}
-          {modalState.deleteLink && <DeleteLinkModal onClose={closeModal} />}
-        </ModalPortal>
+        {modalState.addFolder && (
+          <ModalPortal>
+            <AddfolderModal onClose={closeModal} />
+          </ModalPortal>
+        )}
+        {modalState.deleteLink && (
+          <ModalPortal>
+            <DeleteLinkModal onClose={closeModal} />
+          </ModalPortal>
+        )}
       </S.FolderContents>
     </>
   );

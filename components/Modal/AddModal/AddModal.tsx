@@ -1,5 +1,5 @@
-import * as S from './AddModal.styled';
 import { useState } from 'react';
+import * as S from './AddModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import { Folder, Folders } from '../../../hooks/useGetFolderList';
 import { Button } from '../../Button/Button';
@@ -14,7 +14,9 @@ function FolderButton({ item }: { item: Folder }) {
         <h2>{item.name}</h2>
         <p>{item.link.count}개의 링크</p>
       </S.FolderInfo>
-      {check && <Image src="/check.svg" alt="체크 아이콘" fill />}
+      {check && (
+        <Image src="/check.svg" alt="체크 아이콘" width={20} height={20} />
+      )}
     </S.FolderButton>
   );
 }
