@@ -27,8 +27,6 @@ export default function App({ Component, pageProps }: AppProps) {
         setUser(response[0]);
       };
       loadUser();
-    } else {
-      return;
     }
   }, []);
 

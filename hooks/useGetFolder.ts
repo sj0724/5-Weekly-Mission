@@ -43,22 +43,24 @@ function useGetFolder(id: string, searchKeyword: string, folderId: number) {
   };
 
   useEffect(() => {
-    try {
-      setLoading(true);
-      const loadFolder = async () => {
-        const list = await getFolderList(id, folderId);
-        if (searchKeyword) {
-          const searchList = search(list);
-          setLinkList(searchList);
-        } else {
-          setLinkList(list);
-        }
-      };
-      loadFolder();
-      setLoading(false);
-    } catch (error) {
-      console.error(error);
-      setLoading(false);
+    if (id) {
+      try {
+        setLoading(true);
+        const loadFolder = async () => {
+          const list = await getFolderList(id, folderId);
+          if (searchKeyword) {
+            const searchList = search(list);
+            setLinkList(searchList);
+          } else {
+            setLinkList(list);
+          }
+        };
+        loadFolder();
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
     }
   }, [folderId, id, searchKeyword]);
 

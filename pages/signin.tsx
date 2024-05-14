@@ -19,8 +19,6 @@ function SignIn() {
     if (emailValue && passwordValue) {
       if (ok) {
         postSignIn(emailValue, passwordValue);
-      } else {
-        console.log('no');
       }
     } else {
       alert('값을 입력하지 않았습니다! 다시 확인해주세요!');

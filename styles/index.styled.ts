@@ -61,6 +61,7 @@ export const Slogan_gradient = styled.span`
 `;
 
 export const Header__image = styled.div`
+  position: relative;
   padding: 5rem 4rem 0 4rem;
   width: 120rem;
   aspect-ratio: 2;

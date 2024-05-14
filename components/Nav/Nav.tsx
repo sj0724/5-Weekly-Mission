@@ -22,7 +22,7 @@ function Nav({ user }: { user: User }) {
           <S.NavLogo src="/logo.svg" alt="Linkbrary nav logo" />
         </Link>
         <S.UserProfile>
-          {user ? (
+          {user.id ? (
             <NavUser user={user} />
           ) : (
             <Link href="/signin" style={{ textDecoration: 'none' }}>

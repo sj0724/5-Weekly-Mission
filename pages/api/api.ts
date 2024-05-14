@@ -92,8 +92,10 @@ export async function postSignIn(id: string, password: string) {
       password: password,
     });
     localStorage.setItem('token', data.data.accessToken);
+    window.location.href = '/';
+    return data;
   } catch (error) {
     console.error('Error fetching sign-in:', error);
-    throw error;
+    alert('로그인할 수 없습니다! 아이디와 비밀번호를 확인해주세요!');
   }
 }
