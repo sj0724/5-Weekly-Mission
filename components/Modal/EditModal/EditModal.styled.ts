@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
+export const Title = styled.p`
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 1.5rem 0;
+`;
+
 export const ModalForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
-
-  p {
-    font-size: 2rem;
-    font-weight: 700;
-  }
 `;
 
 export const ModalButton = styled.button`
@@ -29,4 +31,18 @@ export const ModalButton = styled.button`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+`;
+
+export const TextArea = styled.div`
+  height: 1.5rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+`;
+
+export const WarningMessage = styled.p`
+  color: var(--ErrorMessage);
+  font-size: 1.4rem;
+  margin: 0;
 `;

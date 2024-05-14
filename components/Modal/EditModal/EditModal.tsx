@@ -10,7 +10,7 @@ function EditModal({ onClose }: { onClose: (modalName: string) => void }) {
   return (
     <BaseModal onClose={onClose} state={'edit'}>
       <S.ModalForm>
-        <p>폴더이름 변경</p>
+        <S.Title>폴더이름 변경</S.Title>
         <Input
           placeholder="내용 입력"
           type="text"
@@ -18,6 +18,9 @@ function EditModal({ onClose }: { onClose: (modalName: string) => void }) {
           onChange={(e) => checkText(e.target.value)}
           size="sm"
         />
+        <S.TextArea>
+          {textError && <S.WarningMessage>{textError}</S.WarningMessage>}
+        </S.TextArea>
         <Button size="md" onClick={(e) => e.preventDefault()}>
           변경하기
         </Button>

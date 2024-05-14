@@ -9,7 +9,7 @@ function Card({ item }: { item: Link }) {
   const [createdAt, setCreatedAt] = useState({ time: 0, result: '' });
   const [fullDate, setFullDate] = useState('');
   const { image_source } = item;
-  const [kebabView, setKebaView] = useState(false);
+  const [kebabView, setKebabView] = useState(false);
   const [like, setLike] = useState(false);
   const kebabRef = useRef<HTMLObjectElement>(null);
 
@@ -32,7 +32,7 @@ function Card({ item }: { item: Link }) {
         kebabRef.current &&
         !kebabRef.current.contains(e.target)
       ) {
-        setKebaView(false);
+        setKebabView(false);
       }
     }
 
@@ -62,7 +62,7 @@ function Card({ item }: { item: Link }) {
         <S.KebabIcon
           src="/kebab.svg"
           alt="kebabIcon"
-          onClick={() => setKebaView(!kebabView)}
+          onClick={() => setKebabView(!kebabView)}
         />
         <S.ItemDate>{createdText}</S.ItemDate>
         <S.ItemDescription>

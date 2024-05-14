@@ -18,7 +18,6 @@ const InputModal = styled.input<InputProps>`
     var(${({ $error }) => ($error ? '--ErrorMessage' : '--Linkbrary-gray20')});
   background: var(--Section-white);
   font-size: 1.6rem;
-  line-height: 2.4rem;
 
   &:focus {
     border: 1px solid var(--Primary);

@@ -15,7 +15,7 @@ function FolderButton({ item }: { item: Folder }) {
         <p>{item.link.count}개의 링크</p>
       </S.FolderInfo>
       {check && (
-        <Image src="/check.svg" alt="체크 아이콘" width={20} height={20} />
+        <Image src="/check.svg" alt="체크 아이콘" width={15} height={15} />
       )}
     </S.FolderButton>
   );
@@ -31,8 +31,7 @@ function AddModal({
   return (
     <BaseModal onClose={onClose} state={'add'}>
       <S.Header>
-        <p>폴더에 추가</p>
-        <span>폴더명</span>
+        <S.Title>폴더에 추가</S.Title>
       </S.Header>
       <S.FolderContainer>
         {link.map((item) => (

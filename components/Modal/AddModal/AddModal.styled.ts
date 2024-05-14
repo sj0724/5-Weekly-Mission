@@ -6,13 +6,6 @@ export const Header = styled.div`
   align-items: center;
   gap: 0.8rem;
 
-  p {
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-  }
-
   span {
     width: 4.2rem;
     color: var(--Linkbrary-gray60);
@@ -23,6 +16,14 @@ export const Header = styled.div`
     font-weight: 400;
     line-height: 2.2rem; /* 157.143% */
   }
+`;
+
+export const Title = styled.p`
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 1.5rem 0;
 `;
 
 export const FolderContainer = styled.div`
@@ -63,7 +64,7 @@ export const FolderInfo = styled.div`
   p {
     color: var(--Linkbrary-gray60);
     font-family: Pretendard;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;

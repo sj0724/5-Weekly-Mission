@@ -9,7 +9,7 @@ function AddFolderModal({ onClose }: { onClose: (modalName: string) => void }) {
   return (
     <BaseModal onClose={onClose} state={'addFolder'}>
       <S.ModalForm>
-        <p>폴더 추가</p>
+        <S.Title>폴더 추가</S.Title>
         <Input
           placeholder="내용 입력"
           type="text"
@@ -17,6 +17,9 @@ function AddFolderModal({ onClose }: { onClose: (modalName: string) => void }) {
           onChange={(e) => checkText(e.target.value)}
           size="sm"
         />
+        <S.TextArea>
+          {textError && <S.WarningMessage>{textError}</S.WarningMessage>}
+        </S.TextArea>
         <S.ModalButton onClick={(e) => e.preventDefault()}>
           추가하기
         </S.ModalButton>

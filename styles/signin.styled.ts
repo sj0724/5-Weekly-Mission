@@ -85,7 +85,7 @@ export const TextHiddenButton = styled.span<{ $hidden: boolean }>`
   margin: 0;
   padding: 0;
   right: 1.5rem;
-  top: 5.2rem;
+  top: 4.7rem;
   height: 1.6rem;
   width: 1.6rem;
   height: 1.6rem;

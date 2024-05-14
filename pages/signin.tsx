@@ -1,5 +1,5 @@
 import * as S from '@/styles/signin.styled';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import useValidate from '@/hooks/useValidate';
 import Input from '@/components/Input/Input';
 import Link from 'next/link';
@@ -14,7 +14,7 @@ function SignIn() {
   const { ok, emailError, passwordError, validateEmail, validatePassword } =
     useValidate();
 
-  const submitForm = (e: FormEvent) => {
+  const submitForm = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (emailValue && passwordValue) {
       if (ok) {

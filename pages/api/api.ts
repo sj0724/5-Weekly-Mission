@@ -108,7 +108,6 @@ export async function postCheckEmail(email: string) {
     return data;
   } catch (error) {
     console.error('Error fetching sign-in:', error);
-    alert('이미 가입된 이메일입니다! 다시 입력해주세요!');
   }
 }
 
@@ -124,6 +123,6 @@ export async function postSignUp(id: string, password: string) {
     return data;
   } catch (error) {
     console.error('Error fetching sign-in:', error);
-    alert('로그인할 수 없습니다! 아이디와 비밀번호를 확인해주세요!');
+    alert('회원가입할 수 없습니다! 아이디와 비밀번호를 확인해주세요!');
   }
 }

@@ -47,6 +47,9 @@ function useValidate() {
     if (passwordConfirm === '') {
       setOk(false);
       setPasswordConfirmError('비밀번호를 다시 입력해주세요.');
+    } else if (passwordConfirm.length <= 8) {
+      setOk(false);
+      setPasswordConfirmError('비밀번호는 8자 이상으로 설정해주세요.');
     } else if (passwordConfirm) {
       if (passwordConfirm && passwordConfirm !== password) {
         setOk(false);

@@ -1,16 +1,16 @@
-import { Dispatch, FormEvent } from 'react';
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react';
 import { useEffect, useState } from 'react';
 import * as S from './SearchBar.styled';
 
 interface PropsType {
-  setSearchKeyWord: Dispatch<React.SetStateAction<string>>;
+  setSearchKeyWord: Dispatch<SetStateAction<string>>;
 }
 
 function SearchModal({ setSearchKeyWord }: PropsType) {
   const [text, setText] = useState('');
   const [inputImage, setInputImage] = useState('');
 
-  const searchLink = (e: FormEvent) => {
+  const searchLink = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchKeyWord(text);
   };

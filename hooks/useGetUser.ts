@@ -11,7 +11,7 @@ export interface User {
 }
 
 function useGetUser(accessToken: string) {
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState();
 
   useEffect(() => {
     const loadUser = async () => {

@@ -14,7 +14,6 @@ export const Header = styled.div`
   }
 
   span {
-    height: 4.2rem;
     color: var(--Linkbrary-gray60);
     text-align: center;
     font-family: Pretendard;

@@ -54,7 +54,7 @@ export const Description = styled.p`
   width: 29.1rem;
   color: var(--Description);
   font-family: Abel;
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
   line-height: 150%; /* 24px */
