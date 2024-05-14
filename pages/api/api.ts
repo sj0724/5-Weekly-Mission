@@ -126,3 +126,23 @@ export async function postSignUp(id: string, password: string) {
     alert('회원가입할 수 없습니다! 아이디와 비밀번호를 확인해주세요!');
   }
 }
+
+export async function postFolder(name: string) {
+  try {
+    const token = localStorage.getItem('token');
+    const { data } = await axios.post(
+      '/folders',
+      {
+        name: name,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    return data;
+  } catch (error) {
+    console.error('Error fetching post folder:', error);
+  }
+}

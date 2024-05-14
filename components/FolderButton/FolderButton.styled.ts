@@ -15,6 +15,11 @@ export const FolderName = styled.span<{ $select: string | boolean }>`
   white-space: nowrap;
   color: ${(props) => (props.$select === 'select' ? '#fff' : '#000')};
 
+  &:hover {
+    background-color: var(--Linkbrary-gray10);
+    color: #000;
+  }
+
   @media (max-width: 768px) {
     font-size: 1.2rem;
   }
