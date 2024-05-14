@@ -12,9 +12,16 @@ export const NavLogo = styled.img`
 `;
 
 export const UserProfile = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 1rem;
+`;
+
+export const ProfileBody = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 `;
 
 export const UserPicture = styled.img`
@@ -38,5 +45,28 @@ export const NavBar = styled.div`
 
   @media (max-width: 768px) {
     font-size: 1.2rem;
+  }
+`;
+
+export const ToggleMenu = styled.div`
+  padding: 1rem;
+  width: 100%;
+  height: 5rem;
+  background-color: #fff;
+  position: absolute;
+  top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 1.2rem;
+  border-radius: 1.2rem;
+
+  p {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+  }
+
+  p:hover {
+    background-color: var(--Gray-cta);
   }
 `;

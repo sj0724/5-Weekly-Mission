@@ -20,7 +20,7 @@ function Main() {
             <S.Slogan_gradient>세상의 모든 정보</S.Slogan_gradient>를<br />
             쉽게 저장하고 관리해 보세요
           </S.Slogan>
-          <Link href="/shared" style={{ textDecoration: 'none' }}>
+          <Link href="/folder" style={{ textDecoration: 'none' }}>
             <Button size={'lg'}>링크 추가하기</Button>
           </Link>
           <S.Header__image>
