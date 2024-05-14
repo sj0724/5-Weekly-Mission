@@ -70,21 +70,23 @@ function Folder() {
 
   return (
     <>
-      <S.Header $view={toggleInput}>
-        <S.HeaderModal>
-          <S.LinkIcon src="/link.svg"></S.LinkIcon>
-          <S.AddLinkInput placeholder="링크를 추가해보세요." />
-          <S.AddButton size="sm" onClick={() => openModal('add')}>
-            추가하기
-          </S.AddButton>
-          {modalState.add && (
-            <ModalPortal>
-              <AddModal onClose={closeModal} link={link} />
-            </ModalPortal>
-          )}
-        </S.HeaderModal>
-      </S.Header>
       <div ref={obsRef}></div>
+      <S.HeaderBody>
+        <S.Header $view={toggleInput}>
+          <S.HeaderModal>
+            <S.LinkIcon src="/link.svg"></S.LinkIcon>
+            <S.AddLinkInput placeholder="링크를 추가해보세요." />
+            <S.AddButton size="sm" onClick={() => openModal('add')}>
+              추가하기
+            </S.AddButton>
+            {modalState.add && (
+              <ModalPortal>
+                <AddModal onClose={closeModal} link={link} />
+              </ModalPortal>
+            )}
+          </S.HeaderModal>
+        </S.Header>
+      </S.HeaderBody>
       <S.FolderContents>
         <SearchBar setSearchKeyWord={setSearchKeyWord} />
         {searchKeyword && (

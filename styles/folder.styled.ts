@@ -77,6 +77,12 @@ export const Header = styled.div<{ $view: boolean }>`
   }
 `;
 
+export const HeaderBody = styled.div`
+  width: 100%;
+  height: 12rem;
+  background-color: var(--Background);
+`;
+
 export const FolderContents = styled.div`
   display: flex;
   flex-direction: column;

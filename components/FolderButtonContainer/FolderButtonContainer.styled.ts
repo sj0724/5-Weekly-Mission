@@ -12,7 +12,8 @@ export const FolderButtons = styled.div`
   display: flex;
   align-items: center;
   gap: 1.2rem;
-  flex-wrap: wrap;
+  overflow: auto;
+  width: 100%;
 `;
 
 export const TotalFolderButton = styled(FolderName)``;
