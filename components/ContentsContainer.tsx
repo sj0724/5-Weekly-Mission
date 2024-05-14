@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div<{ $empty: number }>`
+  height: 40rem;
   gap: 2rem;
   display: grid;
   grid-template-columns: ${(props) =>

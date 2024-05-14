@@ -17,9 +17,9 @@ function Footer() {
   return (
     <S.Footer>
       <S.Footer__menu>
-        <S.FooterDescrption>©codeit - 2023</S.FooterDescrption>
+        <S.FooterDescription>©codeit - 2023</S.FooterDescription>
         <S.Footer__menu__modal>
-          <p>Privacy Polic</p>
+          <p>Privacy Policy</p>
           <p>FAQ</p>
         </S.Footer__menu__modal>
         <S.Footer__menu__icon>

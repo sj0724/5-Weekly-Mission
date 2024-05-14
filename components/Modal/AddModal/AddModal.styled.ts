@@ -29,7 +29,7 @@ export const FolderContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 20rem;
+  max-height: 20rem;
   overflow: auto;
 `;
 

@@ -3,7 +3,7 @@ import { Description } from '../MainSectionCard/MainSectionCard.styled';
 
 export const Footer = styled.div`
   width: 100%;
-  margin: 6rem auto 0;
+  margin: auto 0;
   background: var(--Footer-black);
   padding: 3.2rem 10.4rem 6.4rem;
   color: #cfcfcf;
@@ -26,7 +26,7 @@ export const Footer__menu = styled.div`
   justify-content: space-between;
 `;
 
-export const FooterDescrption = styled(Description)`
+export const FooterDescription = styled(Description)`
   width: fit-content;
 
   @media (max-width: 768px) {

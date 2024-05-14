@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import * as S from '../styles/index.styled';
 import MainSectionCard from '../components/MainSectionCard/MainSectionCard';
 import { sectionDescription } from '../util/sectionDescription';
 import { Button } from '../components/Button/Button';
 import Link from 'next/link';
+import { UserContext } from '@/contexts/UserContext';
 
 function Main() {
   const [sectionList, setSectionList] = useState<typeof sectionDescription>([]);
+  const id = useContext(UserContext);
 
   useEffect(() => {
     setSectionList(sectionDescription);
@@ -20,7 +22,10 @@ function Main() {
             <S.Slogan_gradient>세상의 모든 정보</S.Slogan_gradient>를<br />
             쉽게 저장하고 관리해 보세요
           </S.Slogan>
-          <Link href="/folder" style={{ textDecoration: 'none' }}>
+          <Link
+            href={id ? '/folder' : '/signin'}
+            style={{ textDecoration: 'none' }}
+          >
             <Button size={'lg'}>링크 추가하기</Button>
           </Link>
           <S.Header__image>
