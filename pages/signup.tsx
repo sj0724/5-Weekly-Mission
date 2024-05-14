@@ -5,6 +5,7 @@ import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/Button/Button';
+import { postCheckEmail, postSignUp } from './api/api';
 
 function SignUp() {
   const [textHidden, setTextHidden] = useState(true);
@@ -21,13 +22,14 @@ function SignUp() {
     validatePasswordConfirm,
   } = useValidate();
 
-  const submitForm = (e: FormEvent) => {
+  const submitForm = async (e: FormEvent) => {
     e.preventDefault();
     if (emailValue && passwordValue && confirmValue) {
       if (ok) {
-        console.log('ok');
-      } else {
-        console.log('no');
+        const result = await postCheckEmail(emailValue);
+        if (result) {
+          postSignUp(emailValue, passwordValue);
+        }
       }
     } else {
       alert('값을 입력하지 않았습니다! 다시 확인해주세요!');
@@ -118,7 +120,7 @@ function SignUp() {
               )}
             </S.TextArea>
             <Button size={'lg'} type="submit">
-              로그인
+              회원가입
             </Button>
           </S.SignForm>
         </S.SignFormBody>

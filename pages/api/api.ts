@@ -99,3 +99,31 @@ export async function postSignIn(id: string, password: string) {
     alert('로그인할 수 없습니다! 아이디와 비밀번호를 확인해주세요!');
   }
 }
+
+export async function postCheckEmail(email: string) {
+  try {
+    const { data } = await axios.post('/check-email', {
+      email: email,
+    });
+    return data;
+  } catch (error) {
+    console.error('Error fetching sign-in:', error);
+    alert('이미 가입된 이메일입니다! 다시 입력해주세요!');
+  }
+}
+
+export async function postSignUp(id: string, password: string) {
+  try {
+    const { data } = await axios.post('/sign-up', {
+      email: id,
+      password: password,
+    });
+    alert('회원가입이 완료되었습니다!');
+    localStorage.setItem('token', data.data.accessToken);
+    window.location.href = '/';
+    return data;
+  } catch (error) {
+    console.error('Error fetching sign-in:', error);
+    alert('로그인할 수 없습니다! 아이디와 비밀번호를 확인해주세요!');
+  }
+}
