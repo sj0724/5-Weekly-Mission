@@ -11,7 +11,7 @@ function FolderButton({
   index,
 }: {
   item: Folder;
-  setFolderId: React.Dispatch<React.SetStateAction<number>>;
+  setFolderId: React.Dispatch<React.SetStateAction<string>>;
   setFolderName: React.Dispatch<React.SetStateAction<string>>;
   isSelected: string;
   handleMenuClick: (index: number) => void;

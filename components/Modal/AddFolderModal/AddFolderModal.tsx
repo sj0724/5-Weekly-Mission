@@ -11,9 +11,9 @@ function AddFolderModal({ onClose }: { onClose: (modalName: string) => void }) {
   const [title, setTitle] = useState('');
   const router = useRouter();
 
-  const addFolder = (e: ChangeEvent<HTMLFormElement>) => {
+  const addFolder = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    postFolder(title);
+    await postFolder(title);
     router.reload();
   };
 

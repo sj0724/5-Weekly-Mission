@@ -9,12 +9,12 @@ export type Link = {
   title: string;
   description: string;
   image_source: string;
-  folder_id?: number;
+  folder_id?: string;
 };
 
 interface Links extends Array<Link> {}
 
-function useGetFolder(id: string, searchKeyword: string, folderId: number) {
+function useGetFolder(id: string, searchKeyword: string, folderId: string) {
   const [linkList, setLinkList] = useState<Links>([]);
   const [loading, setLoading] = useState(false);
 

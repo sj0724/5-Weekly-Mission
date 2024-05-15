@@ -39,7 +39,7 @@ function FolderIcon({
 
 function Folder() {
   const id = useContext(UserContext);
-  const [folderId, setFolderId] = useState(0);
+  const [folderId, setFolderId] = useState('');
   const [folderName, setFolderName] = useState('');
   const [searchKeyword, setSearchKeyWord] = useState('');
   const { linkList, loading } = useGetFolder(id, searchKeyword, folderId);
@@ -101,7 +101,7 @@ function Folder() {
         />
         <S.FolderModalContainer>
           {folderName ? folderName : '전체'}
-          {folderId > 0 && (
+          {folderId && (
             <S.FolderModal>
               <FolderIcon image="/share.svg" onOpen={openModal} state={'share'}>
                 공유
@@ -128,7 +128,11 @@ function Folder() {
               </FolderIcon>
               {modalState.delete && (
                 <ModalPortal>
-                  <DeleteModal onClose={closeModal} folderName={folderName} />
+                  <DeleteModal
+                    onClose={closeModal}
+                    folderName={folderName}
+                    folderId={folderId}
+                  />
                 </ModalPortal>
               )}
             </S.FolderModal>
