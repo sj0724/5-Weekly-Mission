@@ -4,22 +4,21 @@ import { Folder } from '@/hooks/useGetFolderList';
 
 function FolderButton({
   item,
-  setFolderId,
-  setFolderName,
   isSelected,
   handleMenuClick,
   index,
+  setOnSelect,
 }: {
   item: Folder;
-  setFolderId: React.Dispatch<React.SetStateAction<string>>;
-  setFolderName: React.Dispatch<React.SetStateAction<string>>;
   isSelected: string;
   handleMenuClick: (index: number) => void;
   index: number;
+  setOnSelect: React.Dispatch<
+    React.SetStateAction<{ id: string; name: string }>
+  >;
 }) {
   const changeFolder = () => {
-    setFolderId(item.id);
-    setFolderName(item.name);
+    setOnSelect({ id: item.id, name: item.name });
     handleMenuClick(index);
   };
 

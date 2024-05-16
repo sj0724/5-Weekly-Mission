@@ -8,12 +8,12 @@ import AddFolderModal from '../Modal/AddFolderModal/AddFolderModal';
 
 function FolderButtonContainer({
   link,
-  setFolderName,
-  setFolderId,
+  setOnSelect,
 }: {
   link: Folders;
-  setFolderName: React.Dispatch<React.SetStateAction<string>>;
-  setFolderId: React.Dispatch<React.SetStateAction<string>>;
+  setOnSelect: React.Dispatch<
+    React.SetStateAction<{ id: string; name: string }>
+  >;
 }) {
   const [linkSelected, setLinkSelected] = useState<string[]>([]);
   const [totalBtn, setTotalBtn] = useState(true);
@@ -29,8 +29,7 @@ function FolderButtonContainer({
   const handleClickTotalButton = () => {
     const totalArr: string[] = new Array(link.length).fill('white');
     setLinkSelected(totalArr);
-    setFolderId('');
-    setFolderName('');
+    setOnSelect({ id: '', name: '' });
     setTotalBtn(true);
   };
 
@@ -48,8 +47,7 @@ function FolderButtonContainer({
               <FolderButton
                 item={item}
                 key={item.name}
-                setFolderId={setFolderId}
-                setFolderName={setFolderName}
+                setOnSelect={setOnSelect}
                 isSelected={linkSelected[index]}
                 handleMenuClick={handleMenuClick}
                 index={index}

@@ -15,10 +15,12 @@ import FolderModals from '@/components/FolderModalContainer/FolderModals';
 
 function Folder() {
   const id = useContext(UserContext);
-  const [folderId, setFolderId] = useState('');
-  const [folderName, setFolderName] = useState('');
+  const [onSelect, setOnSelect] = useState({
+    id: '',
+    name: '',
+  });
   const [searchKeyword, setSearchKeyWord] = useState('');
-  const { linkList, loading } = useGetFolder(id, searchKeyword, folderId);
+  const { linkList, loading } = useGetFolder(id, searchKeyword, onSelect.id);
   const { link } = useGetFolderList(id);
   const obsRef = useRef(null);
   const [toggleInput, setToggleInput] = useState(true);
@@ -65,14 +67,12 @@ function Folder() {
             <p>{searchKeyword}</p>으로 검색한 결과입니다.
           </S.SearchResult>
         )}
-        <FolderButtonContainer
-          link={link}
-          setFolderId={setFolderId}
-          setFolderName={setFolderName}
-        />
+        <FolderButtonContainer link={link} setOnSelect={setOnSelect} />
         <S.FolderModalContainer>
-          {folderName ? folderName : '전체'}
-          {folderName && <FolderModals id={folderId} name={folderName} />}
+          {onSelect.name ? onSelect.name : '전체'}
+          {onSelect.name && (
+            <FolderModals id={onSelect.id} name={onSelect.name} />
+          )}
         </S.FolderModalContainer>
         <ContentsContainer content={linkList.length}>
           {linkList.length > 0 ? (
