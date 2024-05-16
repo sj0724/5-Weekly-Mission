@@ -12,7 +12,7 @@ function FolderButtonContainer({
 }: {
   link: Folders;
   setOnSelect: React.Dispatch<
-    React.SetStateAction<{ id: string; name: string }>
+    React.SetStateAction<{ id: number; name: string }>
   >;
 }) {
   const [linkSelected, setLinkSelected] = useState<string[]>([]);
@@ -29,7 +29,7 @@ function FolderButtonContainer({
   const handleClickTotalButton = () => {
     const totalArr: string[] = new Array(link.length).fill('white');
     setLinkSelected(totalArr);
-    setOnSelect({ id: '', name: '' });
+    setOnSelect({ id: 0, name: '' });
     setTotalBtn(true);
   };
 

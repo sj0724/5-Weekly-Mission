@@ -49,7 +49,7 @@ export async function getFolder(id: string) {
   }
 }
 
-export async function getFolderList(id: string, folderId: string) {
+export async function getFolderList(id: string, folderId: number) {
   if (folderId) {
     try {
       const query = `/${id}/links?folderId=${folderId}`;
@@ -147,7 +147,7 @@ export async function postFolder(name: string) {
   }
 }
 
-export async function deleteFolder(folderId: string) {
+export async function deleteFolder(folderId: number) {
   try {
     const token = localStorage.getItem('token');
     const { data } = await axios.delete(`/folders/${folderId}`, {
@@ -155,6 +155,27 @@ export async function deleteFolder(folderId: string) {
         Authorization: token,
       },
     });
+    return data;
+  } catch (error) {
+    console.error('Error fetching post folder:', error);
+  }
+}
+
+export async function postLink(folderId: number, url: string) {
+  try {
+    const token = localStorage.getItem('token');
+    const { data } = await axios.post(
+      '/links',
+      {
+        url: url,
+        folderId: folderId,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
     return data;
   } catch (error) {
     console.error('Error fetching post folder:', error);

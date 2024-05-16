@@ -34,7 +34,7 @@ export const FolderContainer = styled.div`
   overflow: auto;
 `;
 
-export const FolderButton = styled.div<{ $check: boolean }>`
+export const FolderButton = styled.div<{ $isSelected: string }>`
   cursor: pointer;
   width: 26.4rem;
   display: flex;
@@ -43,7 +43,8 @@ export const FolderButton = styled.div<{ $check: boolean }>`
   align-items: center;
   gap: 0.8rem;
   border-radius: 0.8rem;
-  background: ${(props) => props.$check && 'var(--Background)'};
+  background: ${(props) =>
+    props.$isSelected === 'select' && 'var(--Background)'};
 `;
 
 export const FolderInfo = styled.div`
@@ -70,3 +71,5 @@ export const FolderInfo = styled.div`
     line-height: normal;
   }
 `;
+
+export const InputForm = styled.form``;

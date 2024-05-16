@@ -26,7 +26,7 @@ function FolderIcon({
   );
 }
 
-function FolderModals({ id, name }: { id: string; name: string }) {
+function FolderModals({ id, name }: { id: number; name: string }) {
   const { modalState, openModal, closeModal } = useModal();
 
   return (

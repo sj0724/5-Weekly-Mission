@@ -9,7 +9,7 @@ function DeleteModal({
   folderId,
 }: {
   folderName: string;
-  folderId: string;
+  folderId: number;
 }) {
   const router = useRouter();
 

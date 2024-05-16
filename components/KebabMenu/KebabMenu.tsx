@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useModal } from '@/contexts/ModalContext';
 import * as S from './KebabMenu.styled';
 import ModalPortal from '@/Portal';
@@ -6,15 +6,7 @@ import AddModal from '../Modal/AddModal/AddModal';
 import DeleteLinkModal from '../Modal/DeleteLinkModal/DeleteLinkModal';
 import { Folders } from '@/hooks/useGetFolderList';
 
-function KebabMenu({
-  kebabView,
-  setKebabView,
-  list,
-}: {
-  kebabView: boolean;
-  setKebabView: Dispatch<SetStateAction<boolean>>;
-  list: Folders;
-}) {
+function KebabMenu({ list, url }: { list: Folders; url: string }) {
   const kebabRef = useRef<HTMLObjectElement>(null);
   const { modalState, openModal } = useModal();
 
@@ -40,7 +32,7 @@ function KebabMenu({
       </S.ModalBody>
       {modalState.add && (
         <ModalPortal>
-          <AddModal link={list} />
+          <AddModal link={list} url={url} />
         </ModalPortal>
       )}
       {modalState.deleteLink && (

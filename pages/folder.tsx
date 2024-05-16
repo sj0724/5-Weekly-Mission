@@ -16,15 +16,16 @@ import FolderModals from '@/components/FolderModalContainer/FolderModals';
 function Folder() {
   const id = useContext(UserContext);
   const [onSelect, setOnSelect] = useState({
-    id: '',
+    id: 0,
     name: '',
   });
   const [searchKeyword, setSearchKeyWord] = useState('');
   const { linkList, loading } = useGetFolder(id, searchKeyword, onSelect.id);
   const { link } = useGetFolderList(id);
-  const obsRef = useRef(null);
   const [toggleInput, setToggleInput] = useState(true);
   const { modalState, openModal }: ContextValue = useModal();
+  const obsRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleObserver = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
@@ -53,7 +54,7 @@ function Folder() {
         <S.Header $view={toggleInput}>
           <S.HeaderModal>
             <S.LinkIcon src="/link.svg"></S.LinkIcon>
-            <S.AddLinkInput placeholder="링크를 추가해보세요." />
+            <S.AddLinkInput placeholder="링크를 추가해보세요." ref={inputRef} />
             <S.AddButton size="sm" onClick={() => openModal('add')}>
               추가하기
             </S.AddButton>
@@ -83,9 +84,9 @@ function Folder() {
             <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
           )}
         </ContentsContainer>
-        {modalState.add && (
+        {modalState.add && inputRef.current && (
           <ModalPortal>
-            <AddModal link={link} />
+            <AddModal link={link} url={inputRef.current.value} />
           </ModalPortal>
         )}
       </S.FolderContents>

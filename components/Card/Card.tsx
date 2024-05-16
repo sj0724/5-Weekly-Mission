@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { changeDate, calculateDate } from '../../util/util';
 import * as S from './Card.styled';
 import KebabMenu from '../KebabMenu/KebabMenu';
@@ -19,7 +19,7 @@ function Card({ item, list }: { item: LinkData; list: Folders }) {
 
   useEffect(() => {
     const nowDate = new Date();
-    let createdate = new Date(item.created_at);
+    const createdate = new Date(item.created_at);
     const date = (Number(nowDate) - Number(createdate)) / 1000;
     setCreatedAt(calculateDate(date));
     setFullDate(changeDate(createdate));
@@ -58,13 +58,7 @@ function Card({ item, list }: { item: LinkData; list: Folders }) {
           </S.ItemDescription>
           <S.ItemFullDate>{fullDate}</S.ItemFullDate>
         </S.ItemInfo>
-        {kebabView && (
-          <KebabMenu
-            setKebabView={setKebabView}
-            kebabView={kebabView}
-            list={list}
-          />
-        )}
+        {kebabView && <KebabMenu list={list} url={url} />}
       </S.ItemCard>
     </Link>
   );

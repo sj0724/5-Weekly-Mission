@@ -1,21 +1,21 @@
 export const calculateDate = (date: number) => {
   if (date < 60 * 2) {
-    return { time: date, result: 'minute' };
+    return { time: 1, result: 'minute' };
   }
   if (date <= 60 * 59) {
-    const minute = Math.floor(date / (60 * 59));
+    const minute = Math.floor(date / 59);
     return { time: minute, result: 'minutes' };
   }
   if (date < 60 * 60 * 24) {
-    const day = Math.floor(date / (60 * 60 * 24));
+    const day = Math.floor(date / (120 * 24));
     return { time: day, result: 'hours' };
   }
   if (date < 60 * 60 * 24 * 30) {
-    const day = Math.floor(date / (60 * 60 * 24));
+    const day = Math.floor(date / (120 * 24 * 30));
     return { time: day, result: 'days' };
   }
   if (date < 60 * 60 * 24 * 30 * 12) {
-    const month = Math.floor(date / (60 * 60 * 24 * 30));
+    const month = Math.floor(date / (120 * 24 * 30 * 12));
     return { time: month, result: 'months' };
   }
   if (date >= 60 * 60 * 24 * 30 * 12) {
@@ -43,41 +43,4 @@ const emailPattern =
 
 export function emailCheck(email: string) {
   return emailPattern.test(email);
-}
-
-export function validateInfo({
-  email,
-  password,
-  passwordConfirm,
-}: {
-  email: string;
-  password?: string;
-  passwordConfirm?: string;
-}) {
-  let result = {
-    ok: true,
-    emailError: '',
-    passwordError: '',
-    passwordConfirmError: '',
-  };
-  if (email === '') {
-    result.ok = false;
-    result.emailError = '이메일을 입력해주세요';
-  } else if (!emailCheck(email)) {
-    result.ok = false;
-    result.emailError = '올바른 이메일 주소가 아닙니다.';
-  }
-  if (password === '') {
-    result.ok = false;
-    result.passwordError = '비밀번호을 입력해주세요.';
-  }
-  if (passwordConfirm === '') {
-    result.ok = false;
-    result.passwordConfirmError = '비밀번호를 다시 입력해주세요.';
-  }
-  if (passwordConfirm && passwordConfirm !== password) {
-    result.ok = false;
-    result.passwordConfirmError = '비밀번호가 일치하지 않습니다.';
-  }
-  return result;
 }

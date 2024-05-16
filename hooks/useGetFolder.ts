@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getFolderList } from '../pages/api/api';
 
 export type LinkData = {
-  id: string;
+  id: number;
   created_at: Date;
   updated_at?: Date;
   url: string;
@@ -14,7 +14,7 @@ export type LinkData = {
 
 export interface Links extends Array<LinkData> {}
 
-function useGetFolder(id: string, searchKeyword: string, folderId: string) {
+function useGetFolder(id: string, searchKeyword: string, folderId: number) {
   const [linkList, setLinkList] = useState<Links>([]);
   const [loading, setLoading] = useState(false);
 

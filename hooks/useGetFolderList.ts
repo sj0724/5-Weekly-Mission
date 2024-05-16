@@ -6,7 +6,7 @@ type Like = {
 };
 
 export interface Folder {
-  id: string;
+  id: number;
   created_at: Date;
   name: string;
   user_id: number;
