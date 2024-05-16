@@ -38,7 +38,6 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
 
   const openModal = (modalName: string) => {
     dispatch({ type: 'OPEN_MODAL', modalName });
-    console.log(modalName);
   };
 
   const closeModal = (modalName: string) => {

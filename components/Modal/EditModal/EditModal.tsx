@@ -4,11 +4,11 @@ import useValidate from '@/hooks/useValidate';
 import { Button } from '@/components/Button/Button';
 import Input from '@/components/Input/Input';
 
-function EditModal({ onClose }: { onClose: (modalName: string) => void }) {
+function EditModal() {
   const { checkText, textError } = useValidate();
 
   return (
-    <BaseModal onClose={onClose} state={'edit'}>
+    <BaseModal state={'edit'}>
       <S.ModalForm>
         <S.Title>폴더이름 변경</S.Title>
         <Input

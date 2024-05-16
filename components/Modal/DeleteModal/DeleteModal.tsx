@@ -6,11 +6,9 @@ import { useRouter } from 'next/router';
 
 function DeleteModal({
   folderName,
-  onClose,
   folderId,
 }: {
   folderName: string;
-  onClose: (modalName: string) => void;
   folderId: string;
 }) {
   const router = useRouter();
@@ -22,7 +20,7 @@ function DeleteModal({
   };
 
   return (
-    <BaseModal onClose={onClose} state={'delete'}>
+    <BaseModal state={'delete'}>
       <S.Title>폴더 삭제</S.Title>
       <S.Name>{folderName}</S.Name>
       <S.ModalButton size="md" onClick={isDeleteModal}>

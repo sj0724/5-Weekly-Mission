@@ -1,15 +1,16 @@
 import React from 'react';
 import * as S from './BaseModal.styled';
+import { useModal } from '@/contexts/ModalContext';
 
 function BaseModal({
   children,
-  onClose,
   state,
 }: {
   children: React.ReactNode;
-  onClose: (modalName: string) => void;
   state: string;
 }) {
+  const { closeModal } = useModal();
+
   return (
     <S.Background>
       <S.Body>
@@ -17,7 +18,7 @@ function BaseModal({
         <S.CloseIcon
           src="/close.svg"
           alt="닫기버튼"
-          onClick={() => onClose(`${state}`)}
+          onClick={() => closeModal(`${state}`)}
         />
       </S.Body>
     </S.Background>

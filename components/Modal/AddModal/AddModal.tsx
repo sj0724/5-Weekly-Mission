@@ -21,15 +21,9 @@ function FolderButton({ item }: { item: Folder }) {
   );
 }
 
-function AddModal({
-  link,
-  onClose,
-}: {
-  link: Folders;
-  onClose: (modalName: string) => void;
-}) {
+function AddModal({ link }: { link: Folders }) {
   return (
-    <BaseModal onClose={onClose} state={'add'}>
+    <BaseModal state={'add'}>
       <S.Header>
         <S.Title>폴더에 추가</S.Title>
       </S.Header>

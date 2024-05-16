@@ -12,7 +12,7 @@ export type LinkData = {
   folder_id?: string;
 };
 
-interface Links extends Array<LinkData> {}
+export interface Links extends Array<LinkData> {}
 
 function useGetFolder(id: string, searchKeyword: string, folderId: string) {
   const [linkList, setLinkList] = useState<Links>([]);

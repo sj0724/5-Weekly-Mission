@@ -3,15 +3,9 @@ import * as S from './ShareModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import Image from 'next/image';
 
-function ShareModal({
-  folderName,
-  onClose,
-}: {
-  folderName: string;
-  onClose: (modalName: string) => void;
-}) {
+function ShareModal({ folderName }: { folderName: string }) {
   return (
-    <BaseModal onClose={onClose} state={'share'}>
+    <BaseModal state={'share'}>
       <S.Header>
         <p>폴더 공유</p>
         <span>{folderName}</span>

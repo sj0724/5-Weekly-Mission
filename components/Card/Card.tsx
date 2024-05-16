@@ -5,8 +5,9 @@ import KebabMenu from '../KebabMenu/KebabMenu';
 import { LinkData } from '../../hooks/useGetFolder';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Folders } from '@/hooks/useGetFolderList';
 
-function Card({ item }: { item: LinkData }) {
+function Card({ item, list }: { item: LinkData; list: Folders }) {
   const [createdAt, setCreatedAt] = useState({ time: 0, result: '' });
   const [fullDate, setFullDate] = useState('');
   const { image_source } = item;
@@ -58,7 +59,11 @@ function Card({ item }: { item: LinkData }) {
           <S.ItemFullDate>{fullDate}</S.ItemFullDate>
         </S.ItemInfo>
         {kebabView && (
-          <KebabMenu setKebabView={setKebabView} kebabView={kebabView} />
+          <KebabMenu
+            setKebabView={setKebabView}
+            kebabView={kebabView}
+            list={list}
+          />
         )}
       </S.ItemCard>
     </Link>

@@ -3,6 +3,8 @@ import * as S from './FolderButtonContainer.styled';
 import FolderButton from '../FolderButton/FolderButton';
 import { useModal } from '../../contexts/ModalContext';
 import { Folders } from '../../hooks/useGetFolderList';
+import ModalPortal from '@/Portal';
+import AddFolderModal from '../Modal/AddFolderModal/AddFolderModal';
 
 function FolderButtonContainer({
   link,
@@ -15,7 +17,7 @@ function FolderButtonContainer({
 }) {
   const [linkSelected, setLinkSelected] = useState<string[]>([]);
   const [totalBtn, setTotalBtn] = useState(true);
-  const { openModal } = useModal();
+  const { modalState, openModal } = useModal();
 
   const handleMenuClick = (index: number) => {
     const booleanArr: string[] = new Array(link.length).fill('white');
@@ -59,6 +61,11 @@ function FolderButtonContainer({
         폴더 추가
         <S.PlusIcon />
       </S.AddFolderButton>
+      {modalState.addFolder && (
+        <ModalPortal>
+          <AddFolderModal />
+        </ModalPortal>
+      )}
     </S.FolderMenu>
   );
 }

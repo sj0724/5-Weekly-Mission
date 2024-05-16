@@ -6,7 +6,7 @@ import { ChangeEvent, useState } from 'react';
 import { postFolder } from '@/pages/api/api';
 import { useRouter } from 'next/router';
 
-function AddFolderModal({ onClose }: { onClose: (modalName: string) => void }) {
+function AddFolderModal() {
   const { checkText, textError } = useValidate();
   const [title, setTitle] = useState('');
   const router = useRouter();
@@ -18,7 +18,7 @@ function AddFolderModal({ onClose }: { onClose: (modalName: string) => void }) {
   };
 
   return (
-    <BaseModal onClose={onClose} state={'addFolder'}>
+    <BaseModal state={'addFolder'}>
       <S.ModalForm onSubmit={addFolder}>
         <S.Title>폴더 추가</S.Title>
         <Input
