@@ -77,6 +77,7 @@ export const KebabIcon = styled.img`
   position: absolute;
   right: 2rem;
   top: 1.5rem;
+  z-index: 10;
 `;
 
 export const ItemDate = styled.p`

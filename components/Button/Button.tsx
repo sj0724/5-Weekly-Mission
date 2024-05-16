@@ -6,9 +6,5 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ children, size }: ButtonProps) {
-  return (
-    <>
-      <S.Cta size={size}>{children}</S.Cta>
-    </>
-  );
+  return <S.Cta size={size}>{children}</S.Cta>;
 }
