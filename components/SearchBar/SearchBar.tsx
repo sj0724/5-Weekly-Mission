@@ -1,5 +1,5 @@
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import * as S from './SearchBar.styled';
 
 interface PropsType {
@@ -8,7 +8,6 @@ interface PropsType {
 
 function SearchModal({ setSearchKeyWord }: PropsType) {
   const [text, setText] = useState('');
-  const [inputImage, setInputImage] = useState('');
 
   const searchLink = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,14 +19,6 @@ function SearchModal({ setSearchKeyWord }: PropsType) {
     setSearchKeyWord('');
   };
 
-  useEffect(() => {
-    if (text) {
-      setInputImage('/SearchPurple.svg');
-      return;
-    }
-    setInputImage('/Search.svg');
-  }, [text]);
-
   return (
     <S.SearchBarModal>
       <S.SearchForm onSubmit={searchLink}>
@@ -37,7 +28,10 @@ function SearchModal({ setSearchKeyWord }: PropsType) {
           id="word"
           value={text}
         />
-        <S.SearchIcon src={inputImage} alt="돋보기 아이콘" />
+        <S.SearchIcon
+          src={text ? '/SearchPurple.svg' : '/Search.svg'}
+          alt="돋보기 아이콘"
+        />
         {text && (
           <S.CloseIcon
             src="/close.svg"
