@@ -182,3 +182,17 @@ export async function postLink(folderId: number, url: string) {
     console.error('Error fetching post folder:', error);
   }
 }
+
+export async function deleteLink(linkId: number) {
+  try {
+    const token = localStorage.getItem('token');
+    const { data } = await axios.delete(`/links/${linkId}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error('Error fetching post folder:', error);
+  }
+}

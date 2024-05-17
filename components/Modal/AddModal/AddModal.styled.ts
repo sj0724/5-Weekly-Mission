@@ -73,3 +73,16 @@ export const FolderInfo = styled.div`
 `;
 
 export const InputForm = styled.form``;
+
+export const AddFolder = styled.div`
+  padding-top: 0.2rem;
+  text-align: center;
+  text-height: 1rem;
+  font-size: 1.6rem;
+  color: var(--Primary);
+  cursor: pointer;
+
+  &:hover {
+    font-weight: 700;
+  }
+`;

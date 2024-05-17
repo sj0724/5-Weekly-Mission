@@ -18,7 +18,7 @@ function Card({
   const { image_source } = item;
   const [kebabView, setKebabView] = useState(false);
   const [like, setLike] = useState(false);
-  const { url, description } = item;
+  const { url, description, id } = item;
 
   const createdText = `${createdAt.time} ${createdAt.result} ago`;
 
@@ -63,7 +63,7 @@ function Card({
           </S.ItemDescription>
           <S.ItemFullDate>{fullDate}</S.ItemFullDate>
         </S.ItemInfo>
-        {kebabView && <KebabMenu url={url} setUrl={setUrl} />}
+        {kebabView && <KebabMenu url={url} setUrl={setUrl} id={id} />}
       </S.ItemCard>
     </Link>
   );

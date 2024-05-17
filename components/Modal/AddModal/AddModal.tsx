@@ -6,6 +6,7 @@ import { Button } from '../../Button/Button';
 import Image from 'next/image';
 import { postLink } from '@/pages/api/api';
 import { useRouter } from 'next/router';
+import { useModal } from '@/contexts/ModalContext';
 
 function FolderButton({
   item,
@@ -41,6 +42,7 @@ function FolderButton({
 function AddModal({ link, url }: { link: Folders; url: string }) {
   const [folderSelected, setFolderSelected] = useState<string[]>([]);
   const [selectedId, setSelectedId] = useState(0);
+  const { openModal, closeModal } = useModal();
   const router = useRouter();
 
   const handleMenuClick = (index: number, folderId: number) => {
@@ -64,16 +66,27 @@ function AddModal({ link, url }: { link: Folders; url: string }) {
         <S.Title>폴더에 추가</S.Title>
       </S.Header>
       <S.FolderContainer>
-        {link.map((item, index) => (
-          <FolderButton
-            key={item.id}
-            item={item}
-            $isSelected={folderSelected[index]}
-            index={index}
-            handleMenuClick={handleMenuClick}
-            folderId={item.id}
-          />
-        ))}
+        {link[0] ? (
+          link.map((item, index) => (
+            <FolderButton
+              key={item.id}
+              item={item}
+              $isSelected={folderSelected[index]}
+              index={index}
+              handleMenuClick={handleMenuClick}
+              folderId={item.id}
+            />
+          ))
+        ) : (
+          <S.AddFolder
+            onClick={() => {
+              closeModal('add');
+              openModal('addFolder');
+            }}
+          >
+            폴더 추가
+          </S.AddFolder>
+        )}
       </S.FolderContainer>
       <S.InputForm onSubmit={addLink}>
         <Button size="md" type="submit">
