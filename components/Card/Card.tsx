@@ -1,13 +1,18 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { changeDate, calculateDate } from '../../util/util';
 import * as S from './Card.styled';
 import KebabMenu from '../KebabMenu/KebabMenu';
 import { LinkData } from '../../hooks/useGetFolder';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Folders } from '@/hooks/useGetFolderList';
 
-function Card({ item, list }: { item: LinkData; list: Folders }) {
+function Card({
+  item,
+  setUrl,
+}: {
+  item: LinkData;
+  setUrl: Dispatch<SetStateAction<string>>;
+}) {
   const [createdAt, setCreatedAt] = useState({ time: 0, result: '' });
   const [fullDate, setFullDate] = useState('');
   const { image_source } = item;
@@ -58,7 +63,7 @@ function Card({ item, list }: { item: LinkData; list: Folders }) {
           </S.ItemDescription>
           <S.ItemFullDate>{fullDate}</S.ItemFullDate>
         </S.ItemInfo>
-        {kebabView && <KebabMenu list={list} url={url} />}
+        {kebabView && <KebabMenu url={url} setUrl={setUrl} />}
       </S.ItemCard>
     </Link>
   );

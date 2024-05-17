@@ -24,7 +24,7 @@ export const ItemImg = styled.div<{ image: string }>`
   background-position: center;
 
   &:hover {
-    background-size: 130%;
+    background-size: 150%;
   }
 `;
 
@@ -87,6 +87,7 @@ export const ItemDescription = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  padding-top: 0.2rem;
 
   a {
     text-decoration: none;

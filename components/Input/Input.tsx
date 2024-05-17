@@ -6,6 +6,7 @@ export interface InputProps extends HtmlHTMLAttributes<HTMLInputElement> {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   $error: string;
   size: 'sm' | 'md' | 'lg';
+  placeholder: string;
 }
 
 function Input({ id, placeholder, type, onChange, $error, size }: InputProps) {

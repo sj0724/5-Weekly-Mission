@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import * as S from './AddModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import { Folder, Folders } from '../../../hooks/useGetFolderList';
@@ -48,13 +48,14 @@ function AddModal({ link, url }: { link: Folders; url: string }) {
     booleanArr[index] = 'select';
     setFolderSelected(booleanArr);
     setSelectedId(folderId);
-    console.log(url);
   };
 
   const addLink = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await postLink(selectedId, url);
-    router.reload();
+    const result = await postLink(selectedId, url);
+    if (result) {
+      router.reload();
+    }
   };
 
   return (

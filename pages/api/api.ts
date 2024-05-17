@@ -178,6 +178,7 @@ export async function postLink(folderId: number, url: string) {
     );
     return data;
   } catch (error) {
+    alert('url과 폴더를 지정해주세요!');
     console.error('Error fetching post folder:', error);
   }
 }

@@ -26,6 +26,7 @@ function Folder() {
   const { modalState, openModal }: ContextValue = useModal();
   const obsRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [url, setUrl] = useState('');
 
   const handleObserver = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
@@ -55,7 +56,15 @@ function Folder() {
           <S.HeaderModal>
             <S.LinkIcon src="/link.svg"></S.LinkIcon>
             <S.AddLinkInput placeholder="링크를 추가해보세요." ref={inputRef} />
-            <S.AddButton size="sm" onClick={() => openModal('add')}>
+            <S.AddButton
+              size="sm"
+              onClick={() => {
+                openModal('add');
+                if (inputRef.current) {
+                  setUrl(inputRef.current.value);
+                }
+              }}
+            >
               추가하기
             </S.AddButton>
           </S.HeaderModal>
@@ -78,7 +87,7 @@ function Folder() {
         <ContentsContainer content={linkList.length}>
           {linkList.length > 0 ? (
             linkList.map((item) => (
-              <Card item={item} key={item.id} list={link} />
+              <Card item={item} key={item.id} setUrl={setUrl} />
             ))
           ) : (
             <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
@@ -86,7 +95,7 @@ function Folder() {
         </ContentsContainer>
         {modalState.add && inputRef.current && (
           <ModalPortal>
-            <AddModal link={link} url={inputRef.current.value} />
+            <AddModal link={link} url={url} />
           </ModalPortal>
         )}
       </S.FolderContents>

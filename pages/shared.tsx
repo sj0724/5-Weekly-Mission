@@ -14,7 +14,7 @@ type Owner = {
 };
 
 type Link = {
-  id: string;
+  id: number;
   created_at: Date;
   url: string;
   title: string;
@@ -77,7 +77,7 @@ function Shared() {
         />
         <S.Container>
           {linkList.map((item) => (
-            <Card item={item} key={item.id} />
+            <Card item={item} key={item.id} setUrl={() => {}} />
           ))}
         </S.Container>
       </S.SharedContent>
