@@ -7,19 +7,19 @@ export const calculateDate = (date: number) => {
     return { time: minute, result: 'minutes' };
   }
   if (date < 60 * 60 * 24) {
-    const day = Math.floor(date / (120 * 24));
+    const day = Math.floor(date / 60 / 60);
     return { time: day, result: 'hours' };
   }
   if (date < 60 * 60 * 24 * 30) {
-    const day = Math.floor(date / (120 * 24 * 30));
+    const day = Math.floor(date / 60 / 60 / 24);
     return { time: day, result: 'days' };
   }
   if (date < 60 * 60 * 24 * 30 * 12) {
-    const month = Math.floor(date / (120 * 24 * 30 * 12));
+    const month = Math.floor(date / 60 / 60 / 24 / 30);
     return { time: month, result: 'months' };
   }
   if (date >= 60 * 60 * 24 * 30 * 12) {
-    const year = Math.floor(date / (60 * 60 * 24 * 30 * 12));
+    const year = Math.floor(date / 60 / 60 / 24 / 30 / 12);
     return { time: year, result: 'years' };
   }
   return { time: date, result: 'minute' };
