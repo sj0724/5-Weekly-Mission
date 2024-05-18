@@ -92,7 +92,6 @@ export async function postSignIn(id: string, password: string) {
       password: password,
     });
     localStorage.setItem('token', data.data.accessToken);
-    window.location.href = '/';
     return data;
   } catch (error) {
     console.error('Error fetching sign-in:', error);
@@ -119,7 +118,6 @@ export async function postSignUp(id: string, password: string) {
     });
     alert('회원가입이 완료되었습니다!');
     localStorage.setItem('token', data.data.accessToken);
-    window.location.href = '/';
     return data;
   } catch (error) {
     console.error('Error fetching sign-in:', error);

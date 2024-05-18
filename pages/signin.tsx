@@ -1,5 +1,5 @@
 import * as S from '@/styles/signin.styled';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import useValidate from '@/hooks/useValidate';
 import Input from '@/components/Input/Input';
 import Link from 'next/link';
@@ -14,11 +14,12 @@ function SignIn() {
   const { ok, emailError, passwordError, validateEmail, validatePassword } =
     useValidate();
 
-  const submitForm = (e: ChangeEvent<HTMLFormElement>) => {
+  const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (emailValue && passwordValue) {
       if (ok) {
-        postSignIn(emailValue, passwordValue);
+        await postSignIn(emailValue, passwordValue);
+        window.location.href = '/';
       }
     } else {
       alert('값을 입력하지 않았습니다! 다시 확인해주세요!');
@@ -59,7 +60,7 @@ function SignIn() {
               <label htmlFor="email">이메일</label>
               <Input
                 type="text"
-                id="email"
+                id="id"
                 placeholder="이메일"
                 onChange={changeEmailInput}
                 $error={emailError}

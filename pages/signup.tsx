@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/Button/Button';
 import { postCheckEmail, postSignUp } from './api/api';
+import { useRouter } from 'next/router';
 
 function SignUp() {
   const [textHidden, setTextHidden] = useState(true);
@@ -21,6 +22,7 @@ function SignUp() {
     validatePassword,
     validatePasswordConfirm,
   } = useValidate();
+  const router = useRouter();
 
   const submitForm = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,7 +30,8 @@ function SignUp() {
       if (ok) {
         const result = await postCheckEmail(emailValue);
         if (result) {
-          postSignUp(emailValue, passwordValue);
+          await postSignUp(emailValue, passwordValue);
+          router.push('/');
         }
       }
     } else {
