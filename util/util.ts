@@ -38,7 +38,7 @@ export const changeDate = (date: Date) => {
   return dateFormate;
 };
 
-const emailPattern =
+export const emailPattern =
   /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
 
 export function emailCheck(email: string) {

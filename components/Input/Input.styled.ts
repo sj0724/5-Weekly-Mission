@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { InputProps } from './Input';
 
 const inputSize = {
   sm: '28',
@@ -7,21 +6,37 @@ const inputSize = {
   lg: '50',
 };
 
-const InputModal = styled.input<InputProps>`
-  display: flex;
-  width: ${({ size }) => inputSize[size]}rem;
-  padding: 1.8rem 1.5rem;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0.8rem;
-  border: 1px solid
-    var(${({ $error }) => ($error ? '--ErrorMessage' : '--Linkbrary-gray20')});
-  background: var(--Section-white);
-  font-size: 1.6rem;
+export const InputModal = styled.div<{
+  size: 'sm' | 'md' | 'lg';
+  $error: boolean;
+}>`
+  input {
+    display: flex;
+    width: ${({ size }) => inputSize[size]}rem;
+    padding: 1.8rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+    border: 0.1rem solid
+      var(${({ $error }) => ($error ? '--ErrorMessage' : '--Linkbrary-gray20')});
+    border-radius: 0.8rem;
+    background: var(--Section-white);
+    font-size: 1.6rem;
+  }
 
   &:focus {
     border: 1px solid var(--Primary);
   }
 `;
 
-export default InputModal;
+export const TextArea = styled.div`
+  height: 3rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+export const WarningMessage = styled.p`
+  color: var(--ErrorMessage);
+  font-size: 1.4rem;
+  margin: 0;
+`;

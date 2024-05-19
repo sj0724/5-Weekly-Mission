@@ -1,28 +1,38 @@
-import { ChangeEvent, HtmlHTMLAttributes } from 'react';
-import InputModal from './Input.styled';
+import {
+  ControllerRenderProps,
+  FieldError,
+  FieldValues,
+} from 'react-hook-form';
+import * as S from './Input.styled';
+import { useEffect, useState } from 'react';
 
-export interface InputProps extends HtmlHTMLAttributes<HTMLInputElement> {
-  type: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  $error: string;
-  size: 'sm' | 'md' | 'lg';
+export interface InputProps {
   placeholder: string;
+  type: string;
+  size: 'sm' | 'md' | 'lg';
+  field: ControllerRenderProps<FieldValues, any>;
+  id: string;
+  error: FieldError | undefined;
 }
 
-function Input({ id, placeholder, type, onChange, $error, size }: InputProps) {
+function Input({ placeholder, type, size, field, error }: InputProps) {
+  const [errorMessage, setErrorMessage] = useState(false);
+
+  useEffect(() => {
+    if (error) {
+      setErrorMessage(true);
+    } else {
+      setErrorMessage(false);
+    }
+  }, [error]);
+
   return (
-    <>
-      <InputModal
-        type={type}
-        autoCapitalize="off"
-        id={id}
-        placeholder={placeholder}
-        onChange={onChange}
-        onBlur={onChange}
-        $error={$error}
-        size={size}
-      />
-    </>
+    <S.InputModal size={size} $error={errorMessage}>
+      <input type={type} placeholder={placeholder} {...field} />
+      <S.TextArea>
+        {error && <S.WarningMessage>{error.message}</S.WarningMessage>}
+      </S.TextArea>
+    </S.InputModal>
   );
 }
 

@@ -1,61 +1,26 @@
 import * as S from '@/styles/signin.styled';
-import { ChangeEvent, useState } from 'react';
-import useValidate from '@/hooks/useValidate';
+import { useState } from 'react';
 import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/Button/Button';
 import { postCheckEmail, postSignUp } from './api/api';
-import { useRouter } from 'next/router';
+import { Controller, useForm } from 'react-hook-form';
+import { emailPattern } from '@/util/util';
 
 function SignUp() {
+  const { handleSubmit, control, watch } = useForm();
   const [textHidden, setTextHidden] = useState(true);
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-  const [confirmValue, setConfirmValue] = useState('');
-  const {
-    ok,
-    emailError,
-    passwordError,
-    passwordConfirmError,
-    validateEmail,
-    validatePassword,
-    validatePasswordConfirm,
-  } = useValidate();
-  const router = useRouter();
 
-  const submitForm = async (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (emailValue && passwordValue && confirmValue) {
-      if (ok) {
-        const result = await postCheckEmail(emailValue);
-        if (result) {
-          await postSignUp(emailValue, passwordValue);
-          router.push('/');
-        }
-      }
-    } else {
-      alert('값을 입력하지 않았습니다! 다시 확인해주세요!');
+  const formAction = async (data: any) => {
+    const result = await postCheckEmail(data.id);
+    if (result) {
+      await postSignUp(data.id, data.password);
     }
   };
 
   const hiddenText = () => {
     setTextHidden(!textHidden);
-  };
-
-  const changeEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmailValue(e.target.value);
-    validateEmail(e.target.value);
-  };
-
-  const changePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setPasswordValue(e.target.value);
-    validatePassword(e.target.value);
-  };
-
-  const changeConfirmInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setConfirmValue(e.target.value);
-    validatePasswordConfirm(e.target.value, passwordValue);
   };
 
   return (
@@ -73,55 +38,80 @@ function SignUp() {
               </Link>
             </S.Question>
           </S.FormLogo>
-          <S.SignForm onSubmit={submitForm}>
+          <S.SignForm onSubmit={handleSubmit(formAction)}>
             <S.InputModal>
               <label htmlFor="email">이메일</label>
-              <Input
-                type="text"
-                id="email"
-                placeholder="이메일"
-                onChange={changeEmailInput}
-                $error={emailError}
-                size="md"
+              <Controller
+                name="id"
+                control={control}
+                rules={{
+                  required: '이메일을 입력해주세요!',
+                  pattern: {
+                    value: emailPattern,
+                    message: '이메일 형식이 아닙니다!',
+                  },
+                }}
+                render={({ field, fieldState: { error } }) => (
+                  <Input
+                    id="id"
+                    field={field}
+                    type="text"
+                    placeholder="이메일"
+                    size="md"
+                    error={error}
+                  />
+                )}
               />
             </S.InputModal>
-            <S.TextArea>
-              {emailError && <S.WarningMessage>{emailError}</S.WarningMessage>}
-            </S.TextArea>
             <S.InputModal>
               <label htmlFor="password">비밀번호</label>
-              <Input
-                type={textHidden ? 'password' : 'text'}
-                id="password"
-                placeholder="비밀번호"
-                onChange={changePasswordInput}
-                $error={passwordError}
-                size="md"
+              <Controller
+                name="password"
+                control={control}
+                rules={{
+                  required: '비밀번호를 입력해주세요!',
+                  minLength: { value: 8, message: '최소 8자를 입력해주세요!' },
+                  deps: ['passwordConfirm'],
+                }}
+                render={({ field, fieldState: { error } }) => (
+                  <Input
+                    id="password"
+                    field={field}
+                    type={textHidden ? 'password' : 'text'}
+                    placeholder="비밀번호"
+                    size="md"
+                    error={error}
+                  />
+                )}
               />
               <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
             </S.InputModal>
-            <S.TextArea>
-              {passwordError && (
-                <S.WarningMessage>{passwordError}</S.WarningMessage>
-              )}
-            </S.TextArea>
             <S.InputModal>
               <label htmlFor="password">비밀번호 확인</label>
-              <Input
-                type={textHidden ? 'password' : 'text'}
-                placeholder="비밀번호"
-                id="confirmPassword"
-                onChange={changeConfirmInput}
-                $error={passwordConfirmError}
-                size="md"
+              <Controller
+                name="confirmPassword"
+                control={control}
+                rules={{
+                  required: '비밀번호를 입력해주세요!',
+                  validate: (value) => {
+                    return value === watch('password')
+                      ? true
+                      : '비밀번호가 일치하지 않습니다!';
+                  },
+                }}
+                render={({ field, fieldState: { error } }) => (
+                  <Input
+                    id="password"
+                    field={field}
+                    type={textHidden ? 'password' : 'text'}
+                    placeholder="비밀번호"
+                    size="md"
+                    error={error}
+                  />
+                )}
               />
               <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
             </S.InputModal>
-            <S.TextArea>
-              {passwordConfirmError && (
-                <S.WarningMessage>{passwordConfirmError}</S.WarningMessage>
-              )}
-            </S.TextArea>
             <Button size={'lg'} type="submit">
               회원가입
             </Button>
