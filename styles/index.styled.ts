@@ -61,14 +61,14 @@ export const Slogan_gradient = styled.span`
 `;
 
 export const Header__image = styled.div`
-  position: relative;
-  padding: 5rem 4rem 0 4rem;
   width: 120rem;
-  aspect-ratio: 2;
+  height: 59rem;
+  padding: 5rem 4rem 0;
   overflow: hidden;
 
   @media (max-width: 1199px) {
     width: 70rem;
+    height: 34rem;
   }
 
   @media (max-width: 768px) {
@@ -76,10 +76,23 @@ export const Header__image = styled.div`
   }
 `;
 
-export const HeaderImage = styled.img`
+export const HeaderImage = styled.div`
+  position: relative;
+  height: 66rem;
   width: 100%;
-  border-radius: 2.5rem;
-  box-shadow: 0px 0.4rem 2.5rem 0px rgba(0, 0, 0, 0.08);
+
+  img {
+    border-radius: 2.5rem;
+    box-shadow: 0px 0.4rem 2.5rem 0px rgba(0, 0, 0, 0.08);
+  }
+
+  @media (max-width: 1199px) {
+    height: 38rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const Main__contents = styled.div`
