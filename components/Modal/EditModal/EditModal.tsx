@@ -1,26 +1,37 @@
 import * as S from './EditModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
-import useValidate from '@/hooks/useValidate';
 import { Button } from '@/components/Button/Button';
 import Input from '@/components/Input/Input';
+import { Controller, useForm } from 'react-hook-form';
 
 function EditModal() {
-  const { checkText, textError } = useValidate();
+  const { handleSubmit, control } = useForm();
+
+  const editFolder = (data: any) => {
+    console.log(data);
+  };
 
   return (
     <BaseModal state={'edit'}>
-      <S.ModalForm>
+      <S.ModalForm onSubmit={handleSubmit(editFolder)}>
         <S.Title>폴더이름 변경</S.Title>
-        <Input
-          placeholder="내용 입력"
-          type="text"
-          $error={textError}
-          onChange={(e) => checkText(e.target.value)}
-          size="sm"
+        <Controller
+          name="edit"
+          control={control}
+          rules={{
+            required: '내용을 입력해주세요!',
+          }}
+          render={({ field, fieldState: { error } }) => (
+            <Input
+              id="edit"
+              field={field}
+              type="text"
+              placeholder="폴더 이름을 입력해주세요!"
+              size="sm"
+              error={error}
+            />
+          )}
         />
-        <S.TextArea>
-          {textError && <S.WarningMessage>{textError}</S.WarningMessage>}
-        </S.TextArea>
         <Button size="md" onClick={(e) => e.preventDefault()}>
           변경하기
         </Button>
