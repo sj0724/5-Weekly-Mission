@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import * as S from './FolderButtonContainer.styled';
 import FolderButton from '../FolderButton/FolderButton';
 import { useModal } from '../../contexts/ModalContext';
@@ -11,9 +11,7 @@ function FolderButtonContainer({
   setOnSelect,
 }: {
   link: Folders;
-  setOnSelect: React.Dispatch<
-    React.SetStateAction<{ id: number; name: string }>
-  >;
+  setOnSelect: Dispatch<SetStateAction<{ id: number; name: string }>>;
 }) {
   const [linkSelected, setLinkSelected] = useState<string[]>([]);
   const [totalBtn, setTotalBtn] = useState(true);
@@ -61,7 +59,7 @@ function FolderButtonContainer({
       </S.AddFolderButton>
       {modalState.addFolder && (
         <ModalPortal>
-          <AddFolderModal />
+          <AddFolderModal setOnSelect={setOnSelect} />
         </ModalPortal>
       )}
     </S.FolderMenu>

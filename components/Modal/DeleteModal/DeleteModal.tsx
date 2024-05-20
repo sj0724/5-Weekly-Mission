@@ -1,22 +1,32 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import * as S from './DeleteModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import { deleteFolder } from '@/pages/api/api';
 import { useRouter } from 'next/router';
+import { useModal } from '@/contexts/ModalContext';
 
 function DeleteModal({
   folderName,
   folderId,
+  setOnSelect,
 }: {
   folderName: string;
   folderId: number;
+  setOnSelect: Dispatch<
+    SetStateAction<{
+      id: number;
+      name: string;
+    }>
+  >;
 }) {
   const router = useRouter();
+  const { closeModal } = useModal();
 
   const isDeleteModal = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     await deleteFolder(folderId);
-    router.reload();
+    setOnSelect({ id: 0, name: '' });
+    closeModal('delete');
   };
 
   return (

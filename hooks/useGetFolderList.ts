@@ -16,7 +16,10 @@ export interface Folder {
 
 export interface Folders extends Array<Folder> {}
 
-function useGetFolderList(userId: string) {
+function useGetFolderList(
+  userId: string,
+  onSelect: { id: number; name: string }
+) {
   const [link, setLink] = useState<Folders>([]);
 
   useEffect(() => {
@@ -27,7 +30,7 @@ function useGetFolderList(userId: string) {
       };
       loadFolderList();
     }
-  }, [userId]);
+  }, [userId, onSelect]);
 
   return {
     link,

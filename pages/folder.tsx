@@ -21,7 +21,7 @@ function Folder() {
   });
   const [searchKeyword, setSearchKeyWord] = useState('');
   const { linkList, loading } = useGetFolder(id, searchKeyword, onSelect.id);
-  const { link } = useGetFolderList(id);
+  const { link } = useGetFolderList(id, onSelect);
   const [toggleInput, setToggleInput] = useState(true);
   const { modalState, openModal }: ContextValue = useModal();
   const obsRef = useRef(null);
@@ -81,7 +81,11 @@ function Folder() {
         <S.FolderModalContainer>
           {onSelect.name ? onSelect.name : '전체'}
           {onSelect.name && (
-            <FolderModals id={onSelect.id} name={onSelect.name} />
+            <FolderModals
+              id={onSelect.id}
+              name={onSelect.name}
+              setOnSelect={setOnSelect}
+            />
           )}
         </S.FolderModalContainer>
         <ContentsContainer content={linkList.length}>

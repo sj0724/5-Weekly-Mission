@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import * as S from './FolderButton.styled';
 import { Folder } from '@/hooks/useGetFolderList';
 
@@ -13,9 +13,7 @@ function FolderButton({
   isSelected: string;
   handleMenuClick: (index: number) => void;
   index: number;
-  setOnSelect: React.Dispatch<
-    React.SetStateAction<{ id: number; name: string }>
-  >;
+  setOnSelect: Dispatch<SetStateAction<{ id: number; name: string }>>;
 }) {
   const changeFolder = () => {
     setOnSelect({ id: item.id, name: item.name });
