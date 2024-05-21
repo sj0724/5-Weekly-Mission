@@ -4,7 +4,7 @@ import BaseModal from '../BaseModal/BaseModal';
 import { Folder, Folders } from '../../../hooks/useGetFolderList';
 import { Button } from '../../Button/Button';
 import Image from 'next/image';
-import { postLink } from '@/pages/api/api';
+import { postLink } from '@/api/api';
 import { useRouter } from 'next/router';
 import { useModal } from '@/contexts/ModalContext';
 

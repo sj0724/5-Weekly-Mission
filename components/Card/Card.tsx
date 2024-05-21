@@ -14,7 +14,7 @@ function Card({
   item: LinkData;
   setUrl: Dispatch<SetStateAction<string>>;
   onSelect?: {
-    id: number;
+    id: string;
     name: string;
   };
 }) {

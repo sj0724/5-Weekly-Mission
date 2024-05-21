@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import * as S from '../styles/shared.styled';
-import { getSampleFolder } from './api/api';
+import { getSampleFolder } from '../api/api';
 import Card from '../components/Card/Card';
 import SearchBar from '../components/SearchBar/SearchBar';
 

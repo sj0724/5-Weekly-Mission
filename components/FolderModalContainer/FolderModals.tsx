@@ -31,11 +31,11 @@ function FolderModals({
   name,
   setOnSelect,
 }: {
-  id: number;
+  id: string;
   name: string;
   setOnSelect: Dispatch<
     SetStateAction<{
-      id: number;
+      id: string;
       name: string;
     }>
   >;

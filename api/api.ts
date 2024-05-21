@@ -1,4 +1,4 @@
-import axios from '../../instance/instance';
+import axios from '../instance/instance';
 
 axios.interceptors.request.use(
   (config) => {
@@ -62,7 +62,7 @@ export async function getFolder(id: string) {
   }
 }
 
-export async function getFolderList(id: string, folderId: number) {
+export async function getFolderList(id: string, folderId: string) {
   if (folderId) {
     try {
       const query = `/${id}/links?folderId=${folderId}`;
@@ -146,13 +146,13 @@ export async function postFolder(name: string) {
     const { data } = await axios.post('/folders', {
       name: name,
     });
-    return data;
+    return data.data;
   } catch (error) {
     console.error('Error fetching post folder:', error);
   }
 }
 
-export async function deleteFolder(folderId: number) {
+export async function deleteFolder(folderId: string) {
   try {
     const token = localStorage.getItem('token');
     const { data } = await axios.delete(`/folders/${folderId}`, {

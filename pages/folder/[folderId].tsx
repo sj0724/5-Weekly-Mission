@@ -12,6 +12,7 @@ import AddModal from '../../components/Modal/AddModal/AddModal';
 import ModalPortal from '../../Portal';
 import { UserContext } from '@/contexts/UserContext';
 import FolderModals from '@/components/FolderModalContainer/FolderModals';
+import { useRouter } from 'next/router';
 
 function Folder() {
   const id = useContext(UserContext);
@@ -22,8 +23,11 @@ function Folder() {
   const [searchKeyword, setSearchKeyWord] = useState('');
   const [url, setUrl] = useState('');
   const [toggleInput, setToggleInput] = useState(true);
-  const { linkList, loading } = useGetFolder(id, searchKeyword, onSelect.id);
-  const { link } = useGetFolderList(id);
+  const [wrongFolder, setWrongFolder] = useState(false);
+  const router = useRouter();
+  const folderId = router.query.folderId as string;
+  const { linkList, loading } = useGetFolder(id, searchKeyword, folderId);
+  const { link } = useGetFolderList(id, folderId);
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -47,6 +51,21 @@ function Folder() {
       observer.disconnect();
     };
   }, [loading]);
+
+  useEffect(() => {
+    for (let i = 0; i < link.length; i++) {
+      setWrongFolder(true);
+      if (link[i].id == folderId) {
+        setOnSelect({ id: folderId, name: link[i].name });
+        setWrongFolder(false);
+        break;
+      }
+    }
+  }, [link, folderId]);
+
+  if (wrongFolder) {
+    return <S.EmptyFolder>존재하지 않는 폴더입니다!</S.EmptyFolder>;
+  }
 
   return (
     <>
@@ -79,14 +98,12 @@ function Folder() {
         )}
         <FolderButtonContainer link={link} setOnSelect={setOnSelect} />
         <S.FolderModalContainer>
-          {onSelect.name ? onSelect.name : '전체'}
-          {onSelect.name && (
-            <FolderModals
-              id={onSelect.id}
-              name={onSelect.name}
-              setOnSelect={setOnSelect}
-            />
-          )}
+          {onSelect.name}
+          <FolderModals
+            id={onSelect.id}
+            name={onSelect.name}
+            setOnSelect={setOnSelect}
+          />
         </S.FolderModalContainer>
         <ContentsContainer content={linkList.length}>
           {linkList.length > 0 ? (

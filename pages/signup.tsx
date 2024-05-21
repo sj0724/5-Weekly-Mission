@@ -4,7 +4,7 @@ import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/Button/Button';
-import { postCheckEmail, postSignUp } from './api/api';
+import { postCheckEmail, postSignUp } from '../api/api';
 import { Controller, useForm } from 'react-hook-form';
 import { emailPattern } from '@/util/util';
 

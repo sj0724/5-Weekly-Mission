@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from '../DeleteModal/DeleteModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
-import { deleteLink } from '@/pages/api/api';
+import { deleteLink } from '@/api/api';
 import { useRouter } from 'next/router';
 
 function DeleteLinkModal({ id }: { id: number }) {

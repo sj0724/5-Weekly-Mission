@@ -1,27 +1,29 @@
 import * as S from '../EditModal/EditModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import Input from '@/components/Input/Input';
-import { postFolder } from '@/pages/api/api';
+import { postFolder } from '@/api/api';
 import { Controller, useForm } from 'react-hook-form';
 import { Dispatch, SetStateAction } from 'react';
 import { useModal } from '@/contexts/ModalContext';
+import { useRouter } from 'next/router';
 
 function AddFolderModal({
   setOnSelect,
 }: {
   setOnSelect: Dispatch<
     SetStateAction<{
-      id: number;
+      id: string;
       name: string;
     }>
   >;
 }) {
   const { handleSubmit, control } = useForm();
   const { closeModal } = useModal();
+  const router = useRouter();
 
   const addFolder = async (data: any) => {
     const result = await postFolder(data.folder);
-    setOnSelect({ id: 0, name: '' });
+    router.push(`/folder/${result[0].id}`);
     closeModal('addFolder');
   };
 

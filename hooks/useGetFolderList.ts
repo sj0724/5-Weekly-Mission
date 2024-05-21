@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { getFolder } from '../pages/api/api';
+import { getFolder } from '../api/api';
 
 type Like = {
   count: number;
 };
 
 export interface Folder {
-  id: number;
+  id: string;
   created_at: Date;
   name: string;
   user_id: number;
@@ -16,10 +16,7 @@ export interface Folder {
 
 export interface Folders extends Array<Folder> {}
 
-function useGetFolderList(
-  userId: string,
-  onSelect: { id: number; name: string }
-) {
+function useGetFolderList(userId: string, folderId?: string) {
   const [link, setLink] = useState<Folders>([]);
 
   useEffect(() => {
@@ -30,7 +27,7 @@ function useGetFolderList(
       };
       loadFolderList();
     }
-  }, [userId, onSelect]);
+  }, [userId, folderId]);
 
   return {
     link,
