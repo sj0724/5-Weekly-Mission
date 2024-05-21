@@ -1,5 +1,18 @@
 import axios from '../../instance/instance';
 
+axios.interceptors.request.use(
+  (config) => {
+    const accessToken = localStorage.getItem('token');
+    config.headers['Authorization'] = accessToken;
+
+    return config;
+  },
+  (error) => {
+    console.log(error);
+    return Promise.reject(error);
+  }
+);
+
 export async function getSampleUser() {
   try {
     const { data } = await axios.get('/sample/user');
@@ -130,18 +143,9 @@ export async function postSignUp(id: string, password: string) {
 
 export async function postFolder(name: string) {
   try {
-    const token = localStorage.getItem('token');
-    const { data } = await axios.post(
-      '/folders',
-      {
-        name: name,
-      },
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
-    );
+    const { data } = await axios.post('/folders', {
+      name: name,
+    });
     return data;
   } catch (error) {
     console.error('Error fetching post folder:', error);
@@ -164,19 +168,10 @@ export async function deleteFolder(folderId: number) {
 
 export async function postLink(folderId: number, url: string) {
   try {
-    const token = localStorage.getItem('token');
-    const { data } = await axios.post(
-      '/links',
-      {
-        url: url,
-        folderId: folderId,
-      },
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
-    );
+    const { data } = await axios.post('/links', {
+      url: url,
+      folderId: folderId,
+    });
     return data;
   } catch (error) {
     alert('url과 폴더를 지정해주세요!');
@@ -186,12 +181,7 @@ export async function postLink(folderId: number, url: string) {
 
 export async function deleteLink(linkId: number) {
   try {
-    const token = localStorage.getItem('token');
-    const { data } = await axios.delete(`/links/${linkId}`, {
-      headers: {
-        Authorization: token,
-      },
-    });
+    const { data } = await axios.delete(`/links/${linkId}`);
     return data;
   } catch (error) {
     console.error('Error fetching post folder:', error);

@@ -9,9 +9,14 @@ import Link from 'next/link';
 function Card({
   item,
   setUrl,
+  onSelect,
 }: {
   item: LinkData;
   setUrl: Dispatch<SetStateAction<string>>;
+  onSelect?: {
+    id: number;
+    name: string;
+  };
 }) {
   const [createdAt, setCreatedAt] = useState({ time: 0, result: '' });
   const [fullDate, setFullDate] = useState('');
@@ -49,14 +54,16 @@ function Card({
           </S.EmptyImg>
         )}
         <S.ItemInfo>
-          <S.KebabIcon
-            src="/kebab.svg"
-            alt="kebabIcon"
-            onClick={(e) => {
-              setKebabView(!kebabView);
-              e.preventDefault();
-            }}
-          />
+          {onSelect && onSelect.name && (
+            <S.KebabIcon
+              src="/kebab.svg"
+              alt="kebabIcon"
+              onClick={(e) => {
+                setKebabView(!kebabView);
+                e.preventDefault();
+              }}
+            />
+          )}
           <S.ItemDate>{createdText}</S.ItemDate>
           <S.ItemDescription>
             {description ? description : url}

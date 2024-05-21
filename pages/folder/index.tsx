@@ -1,15 +1,15 @@
 import { useContext } from 'react';
 import { useEffect, useRef, useState } from 'react';
-import * as S from '../styles/folder.styled';
-import SearchBar from '../components/SearchBar/SearchBar';
-import ContentsContainer from '../components/ContentsContainer';
-import Card from '../components/Card/Card';
-import useGetFolder from '../hooks/useGetFolder';
-import useGetFolderList from '../hooks/useGetFolderList';
-import FolderButtonContainer from '../components/FolderButtonContainer/FolderButtonContainer';
-import { ContextValue, useModal } from '../contexts/ModalContext';
-import AddModal from '../components/Modal/AddModal/AddModal';
-import ModalPortal from '../Portal';
+import * as S from '../../styles/folder.styled';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import ContentsContainer from '../../components/ContentsContainer';
+import Card from '../../components/Card/Card';
+import useGetFolder from '../../hooks/useGetFolder';
+import useGetFolderList from '../../hooks/useGetFolderList';
+import FolderButtonContainer from '../../components/FolderButtonContainer/FolderButtonContainer';
+import { useModal } from '../../contexts/ModalContext';
+import AddModal from '../../components/Modal/AddModal/AddModal';
+import ModalPortal from '../../Portal';
 import { UserContext } from '@/contexts/UserContext';
 import FolderModals from '@/components/FolderModalContainer/FolderModals';
 
@@ -20,13 +20,13 @@ function Folder() {
     name: '',
   });
   const [searchKeyword, setSearchKeyWord] = useState('');
+  const [url, setUrl] = useState('');
+  const [toggleInput, setToggleInput] = useState(true);
   const { linkList, loading } = useGetFolder(id, searchKeyword, onSelect.id);
   const { link } = useGetFolderList(id, onSelect);
-  const [toggleInput, setToggleInput] = useState(true);
-  const { modalState, openModal }: ContextValue = useModal();
+  const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const [url, setUrl] = useState('');
 
   const handleObserver = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
@@ -91,7 +91,12 @@ function Folder() {
         <ContentsContainer content={linkList.length}>
           {linkList.length > 0 ? (
             linkList.map((item) => (
-              <Card item={item} key={item.id} setUrl={setUrl} />
+              <Card
+                item={item}
+                key={item.id}
+                setUrl={setUrl}
+                onSelect={onSelect}
+              />
             ))
           ) : (
             <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>

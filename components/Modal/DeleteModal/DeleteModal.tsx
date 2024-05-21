@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction } from 'react';
 import * as S from './DeleteModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import { deleteFolder } from '@/pages/api/api';
-import { useRouter } from 'next/router';
 import { useModal } from '@/contexts/ModalContext';
 
 function DeleteModal({
@@ -19,7 +18,6 @@ function DeleteModal({
     }>
   >;
 }) {
-  const router = useRouter();
   const { closeModal } = useModal();
 
   const isDeleteModal = async (e: React.MouseEvent<HTMLButtonElement>) => {
