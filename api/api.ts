@@ -166,7 +166,7 @@ export async function deleteFolder(folderId: string) {
   }
 }
 
-export async function postLink(folderId: number, url: string) {
+export async function postLink(folderId: string, url: string) {
   try {
     const { data } = await axios.post('/links', {
       url: url,

@@ -53,7 +53,6 @@ function SignUp() {
                 }}
                 render={({ field, fieldState: { error } }) => (
                   <Input
-                    id="id"
                     field={field}
                     type="text"
                     placeholder="이메일"
@@ -71,11 +70,10 @@ function SignUp() {
                 rules={{
                   required: '비밀번호를 입력해주세요!',
                   minLength: { value: 8, message: '최소 8자를 입력해주세요!' },
-                  deps: ['passwordConfirm'],
+                  deps: ['confirmPassword'],
                 }}
                 render={({ field, fieldState: { error } }) => (
                   <Input
-                    id="password"
                     field={field}
                     type={textHidden ? 'password' : 'text'}
                     placeholder="비밀번호"
@@ -101,7 +99,6 @@ function SignUp() {
                 }}
                 render={({ field, fieldState: { error } }) => (
                   <Input
-                    id="password"
                     field={field}
                     type={textHidden ? 'password' : 'text'}
                     placeholder="비밀번호"

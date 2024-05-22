@@ -5,6 +5,9 @@ import KebabMenu from '../KebabMenu/KebabMenu';
 import { LinkData } from '../../hooks/useGetFolder';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useModal } from '@/contexts/ModalContext';
+import ModalPortal from '@/Portal';
+import DeleteLinkModal from '../Modal/DeleteLinkModal/DeleteLinkModal';
 
 function Card({
   item,
@@ -24,15 +27,21 @@ function Card({
   const [kebabView, setKebabView] = useState(false);
   const [like, setLike] = useState(false);
   const { url, description, id } = item;
+  const { modalState } = useModal();
 
   const createdText = `${createdAt.time} ${createdAt.result} ago`;
 
+  const handleKebab = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+    setKebabView(!kebabView);
+    e.preventDefault();
+  };
+
   useEffect(() => {
     const nowDate = new Date();
-    const createdate = new Date(item.created_at);
-    const date = (Number(nowDate) - Number(createdate)) / 1000;
+    const createDate = new Date(item.created_at);
+    const date = (Number(nowDate) - Number(createDate)) / 1000;
     setCreatedAt(calculateDate(date));
-    setFullDate(changeDate(createdate));
+    setFullDate(changeDate(createDate));
   }, [item]);
 
   return (
@@ -58,10 +67,7 @@ function Card({
             <S.KebabIcon
               src="/kebab.svg"
               alt="kebabIcon"
-              onClick={(e) => {
-                setKebabView(!kebabView);
-                e.preventDefault();
-              }}
+              onClick={handleKebab}
             />
           )}
           <S.ItemDate>{createdText}</S.ItemDate>
@@ -70,8 +76,21 @@ function Card({
           </S.ItemDescription>
           <S.ItemFullDate>{fullDate}</S.ItemFullDate>
         </S.ItemInfo>
-        {kebabView && <KebabMenu url={url} setUrl={setUrl} id={id} />}
+        {kebabView && (
+          <KebabMenu
+            url={url}
+            setUrl={setUrl}
+            id={id}
+            setKebabView={setKebabView}
+            kebabView={kebabView}
+          />
+        )}
       </S.ItemCard>
+      {modalState.deleteLink && (
+        <ModalPortal>
+          <DeleteLinkModal id={id} />
+        </ModalPortal>
+      )}
     </Link>
   );
 }

@@ -11,7 +11,6 @@ export const ModalBody = styled.div`
   align-items: center;
   justify-content: center;
   background: #fff;
-  z-index: 10;
 `;
 
 export const ModalButton = styled.div`

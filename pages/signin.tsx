@@ -51,7 +51,6 @@ function SignIn() {
                   }}
                   render={({ field, fieldState: { error } }) => (
                     <Input
-                      id="id"
                       field={field}
                       type="text"
                       placeholder="이메일"
@@ -71,7 +70,6 @@ function SignIn() {
                   }}
                   render={({ field, fieldState: { error } }) => (
                     <Input
-                      id="password"
                       field={field}
                       type={textHidden ? 'password' : 'text'}
                       placeholder="비밀번호"
