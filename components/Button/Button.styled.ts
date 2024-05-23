@@ -25,6 +25,7 @@ export const Cta = styled.button<ButtonProps>`
   line-height: normal;
   width: ${({ size }) => buttonSize[size]}rem;
   position: relative;
+  white-space: nowrap;
 
   &:hover {
     opacity: 0.8;

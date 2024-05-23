@@ -14,6 +14,7 @@ import { UserContext } from '@/contexts/UserContext';
 import FolderModals from '@/components/FolderModalContainer/FolderModals';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import NotFound from '@/components/NotFound/NotFound';
 
 function Folder() {
   const id = useContext(UserContext);
@@ -90,48 +91,50 @@ function Folder() {
           </S.HeaderModal>
         </S.Header>
       </S.HeaderBody>
-      {folderId && wrongFolder ? (
-        <S.EmptyFolder>존재하지 않는 폴더입니다!</S.EmptyFolder>
-      ) : (
-        <S.FolderContents>
-          <SearchBar setSearchKeyWord={setSearchKeyWord} />
-          {searchKeyword && (
-            <S.SearchResult>
-              <p>{searchKeyword}</p>로 검색한 결과입니다.
-            </S.SearchResult>
-          )}
-          <FolderButtonContainer link={link} setOnSelect={setOnSelect} />
-          <S.FolderModalContainer>
-            {folderId ? onSelect.name : '전체'}
-            {folderId && (
-              <FolderModals
-                id={onSelect.id}
-                name={onSelect.name}
-                setOnSelect={setOnSelect}
-              />
-            )}
-          </S.FolderModalContainer>
-          <ContentsContainer content={linkList.length}>
-            {linkList.length > 0 ? (
-              linkList.map((item) => (
-                <Card
-                  item={item}
-                  key={item.id}
-                  setUrl={setUrl}
-                  onSelect={onSelect}
+      <S.FolderContents>
+        <SearchBar setSearchKeyWord={setSearchKeyWord} />
+        {searchKeyword && (
+          <S.SearchResult>
+            <p>{searchKeyword}</p>로 검색한 결과입니다.
+          </S.SearchResult>
+        )}
+        <FolderButtonContainer link={link} setOnSelect={setOnSelect} />
+        {folderId && wrongFolder && loading ? (
+          <NotFound />
+        ) : (
+          <>
+            <S.FolderModalContainer>
+              <p>{folderId ? onSelect.name : '전체'}</p>
+              {folderId && (
+                <FolderModals
+                  id={onSelect.id}
+                  name={onSelect.name}
+                  setOnSelect={setOnSelect}
                 />
-              ))
-            ) : (
-              <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
-            )}
-          </ContentsContainer>
-          {modalState.add && inputRef.current && (
-            <ModalPortal>
-              <AddModal link={link} url={url} />
-            </ModalPortal>
-          )}
-        </S.FolderContents>
-      )}
+              )}
+            </S.FolderModalContainer>
+            <ContentsContainer content={linkList.length}>
+              {linkList.length > 0 ? (
+                linkList.map((item) => (
+                  <Card
+                    item={item}
+                    key={item.id}
+                    setUrl={setUrl}
+                    onSelect={onSelect}
+                  />
+                ))
+              ) : (
+                <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
+              )}
+            </ContentsContainer>
+          </>
+        )}
+        {modalState.add && inputRef.current && (
+          <ModalPortal>
+            <AddModal link={link} url={url} />
+          </ModalPortal>
+        )}
+      </S.FolderContents>
     </>
   );
 }

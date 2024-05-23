@@ -45,59 +45,61 @@ function Card({
   }, [item]);
 
   return (
-    <Link href={url} target="_blank" rel="noreferrer">
-      <S.ItemCard>
-        <S.StarIcon
-          onClick={(e) => {
-            setLike(!like);
-            e.preventDefault();
-          }}
-        >
-          <Image
-            src={like ? '/full_star.svg' : '/star.svg'}
-            alt="별 이미지"
-            fill
-          />
-        </S.StarIcon>
-        {image_source ? (
-          <S.ItemImg>
-            <Image src={image_source} alt="카드 이미지" fill />
-          </S.ItemImg>
-        ) : (
-          <S.EmptyImg>
-            <Image src="/logo.svg" alt="빈 이미지" width={133} height={24} />
-          </S.EmptyImg>
-        )}
-        <S.ItemInfo>
-          {onSelect && onSelect.name && (
-            <S.KebabIcon
-              src="/kebab.svg"
-              alt="kebabIcon"
-              onClick={handleKebab}
+    <>
+      <Link href={url} target="_blank" rel="noreferrer">
+        <S.ItemCard>
+          <S.StarIcon
+            onClick={(e) => {
+              setLike(!like);
+              e.preventDefault();
+            }}
+          >
+            <Image
+              src={like ? '/full_star.svg' : '/star.svg'}
+              alt="별 이미지"
+              fill
+            />
+          </S.StarIcon>
+          {image_source ? (
+            <S.ItemImg>
+              <Image src={image_source} alt="카드 이미지" fill />
+            </S.ItemImg>
+          ) : (
+            <S.EmptyImg>
+              <Image src="/logo.svg" alt="빈 이미지" width={133} height={24} />
+            </S.EmptyImg>
+          )}
+          <S.ItemInfo>
+            {onSelect && onSelect.name && (
+              <S.KebabIcon
+                src="/kebab.svg"
+                alt="kebabIcon"
+                onClick={handleKebab}
+              />
+            )}
+            <S.ItemDate>{createdText}</S.ItemDate>
+            <S.ItemDescription>
+              {description ? description : url}
+            </S.ItemDescription>
+            <S.ItemFullDate>{fullDate}</S.ItemFullDate>
+          </S.ItemInfo>
+          {kebabView && (
+            <KebabMenu
+              url={url}
+              setUrl={setUrl}
+              id={id}
+              setKebabView={setKebabView}
+              kebabView={kebabView}
             />
           )}
-          <S.ItemDate>{createdText}</S.ItemDate>
-          <S.ItemDescription>
-            {description ? description : url}
-          </S.ItemDescription>
-          <S.ItemFullDate>{fullDate}</S.ItemFullDate>
-        </S.ItemInfo>
-        {kebabView && (
-          <KebabMenu
-            url={url}
-            setUrl={setUrl}
-            id={id}
-            setKebabView={setKebabView}
-            kebabView={kebabView}
-          />
-        )}
-      </S.ItemCard>
+        </S.ItemCard>
+      </Link>
       {modalState.deleteLink && (
         <ModalPortal>
           <DeleteLinkModal id={id} />
         </ModalPortal>
       )}
-    </Link>
+    </>
   );
 }
 

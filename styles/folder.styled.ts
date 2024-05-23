@@ -114,10 +114,13 @@ export const FolderModalContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-family: Pretendard;
-  font-weight: 600;
-  font-size: 2.4rem;
   margin: 2.4rem auto;
+
+  p {
+    font-family: Pretendard;
+    font-weight: 600;
+    font-size: 2.4rem;
+  }
 
   @media (max-width: 768px) {
     flex-direction: column;

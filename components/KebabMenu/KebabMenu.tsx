@@ -1,12 +1,9 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import { useModal } from '@/contexts/ModalContext';
 import * as S from './KebabMenu.styled';
-import ModalPortal from '@/Portal';
-import DeleteLinkModal from '../Modal/DeleteLinkModal/DeleteLinkModal';
 
 function KebabMenu({
   url,
-  id,
   setUrl,
   setKebabView,
   kebabView,

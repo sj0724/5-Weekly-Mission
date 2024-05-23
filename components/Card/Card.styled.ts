@@ -17,10 +17,10 @@ export const EmptyImg = styled.div`
 `;
 
 export const ItemImg = styled.div`
+  border-radius: 1.5rem 1.5rem 0 0;
   position: relative;
   height: 100%;
   width: 100%;
-  border-radius: 1.5rem 1.5rem 0 0;
   transition: 0.3s ease;
 
   img {
