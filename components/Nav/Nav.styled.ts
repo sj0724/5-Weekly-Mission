@@ -6,11 +6,6 @@ export const NavModal = styled.div`
   align-items: center;
 `;
 
-export const NavLogo = styled.img`
-  width: 13.3rem;
-  height: 2.4rem;
-`;
-
 export const UserProfile = styled.div`
   position: relative;
   display: flex;
@@ -24,10 +19,12 @@ export const ProfileBody = styled.div`
   gap: 0.8rem;
 `;
 
-export const UserPicture = styled.img`
+export const UserPicture = styled.div`
+  position: relative;
   width: 2.8rem;
   height: 2.8rem;
   border-radius: 1.4rem;
+  overflow: hidden;
 `;
 
 export const NavBar = styled.div`

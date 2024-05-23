@@ -18,11 +18,6 @@ export const OwnerProfile = styled.div`
   padding: 2rem 0 6rem 0;
 `;
 
-export const OwnerProfileImage = styled.img`
-  width: 6rem;
-  height: 6rem;
-`;
-
 export const OwnerName = styled.p`
   font-family: Pretendard;
   font-size: 1.6rem;

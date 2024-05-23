@@ -39,7 +39,7 @@ export const AddLinkInput = styled.input`
   }
 `;
 
-export const LinkIcon = styled.img`
+export const LinkIcon = styled.div`
   width: 2rem;
   height: 2rem;
   position: absolute;

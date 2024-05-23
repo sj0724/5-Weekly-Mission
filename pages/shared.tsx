@@ -3,6 +3,7 @@ import * as S from '../styles/shared.styled';
 import { getSampleFolder } from '../api/api';
 import Card from '../components/Card/Card';
 import SearchBar from '../components/SearchBar/SearchBar';
+import Image from 'next/image';
 
 type FolderName = {
   name: string;
@@ -60,9 +61,11 @@ function Shared() {
   return (
     <S.Shared>
       <S.OwnerProfile>
-        <S.OwnerProfileImage
+        <Image
           src={folderOwner.profileImageSource}
-          alt="ownerImg"
+          alt="owner 이미지"
+          width={60}
+          height={60}
         />
         <S.OwnerName>{folderOwner.name}</S.OwnerName>
         <S.FolderName>{folderInfo.name}</S.FolderName>

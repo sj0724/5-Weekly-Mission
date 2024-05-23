@@ -13,6 +13,7 @@ import ModalPortal from '../../Portal';
 import { UserContext } from '@/contexts/UserContext';
 import FolderModals from '@/components/FolderModalContainer/FolderModals';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 function Folder() {
   const id = useContext(UserContext);
@@ -75,7 +76,9 @@ function Folder() {
         <div ref={obsRef}></div>
         <S.Header $view={toggleInput}>
           <S.HeaderModal>
-            <S.LinkIcon src="/link.svg"></S.LinkIcon>
+            <S.LinkIcon>
+              <Image src="/link.svg" alt="링크 아이콘" fill />
+            </S.LinkIcon>
             <S.AddLinkInput placeholder="링크를 추가해보세요." ref={inputRef} />
             <S.AddButton
               size="sm"
