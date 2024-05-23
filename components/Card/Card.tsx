@@ -48,15 +48,21 @@ function Card({
     <Link href={url} target="_blank" rel="noreferrer">
       <S.ItemCard>
         <S.StarIcon
-          src={like ? '/full_star.svg' : '/star.svg'}
-          alt="별 이미지"
           onClick={(e) => {
             setLike(!like);
             e.preventDefault();
           }}
-        />
+        >
+          <Image
+            src={like ? '/full_star.svg' : '/star.svg'}
+            alt="별 이미지"
+            fill
+          />
+        </S.StarIcon>
         {image_source ? (
-          <S.ItemImg image={image_source} />
+          <S.ItemImg>
+            <Image src={image_source} alt="카드 이미지" fill />
+          </S.ItemImg>
         ) : (
           <S.EmptyImg>
             <Image src="/logo.svg" alt="빈 이미지" width={133} height={24} />
