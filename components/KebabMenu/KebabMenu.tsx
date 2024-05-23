@@ -41,7 +41,6 @@ function KebabMenu({
         !kebabRef.current.contains(e.target as Node)
       ) {
         setKebabView(!kebabView);
-        console.log(e.target as Node);
       }
     }
 

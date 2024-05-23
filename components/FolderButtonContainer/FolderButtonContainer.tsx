@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import * as S from './FolderButtonContainer.styled';
 import FolderButton from '../FolderButton/FolderButton';
 import { useModal } from '../../contexts/ModalContext';
@@ -23,6 +23,7 @@ function FolderButtonContainer({
     booleanArr[index] = 'select';
     setLinkSelected(booleanArr);
     setTotalBtn(false);
+    console.log(booleanArr);
   };
 
   const handleClickTotalButton = () => {
