@@ -39,7 +39,6 @@ function AddFolderModal({
           }}
           render={({ field, fieldState: { error } }) => (
             <Input
-              id="folder"
               field={field}
               type="text"
               placeholder="폴더 이름을 입력해주세요!"

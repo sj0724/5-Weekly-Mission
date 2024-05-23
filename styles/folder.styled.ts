@@ -40,8 +40,6 @@ export const AddLinkInput = styled.input`
 `;
 
 export const LinkIcon = styled.div`
-  width: 2rem;
-  height: 2rem;
   position: absolute;
   left: 2rem;
   @media (max-width: 768px) {

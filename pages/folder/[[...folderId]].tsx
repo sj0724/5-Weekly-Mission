@@ -66,18 +66,14 @@ function Folder() {
     }
   }, [link, folderId]);
 
-  if (folderId && wrongFolder) {
-    return <S.EmptyFolder>존재하지 않는 폴더입니다!</S.EmptyFolder>;
-  }
-
   return (
     <>
+      <div ref={obsRef}></div>
       <S.HeaderBody>
-        <div ref={obsRef}></div>
         <S.Header $view={toggleInput}>
           <S.HeaderModal>
             <S.LinkIcon>
-              <Image src="/link.svg" alt="링크 아이콘" fill />
+              <Image src="/link.svg" alt="링크 아이콘" width={20} height={20} />
             </S.LinkIcon>
             <S.AddLinkInput placeholder="링크를 추가해보세요." ref={inputRef} />
             <S.AddButton
@@ -94,44 +90,48 @@ function Folder() {
           </S.HeaderModal>
         </S.Header>
       </S.HeaderBody>
-      <S.FolderContents>
-        <SearchBar setSearchKeyWord={setSearchKeyWord} />
-        {searchKeyword && (
-          <S.SearchResult>
-            <p>{searchKeyword}</p>로 검색한 결과입니다.
-          </S.SearchResult>
-        )}
-        <FolderButtonContainer link={link} setOnSelect={setOnSelect} />
-        <S.FolderModalContainer>
-          {folderId ? onSelect.name : '전체'}
-          {folderId && (
-            <FolderModals
-              id={onSelect.id}
-              name={onSelect.name}
-              setOnSelect={setOnSelect}
-            />
+      {folderId && wrongFolder ? (
+        <S.EmptyFolder>존재하지 않는 폴더입니다!</S.EmptyFolder>
+      ) : (
+        <S.FolderContents>
+          <SearchBar setSearchKeyWord={setSearchKeyWord} />
+          {searchKeyword && (
+            <S.SearchResult>
+              <p>{searchKeyword}</p>로 검색한 결과입니다.
+            </S.SearchResult>
           )}
-        </S.FolderModalContainer>
-        <ContentsContainer content={linkList.length}>
-          {linkList.length > 0 ? (
-            linkList.map((item) => (
-              <Card
-                item={item}
-                key={item.id}
-                setUrl={setUrl}
-                onSelect={onSelect}
+          <FolderButtonContainer link={link} setOnSelect={setOnSelect} />
+          <S.FolderModalContainer>
+            {folderId ? onSelect.name : '전체'}
+            {folderId && (
+              <FolderModals
+                id={onSelect.id}
+                name={onSelect.name}
+                setOnSelect={setOnSelect}
               />
-            ))
-          ) : (
-            <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
+            )}
+          </S.FolderModalContainer>
+          <ContentsContainer content={linkList.length}>
+            {linkList.length > 0 ? (
+              linkList.map((item) => (
+                <Card
+                  item={item}
+                  key={item.id}
+                  setUrl={setUrl}
+                  onSelect={onSelect}
+                />
+              ))
+            ) : (
+              <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
+            )}
+          </ContentsContainer>
+          {modalState.add && inputRef.current && (
+            <ModalPortal>
+              <AddModal link={link} url={url} />
+            </ModalPortal>
           )}
-        </ContentsContainer>
-        {modalState.add && inputRef.current && (
-          <ModalPortal>
-            <AddModal link={link} url={url} />
-          </ModalPortal>
-        )}
-      </S.FolderContents>
+        </S.FolderContents>
+      )}
     </>
   );
 }
