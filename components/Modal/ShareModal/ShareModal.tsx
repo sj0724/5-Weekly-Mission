@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './ShareModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import Image from 'next/image';
+import Toast from '@/components/Toast/Toast';
 
 function ShareModal({
   folderName,
@@ -10,10 +11,13 @@ function ShareModal({
   folderName: string;
   folderId: string;
 }) {
+  const [toast, setToast] = useState(false);
+
   const shareLink = async () => {
     await navigator.clipboard.writeText(
       `${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}`
     );
+    setToast(true);
   };
 
   return (
@@ -55,6 +59,7 @@ function ShareModal({
           <p>링크 복사</p>
         </S.ShareButtonBody>
       </S.ButtonContainer>
+      {toast && <Toast setToast={setToast} text="URL이 복사되었습니다." />}
     </BaseModal>
   );
 }

@@ -57,3 +57,8 @@ export const ShareButtonBody = styled.div<{ $color: string }>`
     background-color: ${(props) => props.$color};
   }
 `;
+
+export const Toast = styled.div`
+  position: absolute;
+  bottom: -4rem;
+`;
