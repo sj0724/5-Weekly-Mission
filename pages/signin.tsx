@@ -13,7 +13,10 @@ function SignIn() {
   const { handleSubmit, control } = useForm();
 
   const formAction = async (data: any) => {
-    await postSignIn(data.id, data.password);
+    const result = await postSignIn(data.id, data.password);
+    if (result) {
+      window.location.href = '/';
+    }
   };
 
   const hiddenText = () => {

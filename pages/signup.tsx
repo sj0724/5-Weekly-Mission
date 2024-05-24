@@ -15,7 +15,10 @@ function SignUp() {
   const formAction = async (data: any) => {
     const result = await postCheckEmail(data.id);
     if (result) {
-      await postSignUp(data.id, data.password);
+      const signUp = await postSignUp(data.id, data.password);
+      if (signUp) {
+        window.location.href = '/';
+      }
     }
   };
 
