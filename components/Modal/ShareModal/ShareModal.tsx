@@ -3,7 +3,19 @@ import * as S from './ShareModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import Image from 'next/image';
 
-function ShareModal({ folderName }: { folderName: string }) {
+function ShareModal({
+  folderName,
+  folderId,
+}: {
+  folderName: string;
+  folderId: string;
+}) {
+  const shareLink = async () => {
+    await navigator.clipboard.writeText(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}`
+    );
+  };
+
   return (
     <BaseModal state={'share'}>
       <S.Header>
@@ -33,7 +45,10 @@ function ShareModal({ folderName }: { folderName: string }) {
           </span>
           <p>페이스북</p>
         </S.ShareButtonBody>
-        <S.ShareButtonBody $color="rgba(157, 157, 157, 0.04)">
+        <S.ShareButtonBody
+          $color="rgba(157, 157, 157, 0.04)"
+          onClick={() => shareLink()}
+        >
           <span>
             <Image src="/link.svg" alt="링크 아이콘" width={18} height={18} />
           </span>

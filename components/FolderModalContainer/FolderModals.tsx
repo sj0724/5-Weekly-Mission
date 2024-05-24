@@ -55,7 +55,7 @@ function FolderModals({
       </FolderIcon>
       {modalState.share && (
         <ModalPortal>
-          <ShareModal folderName={name} />
+          <ShareModal folderName={name} folderId={id} />
         </ModalPortal>
       )}
       {modalState.edit && (

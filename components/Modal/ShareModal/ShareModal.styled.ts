@@ -35,6 +35,7 @@ export const ShareButtonBody = styled.div<{ $color: string }>`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  cursor: pointer;
 
   p {
     color: var(--Linkbrary-gray100);
