@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  SyntheticEvent,
-  useEffect,
-  useState,
-} from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { changeDate, calculateDate } from '../../util/util';
 import * as S from './Card.styled';
 import KebabMenu from '../KebabMenu/KebabMenu';
@@ -22,7 +16,7 @@ function Card({
   onSelect,
 }: {
   item: LinkData;
-  setUrl: Dispatch<SetStateAction<string>>;
+  setUrl?: Dispatch<SetStateAction<string>>;
   onSelect?: {
     id: string;
     name: string;
@@ -42,10 +36,6 @@ function Card({
     setKebabView(!kebabView);
     e.preventDefault();
   };
-
-  const handleImgError = (
-    e: React.SyntheticEvent<HTMLImageElement, Event>
-  ) => {};
 
   useEffect(() => {
     const nowDate = new Date();

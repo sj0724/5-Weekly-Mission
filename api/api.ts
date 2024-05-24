@@ -62,6 +62,16 @@ export async function getFolder(id: string) {
   }
 }
 
+export async function getFolderData(folderId: string) {
+  try {
+    const { data } = await axios.get(`/folders/${folderId}`);
+    return data.data;
+  } catch (error) {
+    console.error('Error fetching folder:', error);
+    throw error;
+  }
+}
+
 export async function getFolderList(id: string, folderId: string) {
   if (folderId) {
     try {
@@ -91,6 +101,16 @@ export async function getUser(accessToken: string) {
         Authorization: accessToken,
       },
     });
+    return data.data;
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    throw error;
+  }
+}
+
+export async function getUserData(id: string) {
+  try {
+    const { data } = await axios.get(`/users/${id}`);
     return data.data;
   } catch (error) {
     console.error('Error fetching user:', error);

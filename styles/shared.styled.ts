@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-export const Shared = styled.div`
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: Pretendard;
-`;
-
 export const OwnerProfile = styled.div`
   background-color: var(--Background);
   width: 100%;
@@ -40,10 +32,12 @@ export const FolderName = styled.p`
 `;
 
 export const SharedContent = styled.div`
-  margin: 0 auto;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 106rem;
 
   @media (max-width: 1199px) {
     padding: 0 3.2rem;
@@ -64,4 +58,15 @@ export const Container = styled.div`
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
   }
+`;
+
+export const EmptyFolder = styled.div`
+  height: 50vh;
+  font-size: 1.6rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem 0;
 `;

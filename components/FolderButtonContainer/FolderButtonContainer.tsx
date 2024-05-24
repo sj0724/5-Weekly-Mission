@@ -32,10 +32,6 @@ function FolderButtonContainer({
     setTotalBtn(true);
   };
 
-  useEffect(() => {
-    console.log(1);
-  }, []);
-
   return (
     <S.FolderMenu>
       <S.FolderButtons>

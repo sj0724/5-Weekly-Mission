@@ -99,7 +99,7 @@ function Folder() {
           </S.SearchResult>
         )}
         <FolderButtonContainer link={link} setOnSelect={setOnSelect} />
-        {folderId && wrongFolder && loading ? (
+        {folderId && wrongFolder ? (
           <NotFound />
         ) : (
           <>
