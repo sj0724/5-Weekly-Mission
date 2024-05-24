@@ -33,6 +33,6 @@ export const Cta = styled.button<ButtonProps>`
 
   @media (max-width: 768px) {
     font-size: 1.4rem;
-    width: ${({ size }) => (size === 'lg' ? '25' : buttonSize[size])}rem;
+    padding: 1rem 1.6rem;
   }
 `;

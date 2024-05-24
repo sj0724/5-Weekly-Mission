@@ -69,10 +69,13 @@ export const Header__image = styled.div`
   @media (max-width: 1199px) {
     width: 70rem;
     height: 34rem;
+    padding: 3rem 2.4rem 0;
   }
 
   @media (max-width: 768px) {
-    width: 100%;
+    height: 16rem;
+    width: 32.5rem;
+    padding: 1.3rem 1rem 0;
   }
 `;
 
@@ -91,7 +94,7 @@ export const HeaderImage = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 100%;
+    height: 18rem;
   }
 `;
 

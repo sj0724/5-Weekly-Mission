@@ -31,7 +31,7 @@ function Main() {
           </Link>
           <S.Header__image>
             <S.HeaderImage>
-              <Image src={'/image25.png'} alt="헤더 이미지" fill />
+              <Image src="/image25.png" alt="헤더 이미지" fill />
             </S.HeaderImage>
           </S.Header__image>
         </S.Header__contents>
