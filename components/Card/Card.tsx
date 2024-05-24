@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  SyntheticEvent,
+  useEffect,
+  useState,
+} from 'react';
 import { changeDate, calculateDate } from '../../util/util';
 import * as S from './Card.styled';
 import KebabMenu from '../KebabMenu/KebabMenu';
@@ -8,6 +14,7 @@ import Link from 'next/link';
 import { useModal } from '@/contexts/ModalContext';
 import ModalPortal from '@/Portal';
 import DeleteLinkModal from '../Modal/DeleteLinkModal/DeleteLinkModal';
+import logo from '@/public/logo.svg';
 
 function Card({
   item,
@@ -23,10 +30,10 @@ function Card({
 }) {
   const [createdAt, setCreatedAt] = useState({ time: 0, result: '' });
   const [fullDate, setFullDate] = useState('');
-  const { image_source } = item;
   const [kebabView, setKebabView] = useState(false);
   const [like, setLike] = useState(false);
-  const { url, description, id } = item;
+  const { url, description, id, image_source } = item;
+  const [imageUrl, setImageUrl] = useState(image_source);
   const { modalState } = useModal();
 
   const createdText = `${createdAt.time} ${createdAt.result} ago`;
@@ -35,6 +42,10 @@ function Card({
     setKebabView(!kebabView);
     e.preventDefault();
   };
+
+  const handleImgError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {};
 
   useEffect(() => {
     const nowDate = new Date();
@@ -60,17 +71,22 @@ function Card({
               fill
             />
           </S.StarIcon>
-          {image_source ? (
-            <S.ImageArea>
+          <S.ImageArea>
+            {imageUrl ? (
               <S.ItemImg>
-                <Image src={image_source} alt="카드 이미지" fill />
+                <Image
+                  src={imageUrl}
+                  alt="카드 이미지"
+                  fill
+                  onError={() => setImageUrl('')}
+                />
               </S.ItemImg>
-            </S.ImageArea>
-          ) : (
-            <S.EmptyImg>
-              <Image src="/logo.svg" alt="빈 이미지" width={133} height={24} />
-            </S.EmptyImg>
-          )}
+            ) : (
+              <S.EmptyImg>
+                <Image src={logo} alt="빈 이미지" width={133} height={24} />
+              </S.EmptyImg>
+            )}
+          </S.ImageArea>
           <S.ItemInfo>
             {onSelect && onSelect.name && (
               <S.KebabIcon

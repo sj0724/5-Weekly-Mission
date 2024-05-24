@@ -33,6 +33,7 @@ export const StarIcon = styled.div`
 
 export const EmptyImg = styled.div`
   height: 100%;
+  width: 100%;
   background-color: var(--EmptyArea);
   border-radius: 1.5rem 1.5rem 0 0;
   display: flex;
@@ -42,8 +43,6 @@ export const EmptyImg = styled.div`
 
   img {
     opacity: 0.2;
-    width: 13.3rem;
-    height: 2.4rem;
   }
 `;
 
