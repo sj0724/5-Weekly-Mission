@@ -24,9 +24,34 @@ function ShareModal({
 
   const shareKakao = () => {
     const { Kakao } = window;
-    Kakao.Link.sendScrap({
-      requestUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${id}`,
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: 'Linkbrary',
+        description: '나만의 폴더를 만들고 링크를 저장해보세요!',
+        imageUrl: '',
+        link: {
+          mobileWebUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${id}`,
+        },
+      },
+      buttons: [
+        {
+          title: '링크 추가하러 가기',
+          link: {
+            mobileWebUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${id}`,
+          },
+        },
+      ],
     });
+  };
+
+  const shareFacebook = () => {
+    const title = '페이스북 공유하기';
+    window.open(
+      `https://www.facebook.com/sharer.php?u=${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${id}`,
+      title,
+      'toolbar=0,status=0,width=655,height=520'
+    );
   };
 
   return (
@@ -47,7 +72,7 @@ function ShareModal({
           </span>
           <p>카카오톡</p>
         </S.ShareButtonBody>
-        <S.ShareButtonBody $color="#1877F2">
+        <S.ShareButtonBody $color="#1877F2" onClick={shareFacebook}>
           <span>
             <Image
               src="/Facebook.svg"
