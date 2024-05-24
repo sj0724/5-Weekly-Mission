@@ -9,6 +9,12 @@ import { useEffect, useState } from 'react';
 import { getUser } from '../api/api';
 import { User } from '@/hooks/useGetUser';
 
+declare global {
+  interface Window {
+    Kakao: any;
+  }
+}
+
 export default function App({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState<User>({
     id: '',
@@ -28,6 +34,10 @@ export default function App({ Component, pageProps }: AppProps) {
       };
       loadUser();
     }
+  }, []);
+
+  useEffect(() => {
+    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY);
   }, []);
 
   return (

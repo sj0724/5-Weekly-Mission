@@ -16,7 +16,7 @@ function Card({
   onSelect,
 }: {
   item: LinkData;
-  setUrl?: Dispatch<SetStateAction<string>>;
+  setUrl: Dispatch<SetStateAction<string>>;
   onSelect?: {
     id: string;
     name: string;
