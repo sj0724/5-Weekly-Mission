@@ -61,9 +61,11 @@ function Card({
             />
           </S.StarIcon>
           {image_source ? (
-            <S.ItemImg>
-              <Image src={image_source} alt="카드 이미지" fill />
-            </S.ItemImg>
+            <S.ImageArea>
+              <S.ItemImg>
+                <Image src={image_source} alt="카드 이미지" fill />
+              </S.ItemImg>
+            </S.ImageArea>
           ) : (
             <S.EmptyImg>
               <Image src="/logo.svg" alt="빈 이미지" width={133} height={24} />
