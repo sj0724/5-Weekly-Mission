@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ModalBody = styled.div`
   position: absolute;
-  right: -3rem;
+  right: -1rem;
   bottom: 1rem;
   width: 10rem;
   box-shadow: 0px 2px 8px 0px rgba(51, 50, 54, 0.1);
