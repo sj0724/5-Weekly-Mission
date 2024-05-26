@@ -3,12 +3,16 @@ import BaseModal from '../BaseModal/BaseModal';
 import { Button } from '@/components/Button/Button';
 import Input from '@/components/Input/Input';
 import { Controller, useForm } from 'react-hook-form';
+import { putFolder } from '@/api/api';
+import { useRouter } from 'next/router';
 
-function EditModal() {
+function EditModal({ folderId }: { folderId: string }) {
   const { handleSubmit, control } = useForm();
+  const router = useRouter();
 
-  const editFolder = (data: any) => {
-    console.log(data);
+  const editFolder = async (data: any) => {
+    await putFolder(folderId, data.edit);
+    router.reload();
   };
 
   return (

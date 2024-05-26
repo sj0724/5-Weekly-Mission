@@ -205,3 +205,15 @@ export async function deleteLink(linkId: number) {
     console.error('Error fetching post folder:', error);
   }
 }
+
+export async function putFolder(folderId: string, name: string) {
+  try {
+    const { data } = await axios.put(`/folders/${folderId}`, {
+      name: name,
+    });
+    return data;
+  } catch (error) {
+    alert('이름 수정에 실패했습니다!');
+    console.error('Error fetching put folder:', error);
+  }
+}

@@ -60,7 +60,7 @@ function FolderModals({
       )}
       {modalState.edit && (
         <ModalPortal>
-          <EditModal />
+          <EditModal folderId={id} />
         </ModalPortal>
       )}
       {modalState.delete && (
