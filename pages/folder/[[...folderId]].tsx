@@ -15,6 +15,7 @@ import FolderModals from '@/components/FolderModalContainer/FolderModals';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import NotFound from '@/components/NotFound/NotFound';
+import DeleteLinkModal from '@/components/Modal/DeleteLinkModal/DeleteLinkModal';
 
 function Folder() {
   const id = useContext(UserContext);
@@ -26,6 +27,7 @@ function Folder() {
   const [url, setUrl] = useState('');
   const [toggleInput, setToggleInput] = useState(true);
   const [wrongFolder, setWrongFolder] = useState(false);
+  const [linkId, setLinkId] = useState(0);
   const router = useRouter();
   const folderId = router.query.folderId as string;
   const { linkList, loading } = useGetFolder(id, searchKeyword, folderId);
@@ -126,6 +128,7 @@ function Folder() {
                     key={item.id}
                     setUrl={setUrl}
                     onSelect={onSelect}
+                    setLinkId={setLinkId}
                   />
                 ))
               ) : (
@@ -137,6 +140,11 @@ function Folder() {
         {modalState.add && inputRef.current && (
           <ModalPortal>
             <AddModal link={link} url={url} />
+          </ModalPortal>
+        )}
+        {modalState.deleteLink && (
+          <ModalPortal>
+            <DeleteLinkModal id={linkId} />
           </ModalPortal>
         )}
       </S.FolderContents>

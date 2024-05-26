@@ -55,9 +55,7 @@ function Shared() {
         {searchKeyword && <p>{searchKeyword}로 검색한 결과입니다.</p>}
         <ContentsContainer content={linkList.length}>
           {linkList.length > 0 ? (
-            linkList.map((item) => (
-              <Card item={item} key={item.id} setUrl={() => {}} />
-            ))
+            linkList.map((item) => <Card item={item} key={item.id} />)
           ) : (
             <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
           )}

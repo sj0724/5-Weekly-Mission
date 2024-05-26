@@ -5,22 +5,21 @@ import KebabMenu from '../KebabMenu/KebabMenu';
 import { LinkData } from '../../hooks/useGetFolder';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useModal } from '@/contexts/ModalContext';
-import ModalPortal from '@/Portal';
-import DeleteLinkModal from '../Modal/DeleteLinkModal/DeleteLinkModal';
 import logo from '@/public/logo.svg';
 
 function Card({
   item,
   setUrl,
   onSelect,
+  setLinkId,
 }: {
   item: LinkData;
-  setUrl: Dispatch<SetStateAction<string>>;
+  setUrl?: Dispatch<SetStateAction<string>>;
   onSelect?: {
     id: string;
     name: string;
   };
+  setLinkId?: Dispatch<SetStateAction<number>>;
 }) {
   const [createdAt, setCreatedAt] = useState({ time: 0, result: '' });
   const [fullDate, setFullDate] = useState('');
@@ -28,12 +27,14 @@ function Card({
   const [like, setLike] = useState(false);
   const { url, description, id, image_source } = item;
   const [imageUrl, setImageUrl] = useState(image_source);
-  const { modalState } = useModal();
 
   const createdText = `${createdAt.time} ${createdAt.result} ago`;
 
   const handleKebab = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     setKebabView(!kebabView);
+    if (setLinkId) {
+      setLinkId(id);
+    }
     e.preventDefault();
   };
 
@@ -102,11 +103,6 @@ function Card({
           )}
         </S.ItemCard>
       </Link>
-      {modalState.deleteLink && (
-        <ModalPortal>
-          <DeleteLinkModal id={id} />
-        </ModalPortal>
-      )}
     </>
   );
 }
