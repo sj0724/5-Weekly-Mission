@@ -34,5 +34,6 @@ export const Cta = styled.button<ButtonProps>`
   @media (max-width: 768px) {
     font-size: 1.4rem;
     padding: 1rem 1.6rem;
+    width: 100%;
   }
 `;

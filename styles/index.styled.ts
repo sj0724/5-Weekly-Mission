@@ -35,6 +35,11 @@ export const Header__contents = styled.div`
 
   @media (max-width: 768px) {
     gap: 1.5rem;
+
+    a {
+      width: 100%;
+      max-width: 40rem;
+    }
   }
 `;
 
@@ -133,7 +138,6 @@ export const Main__contents = styled.div`
         'description';
       row-gap: 0.5rem;
       column-gap: 2.6rem;
-      justify-content: center;
       padding: 4rem 3.2rem;
     }
   }
