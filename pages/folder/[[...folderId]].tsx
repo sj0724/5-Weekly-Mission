@@ -47,6 +47,11 @@ function Folder() {
   };
 
   useEffect(() => {
+    const access = localStorage.getItem('token');
+    if (!access) {
+      router.replace('/');
+      return;
+    }
     const observer = new IntersectionObserver(handleObserver);
     if (!loading && obsRef.current) {
       observer.observe(obsRef.current);
@@ -54,7 +59,7 @@ function Folder() {
     return () => {
       observer.disconnect();
     };
-  }, [loading, folderId]);
+  }, [loading, folderId, router]);
 
   useEffect(() => {
     for (let i = 0; i < link.length; i++) {
