@@ -25,7 +25,7 @@ function Card({
   const [fullDate, setFullDate] = useState('');
   const [kebabView, setKebabView] = useState(false);
   const [like, setLike] = useState(false);
-  const { url, description, id, image_source } = item;
+  const { url, description, id, image_source, title } = item;
   const [imageUrl, setImageUrl] = useState(image_source);
 
   const createdText = `${createdAt.time} ${createdAt.result} ago`;
@@ -87,9 +87,7 @@ function Card({
               />
             )}
             <S.ItemDate>{createdText}</S.ItemDate>
-            <S.ItemDescription>
-              {description ? description : url}
-            </S.ItemDescription>
+            <S.ItemDescription>{title ? title : description}</S.ItemDescription>
             <S.ItemFullDate>{fullDate}</S.ItemFullDate>
           </S.ItemInfo>
           {kebabView && (

@@ -53,15 +53,15 @@ function useGetFolder(id: string, searchKeyword: string, folderId: string) {
         if (searchKeyword) {
           const searchList = search(list);
           setLinkList(searchList);
+          setLoading(false);
         } else {
           setLinkList(list);
+          setLoading(false);
         }
       };
       loadFolder();
-      setLoading(false);
     } catch (error) {
       console.error(error);
-      setLoading(false);
     }
   }, [folderId, id, searchKeyword]);
 

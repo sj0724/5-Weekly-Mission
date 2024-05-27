@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import NotFound from '@/components/NotFound/NotFound';
 import DeleteLinkModal from '@/components/Modal/DeleteLinkModal/DeleteLinkModal';
+import Loading from '@/components/Loading/Loading';
 
 function Folder() {
   const id = useContext(UserContext);
@@ -31,7 +32,7 @@ function Folder() {
   const router = useRouter();
   const folderId = router.query.folderId as string;
   const { linkList, loading } = useGetFolder(id, searchKeyword, folderId);
-  const { link } = useGetFolderList(id, folderId);
+  const { link, linkLoading } = useGetFolderList(id, folderId);
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -76,6 +77,7 @@ function Folder() {
 
   return (
     <>
+      {linkLoading || loading ? <Loading /> : null}
       <div ref={obsRef}></div>
       <S.HeaderBody>
         <S.Header $view={toggleInput}>

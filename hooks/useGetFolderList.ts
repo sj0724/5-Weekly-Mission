@@ -18,23 +18,28 @@ export interface Folders extends Array<Folder> {}
 
 function useGetFolderList(userId: string, folderId?: string) {
   const [link, setLink] = useState<Folders>([]);
-  const [loading, setLoading] = useState(false);
+  const [linkLoading, setLinkLoading] = useState(false);
 
   useEffect(() => {
-    if (userId) {
-      setLoading(true);
+    if (!userId) {
+      return;
+    }
+    try {
+      setLinkLoading(true);
       const loadFolderList = async () => {
         const links = await getFolder(userId);
         setLink(links.data);
+        setLinkLoading(false);
       };
       loadFolderList();
-      setLoading(false);
+    } catch (error) {
+      console.error();
     }
   }, [userId, folderId]);
 
   return {
     link,
-    loading,
+    linkLoading,
   };
 }
 export default useGetFolderList;
