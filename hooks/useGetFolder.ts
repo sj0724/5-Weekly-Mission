@@ -19,27 +19,15 @@ function useGetFolder(id: string, searchKeyword: string, folderId: string) {
   const [loading, setLoading] = useState(false);
 
   const search = (list: Links) => {
-    let arr: Links = [];
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].title) {
-        if (list[i].title.includes(searchKeyword)) {
-          arr = [...arr, list[i]];
-          continue;
-        }
-      }
-      if (list[i].description) {
-        if (list[i].description.includes(searchKeyword)) {
-          arr = [...arr, list[i]];
-          continue;
-        }
-      }
-      if (list[i].url) {
-        if (list[i].url.includes(searchKeyword)) {
-          arr = [...arr, list[i]];
-        }
-      }
+    if (list) {
+      const searchLinks = list.filter(
+        (link) =>
+          link.url?.includes(searchKeyword) ||
+          link.title?.includes(searchKeyword) ||
+          link.description?.includes(searchKeyword)
+      );
+      setLinkList(searchLinks);
     }
-    return arr;
   };
 
   useEffect(() => {
@@ -51,8 +39,7 @@ function useGetFolder(id: string, searchKeyword: string, folderId: string) {
       const loadFolder = async () => {
         const list = await getFolderList(id, folderId);
         if (searchKeyword) {
-          const searchList = search(list);
-          setLinkList(searchList);
+          search(list);
           setLoading(false);
         } else {
           setLinkList(list);
