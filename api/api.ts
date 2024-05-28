@@ -173,11 +173,7 @@ export async function postFolder(name: string) {
 export async function deleteFolder(folderId: string) {
   try {
     const token = localStorage.getItem('token');
-    const { data } = await axios.delete(`/folders/${folderId}`, {
-      headers: {
-        Authorization: token,
-      },
-    });
+    const { data } = await axios.delete(`/folders/${folderId}`);
     return data;
   } catch (error) {
     console.error('Error fetching post folder:', error);
