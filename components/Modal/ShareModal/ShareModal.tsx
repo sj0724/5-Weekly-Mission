@@ -17,7 +17,7 @@ function ShareModal({
 
   const shareLink = async () => {
     await navigator.clipboard.writeText(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${id}`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}`
     );
     setToast(true);
   };

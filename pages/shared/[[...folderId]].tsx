@@ -21,21 +21,31 @@ function Shared() {
   const [folderName, setFolderName] = useState('');
   const router = useRouter();
   const folderId = router.query.folderId as string;
-  const userId = router.query['userId'] as string;
+  const [userId, setUserId] = useState('');
   const { linkList, loading } = useGetFolder(userId, searchKeyword, folderId);
 
+  const loadOwnerFolderData = async () => {
+    const folder = await getFolderData(folderId);
+    if (folder) {
+      setFolderName(folder[0].name);
+      setUserId(folder[0].user_id);
+    }
+  };
+
+  const loadOwnerData = async () => {
+    const user = await getUserData(userId);
+    if (user) {
+      setOwner(user[0]);
+    }
+  };
+
   useEffect(() => {
-    const loadOwnerData = async () => {
-      const user = await getUserData(userId);
-      if (user) {
-        setOwner(user[0]);
-      }
-      const folderName = await getFolderData(folderId);
-      if (folderName) {
-        setFolderName(folderName[0].name);
-      }
-    };
-    loadOwnerData();
+    if (folderId) {
+      loadOwnerFolderData();
+    }
+    if (userId) {
+      loadOwnerData();
+    }
   }, [folderId, userId]);
 
   return (
