@@ -36,6 +36,7 @@ function AddFolderModal({
           control={control}
           rules={{
             required: '내용을 입력해주세요!',
+            maxLength: { value: 10, message: '10자 이하로 입력해주세요!' },
           }}
           render={({ field, fieldState: { error } }) => (
             <Input
