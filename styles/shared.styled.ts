@@ -17,6 +17,7 @@ export const OwnerName = styled.p`
   font-weight: 400;
   line-height: 2.4rem;
   margin-top: 1.2rem;
+  height: 2.4rem;
 `;
 
 export const FolderName = styled.p`
@@ -29,6 +30,7 @@ export const FolderName = styled.p`
   font-weight: 600;
   line-height: normal;
   margin-top: 2rem;
+  height: 5.5rem;
 `;
 
 export const SharedContent = styled.div`
@@ -69,4 +71,21 @@ export const EmptyFolder = styled.div`
   justify-content: center;
   align-items: center;
   padding: 8rem 0;
+`;
+
+export const SearchResult = styled.div`
+  display: flex;
+  width: 100%;
+  margin-bottom: 4rem;
+  color: var(--Linkbrary-gray60);
+  font-family: Pretendard;
+  font-size: 3.2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.2px;
+
+  p {
+    color: var(--Linkbrary-gray100);
+  }
 `;

@@ -34,7 +34,7 @@ export const Header__contents = styled.div`
   width: 100%;
 
   @media (max-width: 768px) {
-    gap: 1.5rem;
+    gap: 2.4rem;
 
     a {
       width: 100%;
@@ -68,25 +68,25 @@ export const Slogan_gradient = styled.span`
 export const Header__image = styled.div`
   width: 120rem;
   height: 59rem;
-  padding: 5rem 4rem 0;
+  padding: 5rem 4.1rem 0;
   overflow: hidden;
 
   @media (max-width: 1199px) {
-    width: 70rem;
-    height: 34rem;
-    padding: 3rem 2.4rem 0;
+    width: 69.8rem;
+    height: 34.3rem;
+    padding: 2.9rem 2.4rem 0;
   }
 
   @media (max-width: 768px) {
-    height: 16rem;
-    width: 32.5rem;
-    padding: 1.3rem 1rem 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 2 / 1;
   }
 `;
 
 export const HeaderImage = styled.div`
   position: relative;
-  height: 66rem;
+  height: 65.9rem;
   width: 100%;
 
   img {
@@ -99,7 +99,8 @@ export const HeaderImage = styled.div`
   }
 
   @media (max-width: 768px) {
-    height: 18rem;
+    aspect-ratio: 1.7 / 1;
+    height: auto;
   }
 `;
 

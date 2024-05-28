@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useGetFolder from '@/hooks/useGetFolder';
 import ContentsContainer from '@/components/ContentsContainer';
+import Loading from '@/components/Loading/Loading';
 
 function Shared() {
   const [searchKeyword, setSearchKeyWord] = useState('');
@@ -24,22 +25,21 @@ function Shared() {
   const [userId, setUserId] = useState('');
   const { linkList, loading } = useGetFolder(userId, searchKeyword, folderId);
 
-  const loadOwnerFolderData = async () => {
-    const folder = await getFolderData(folderId);
-    if (folder) {
-      setFolderName(folder[0].name);
-      setUserId(folder[0].user_id);
-    }
-  };
-
-  const loadOwnerData = async () => {
-    const user = await getUserData(userId);
-    if (user) {
-      setOwner(user[0]);
-    }
-  };
-
   useEffect(() => {
+    const loadOwnerFolderData = async () => {
+      const folder = await getFolderData(folderId);
+      if (folder) {
+        setFolderName(folder[0].name);
+        setUserId(folder[0].user_id);
+      }
+    };
+
+    const loadOwnerData = async () => {
+      const user = await getUserData(userId);
+      if (user) {
+        setOwner(user[0]);
+      }
+    };
     if (folderId) {
       loadOwnerFolderData();
     }
@@ -50,6 +50,7 @@ function Shared() {
 
   return (
     <>
+      {loading && <Loading />}
       <S.OwnerProfile>
         <Image
           src={owner.image_source}
@@ -62,7 +63,11 @@ function Shared() {
       </S.OwnerProfile>
       <S.SharedContent>
         <SearchBar setSearchKeyWord={setSearchKeyWord} />
-        {searchKeyword && <p>{searchKeyword}로 검색한 결과입니다.</p>}
+        {searchKeyword && (
+          <S.SearchResult>
+            <p>{searchKeyword}</p>로 검색한 결과입니다.
+          </S.SearchResult>
+        )}
         <ContentsContainer content={linkList.length}>
           {linkList.length > 0 ? (
             linkList.map((item) => <Card item={item} key={item.id} />)
