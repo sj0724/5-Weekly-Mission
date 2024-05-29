@@ -1,24 +1,24 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as S from '../styles/index.styled';
 import MainSectionCard from '../components/MainSectionCard/MainSectionCard';
 import { sectionDescription } from '../util/sectionDescription';
 import { Button } from '../components/Button/Button';
 import Link from 'next/link';
-import { UserContext } from '@/contexts/UserContext';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useLoadUser } from '@/contexts/UserContext';
 
 function Main() {
   const [sectionList, setSectionList] = useState<typeof sectionDescription>([]);
-  const id = useContext(UserContext);
   const router = useRouter();
+  const user = useLoadUser();
 
   useEffect(() => {
-    if (id) {
+    if (user.id) {
       router.replace('/folder');
     }
     setSectionList(sectionDescription);
-  }, [id, router]);
+  }, [user.id, router]);
 
   return (
     <S.Main>
@@ -29,7 +29,7 @@ function Main() {
             쉽게 저장하고 관리해 보세요
           </S.Slogan>
           <Link
-            href={id ? '/folder' : '/signin'}
+            href={user ? '/folder' : '/signin'}
             style={{ textDecoration: 'none' }}
           >
             <Button size={'lg'}>링크 추가하기</Button>

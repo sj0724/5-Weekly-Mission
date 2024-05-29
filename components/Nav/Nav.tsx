@@ -4,6 +4,7 @@ import { User } from '../../hooks/useGetUser';
 import Link from 'next/link';
 import { Dispatch, useState } from 'react';
 import Image from 'next/image';
+import { useLoadUser } from '@/contexts/UserContext';
 
 function NavUser({
   user,
@@ -34,8 +35,9 @@ function NavUser({
   );
 }
 
-function Nav({ user }: { user: User }) {
+function Nav() {
   const [toggleNav, setToggleNav] = useState(false);
+  const user = useLoadUser();
 
   return (
     <S.NavBar>

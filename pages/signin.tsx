@@ -1,5 +1,5 @@
 import * as S from '@/styles/signin.styled';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,14 +7,14 @@ import { Button } from '@/components/Button/Button';
 import { postSignIn } from '../api/api';
 import { Controller, useForm } from 'react-hook-form';
 import { emailPattern } from '@/util/util';
-import { UserContext } from '@/contexts/UserContext';
 import { useRouter } from 'next/router';
+import { useLoadUser } from '@/contexts/UserContext';
 
 function SignIn() {
   const [textHidden, setTextHidden] = useState(true);
   const { handleSubmit, control } = useForm();
   const router = useRouter();
-  const id = useContext(UserContext);
+  const user = useLoadUser();
 
   const formAction = async (data: any) => {
     const result = await postSignIn(data.id, data.password);
@@ -28,10 +28,10 @@ function SignIn() {
   };
 
   useEffect(() => {
-    if (id) {
+    if (user.id) {
       router.replace('/folder');
     }
-  }, [id, router]);
+  }, [user.id, router]);
 
   return (
     <>

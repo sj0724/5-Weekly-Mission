@@ -10,7 +10,7 @@ import FolderButtonContainer from '../../components/FolderButtonContainer/Folder
 import { useModal } from '../../contexts/ModalContext';
 import AddModal from '../../components/Modal/AddModal/AddModal';
 import ModalPortal from '../../Portal';
-import { UserContext } from '@/contexts/UserContext';
+import { useLoadUser } from '@/contexts/UserContext';
 import FolderModals from '@/components/FolderModalContainer/FolderModals';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -19,7 +19,7 @@ import DeleteLinkModal from '@/components/Modal/DeleteLinkModal/DeleteLinkModal'
 import Loading from '@/components/Loading/Loading';
 
 function Folder() {
-  const id = useContext(UserContext);
+  const user = useLoadUser();
   const [onSelect, setOnSelect] = useState({
     id: '',
     name: '',
@@ -31,8 +31,8 @@ function Folder() {
   const [linkId, setLinkId] = useState(0);
   const router = useRouter();
   const folderId = router.query.folderId as string;
-  const { linkList, loading } = useGetFolder(id, searchKeyword, folderId);
-  const { link, linkLoading } = useGetFolderList(id, folderId);
+  const { linkList, loading } = useGetFolder(user.id, searchKeyword, folderId);
+  const { link, linkLoading } = useGetFolderList(user.id, folderId);
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);

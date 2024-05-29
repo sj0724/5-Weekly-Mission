@@ -7,14 +7,14 @@ import { Button } from '@/components/Button/Button';
 import { postCheckEmail, postSignUp } from '../api/api';
 import { Controller, useForm } from 'react-hook-form';
 import { emailPattern } from '@/util/util';
-import { UserContext } from '@/contexts/UserContext';
+import { useLoadUser } from '@/contexts/UserContext';
 import { useRouter } from 'next/router';
 
 function SignUp() {
   const { handleSubmit, control, watch } = useForm();
   const [textHidden, setTextHidden] = useState(true);
-  const id = useContext(UserContext);
   const router = useRouter();
+  const user = useLoadUser();
 
   const formAction = async (data: any) => {
     const result = await postCheckEmail(data.id);
@@ -31,10 +31,10 @@ function SignUp() {
   };
 
   useEffect(() => {
-    if (id) {
+    if (user.id) {
       router.replace('/folder');
     }
-  }, [id, router]);
+  }, [user.id, router]);
 
   return (
     <S.SignBody>
