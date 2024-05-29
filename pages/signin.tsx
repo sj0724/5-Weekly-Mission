@@ -1,5 +1,5 @@
 import * as S from '@/styles/signin.styled';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,21 +7,31 @@ import { Button } from '@/components/Button/Button';
 import { postSignIn } from '../api/api';
 import { Controller, useForm } from 'react-hook-form';
 import { emailPattern } from '@/util/util';
+import { UserContext } from '@/contexts/UserContext';
+import { useRouter } from 'next/router';
 
 function SignIn() {
   const [textHidden, setTextHidden] = useState(true);
   const { handleSubmit, control } = useForm();
+  const router = useRouter();
+  const id = useContext(UserContext);
 
   const formAction = async (data: any) => {
     const result = await postSignIn(data.id, data.password);
     if (result) {
-      window.location.href = '/';
+      window.location.href = '/folder';
     }
   };
 
   const hiddenText = () => {
     setTextHidden(!textHidden);
   };
+
+  useEffect(() => {
+    if (id) {
+      router.replace('/folder');
+    }
+  }, [id, router]);
 
   return (
     <>

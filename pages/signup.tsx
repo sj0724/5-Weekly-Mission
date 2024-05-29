@@ -1,5 +1,5 @@
 import * as S from '@/styles/signin.styled';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -7,17 +7,21 @@ import { Button } from '@/components/Button/Button';
 import { postCheckEmail, postSignUp } from '../api/api';
 import { Controller, useForm } from 'react-hook-form';
 import { emailPattern } from '@/util/util';
+import { UserContext } from '@/contexts/UserContext';
+import { useRouter } from 'next/router';
 
 function SignUp() {
   const { handleSubmit, control, watch } = useForm();
   const [textHidden, setTextHidden] = useState(true);
+  const id = useContext(UserContext);
+  const router = useRouter();
 
   const formAction = async (data: any) => {
     const result = await postCheckEmail(data.id);
     if (result) {
       const signUp = await postSignUp(data.id, data.password);
       if (signUp) {
-        window.location.href = '/';
+        window.location.href = '/folder';
       }
     }
   };
@@ -25,6 +29,12 @@ function SignUp() {
   const hiddenText = () => {
     setTextHidden(!textHidden);
   };
+
+  useEffect(() => {
+    if (id) {
+      router.replace('/folder');
+    }
+  }, [id, router]);
 
   return (
     <S.SignBody>

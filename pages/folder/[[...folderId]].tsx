@@ -52,7 +52,7 @@ function Folder() {
   useEffect(() => {
     const access = localStorage.getItem('token');
     if (!access) {
-      router.replace('/');
+      router.replace('/signin');
       return;
     }
     const observer = new IntersectionObserver(handleObserver);

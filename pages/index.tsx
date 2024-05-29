@@ -6,14 +6,19 @@ import { Button } from '../components/Button/Button';
 import Link from 'next/link';
 import { UserContext } from '@/contexts/UserContext';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 function Main() {
   const [sectionList, setSectionList] = useState<typeof sectionDescription>([]);
   const id = useContext(UserContext);
+  const router = useRouter();
 
   useEffect(() => {
+    if (id) {
+      router.replace('/folder');
+    }
     setSectionList(sectionDescription);
-  }, []);
+  }, [id, router]);
 
   return (
     <S.Main>
