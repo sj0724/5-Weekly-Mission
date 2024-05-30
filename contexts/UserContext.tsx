@@ -9,12 +9,14 @@ import {
 } from 'react';
 
 const UserContext = createContext({
-  id: '',
-  created_at: new Date(),
-  name: '',
-  image_source: '',
-  email: '',
-  auth_id: '',
+  user: {
+    id: '',
+    created_at: new Date(),
+    name: '',
+    image_source: '',
+    email: '',
+    auth_id: '',
+  },
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
@@ -38,7 +40,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
+  );
 };
 
 export const useLoadUser = () => {

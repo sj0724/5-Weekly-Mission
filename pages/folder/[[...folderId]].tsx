@@ -19,7 +19,7 @@ import DeleteLinkModal from '@/components/Modal/DeleteLinkModal/DeleteLinkModal'
 import Loading from '@/components/Loading/Loading';
 
 function Folder() {
-  const user = useLoadUser();
+  const { user } = useLoadUser();
   const [onSelect, setOnSelect] = useState({
     id: '',
     name: '',

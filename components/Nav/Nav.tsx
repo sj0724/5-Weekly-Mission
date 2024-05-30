@@ -37,7 +37,7 @@ function NavUser({
 
 function Nav() {
   const [toggleNav, setToggleNav] = useState(false);
-  const user = useLoadUser();
+  const { user } = useLoadUser();
 
   return (
     <S.NavBar>

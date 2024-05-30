@@ -5,18 +5,24 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/Button/Button';
 import { postSignIn } from '../api/api';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { emailPattern } from '@/util/util';
 import { useRouter } from 'next/router';
 import { useLoadUser } from '@/contexts/UserContext';
 
+export interface FormValueType {
+  id: string;
+  password: string;
+  confirmPassword?: string;
+}
+
 function SignIn() {
   const [textHidden, setTextHidden] = useState(true);
-  const { handleSubmit, control } = useForm();
+  const { handleSubmit, control } = useForm<FormValueType>();
   const router = useRouter();
-  const user = useLoadUser();
+  const { user } = useLoadUser();
 
-  const formAction = async (data: any) => {
+  const formAction: SubmitHandler<FormValueType> = async (data) => {
     const result = await postSignIn(data.id, data.password);
     if (result) {
       window.location.href = '/folder';

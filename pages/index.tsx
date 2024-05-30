@@ -11,7 +11,7 @@ import { useLoadUser } from '@/contexts/UserContext';
 function Main() {
   const [sectionList, setSectionList] = useState<typeof sectionDescription>([]);
   const router = useRouter();
-  const user = useLoadUser();
+  const { user } = useLoadUser();
 
   useEffect(() => {
     if (user.id) {
@@ -29,7 +29,7 @@ function Main() {
             쉽게 저장하고 관리해 보세요
           </S.Slogan>
           <Link
-            href={user ? '/folder' : '/signin'}
+            href={user.id ? '/folder' : '/signin'}
             style={{ textDecoration: 'none' }}
           >
             <Button size={'lg'}>링크 추가하기</Button>

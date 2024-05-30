@@ -5,12 +5,13 @@ import {
 } from 'react-hook-form';
 import * as S from './Input.styled';
 import { useEffect, useState } from 'react';
+import { FormValueType } from '@/pages/signin';
 
 export interface InputProps {
   placeholder: string;
   type: string;
   size: 'sm' | 'md' | 'lg';
-  field: ControllerRenderProps<FieldValues, any>;
+  field: ControllerRenderProps<FormValueType, any>;
   error: FieldError | undefined;
 }
 

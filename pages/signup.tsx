@@ -1,22 +1,23 @@
 import * as S from '@/styles/signin.styled';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/Button/Button';
 import { postCheckEmail, postSignUp } from '../api/api';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { emailPattern } from '@/util/util';
 import { useLoadUser } from '@/contexts/UserContext';
 import { useRouter } from 'next/router';
+import { FormValueType } from './signin';
 
 function SignUp() {
-  const { handleSubmit, control, watch } = useForm();
+  const { handleSubmit, control, watch } = useForm<FormValueType>();
   const [textHidden, setTextHidden] = useState(true);
   const router = useRouter();
-  const user = useLoadUser();
+  const { user } = useLoadUser();
 
-  const formAction = async (data: any) => {
+  const formAction: SubmitHandler<FormValueType> = async (data) => {
     const result = await postCheckEmail(data.id);
     if (result) {
       const signUp = await postSignUp(data.id, data.password);
