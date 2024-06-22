@@ -159,6 +159,7 @@ export const SignForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  gap: 1rem;
 
   @media (max-width: 768px) {
     width: 100%;

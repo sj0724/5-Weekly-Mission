@@ -1,13 +1,17 @@
 import { FieldError } from 'react-hook-form';
-import * as S from './Input.styled';
+import * as S from './AuthInput.styled';
 import { useEffect, useState } from 'react';
 
 export interface FormValueTypes {
-  edit?: string;
+  id?: string;
+  password?: string;
+  confirmPassword?: string;
   folder?: string;
 }
 
 export interface InputProps {
+  id: string;
+  label: string;
   placeholder: string;
   type: string;
   size: 'sm' | 'md' | 'lg';
@@ -17,7 +21,9 @@ export interface InputProps {
   onBlur?: () => void;
 }
 
-function Input({
+function AuthInput({
+  id,
+  label,
   placeholder,
   type,
   size,
@@ -38,7 +44,9 @@ function Input({
 
   return (
     <S.InputModal size={size} $error={errorMessage}>
+      <label htmlFor={id}>{label}</label>
       <input
+        id={id}
         type={type}
         placeholder={placeholder}
         onChange={onChange}
@@ -52,4 +60,4 @@ function Input({
   );
 }
 
-export default Input;
+export default AuthInput;

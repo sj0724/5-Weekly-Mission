@@ -1,23 +1,24 @@
 import * as S from '@/styles/signin.styled';
 import { useEffect, useState } from 'react';
-import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/Button/Button';
 import { postCheckEmail, postSignUp } from '../api/api';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { emailPattern } from '@/util/util';
 import { useLoadUser } from '@/contexts/UserContext';
 import { useRouter } from 'next/router';
 import { FormValueType } from './signin';
+import AuthInput from '@/components/Input/AuthInput';
 
 function SignUp() {
   const { handleSubmit, control, watch } = useForm<FormValueType>();
-  const [textHidden, setTextHidden] = useState(true);
+  const [passwordHidden, setPasswordHidden] = useState(true);
+  const [passwordConfirmHidden, setPasswordConfirmHidden] = useState(true);
   const router = useRouter();
   const { user } = useLoadUser();
 
-  const formAction: SubmitHandler<FormValueType> = async (data) => {
+  const formAction = async (data: FormValueType) => {
     const result = await postCheckEmail(data.id);
     if (result) {
       const signUp = await postSignUp(data.id, data.password);
@@ -25,10 +26,6 @@ function SignUp() {
         window.location.href = '/folder';
       }
     }
-  };
-
-  const hiddenText = () => {
-    setTextHidden(!textHidden);
   };
 
   useEffect(() => {
@@ -54,7 +51,6 @@ function SignUp() {
           </S.FormLogo>
           <S.SignForm onSubmit={handleSubmit(formAction)}>
             <S.InputModal>
-              <label htmlFor="email">이메일</label>
               <Controller
                 name="id"
                 control={control}
@@ -65,19 +61,25 @@ function SignUp() {
                     message: '이메일 형식이 아닙니다!',
                   },
                 }}
-                render={({ field, fieldState: { error } }) => (
-                  <Input
-                    field={field}
+                render={({
+                  field: { value, onChange, onBlur },
+                  fieldState: { error },
+                }) => (
+                  <AuthInput
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
                     type="text"
                     placeholder="이메일"
                     size="md"
                     error={error}
+                    id="email"
+                    label="이메일"
                   />
                 )}
               />
             </S.InputModal>
             <S.InputModal>
-              <label htmlFor="password">비밀번호</label>
               <Controller
                 name="password"
                 control={control}
@@ -86,20 +88,29 @@ function SignUp() {
                   minLength: { value: 8, message: '최소 8자를 입력해주세요!' },
                   deps: ['confirmPassword'],
                 }}
-                render={({ field, fieldState: { error } }) => (
-                  <Input
-                    field={field}
-                    type={textHidden ? 'password' : 'text'}
+                render={({
+                  field: { value, onChange, onBlur },
+                  fieldState: { error },
+                }) => (
+                  <AuthInput
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    type={passwordHidden ? 'password' : 'text'}
                     placeholder="비밀번호"
                     size="md"
                     error={error}
+                    id="password"
+                    label="비밀번호"
                   />
                 )}
               />
-              <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
+              <S.TextHiddenButton
+                $hidden={passwordHidden}
+                onClick={() => setPasswordHidden(!passwordHidden)}
+              />
             </S.InputModal>
             <S.InputModal>
-              <label htmlFor="password">비밀번호 확인</label>
               <Controller
                 name="confirmPassword"
                 control={control}
@@ -111,17 +122,27 @@ function SignUp() {
                       : '비밀번호가 일치하지 않습니다!';
                   },
                 }}
-                render={({ field, fieldState: { error } }) => (
-                  <Input
-                    field={field}
-                    type={textHidden ? 'password' : 'text'}
+                render={({
+                  field: { value, onChange, onBlur },
+                  fieldState: { error },
+                }) => (
+                  <AuthInput
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    type={passwordConfirmHidden ? 'password' : 'text'}
                     placeholder="비밀번호"
                     size="md"
                     error={error}
+                    id="passwordConfirm"
+                    label="비밀번호확인"
                   />
                 )}
               />
-              <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
+              <S.TextHiddenButton
+                $hidden={passwordConfirmHidden}
+                onClick={() => setPasswordConfirmHidden(!passwordConfirmHidden)}
+              />
             </S.InputModal>
             <Button size={'lg'} type="submit">
               회원가입
