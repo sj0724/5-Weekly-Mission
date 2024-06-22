@@ -1,14 +1,14 @@
 import * as S from '@/styles/signin.styled';
 import { useEffect, useState } from 'react';
-import Input from '@/components/Input/Input';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/Button/Button';
 import { postSignIn } from '../api/api';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { emailPattern } from '@/util/util';
 import { useRouter } from 'next/router';
 import { useLoadUser } from '@/contexts/UserContext';
+import AuthInput from '@/components/Input/AuthInput';
 
 export interface FormValueType {
   id: string;
@@ -22,7 +22,7 @@ function SignIn() {
   const router = useRouter();
   const { user } = useLoadUser();
 
-  const formAction: SubmitHandler<FormValueType> = async (data) => {
+  const formAction = async (data: FormValueType) => {
     const result = await postSignIn(data.id, data.password);
     if (result) {
       window.location.href = '/folder';
@@ -57,7 +57,6 @@ function SignIn() {
             </S.FormLogo>
             <S.SignForm onSubmit={handleSubmit(formAction)}>
               <S.InputModal>
-                <label htmlFor="email">이메일</label>
                 <Controller
                   name="id"
                   control={control}
@@ -68,9 +67,16 @@ function SignIn() {
                       message: '이메일 형식이 아닙니다!',
                     },
                   }}
-                  render={({ field, fieldState: { error } }) => (
-                    <Input
-                      field={field}
+                  render={({
+                    field: { value, onChange, onBlur },
+                    fieldState: { error },
+                  }) => (
+                    <AuthInput
+                      id="email"
+                      label="이메일"
+                      value={value}
+                      onChange={onChange}
+                      onBlur={onBlur}
                       type="text"
                       placeholder="이메일"
                       size="md"
@@ -80,16 +86,22 @@ function SignIn() {
                 />
               </S.InputModal>
               <S.InputModal>
-                <label htmlFor="password">비밀번호</label>
                 <Controller
                   name="password"
                   control={control}
                   rules={{
                     required: '비밀번호를 입력해주세요!',
                   }}
-                  render={({ field, fieldState: { error } }) => (
-                    <Input
-                      field={field}
+                  render={({
+                    field: { value, onChange, onBlur },
+                    fieldState: { error },
+                  }) => (
+                    <AuthInput
+                      id="password"
+                      label="비밀번호"
+                      value={value}
+                      onChange={onChange}
+                      onBlur={onBlur}
                       type={textHidden ? 'password' : 'text'}
                       placeholder="비밀번호"
                       size="md"
