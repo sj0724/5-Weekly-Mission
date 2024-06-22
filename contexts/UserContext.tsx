@@ -8,7 +8,7 @@ import {
   useState,
 } from 'react';
 
-const UserContext = createContext({
+export const UserContext = createContext({
   user: {
     id: '',
     created_at: new Date(),

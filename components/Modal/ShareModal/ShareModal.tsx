@@ -12,7 +12,7 @@ function ShareModal({
   folderName: string;
   folderId: string;
 }) {
-  const id = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [toast, setToast] = useState(false);
 
   const shareLink = async () => {
@@ -31,14 +31,14 @@ function ShareModal({
         description: '나만의 폴더를 만들고 링크를 저장해보세요!',
         imageUrl: '',
         link: {
-          mobileWebUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${id}`,
+          mobileWebUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${user.id}`,
         },
       },
       buttons: [
         {
           title: '링크 추가하러 가기',
           link: {
-            mobileWebUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${id}`,
+            mobileWebUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${user.id}`,
           },
         },
       ],
@@ -48,7 +48,7 @@ function ShareModal({
   const shareFacebook = () => {
     const title = '페이스북 공유하기';
     window.open(
-      `https://www.facebook.com/sharer.php?u=${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${id}`,
+      `https://www.facebook.com/sharer.php?u=${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${user.id}`,
       title,
       'toolbar=0,status=0,width=655,height=520'
     );

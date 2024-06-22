@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import * as S from '../../styles/folder.styled';
 import SearchBar from '../../components/SearchBar/SearchBar';
