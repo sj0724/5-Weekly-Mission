@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import * as S from './FolderButtonContainer.styled';
 import FolderButton from '../FolderButton/FolderButton';
 import { useModal } from '../../contexts/ModalContext';
@@ -62,7 +62,7 @@ function FolderButtonContainer({
       </S.AddFolderButton>
       {modalState.addFolder && (
         <ModalPortal>
-          <AddFolderModal setOnSelect={setOnSelect} />
+          <AddFolderModal />
         </ModalPortal>
       )}
     </S.FolderMenu>

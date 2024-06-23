@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import * as S from '../../styles/folder.styled';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -31,8 +30,8 @@ function Folder() {
   const [linkId, setLinkId] = useState(0);
   const router = useRouter();
   const folderId = router.query.folderId as string;
-  const { linkList, loading } = useGetFolder(user.id, searchKeyword, folderId);
-  const { link, linkLoading } = useGetFolderList(user.id, folderId);
+  const { linkList, loading } = useGetFolder(user?.id, searchKeyword, folderId);
+  const { link, linkLoading } = useGetFolderList(user?.id, folderId);
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -123,7 +122,7 @@ function Folder() {
               )}
             </S.FolderModalContainer>
             <ContentsContainer content={linkList.length}>
-              {linkList.length > 0 ? (
+              {linkList ? (
                 linkList.map((item) => (
                   <Card
                     item={item}

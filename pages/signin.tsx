@@ -34,10 +34,10 @@ function SignIn() {
   };
 
   useEffect(() => {
-    if (user.id) {
+    if (user) {
       router.replace('/folder');
     }
-  }, [user.id, router]);
+  }, [user, router]);
 
   return (
     <>

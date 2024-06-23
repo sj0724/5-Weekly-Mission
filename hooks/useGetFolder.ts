@@ -37,7 +37,7 @@ function useGetFolder(id: string, searchKeyword: string, folderId: string) {
     try {
       setLoading(true);
       const loadFolder = async () => {
-        const list = await getFolderList(id, folderId);
+        const list = await getFolderList({ id, folderId });
         if (searchKeyword) {
           search(list);
           setLoading(false);

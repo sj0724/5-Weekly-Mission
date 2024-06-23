@@ -1,8 +1,8 @@
-import INSTANCE from '../instance/instance';
+import axios from '../instance/instance';
 
 export async function getSampleUser() {
   try {
-    const { data } = await INSTANCE.get('/sample/user');
+    const { data } = await axios.get('/sample/user');
     return data;
   } catch (error) {
     console.error('Error fetching sample user:', error);
@@ -19,7 +19,7 @@ interface Link {
 
 export async function getSampleFolder() {
   try {
-    const { data } = await INSTANCE.get('/sample/folder');
+    const { data } = await axios.get('/sample/folder');
     if (data && data.folder && data.folder.links) {
       data.folder.links.forEach((link: Link) => {
         if (link.imageSource) {
@@ -41,7 +41,7 @@ export async function getSampleFolder() {
 
 export async function getFolder(id: string) {
   try {
-    const { data } = await INSTANCE.get(`/users/${id}/folders`);
+    const { data } = await axios.get(`/users/${id}/folders`);
     return data;
   } catch (error) {
     console.error('Error fetching folder:', error);
@@ -51,7 +51,7 @@ export async function getFolder(id: string) {
 
 export async function getFolderData(folderId: string) {
   try {
-    const { data } = await INSTANCE.get(`/folders/${folderId}`);
+    const { data } = await axios.get(`/folders/${folderId}`);
     return data.data;
   } catch (error) {
     console.error('Error fetching folder:', error);
@@ -59,45 +59,31 @@ export async function getFolderData(folderId: string) {
   }
 }
 
-export async function getFolderList(id: string, folderId: string) {
+export async function getFolderList({
+  id,
+  folderId,
+}: {
+  id: string;
+  folderId: string;
+}) {
+  let query;
   if (folderId) {
-    try {
-      const query = `/${id}/links?folderId=${folderId}`;
-      const { data } = await INSTANCE.get(`/users${query}`);
-      return data.data;
-    } catch (error) {
-      console.error('Error fetching folderList:', error);
-      throw error;
-    }
-  } else if (!folderId) {
-    try {
-      const query = `/${id}/links`;
-      const { data } = await INSTANCE.get(`/users${query}`);
-      return data.data;
-    } catch (error) {
-      console.error('Error fetching folderList:', error);
-      throw error;
-    }
+    query = `/${id}/links?folderId=${folderId}`;
+  } else {
+    query = `/${id}/links`;
   }
+  const { data } = await axios.get(`/users${query}`);
+  return data.data;
 }
 
-export async function getUser(accessToken: string) {
-  try {
-    const { data } = await INSTANCE.get('/users', {
-      headers: {
-        Authorization: accessToken,
-      },
-    });
-    return data.data;
-  } catch (error) {
-    console.error('Error fetching user:', error);
-    throw error;
-  }
+export async function getUser() {
+  const { data } = await axios.get('/users');
+  return data.data;
 }
 
 export async function getUserData(id: string) {
   try {
-    const { data } = await INSTANCE.get(`/users/${id}`);
+    const { data } = await axios.get(`/users/${id}`);
     return data.data;
   } catch (error) {
     console.error('Error fetching user:', error);
@@ -107,7 +93,7 @@ export async function getUserData(id: string) {
 
 export async function postSignIn(id: string, password: string) {
   try {
-    const { data } = await INSTANCE.post('/sign-in', {
+    const { data } = await axios.post('/sign-in', {
       email: id,
       password: password,
     });
@@ -121,7 +107,7 @@ export async function postSignIn(id: string, password: string) {
 
 export async function postCheckEmail(email: string) {
   try {
-    const { data } = await INSTANCE.post('/check-email', {
+    const { data } = await axios.post('/check-email', {
       email: email,
     });
     return data;
@@ -133,7 +119,7 @@ export async function postCheckEmail(email: string) {
 
 export async function postSignUp(id: string, password: string) {
   try {
-    const { data } = await INSTANCE.post('/sign-up', {
+    const { data } = await axios.post('/sign-up', {
       email: id,
       password: password,
     });
@@ -148,7 +134,7 @@ export async function postSignUp(id: string, password: string) {
 
 export async function postFolder(name: string) {
   try {
-    const { data } = await INSTANCE.post('/folders', {
+    const { data } = await axios.post('/folders', {
       name: name,
     });
     return data.data;
@@ -159,8 +145,7 @@ export async function postFolder(name: string) {
 
 export async function deleteFolder(folderId: string) {
   try {
-    const token = localStorage.getItem('token');
-    const { data } = await INSTANCE.delete(`/folders/${folderId}`);
+    const { data } = await axios.delete(`/folders/${folderId}`);
     return data;
   } catch (error) {
     console.error('Error fetching post folder:', error);
@@ -169,7 +154,7 @@ export async function deleteFolder(folderId: string) {
 
 export async function postLink(folderId: string, url: string) {
   try {
-    const { data } = await INSTANCE.post('/links', {
+    const { data } = await axios.post('/links', {
       url: url,
       folderId: folderId,
     });
@@ -182,7 +167,7 @@ export async function postLink(folderId: string, url: string) {
 
 export async function deleteLink(linkId: number) {
   try {
-    const { data } = await INSTANCE.delete(`/links/${linkId}`);
+    const { data } = await axios.delete(`/links/${linkId}`);
     return data;
   } catch (error) {
     console.error('Error fetching post folder:', error);
@@ -191,7 +176,7 @@ export async function deleteLink(linkId: number) {
 
 export async function putFolder(folderId: string, name: string) {
   try {
-    const { data } = await INSTANCE.put(`/folders/${folderId}`, {
+    const { data } = await axios.put(`/folders/${folderId}`, {
       name: name,
     });
     return data;

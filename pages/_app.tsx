@@ -3,6 +3,8 @@ import Nav from '@/components/Nav/Nav';
 import { ModalProvider } from '@/contexts/ModalContext';
 import { UserProvider } from '@/contexts/UserContext';
 import '@/styles/globals.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
@@ -12,6 +14,8 @@ declare global {
     Kakao: any;
   }
 }
+
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -23,12 +27,15 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Linkbrary</title>
       </Head>
-      <UserProvider>
-        <Nav />
-        <ModalProvider>
-          <Component {...pageProps} />
-        </ModalProvider>
-      </UserProvider>
+      <QueryClientProvider client={queryClient}>
+        <UserProvider>
+          <Nav />
+          <ModalProvider>
+            <Component {...pageProps} />
+          </ModalProvider>
+        </UserProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
       <Footer />
     </>
   );

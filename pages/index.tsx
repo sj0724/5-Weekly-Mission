@@ -14,11 +14,11 @@ function Main() {
   const { user } = useLoadUser();
 
   useEffect(() => {
-    if (user.id) {
+    if (user) {
       router.replace('/folder');
     }
     setSectionList(sectionDescription);
-  }, [user.id, router]);
+  }, [user, router]);
 
   return (
     <S.Main>
@@ -29,7 +29,7 @@ function Main() {
             쉽게 저장하고 관리해 보세요
           </S.Slogan>
           <Link
-            href={user.id ? '/folder' : '/signin'}
+            href={user ? '/folder' : '/signin'}
             style={{ textDecoration: 'none' }}
           >
             <Button size={'lg'}>링크 추가하기</Button>
