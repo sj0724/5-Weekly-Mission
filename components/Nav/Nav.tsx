@@ -51,7 +51,7 @@ function Nav() {
           />
         </Link>
         <S.UserProfile>
-          {user.id ? (
+          {user ? (
             <NavUser user={user} toggle={toggleNav} setToggle={setToggleNav} />
           ) : (
             <Link href="/signin" style={{ textDecoration: 'none' }}>

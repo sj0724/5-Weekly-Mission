@@ -3,7 +3,7 @@ import * as S from './ShareModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import Image from 'next/image';
 import Toast from '@/components/Toast/Toast';
-import { UserContext } from '@/contexts/UserContext';
+import { useLoadUser } from '@/contexts/UserContext';
 
 function ShareModal({
   folderName,
@@ -12,7 +12,7 @@ function ShareModal({
   folderName: string;
   folderId: string;
 }) {
-  const { user } = useContext(UserContext);
+  const { user } = useLoadUser();
   const [toast, setToast] = useState(false);
 
   const shareLink = async () => {

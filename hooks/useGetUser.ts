@@ -10,17 +10,17 @@ export interface User {
   auth_id: string;
 }
 
-function useGetUser(accessToken: string) {
+function useGetUser() {
   const [user, setUser] = useState();
 
   useEffect(() => {
     const loadUser = async () => {
-      const response = await getUser(accessToken);
+      const response = await getUser();
       setUser(response[0]);
     };
 
     loadUser();
-  }, [accessToken]);
+  }, []);
 
   return { user };
 }
