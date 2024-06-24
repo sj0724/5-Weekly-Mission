@@ -6,25 +6,23 @@ import { LinkData } from '../../hooks/useGetFolder';
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '@/public/logo.svg';
+import { useRouter } from 'next/router';
 
 function Card({
   item,
   setUrl,
-  onSelect,
   setLinkId,
 }: {
   item: LinkData;
   setUrl?: Dispatch<SetStateAction<string>>;
-  onSelect?: {
-    id: string;
-    name: string;
-  };
   setLinkId?: Dispatch<SetStateAction<number>>;
 }) {
   const [createdAt, setCreatedAt] = useState({ time: 0, result: '' });
   const [fullDate, setFullDate] = useState('');
   const [kebabView, setKebabView] = useState(false);
   const [like, setLike] = useState(false);
+  const router = useRouter();
+  const folderId = router.query.folderId as string;
   const { url, description, id, image_source, title } = item;
   const [imageUrl, setImageUrl] = useState(image_source);
 
@@ -79,7 +77,7 @@ function Card({
             )}
           </S.ImageArea>
           <S.ItemInfo>
-            {onSelect && onSelect.name && (
+            {folderId && (
               <S.KebabIcon
                 src="/kebab.svg"
                 alt="kebabIcon"

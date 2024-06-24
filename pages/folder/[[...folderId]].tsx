@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import * as S from '../../styles/folder.styled';
-import SearchBar from '../../components/SearchBar/SearchBar';
 import ContentsContainer from '../../components/ContentsContainer';
 import Card from '../../components/Card/Card';
 import useGetFolder from '../../hooks/useGetFolder';
@@ -16,6 +15,7 @@ import Image from 'next/image';
 import NotFound from '@/components/NotFound/NotFound';
 import DeleteLinkModal from '@/components/Modal/DeleteLinkModal/DeleteLinkModal';
 import Loading from '@/components/Loading/Loading';
+import SearchContent from '@/components/SearchBar/SearchContent';
 
 function Folder() {
   const { user } = useLoadUser();
@@ -52,8 +52,10 @@ function Folder() {
     const access = localStorage.getItem('token');
     if (!access) {
       router.replace('/signin');
-      return;
     }
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(handleObserver);
     if (!loading && obsRef.current) {
       observer.observe(obsRef.current);
@@ -100,13 +102,11 @@ function Folder() {
         </S.Header>
       </S.HeaderBody>
       <S.FolderContents>
-        <SearchBar setSearchKeyWord={setSearchKeyWord} />
-        {searchKeyword && (
-          <S.SearchResult>
-            <p>{searchKeyword}</p>로 검색한 결과입니다.
-          </S.SearchResult>
-        )}
-        <FolderButtonContainer link={link} setOnSelect={setOnSelect} />
+        <SearchContent
+          searchKeyword={searchKeyword}
+          setSearchKeyWord={setSearchKeyWord}
+        />
+        <FolderButtonContainer link={link} />
         {folderId && wrongFolder ? (
           <NotFound />
         ) : (
@@ -114,11 +114,7 @@ function Folder() {
             <S.FolderModalContainer>
               <p>{folderId ? onSelect.name : '전체'}</p>
               {folderId && (
-                <FolderModals
-                  id={onSelect.id}
-                  name={onSelect.name}
-                  setOnSelect={setOnSelect}
-                />
+                <FolderModals id={onSelect.id} name={onSelect.name} />
               )}
             </S.FolderModalContainer>
             <ContentsContainer content={linkList.length}>
@@ -128,7 +124,6 @@ function Folder() {
                     item={item}
                     key={item.id}
                     setUrl={setUrl}
-                    onSelect={onSelect}
                     setLinkId={setLinkId}
                   />
                 ))

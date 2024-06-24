@@ -7,16 +7,9 @@ import { useModal } from '@/contexts/ModalContext';
 function DeleteModal({
   folderName,
   folderId,
-  setOnSelect,
 }: {
   folderName: string;
   folderId: string;
-  setOnSelect: Dispatch<
-    SetStateAction<{
-      id: string;
-      name: string;
-    }>
-  >;
 }) {
   const { closeModal } = useModal();
 
