@@ -1,10 +1,9 @@
 import { Button } from '../Button/Button';
 import * as S from './Nav.styled';
-import { User } from '../../hooks/useGetUser';
 import Link from 'next/link';
 import { Dispatch, useState } from 'react';
 import Image from 'next/image';
-import { useLoadUser } from '@/contexts/UserContext';
+import { User, useLoadUser } from '@/contexts/UserContext';
 
 function NavUser({
   user,

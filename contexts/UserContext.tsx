@@ -2,6 +2,15 @@ import { getUser } from '@/api/api';
 import { useQuery } from '@tanstack/react-query';
 import { ReactNode, createContext, useContext } from 'react';
 
+export interface User {
+  id: string;
+  created_at: Date;
+  name: string;
+  image_source: string;
+  email: string;
+  auth_id: string;
+}
+
 export const UserContext = createContext({
   id: '',
   created_at: new Date(),

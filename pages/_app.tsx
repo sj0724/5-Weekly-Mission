@@ -34,7 +34,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </ModalProvider>
         </UserProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
+        <div style={{ fontSize: '16px' }}>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </div>
       </QueryClientProvider>
       <Footer />
     </>
