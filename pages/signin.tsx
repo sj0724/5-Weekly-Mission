@@ -9,6 +9,9 @@ import { emailPattern } from '@/util/util';
 import { useRouter } from 'next/router';
 import { useLoadUser } from '@/contexts/UserContext';
 import AuthInput from '@/components/Input/AuthInput';
+import { useMutation } from '@tanstack/react-query';
+import Toast from '@/components/Toast/Toast';
+import Loading from '@/components/Loading/Loading';
 
 export interface FormValueType {
   id: string;
@@ -18,15 +21,25 @@ export interface FormValueType {
 
 function SignIn() {
   const [textHidden, setTextHidden] = useState(true);
-  const { handleSubmit, control } = useForm<FormValueType>();
+  const { handleSubmit, control, setError } = useForm<FormValueType>();
+  const [toast, setToast] = useState(false);
   const router = useRouter();
   const { user } = useLoadUser();
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: (user: { id: string; password: string }) =>
+      postSignIn(user.id, user.password),
+    onSuccess: () => (window.location.href = '/folder'),
+    onError: () => {
+      setToast(true);
+      setError('id', { type: 'manual', message: '다시 입력해주세요!' });
+      setError('password', { type: 'manual', message: '다시 입력해주세요!' });
+    },
+  });
+
   const formAction = async (data: FormValueType) => {
-    const result = await postSignIn(data.id, data.password);
-    if (result) {
-      window.location.href = '/folder';
-    }
+    const userInfo = { id: data.id, password: data.password };
+    mutate(userInfo);
   };
 
   const hiddenText = () => {
@@ -41,6 +54,7 @@ function SignIn() {
 
   return (
     <>
+      {isPending && <Loading />}
       <S.SignBody>
         <S.SignContent>
           <S.SignFormBody>
@@ -137,6 +151,12 @@ function SignIn() {
               </S.Kakao>
             </S.SnsIcons>
           </S.SnsLogin>
+          {toast && (
+            <Toast
+              setToast={setToast}
+              text="로그인에 실패했습니다. 다시 시도해주세요."
+            />
+          )}
         </S.SignContent>
       </S.SignBody>
     </>

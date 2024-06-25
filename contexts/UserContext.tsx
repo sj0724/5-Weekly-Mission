@@ -27,7 +27,7 @@ export const UserContext = createContext({
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [isLogin, setIsLogin] = useState('');
+  const [isLogin, setIsLogin] = useState(false);
 
   const { data: user } = useQuery({
     queryKey: ['user'],
@@ -37,9 +37,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    const status = localStorage.getItem('token');
-    if (status) {
-      setIsLogin(status);
+    if (localStorage.getItem('token')) {
+      setIsLogin(!isLogin);
     }
   }, []);
 
