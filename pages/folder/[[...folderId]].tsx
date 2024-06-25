@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as S from '../../styles/folder.styled';
 import ContentsContainer from '../../components/ContentsContainer';
 import Card from '../../components/Card/Card';
-import useGetFolder from '../../hooks/useGetFolder';
+import useGetFolder, { LinkData } from '../../hooks/useGetFolder';
 import useGetFolderList from '../../hooks/useGetFolderList';
 import FolderButtonContainer from '../../components/FolderButtonContainer/FolderButtonContainer';
 import { useModal } from '../../contexts/ModalContext';
@@ -16,6 +16,7 @@ import NotFound from '@/components/NotFound/NotFound';
 import DeleteLinkModal from '@/components/Modal/DeleteLinkModal/DeleteLinkModal';
 import Loading from '@/components/Loading/Loading';
 import SearchContent from '@/components/SearchBar/SearchContent';
+import useDebounce from '@/hooks/useDebounce';
 
 function Folder() {
   const { user } = useLoadUser();
@@ -29,9 +30,17 @@ function Folder() {
   const [wrongFolder, setWrongFolder] = useState(false);
   const [linkId, setLinkId] = useState(0);
   const router = useRouter();
+  const { deBounceValue } = useDebounce(searchKeyword, 500);
   const folderId = router.query.folderId as string;
-  const { linkList, loading } = useGetFolder(user?.id, searchKeyword, folderId);
-  const { link, linkLoading } = useGetFolderList(user?.id, folderId);
+  const { linkList, isPending: linkLoading } = useGetFolder(
+    user?.id,
+    deBounceValue,
+    folderId
+  );
+  const { folderList, isPending: folderLoading } = useGetFolderList(
+    user?.id,
+    folderId
+  );
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -57,28 +66,28 @@ function Folder() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver);
-    if (!loading && obsRef.current) {
+    if (!linkLoading && obsRef.current) {
       observer.observe(obsRef.current);
     }
     return () => {
       observer.disconnect();
     };
-  }, [loading, folderId, router]);
+  }, [linkLoading, folderId]);
 
   useEffect(() => {
-    for (let i = 0; i < link.length; i++) {
+    for (let i = 0; i < folderList.length; i++) {
       setWrongFolder(true);
-      if (link[i].id == folderId) {
-        setOnSelect({ id: folderId, name: link[i].name });
+      if (folderList[i].id == folderId) {
+        setOnSelect({ id: folderId, name: folderList[i].name });
         setWrongFolder(false);
         break;
       }
     }
-  }, [link, folderId]);
+  }, [folderList, folderId]);
 
   return (
     <>
-      {linkLoading || loading ? <Loading /> : null}
+      {(folderLoading || linkLoading) && <Loading />}
       <div ref={obsRef}></div>
       <S.HeaderBody>
         <S.Header $view={toggleInput}>
@@ -106,7 +115,7 @@ function Folder() {
           searchKeyword={searchKeyword}
           setSearchKeyWord={setSearchKeyWord}
         />
-        <FolderButtonContainer link={link} />
+        <FolderButtonContainer link={folderList} />
         {folderId && wrongFolder ? (
           <NotFound />
         ) : (
@@ -118,8 +127,8 @@ function Folder() {
               )}
             </S.FolderModalContainer>
             <ContentsContainer content={linkList.length}>
-              {linkList ? (
-                linkList.map((item) => (
+              {linkList.length > 0 ? (
+                linkList.map((item: LinkData) => (
                   <Card
                     item={item}
                     key={item.id}
@@ -135,7 +144,7 @@ function Folder() {
         )}
         {modalState.add && inputRef.current && (
           <ModalPortal>
-            <AddModal link={link} url={url} />
+            <AddModal link={folderList} url={url} />
           </ModalPortal>
         )}
         {modalState.deleteLink && (

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getFolder } from '../api/api';
+import { useQuery } from '@tanstack/react-query';
 
 type Like = {
   count: number;
@@ -17,29 +18,18 @@ export interface Folder {
 export interface Folders extends Array<Folder> {}
 
 function useGetFolderList(userId: string, folderId?: string) {
-  const [link, setLink] = useState<Folders>([]);
-  const [linkLoading, setLinkLoading] = useState(false);
+  const { data: list, isPending } = useQuery({
+    queryKey: ['folder'],
+    queryFn: () => getFolder(userId),
+    enabled: !!userId,
+    staleTime: 60 * 1000 * 10,
+  });
 
-  useEffect(() => {
-    if (!userId) {
-      return;
-    }
-    try {
-      setLinkLoading(true);
-      const loadFolderList = async () => {
-        const links = await getFolder(userId);
-        setLink(links.data);
-        setLinkLoading(false);
-      };
-      loadFolderList();
-    } catch (error) {
-      console.error();
-    }
-  }, [userId, folderId]);
+  const folderList = list?.data ?? [];
 
   return {
-    link,
-    linkLoading,
+    folderList,
+    isPending,
   };
 }
 export default useGetFolderList;

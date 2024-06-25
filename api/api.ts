@@ -1,15 +1,5 @@
 import axios from '../instance/instance';
 
-export async function getSampleUser() {
-  try {
-    const { data } = await axios.get('/sample/user');
-    return data;
-  } catch (error) {
-    console.error('Error fetching sample user:', error);
-    throw error;
-  }
-}
-
 interface Link {
   imageSource?: string;
   image_source: string;
@@ -59,13 +49,7 @@ export async function getFolderData(folderId: string) {
   }
 }
 
-export async function getFolderList({
-  id,
-  folderId,
-}: {
-  id: string;
-  folderId: string;
-}) {
+export async function getFolderList(id: string, folderId: string) {
   let query;
   if (folderId) {
     query = `/${id}/links?folderId=${folderId}`;
@@ -91,19 +75,14 @@ export async function getUserData(id: string) {
   }
 }
 
-export async function postSignIn(id: string, password: string) {
-  try {
-    const { data } = await axios.post('/sign-in', {
-      email: id,
-      password: password,
-    });
-    localStorage.setItem('token', data.data.accessToken);
-    return data;
-  } catch (error) {
-    console.error('Error fetching sign-in:', error);
-    alert('로그인할 수 없습니다! 아이디와 비밀번호를 확인해주세요!');
-  }
-}
+export const postSignIn = async (id: string, password: string) => {
+  const { data } = await axios.post('/sign-in', {
+    email: id,
+    password: password,
+  });
+  localStorage.setItem('token', data.data.accessToken);
+  return data;
+};
 
 export async function postCheckEmail(email: string) {
   try {

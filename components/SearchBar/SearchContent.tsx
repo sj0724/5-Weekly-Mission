@@ -12,7 +12,10 @@ function SearchContent({
 }: SearchContentProps) {
   return (
     <>
-      <SearchModal setSearchKeyWord={setSearchKeyWord} />
+      <SearchModal
+        setSearchKeyWord={setSearchKeyWord}
+        searchKeyword={searchKeyword}
+      />
       {searchKeyword && (
         <S.SearchResult>
           <p>{searchKeyword}</p>로 검색한 결과입니다.
