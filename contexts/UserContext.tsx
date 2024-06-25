@@ -24,6 +24,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const { data: user } = useQuery({
     queryKey: ['user'],
     queryFn: () => getUser(),
+    staleTime: 60 * 1000 * 60,
   });
 
   return (

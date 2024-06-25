@@ -31,7 +31,7 @@ function Folder() {
   const router = useRouter();
   const folderId = router.query.folderId as string;
   const { linkList, loading } = useGetFolder(user?.id, searchKeyword, folderId);
-  const { link, linkLoading } = useGetFolderList(user?.id, folderId);
+  const { folderList, isPending } = useGetFolderList(user?.id, folderId);
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -66,19 +66,19 @@ function Folder() {
   }, [loading, folderId, router]);
 
   useEffect(() => {
-    for (let i = 0; i < link.length; i++) {
+    for (let i = 0; i < folderList.length; i++) {
       setWrongFolder(true);
-      if (link[i].id == folderId) {
-        setOnSelect({ id: folderId, name: link[i].name });
+      if (folderList[i].id == folderId) {
+        setOnSelect({ id: folderId, name: folderList[i].name });
         setWrongFolder(false);
         break;
       }
     }
-  }, [link, folderId]);
+  }, [folderList, folderId]);
 
   return (
     <>
-      {linkLoading || loading ? <Loading /> : null}
+      {isPending || loading ? <Loading /> : null}
       <div ref={obsRef}></div>
       <S.HeaderBody>
         <S.Header $view={toggleInput}>
@@ -106,7 +106,7 @@ function Folder() {
           searchKeyword={searchKeyword}
           setSearchKeyWord={setSearchKeyWord}
         />
-        <FolderButtonContainer link={link} />
+        <FolderButtonContainer link={folderList} />
         {folderId && wrongFolder ? (
           <NotFound />
         ) : (
@@ -118,7 +118,7 @@ function Folder() {
               )}
             </S.FolderModalContainer>
             <ContentsContainer content={linkList.length}>
-              {linkList ? (
+              {linkList.length > 0 ? (
                 linkList.map((item) => (
                   <Card
                     item={item}
@@ -135,7 +135,7 @@ function Folder() {
         )}
         {modalState.add && inputRef.current && (
           <ModalPortal>
-            <AddModal link={link} url={url} />
+            <AddModal link={folderList} url={url} />
           </ModalPortal>
         )}
         {modalState.deleteLink && (
