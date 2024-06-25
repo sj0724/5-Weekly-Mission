@@ -1,6 +1,12 @@
 import { getUser } from '@/api/api';
 import { useQuery } from '@tanstack/react-query';
-import { ReactNode, createContext, useContext } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 export interface User {
   id: string;
@@ -21,11 +27,21 @@ export const UserContext = createContext({
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
+  const [isLogin, setIsLogin] = useState('');
+
   const { data: user } = useQuery({
     queryKey: ['user'],
     queryFn: () => getUser(),
     staleTime: 60 * 1000 * 60,
+    enabled: !!isLogin,
   });
+
+  useEffect(() => {
+    const status = localStorage.getItem('token');
+    if (status) {
+      setIsLogin(status);
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={user?.[0]}>{children}</UserContext.Provider>
