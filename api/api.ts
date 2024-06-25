@@ -1,15 +1,5 @@
 import axios from '../instance/instance';
 
-export async function getSampleUser() {
-  try {
-    const { data } = await axios.get('/sample/user');
-    return data;
-  } catch (error) {
-    console.error('Error fetching sample user:', error);
-    throw error;
-  }
-}
-
 interface Link {
   imageSource?: string;
   image_source: string;

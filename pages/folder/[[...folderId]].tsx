@@ -16,6 +16,7 @@ import NotFound from '@/components/NotFound/NotFound';
 import DeleteLinkModal from '@/components/Modal/DeleteLinkModal/DeleteLinkModal';
 import Loading from '@/components/Loading/Loading';
 import SearchContent from '@/components/SearchBar/SearchContent';
+import useDebounce from '@/hooks/useDebounce';
 
 function Folder() {
   const { user } = useLoadUser();
@@ -29,10 +30,11 @@ function Folder() {
   const [wrongFolder, setWrongFolder] = useState(false);
   const [linkId, setLinkId] = useState(0);
   const router = useRouter();
+  const { deBounceValue } = useDebounce(searchKeyword, 500);
   const folderId = router.query.folderId as string;
   const { linkList, isPending: linkLoading } = useGetFolder(
     user?.id,
-    searchKeyword,
+    deBounceValue,
     folderId
   );
   const { folderList, isPending: folderLoading } = useGetFolderList(

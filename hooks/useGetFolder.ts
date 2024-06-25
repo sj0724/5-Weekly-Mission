@@ -15,7 +15,7 @@ export type LinkData = {
 
 export interface Links extends Array<LinkData> {}
 
-function useGetFolder(userId: string, searchKeyword: string, folderId: string) {
+function useGetFolder(userId: string, deBounceValue: string, folderId: string) {
   const [linkList, setLinkList] = useState<Links>([]);
   const {
     data: link,
@@ -34,9 +34,9 @@ function useGetFolder(userId: string, searchKeyword: string, folderId: string) {
     if (list) {
       const searchLinks = list.filter(
         (link) =>
-          link.url?.includes(searchKeyword) ||
-          link.title?.includes(searchKeyword) ||
-          link.description?.includes(searchKeyword)
+          link.url?.includes(deBounceValue) ||
+          link.title?.includes(deBounceValue) ||
+          link.description?.includes(deBounceValue)
       );
       setLinkList([...searchLinks]);
     }
@@ -49,12 +49,12 @@ function useGetFolder(userId: string, searchKeyword: string, folderId: string) {
   }, [linkArr, isSuccess]);
 
   useEffect(() => {
-    if (!searchKeyword) {
+    if (!deBounceValue) {
       setLinkList(linkArr);
       return;
     }
     search(linkArr);
-  }, [searchKeyword]);
+  }, [deBounceValue]);
 
   return { linkList, isPending };
 }
