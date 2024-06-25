@@ -15,9 +15,20 @@ export type LinkData = {
 
 export interface Links extends Array<LinkData> {}
 
-function useGetFolder(id: string, searchKeyword: string, folderId: string) {
+function useGetFolder(userId: string, searchKeyword: string, folderId: string) {
   const [linkList, setLinkList] = useState<Links>([]);
-  const [loading, setLoading] = useState(false);
+  const {
+    data: link,
+    isPending,
+    isSuccess,
+  } = useQuery({
+    queryKey: ['links', folderId],
+    queryFn: ({ queryKey }) => getFolderList(userId, queryKey[1]),
+    enabled: !!userId,
+    staleTime: 60 * 1000 * 60,
+  });
+
+  const linkArr = link ?? [];
 
   const search = (list: Links) => {
     if (list) {
@@ -27,33 +38,25 @@ function useGetFolder(id: string, searchKeyword: string, folderId: string) {
           link.title?.includes(searchKeyword) ||
           link.description?.includes(searchKeyword)
       );
-      setLinkList(searchLinks);
+      setLinkList([...searchLinks]);
     }
   };
 
   useEffect(() => {
-    if (!id) {
+    if (linkArr && isSuccess) {
+      setLinkList(linkArr);
+    }
+  }, [linkArr, isSuccess]);
+
+  useEffect(() => {
+    if (!searchKeyword) {
+      setLinkList(linkArr);
       return;
     }
-    try {
-      setLoading(true);
-      const loadFolder = async () => {
-        const list = await getFolderList({ id, folderId });
-        if (searchKeyword) {
-          search(list);
-          setLoading(false);
-        } else {
-          setLinkList(list);
-          setLoading(false);
-        }
-      };
-      loadFolder();
-    } catch (error) {
-      console.error(error);
-    }
-  }, [folderId, id, searchKeyword]);
+    search(linkArr);
+  }, [searchKeyword]);
 
-  return { linkList, loading };
+  return { linkList, isPending };
 }
 
 export default useGetFolder;

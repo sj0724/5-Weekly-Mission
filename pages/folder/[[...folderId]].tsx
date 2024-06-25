@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as S from '../../styles/folder.styled';
 import ContentsContainer from '../../components/ContentsContainer';
 import Card from '../../components/Card/Card';
-import useGetFolder from '../../hooks/useGetFolder';
+import useGetFolder, { LinkData } from '../../hooks/useGetFolder';
 import useGetFolderList from '../../hooks/useGetFolderList';
 import FolderButtonContainer from '../../components/FolderButtonContainer/FolderButtonContainer';
 import { useModal } from '../../contexts/ModalContext';
@@ -30,8 +30,15 @@ function Folder() {
   const [linkId, setLinkId] = useState(0);
   const router = useRouter();
   const folderId = router.query.folderId as string;
-  const { linkList, loading } = useGetFolder(user?.id, searchKeyword, folderId);
-  const { folderList, isPending } = useGetFolderList(user?.id, folderId);
+  const { linkList, isPending: linkLoading } = useGetFolder(
+    user?.id,
+    searchKeyword,
+    folderId
+  );
+  const { folderList, isPending: folderLoading } = useGetFolderList(
+    user?.id,
+    folderId
+  );
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -57,13 +64,13 @@ function Folder() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver);
-    if (!loading && obsRef.current) {
+    if (!linkLoading && obsRef.current) {
       observer.observe(obsRef.current);
     }
     return () => {
       observer.disconnect();
     };
-  }, [loading, folderId, router]);
+  }, [linkLoading, folderId]);
 
   useEffect(() => {
     for (let i = 0; i < folderList.length; i++) {
@@ -78,7 +85,7 @@ function Folder() {
 
   return (
     <>
-      {isPending || loading ? <Loading /> : null}
+      {(folderLoading || linkLoading) && <Loading />}
       <div ref={obsRef}></div>
       <S.HeaderBody>
         <S.Header $view={toggleInput}>
@@ -119,7 +126,7 @@ function Folder() {
             </S.FolderModalContainer>
             <ContentsContainer content={linkList.length}>
               {linkList.length > 0 ? (
-                linkList.map((item) => (
+                linkList.map((item: LinkData) => (
                   <Card
                     item={item}
                     key={item.id}

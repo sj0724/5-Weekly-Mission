@@ -59,13 +59,7 @@ export async function getFolderData(folderId: string) {
   }
 }
 
-export async function getFolderList({
-  id,
-  folderId,
-}: {
-  id: string;
-  folderId: string;
-}) {
+export async function getFolderList(id: string, folderId: string) {
   let query;
   if (folderId) {
     query = `/${id}/links?folderId=${folderId}`;
