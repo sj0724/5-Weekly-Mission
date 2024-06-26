@@ -87,7 +87,11 @@ function Folder() {
 
   return (
     <>
-      {(folderLoading || linkLoading) && <Loading />}
+      {(folderLoading || linkLoading) && (
+        <ModalPortal>
+          <Loading />
+        </ModalPortal>
+      )}
       <div ref={obsRef}></div>
       <S.HeaderBody>
         <S.Header $view={toggleInput}>

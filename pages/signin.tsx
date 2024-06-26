@@ -12,6 +12,7 @@ import AuthInput from '@/components/Input/AuthInput';
 import { useMutation } from '@tanstack/react-query';
 import Toast from '@/components/Toast/Toast';
 import Loading from '@/components/Loading/Loading';
+import ModalPortal from '@/Portal';
 
 export interface FormValueType {
   id: string;
@@ -69,7 +70,11 @@ function SignIn() {
 
   return (
     <>
-      {isPending && <Loading />}
+      {isPending && (
+        <ModalPortal>
+          <Loading />
+        </ModalPortal>
+      )}
       <S.SignBody>
         <S.SignContent>
           <S.SignFormBody>
