@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import useGetFolder from '@/hooks/useGetFolder';
 import ContentsContainer from '@/components/ContentsContainer';
 import Loading from '@/components/Loading/Loading';
+import useDebounce from '@/hooks/useDebounce';
 
 function Shared() {
   const [searchKeyword, setSearchKeyWord] = useState('');
@@ -23,7 +24,12 @@ function Shared() {
   const router = useRouter();
   const folderId = router.query.folderId as string;
   const [userId, setUserId] = useState('');
-  const { linkList, loading } = useGetFolder(userId, searchKeyword, folderId);
+  const { deBounceValue } = useDebounce(searchKeyword, 500);
+  const { linkList, isPending: linkLoading } = useGetFolder(
+    owner?.id,
+    deBounceValue,
+    folderId
+  );
 
   useEffect(() => {
     const loadOwnerFolderData = async () => {
@@ -34,23 +40,26 @@ function Shared() {
       }
     };
 
+    if (folderId) {
+      loadOwnerFolderData();
+    }
+  }, [folderId]);
+
+  useEffect(() => {
     const loadOwnerData = async () => {
       const user = await getUserData(userId);
       if (user) {
         setOwner(user[0]);
       }
     };
-    if (folderId) {
-      loadOwnerFolderData();
-    }
     if (userId) {
       loadOwnerData();
     }
-  }, [folderId, userId]);
+  }, [userId]);
 
   return (
     <>
-      {loading && <Loading />}
+      {linkLoading && <Loading />}
       <S.OwnerProfile>
         <Image
           src={owner.image_source}
@@ -62,7 +71,10 @@ function Shared() {
         <S.FolderName>{folderName}</S.FolderName>
       </S.OwnerProfile>
       <S.SharedContent>
-        <SearchBar setSearchKeyWord={setSearchKeyWord} />
+        <SearchBar
+          searchKeyword={searchKeyword}
+          setSearchKeyWord={setSearchKeyWord}
+        />
         {searchKeyword && (
           <S.SearchResult>
             <p>{searchKeyword}</p>로 검색한 결과입니다.

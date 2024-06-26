@@ -85,30 +85,18 @@ export const postSignIn = async (id: string, password: string) => {
 };
 
 export async function postCheckEmail(email: string) {
-  try {
-    const { data } = await axios.post('/check-email', {
-      email: email,
-    });
-    return data;
-  } catch (error) {
-    console.error('Error fetching sign-in:', error);
-    alert('이미 가입된 이메일입니다!');
-  }
+  const { data } = await axios.post('/check-email', {
+    email: email,
+  });
+  return data;
 }
 
 export async function postSignUp(id: string, password: string) {
-  try {
-    const { data } = await axios.post('/sign-up', {
-      email: id,
-      password: password,
-    });
-    localStorage.setItem('token', data.data.accessToken);
-    alert('회원가입이 완료되었습니다!');
-    return data;
-  } catch (error) {
-    console.error('Error fetching sign-in:', error);
-    alert('회원가입할 수 없습니다! 아이디와 비밀번호를 확인해주세요!');
-  }
+  const result = await axios.post('/sign-up', {
+    email: id,
+    password: password,
+  });
+  return result;
 }
 
 export async function postFolder(name: string) {

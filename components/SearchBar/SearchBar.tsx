@@ -17,7 +17,7 @@ function SearchModal({ setSearchKeyWord, searchKeyword }: PropsType) {
 
   return (
     <S.SearchBarModal>
-      <S.SearchForm>
+      <S.SearchForm onSubmit={(e) => e.preventDefault()}>
         <S.SearchBarInput
           placeholder="링크를 검색해 보세요"
           onChange={handleChangeInput}
