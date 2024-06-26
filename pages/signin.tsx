@@ -36,11 +36,9 @@ function SignIn() {
   const { mutate, isPending } = useMutation({
     mutationFn: (user: { id: string; password: string }) =>
       postSignIn(user.id, user.password),
-    onMutate: () => setIsActive(true),
     onSuccess: () => (window.location.href = '/folder'),
     onError: () => {
       setToast(true);
-      setIsActive(false);
       setError('id', {
         type: 'manual',
         message: '이메일을 확인해주세요!',
@@ -59,7 +57,6 @@ function SignIn() {
 
   const hiddenText = () => {
     setTextHidden(!textHidden);
-    console.log(isValid);
   };
 
   useEffect(() => {
@@ -145,12 +142,7 @@ function SignIn() {
                 />
                 <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
               </S.InputModal>
-              <Button
-                size={'lg'}
-                type="submit"
-                buttonActive={!isValid}
-                isActive={!isActive}
-              >
+              <Button size={'lg'} type="submit" buttonActive={!isValid}>
                 로그인
               </Button>
             </S.SignForm>

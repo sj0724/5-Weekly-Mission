@@ -14,7 +14,7 @@ export function Button({
   buttonActive,
 }: ButtonProps) {
   return (
-    <S.Cta size={size} disabled={buttonActive && isActive}>
+    <S.Cta size={size} disabled={buttonActive || isActive}>
       {children}
     </S.Cta>
   );
