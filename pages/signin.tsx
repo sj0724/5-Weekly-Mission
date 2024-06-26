@@ -21,19 +21,33 @@ export interface FormValueType {
 
 function SignIn() {
   const [textHidden, setTextHidden] = useState(true);
-  const { handleSubmit, control, setError } = useForm<FormValueType>();
+  const {
+    handleSubmit,
+    control,
+    setError,
+    formState: { isValid },
+  } = useForm<FormValueType>({ mode: 'onChange' });
   const [toast, setToast] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const router = useRouter();
   const { user } = useLoadUser();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (user: { id: string; password: string }) =>
       postSignIn(user.id, user.password),
+    onMutate: () => setIsActive(true),
     onSuccess: () => (window.location.href = '/folder'),
     onError: () => {
       setToast(true);
-      setError('id', { type: 'manual', message: '다시 입력해주세요!' });
-      setError('password', { type: 'manual', message: '다시 입력해주세요!' });
+      setIsActive(false);
+      setError('id', {
+        type: 'manual',
+        message: '이메일을 확인해주세요!',
+      });
+      setError('password', {
+        type: 'manual',
+        message: '비밀번호를 확인해주세요!',
+      });
     },
   });
 
@@ -44,6 +58,7 @@ function SignIn() {
 
   const hiddenText = () => {
     setTextHidden(!textHidden);
+    console.log(isValid);
   };
 
   useEffect(() => {
@@ -125,7 +140,12 @@ function SignIn() {
                 />
                 <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
               </S.InputModal>
-              <Button size={'lg'} type="submit">
+              <Button
+                size={'lg'}
+                type="submit"
+                buttonActive={!isValid}
+                isActive={!isActive}
+              >
                 로그인
               </Button>
             </S.SignForm>
