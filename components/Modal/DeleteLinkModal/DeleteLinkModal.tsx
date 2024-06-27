@@ -11,10 +11,12 @@ function DeleteLinkModal({ id }: { id: number }) {
   const folderId = router.query.folderId as string;
   const queryClient = useQueryClient();
   const { closeModal } = useModal();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (id: number) => deleteLink(id),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['links', folderId] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['links', folderId] });
+      queryClient.invalidateQueries({ queryKey: ['folder'] });
+    },
     onSettled: () => closeModal('deleteLink'),
   });
 
@@ -27,7 +29,7 @@ function DeleteLinkModal({ id }: { id: number }) {
       <S.Header>
         <S.Title>링크 삭제</S.Title>
       </S.Header>
-      <S.ModalButton size="md" onClick={isDeleteLink}>
+      <S.ModalButton size="md" onClick={isDeleteLink} disabled={isPending}>
         삭제하기
       </S.ModalButton>
     </BaseModal>
