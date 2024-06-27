@@ -25,11 +25,7 @@ function Shared() {
   const folderId = router.query.folderId as string;
   const [userId, setUserId] = useState('');
   const { deBounceValue } = useDebounce(searchKeyword, 500);
-  const { linkList, isPending: linkLoading } = useGetFolder(
-    owner?.id,
-    deBounceValue,
-    folderId
-  );
+  const { linkList, allFolderLoading } = useGetFolder(deBounceValue, folderId);
 
   useEffect(() => {
     const loadOwnerFolderData = async () => {
@@ -59,7 +55,7 @@ function Shared() {
 
   return (
     <>
-      {linkLoading && <Loading />}
+      {allFolderLoading && <Loading />}
       <S.OwnerProfile>
         <Image
           src={owner.image_source}

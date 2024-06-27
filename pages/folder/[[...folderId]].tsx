@@ -32,15 +32,11 @@ function Folder() {
   const router = useRouter();
   const { deBounceValue } = useDebounce(searchKeyword, 500);
   const folderId = router.query.folderId as string;
-  const { linkList, isPending: linkLoading } = useGetFolder(
-    user?.id,
+  const { linkList, allFolderLoading, singleFolderLoading } = useGetFolder(
     deBounceValue,
     folderId
   );
-  const { folderList, isPending: folderLoading } = useGetFolderList(
-    user?.id,
-    folderId
-  );
+  const { folderList, isPending: folderLoading } = useGetFolderList();
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -66,13 +62,13 @@ function Folder() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver);
-    if (!linkLoading && obsRef.current) {
+    if (!allFolderLoading && obsRef.current) {
       observer.observe(obsRef.current);
     }
     return () => {
       observer.disconnect();
     };
-  }, [linkLoading, folderId]);
+  }, [allFolderLoading, folderId]);
 
   useEffect(() => {
     for (let i = 0; i < folderList.length; i++) {
@@ -87,7 +83,7 @@ function Folder() {
 
   return (
     <>
-      {(folderLoading || linkLoading) && (
+      {(folderLoading || allFolderLoading) && (
         <ModalPortal>
           <Loading />
         </ModalPortal>

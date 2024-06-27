@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getFolderList } from '../api/api';
+import { getFolderList, getUserLinks } from '../api/api';
 import { useQuery } from '@tanstack/react-query';
 
 export type LinkData = {
@@ -15,20 +15,32 @@ export type LinkData = {
 
 export interface Links extends Array<LinkData> {}
 
-function useGetFolder(userId: string, deBounceValue: string, folderId: string) {
+function useGetFolder(deBounceValue: string, folderId: string) {
   const [linkList, setLinkList] = useState<Links>([]);
   const {
     data: link,
-    isPending,
-    isSuccess,
+    isPending: singleFolderLoading,
+    isSuccess: singleFolderSuccess,
   } = useQuery({
     queryKey: ['links', folderId],
-    queryFn: ({ queryKey }) => getFolderList(userId, queryKey[1]),
-    enabled: !!userId,
+    queryFn: ({ queryKey }) => getFolderList(queryKey[1]),
+    enabled: !!folderId,
     staleTime: 60 * 1000 * 60,
   });
 
-  const linkArr = link ?? [];
+  const {
+    data: allLink,
+    isPending: allFolderLoading,
+    isSuccess: allFolderSuccess,
+  } = useQuery({
+    queryKey: ['links'],
+    queryFn: () => getUserLinks(),
+    staleTime: 60 * 1000 * 60,
+  });
+
+  const linkArr = link?.data ?? [];
+
+  const allLinkArr = allLink?.data ?? [];
 
   const search = (list: Links) => {
     if (list) {
@@ -43,20 +55,25 @@ function useGetFolder(userId: string, deBounceValue: string, folderId: string) {
   };
 
   useEffect(() => {
-    if (linkArr && isSuccess) {
-      setLinkList(linkArr);
+    if (folderId) {
+      if (linkArr && singleFolderSuccess) {
+        setLinkList(linkArr);
+      }
+    } else {
+      if (allLinkArr && allFolderSuccess) {
+        setLinkList(allLinkArr);
+        console.log(linkList);
+      }
     }
-  }, [linkArr, isSuccess]);
+  }, [allLink, linkArr, allFolderSuccess, singleFolderSuccess]);
 
   useEffect(() => {
-    if (!deBounceValue) {
-      setLinkList(linkArr);
-      return;
+    if (deBounceValue) {
+      search(linkArr || allLinkArr);
     }
-    search(linkArr);
   }, [deBounceValue]);
 
-  return { linkList, isPending };
+  return { linkList, allFolderLoading, singleFolderLoading };
 }
 
 export default useGetFolder;

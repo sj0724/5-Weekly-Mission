@@ -30,7 +30,7 @@ function FolderButton({
     >
       <S.FolderInfo>
         <h2>{item.name}</h2>
-        <p>{item.link.count}개의 링크</p>
+        <p>{item.link_count}개의 링크</p>
       </S.FolderInfo>
       {$isSelected === 'select' && (
         <Image src="/check.svg" alt="체크 아이콘" width={15} height={15} />
@@ -66,7 +66,7 @@ function AddModal({ link, url }: { link: Folders; url: string }) {
         <S.Title>폴더에 추가</S.Title>
       </S.Header>
       <S.FolderContainer>
-        {link[0] ? (
+        {link.length > 0 ? (
           link.map((item, index) => (
             <FolderButton
               key={item.id}
