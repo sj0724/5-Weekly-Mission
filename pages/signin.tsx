@@ -29,7 +29,6 @@ function SignIn() {
     formState: { isValid },
   } = useForm<FormValueType>({ mode: 'onChange' });
   const [toast, setToast] = useState(false);
-  const [isActive, setIsActive] = useState(false);
   const router = useRouter();
   const { user } = useLoadUser();
 
