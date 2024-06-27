@@ -60,7 +60,7 @@ function useGetFolder(deBounceValue: string, folderId: string) {
         setLinkList(allLinkArr);
       }
     }
-  }, [allLinkArr, allFolderSuccess]);
+  }, [allLinkArr, allFolderSuccess, folderId]);
 
   useEffect(() => {
     if (folderId) {
@@ -68,7 +68,7 @@ function useGetFolder(deBounceValue: string, folderId: string) {
         setLinkList(linkArr);
       }
     }
-  }, [linkArr, singleFolderSuccess]);
+  }, [linkArr, singleFolderSuccess, folderId]);
 
   useEffect(() => {
     if (!deBounceValue) {
