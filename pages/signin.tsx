@@ -12,6 +12,7 @@ import AuthInput from '@/components/Input/AuthInput';
 import { useMutation } from '@tanstack/react-query';
 import Toast from '@/components/Toast/Toast';
 import Loading from '@/components/Loading/Loading';
+import ModalPortal from '@/Portal';
 
 export interface FormValueType {
   id: string;
@@ -21,7 +22,12 @@ export interface FormValueType {
 
 function SignIn() {
   const [textHidden, setTextHidden] = useState(true);
-  const { handleSubmit, control, setError } = useForm<FormValueType>();
+  const {
+    handleSubmit,
+    control,
+    setError,
+    formState: { isValid },
+  } = useForm<FormValueType>({ mode: 'onChange' });
   const [toast, setToast] = useState(false);
   const router = useRouter();
   const { user } = useLoadUser();
@@ -32,8 +38,14 @@ function SignIn() {
     onSuccess: () => (window.location.href = '/folder'),
     onError: () => {
       setToast(true);
-      setError('id', { type: 'manual', message: '다시 입력해주세요!' });
-      setError('password', { type: 'manual', message: '다시 입력해주세요!' });
+      setError('id', {
+        type: 'manual',
+        message: '이메일을 확인해주세요!',
+      });
+      setError('password', {
+        type: 'manual',
+        message: '비밀번호를 확인해주세요!',
+      });
     },
   });
 
@@ -54,7 +66,11 @@ function SignIn() {
 
   return (
     <>
-      {isPending && <Loading />}
+      {isPending && (
+        <ModalPortal>
+          <Loading />
+        </ModalPortal>
+      )}
       <S.SignBody>
         <S.SignContent>
           <S.SignFormBody>
@@ -125,7 +141,7 @@ function SignIn() {
                 />
                 <S.TextHiddenButton $hidden={textHidden} onClick={hiddenText} />
               </S.InputModal>
-              <Button size={'lg'} type="submit">
+              <Button size={'lg'} type="submit" buttonActive={!isValid}>
                 로그인
               </Button>
             </S.SignForm>

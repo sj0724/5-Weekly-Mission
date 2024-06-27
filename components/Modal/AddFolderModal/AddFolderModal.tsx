@@ -4,18 +4,25 @@ import Input, { FormValueTypes } from '@/components/Input/Input';
 import { postFolder } from '@/api/api';
 import { Controller, useForm } from 'react-hook-form';
 import { useModal } from '@/contexts/ModalContext';
-import { useRouter } from 'next/router';
-
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Button } from '@/components/Button/Button';
 function AddFolderModal() {
+  const queryClient = useQueryClient();
   const { handleSubmit, control } = useForm<FormValueTypes>();
+  const { mutate, isPending } = useMutation({
+    mutationFn: (name: string) => postFolder(name),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['folder'] });
+    },
+    onSettled: () => {
+      closeModal('addFolder');
+    },
+  });
   const { closeModal } = useModal();
-  const router = useRouter();
 
   const addFolder = async (data: FormValueTypes) => {
     if (!data.folder) return;
-    const result = await postFolder(data.folder);
-    router.push(`/folder/${result[0].id}`);
-    closeModal('addFolder');
+    mutate(data.folder);
   };
 
   return (
@@ -44,7 +51,13 @@ function AddFolderModal() {
             />
           )}
         />
-        <S.ModalButton>추가하기</S.ModalButton>
+        <Button
+          size="md"
+          onClick={(e) => e.preventDefault()}
+          isActive={isPending}
+        >
+          추가하기
+        </Button>
       </S.ModalForm>
     </BaseModal>
   );

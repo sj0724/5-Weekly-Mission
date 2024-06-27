@@ -8,7 +8,6 @@ import FolderButtonContainer from '../../components/FolderButtonContainer/Folder
 import { useModal } from '../../contexts/ModalContext';
 import AddModal from '../../components/Modal/AddModal/AddModal';
 import ModalPortal from '../../Portal';
-import { useLoadUser } from '@/contexts/UserContext';
 import FolderModals from '@/components/FolderModalContainer/FolderModals';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -17,9 +16,9 @@ import DeleteLinkModal from '@/components/Modal/DeleteLinkModal/DeleteLinkModal'
 import Loading from '@/components/Loading/Loading';
 import SearchContent from '@/components/SearchBar/SearchContent';
 import useDebounce from '@/hooks/useDebounce';
+import { urlCheck } from '@/util/util';
 
 function Folder() {
-  const { user } = useLoadUser();
   const [onSelect, setOnSelect] = useState({
     id: '',
     name: '',
@@ -32,18 +31,13 @@ function Folder() {
   const router = useRouter();
   const { deBounceValue } = useDebounce(searchKeyword, 500);
   const folderId = router.query.folderId as string;
-  const { linkList, isPending: linkLoading } = useGetFolder(
-    user?.id,
+  const { linkList, allFolderLoading, singleFolderLoading } = useGetFolder(
     deBounceValue,
     folderId
   );
-  const { folderList, isPending: folderLoading } = useGetFolderList(
-    user?.id,
-    folderId
-  );
+  const { folderList, isPending: folderLoading } = useGetFolderList();
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleObserver = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
@@ -66,13 +60,13 @@ function Folder() {
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver);
-    if (!linkLoading && obsRef.current) {
+    if (!allFolderLoading && obsRef.current) {
       observer.observe(obsRef.current);
     }
     return () => {
       observer.disconnect();
     };
-  }, [linkLoading, folderId]);
+  }, [allFolderLoading, folderId]);
 
   useEffect(() => {
     for (let i = 0; i < folderList.length; i++) {
@@ -87,7 +81,13 @@ function Folder() {
 
   return (
     <>
-      {(folderLoading || linkLoading) && <Loading />}
+      {(allFolderLoading ||
+        folderLoading ||
+        (folderId && singleFolderLoading)) && (
+        <ModalPortal>
+          <Loading />
+        </ModalPortal>
+      )}
       <div ref={obsRef}></div>
       <S.HeaderBody>
         <S.Header $view={toggleInput}>
@@ -95,15 +95,26 @@ function Folder() {
             <S.LinkIcon>
               <Image src="/link.svg" alt="링크 아이콘" width={20} height={20} />
             </S.LinkIcon>
-            <S.AddLinkInput placeholder="링크를 추가해보세요." ref={inputRef} />
+            <S.AddLinkInput
+              placeholder="링크를 추가해보세요 (https://example/com)"
+              onChange={(e) => {
+                setUrl(e.target.value);
+              }}
+              value={url}
+            />
             <S.AddButton
               size="sm"
               onClick={() => {
-                openModal('add');
-                if (inputRef.current) {
-                  setUrl(inputRef.current.value);
+                if (url) {
+                  const result = urlCheck(url);
+                  if (result) {
+                    openModal('add');
+                  } else {
+                    alert('올바른 url이 아닙니다!');
+                  }
                 }
               }}
+              disabled={url ? false : true}
             >
               추가하기
             </S.AddButton>
@@ -134,6 +145,7 @@ function Folder() {
                     key={item.id}
                     setUrl={setUrl}
                     setLinkId={setLinkId}
+                    isActive={true}
                   />
                 ))
               ) : (
@@ -142,7 +154,7 @@ function Folder() {
             </ContentsContainer>
           </>
         )}
-        {modalState.add && inputRef.current && (
+        {modalState.add && (
           <ModalPortal>
             <AddModal link={folderList} url={url} />
           </ModalPortal>

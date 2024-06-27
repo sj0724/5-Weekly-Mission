@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const INSTANCE = axios.create({
-  baseURL: 'https://bootcamp-api.codeit.kr/api',
+  baseURL: 'https://bootcamp-api.codeit.kr/api/linkbrary/v1',
 });
 
 INSTANCE.interceptors.request.use(

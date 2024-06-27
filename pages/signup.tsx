@@ -14,21 +14,27 @@ import { useMutation } from '@tanstack/react-query';
 import Loading from '@/components/Loading/Loading';
 
 function SignUp() {
-  const { handleSubmit, control, watch, setError } = useForm<FormValueType>({
+  const {
+    handleSubmit,
+    control,
+    watch,
+    setError,
+    formState: { isValid },
+  } = useForm<FormValueType>({
     mode: 'onChange',
   });
   const [passwordHidden, setPasswordHidden] = useState(true);
   const [passwordConfirmHidden, setPasswordConfirmHidden] = useState(true);
-  const [disableButton, setDisableButton] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   const router = useRouter();
   const { user } = useLoadUser();
 
   const { mutate: checkEmail } = useMutation({
     mutationFn: (id: string) => postCheckEmail(id),
-    onMutate: () => setDisableButton(false),
+    onMutate: () => setIsActive(true),
     onError: () => {
+      setIsActive(false);
       setError('id', { type: 'manual', message: '이미 가입된 이메일입니다!' });
-      setDisableButton(true);
     },
   });
 
@@ -131,7 +137,9 @@ function SignUp() {
                 />
                 <S.TextHiddenButton
                   $hidden={passwordHidden}
-                  onClick={() => setPasswordHidden(!passwordHidden)}
+                  onClick={() => {
+                    setPasswordHidden(!passwordHidden);
+                  }}
                 />
               </S.InputModal>
               <S.InputModal>
@@ -170,7 +178,12 @@ function SignUp() {
                   }
                 />
               </S.InputModal>
-              <Button size={'lg'} type="submit" isActive={disableButton}>
+              <Button
+                size={'lg'}
+                type="submit"
+                buttonActive={!isValid}
+                isActive={!isActive}
+              >
                 회원가입
               </Button>
             </S.SignForm>
