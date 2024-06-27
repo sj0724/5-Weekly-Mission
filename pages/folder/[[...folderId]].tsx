@@ -19,7 +19,6 @@ import SearchContent from '@/components/SearchBar/SearchContent';
 import useDebounce from '@/hooks/useDebounce';
 
 function Folder() {
-  const { user } = useLoadUser();
   const [onSelect, setOnSelect] = useState({
     id: '',
     name: '',
@@ -32,10 +31,7 @@ function Folder() {
   const router = useRouter();
   const { deBounceValue } = useDebounce(searchKeyword, 500);
   const folderId = router.query.folderId as string;
-  const { linkList, allFolderLoading, singleFolderLoading } = useGetFolder(
-    deBounceValue,
-    folderId
-  );
+  const { linkList, allFolderLoading } = useGetFolder(deBounceValue, folderId);
   const { folderList, isPending: folderLoading } = useGetFolderList();
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);

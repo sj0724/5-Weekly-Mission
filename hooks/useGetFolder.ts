@@ -55,21 +55,26 @@ function useGetFolder(deBounceValue: string, folderId: string) {
   };
 
   useEffect(() => {
+    if (!folderId) {
+      if (allLinkArr && allFolderSuccess) {
+        setLinkList(allLinkArr);
+      }
+    }
+  }, [allLinkArr, allFolderSuccess]);
+
+  useEffect(() => {
     if (folderId) {
       if (linkArr && singleFolderSuccess) {
         setLinkList(linkArr);
       }
-    } else {
-      if (allLinkArr && allFolderSuccess) {
-        setLinkList(allLinkArr);
-        console.log(linkList);
-      }
     }
-  }, [allLink, linkArr, allFolderSuccess, singleFolderSuccess]);
+  }, [linkArr, singleFolderSuccess]);
 
   useEffect(() => {
-    if (deBounceValue) {
-      search(linkArr || allLinkArr);
+    if (!deBounceValue) {
+      setLinkList(folderId ? linkArr : allLinkArr);
+    } else {
+      search(linkList);
     }
   }, [deBounceValue]);
 
