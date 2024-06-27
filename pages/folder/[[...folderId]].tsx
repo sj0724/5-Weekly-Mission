@@ -96,7 +96,7 @@ function Folder() {
               <Image src="/link.svg" alt="링크 아이콘" width={20} height={20} />
             </S.LinkIcon>
             <S.AddLinkInput
-              placeholder="링크를 추가해보세요."
+              placeholder="링크를 추가해보세요 (https://example/com)"
               onChange={(e) => {
                 setUrl(e.target.value);
               }}
@@ -109,7 +109,6 @@ function Folder() {
                   const result = urlCheck(url);
                   if (result) {
                     openModal('add');
-                    setUrl('');
                   } else {
                     alert('올바른 url이 아닙니다!');
                   }

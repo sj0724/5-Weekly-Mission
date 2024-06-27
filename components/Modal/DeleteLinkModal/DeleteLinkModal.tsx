@@ -3,16 +3,23 @@ import * as S from '../DeleteModal/DeleteModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import { deleteLink } from '@/api/api';
 import { useRouter } from 'next/router';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useModal } from '@/contexts/ModalContext';
 
 function DeleteLinkModal({ id }: { id: number }) {
   const router = useRouter();
+  const folderId = router.query.folderId as string;
+  const queryClient = useQueryClient();
+  const { closeModal } = useModal();
+  const { mutate } = useMutation({
+    mutationFn: (id: number) => deleteLink(id),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['links', folderId] }),
+    onSettled: () => closeModal('deleteLink'),
+  });
 
-  const isDeleteLink = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-    await deleteLink(id);
-    router.reload();
+  const isDeleteLink = async () => {
+    mutate(id);
   };
 
   return (
