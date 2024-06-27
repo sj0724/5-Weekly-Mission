@@ -5,10 +5,11 @@ import { postFolder } from '@/api/api';
 import { Controller, useForm } from 'react-hook-form';
 import { useModal } from '@/contexts/ModalContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Button } from '@/components/Button/Button';
 function AddFolderModal() {
   const queryClient = useQueryClient();
   const { handleSubmit, control } = useForm<FormValueTypes>();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (name: string) => postFolder(name),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['folder'] });
@@ -50,7 +51,13 @@ function AddFolderModal() {
             />
           )}
         />
-        <S.ModalButton>추가하기</S.ModalButton>
+        <Button
+          size="md"
+          onClick={(e) => e.preventDefault()}
+          isActive={isPending}
+        >
+          추가하기
+        </Button>
       </S.ModalForm>
     </BaseModal>
   );

@@ -46,7 +46,7 @@ function AddModal({ link, url }: { link: Folders; url: string }) {
   const [selectedId, setSelectedId] = useState('');
   const { openModal, closeModal } = useModal();
   const router = useRouter();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (data: { selectedId: string; url: string }) =>
       postLink(data.selectedId, data.url),
     onSuccess: () => {
@@ -101,7 +101,11 @@ function AddModal({ link, url }: { link: Folders; url: string }) {
         )}
       </S.FolderContainer>
       <S.InputForm onSubmit={addLink}>
-        <Button size="md" type="submit" isActive={selectedId ? false : true}>
+        <Button
+          size="md"
+          type="submit"
+          isActive={selectedId && !isPending ? false : true}
+        >
           추가하기
         </Button>
       </S.InputForm>

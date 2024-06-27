@@ -10,7 +10,7 @@ import { useModal } from '@/contexts/ModalContext';
 function EditModal({ folderId }: { folderId: string }) {
   const queryClient = useQueryClient();
   const { handleSubmit, control } = useForm<FormValueTypes>();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (data: { folderId: string; folderName: string }) =>
       putFolder(data.folderId, data.folderName),
     onSuccess: () => {
@@ -54,7 +54,11 @@ function EditModal({ folderId }: { folderId: string }) {
             />
           )}
         />
-        <Button size="md" onClick={(e) => e.preventDefault()}>
+        <Button
+          size="md"
+          onClick={(e) => e.preventDefault()}
+          isActive={isPending}
+        >
           변경하기
         </Button>
       </S.ModalForm>
