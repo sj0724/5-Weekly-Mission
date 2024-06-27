@@ -8,7 +8,6 @@ import FolderButtonContainer from '../../components/FolderButtonContainer/Folder
 import { useModal } from '../../contexts/ModalContext';
 import AddModal from '../../components/Modal/AddModal/AddModal';
 import ModalPortal from '../../Portal';
-import { useLoadUser } from '@/contexts/UserContext';
 import FolderModals from '@/components/FolderModalContainer/FolderModals';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
@@ -31,7 +30,10 @@ function Folder() {
   const router = useRouter();
   const { deBounceValue } = useDebounce(searchKeyword, 500);
   const folderId = router.query.folderId as string;
-  const { linkList, allFolderLoading } = useGetFolder(deBounceValue, folderId);
+  const { linkList, allFolderLoading, singleFolderLoading } = useGetFolder(
+    deBounceValue,
+    folderId
+  );
   const { folderList, isPending: folderLoading } = useGetFolderList();
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
@@ -79,7 +81,9 @@ function Folder() {
 
   return (
     <>
-      {(folderLoading || allFolderLoading) && (
+      {(allFolderLoading ||
+        folderLoading ||
+        (folderId && singleFolderLoading)) && (
         <ModalPortal>
           <Loading />
         </ModalPortal>

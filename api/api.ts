@@ -42,8 +42,8 @@ export async function getFolder() {
 
 export async function getFolderData(folderId: string) {
   try {
-    const { data } = await axios.get(`/folders/${folderId}`);
-    return data.data;
+    const data = await axios.get(`/folders/${folderId}`);
+    return data;
   } catch (error) {
     console.error('Error fetching folder:', error);
     throw error;
@@ -68,8 +68,8 @@ export async function getUser() {
 
 export async function getUserData(id: string) {
   try {
-    const { data } = await axios.get(`/users/${id}`);
-    return data.data;
+    const data = await axios.get(`/users/${id}`);
+    return data;
   } catch (error) {
     console.error('Error fetching user:', error);
     throw error;
