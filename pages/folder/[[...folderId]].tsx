@@ -16,6 +16,7 @@ import DeleteLinkModal from '@/components/Modal/DeleteLinkModal/DeleteLinkModal'
 import Loading from '@/components/Loading/Loading';
 import SearchContent from '@/components/SearchBar/SearchContent';
 import useDebounce from '@/hooks/useDebounce';
+import { urlCheck } from '@/util/util';
 
 function Folder() {
   const [onSelect, setOnSelect] = useState({
@@ -37,7 +38,6 @@ function Folder() {
   const { folderList, isPending: folderLoading } = useGetFolderList();
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleObserver = (entries: IntersectionObserverEntry[]) => {
     entries.forEach((entry) => {
@@ -95,15 +95,27 @@ function Folder() {
             <S.LinkIcon>
               <Image src="/link.svg" alt="링크 아이콘" width={20} height={20} />
             </S.LinkIcon>
-            <S.AddLinkInput placeholder="링크를 추가해보세요." ref={inputRef} />
+            <S.AddLinkInput
+              placeholder="링크를 추가해보세요."
+              onChange={(e) => {
+                setUrl(e.target.value);
+              }}
+              value={url}
+            />
             <S.AddButton
               size="sm"
               onClick={() => {
-                openModal('add');
-                if (inputRef.current) {
-                  setUrl(inputRef.current.value);
+                if (url) {
+                  const result = urlCheck(url);
+                  if (result) {
+                    openModal('add');
+                    setUrl('');
+                  } else {
+                    alert('올바른 url이 아닙니다!');
+                  }
                 }
               }}
+              disabled={url ? false : true}
             >
               추가하기
             </S.AddButton>
@@ -143,7 +155,7 @@ function Folder() {
             </ContentsContainer>
           </>
         )}
-        {modalState.add && inputRef.current && (
+        {modalState.add && (
           <ModalPortal>
             <AddModal link={folderList} url={url} />
           </ModalPortal>

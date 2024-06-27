@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { postLink } from '@/api/api';
 import { useRouter } from 'next/router';
 import { useModal } from '@/contexts/ModalContext';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 function FolderButton({
   item,
@@ -40,10 +41,23 @@ function FolderButton({
 }
 
 function AddModal({ link, url }: { link: Folders; url: string }) {
+  const queryClient = useQueryClient();
   const [folderSelected, setFolderSelected] = useState<string[]>([]);
   const [selectedId, setSelectedId] = useState('');
   const { openModal, closeModal } = useModal();
   const router = useRouter();
+  const { mutate } = useMutation({
+    mutationFn: (data: { selectedId: string; url: string }) =>
+      postLink(data.selectedId, data.url),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['links'] });
+      queryClient.invalidateQueries({ queryKey: ['folder'] });
+    },
+    onSettled: () => {
+      closeModal('add');
+      router.push(`/folder/${selectedId}`);
+    },
+  });
 
   const handleMenuClick = (index: number, folderId: string) => {
     const booleanArr: string[] = new Array(link.length).fill('none');
@@ -54,10 +68,8 @@ function AddModal({ link, url }: { link: Folders; url: string }) {
 
   const addLink = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const result = await postLink(selectedId, url);
-    if (result) {
-      router.reload();
-    }
+    const addLink = { selectedId: selectedId, url: url };
+    mutate(addLink);
   };
 
   return (
@@ -89,7 +101,7 @@ function AddModal({ link, url }: { link: Folders; url: string }) {
         )}
       </S.FolderContainer>
       <S.InputForm onSubmit={addLink}>
-        <Button size="md" type="submit">
+        <Button size="md" type="submit" isActive={selectedId ? false : true}>
           추가하기
         </Button>
       </S.InputForm>
