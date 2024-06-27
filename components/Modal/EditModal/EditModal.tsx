@@ -4,16 +4,28 @@ import { Button } from '@/components/Button/Button';
 import Input, { FormValueTypes } from '@/components/Input/Input';
 import { Controller, useForm } from 'react-hook-form';
 import { putFolder } from '@/api/api';
-import { useRouter } from 'next/router';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useModal } from '@/contexts/ModalContext';
 
 function EditModal({ folderId }: { folderId: string }) {
+  const queryClient = useQueryClient();
   const { handleSubmit, control } = useForm<FormValueTypes>();
-  const router = useRouter();
+  const { mutate } = useMutation({
+    mutationFn: (data: { folderId: string; folderName: string }) =>
+      putFolder(data.folderId, data.folderName),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['folder'] });
+    },
+    onSettled: () => {
+      closeModal('edit');
+    },
+  });
+  const { closeModal } = useModal();
 
   const editFolder = async (data: FormValueTypes) => {
     if (!data.edit) return;
-    await putFolder(folderId, data.edit);
-    router.reload();
+    const editData = { folderId: folderId, folderName: data.edit };
+    mutate(editData);
   };
 
   return (

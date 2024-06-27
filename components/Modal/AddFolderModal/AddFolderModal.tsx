@@ -13,13 +13,15 @@ function AddFolderModal() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['folder'] });
     },
+    onSettled: () => {
+      closeModal('addFolder');
+    },
   });
   const { closeModal } = useModal();
 
   const addFolder = async (data: FormValueTypes) => {
     if (!data.folder) return;
     mutate(data.folder);
-    closeModal('addFolder');
   };
 
   return (
