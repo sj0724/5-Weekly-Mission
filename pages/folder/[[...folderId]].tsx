@@ -134,6 +134,7 @@ function Folder() {
                     key={item.id}
                     setUrl={setUrl}
                     setLinkId={setLinkId}
+                    isActive={true}
                   />
                 ))
               ) : (

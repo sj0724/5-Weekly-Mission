@@ -10,10 +10,12 @@ import { useRouter } from 'next/router';
 
 function Card({
   item,
+  isActive,
   setUrl,
   setLinkId,
 }: {
   item: LinkData;
+  isActive: boolean;
   setUrl?: Dispatch<SetStateAction<string>>;
   setLinkId?: Dispatch<SetStateAction<number>>;
 }) {
@@ -48,18 +50,20 @@ function Card({
     <>
       <Link href={url} target="_blank" rel="noreferrer">
         <S.ItemCard>
-          <S.StarIcon
-            onClick={(e) => {
-              setLike(!like);
-              e.preventDefault();
-            }}
-          >
-            <Image
-              src={like ? '/full_star.svg' : '/star.svg'}
-              alt="별 이미지"
-              fill
-            />
-          </S.StarIcon>
+          {isActive && (
+            <S.StarIcon
+              onClick={(e) => {
+                setLike(!like);
+                e.preventDefault();
+              }}
+            >
+              <Image
+                src={like ? '/full_star.svg' : '/star.svg'}
+                alt="별 이미지"
+                fill
+              />
+            </S.StarIcon>
+          )}
           <S.ImageArea>
             {imageUrl ? (
               <S.ItemImg>
@@ -77,7 +81,7 @@ function Card({
             )}
           </S.ImageArea>
           <S.ItemInfo>
-            {folderId && (
+            {folderId && isActive && (
               <S.KebabIcon
                 src="/kebab.svg"
                 alt="kebabIcon"
