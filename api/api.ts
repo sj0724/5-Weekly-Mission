@@ -153,3 +153,10 @@ export async function putFolder(folderId: string, name: string) {
     console.error('Error fetching put folder:', error);
   }
 }
+
+export async function putLinkLike(linkId: string, favorite: boolean) {
+  const data = await axios.put(`/links/${linkId}`, {
+    favorite: favorite,
+  });
+  return data;
+}

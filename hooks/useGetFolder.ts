@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 
 export type LinkData = {
   id: number;
+  favorite: boolean;
   created_at: Date;
-  updated_at?: Date;
   url: string;
   title: string;
   description: string;

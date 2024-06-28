@@ -56,7 +56,7 @@ function Folder() {
     if (!access) {
       router.replace('/signin');
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver);
@@ -139,13 +139,14 @@ function Folder() {
             </S.FolderModalContainer>
             <ContentsContainer content={linkList.length}>
               {linkList.length > 0 ? (
-                linkList.map((item: LinkData) => (
+                linkList.map((item: LinkData, index) => (
                   <Card
                     item={item}
                     key={item.id}
                     setUrl={setUrl}
                     setLinkId={setLinkId}
                     isActive={true}
+                    index={index}
                   />
                 ))
               ) : (
