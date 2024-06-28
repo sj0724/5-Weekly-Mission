@@ -7,26 +7,77 @@ import Image from 'next/image';
 import Link from 'next/link';
 import logo from '@/public/logo.svg';
 import { useRouter } from 'next/router';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { putLinkLike } from '@/api/api';
 
 function Card({
   item,
   isActive,
+  index,
+  favoriteFolder,
   setUrl,
   setLinkId,
 }: {
   item: LinkData;
   isActive: boolean;
+  index: number;
+  favoriteFolder?: string;
   setUrl?: Dispatch<SetStateAction<string>>;
   setLinkId?: Dispatch<SetStateAction<number>>;
 }) {
   const [createdAt, setCreatedAt] = useState({ time: 0, result: '' });
   const [fullDate, setFullDate] = useState('');
   const [kebabView, setKebabView] = useState(false);
-  const [like, setLike] = useState(false);
   const router = useRouter();
   const folderId = router.query.folderId as string;
   const { url, description, id, image_source, title } = item;
   const [imageUrl, setImageUrl] = useState(image_source);
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: async (data: { linkId: string; favorite: boolean }) => {
+      if (data.favorite) {
+        await putLinkLike(data.linkId, false);
+      } else {
+        await putLinkLike(data.linkId, true);
+      }
+    },
+    onMutate: async (data: { linkId: string; favorite: boolean }) => {
+      if (folderId) {
+        const result = queryClient.getQueryData<any>(['links', folderId]);
+        const refetchLink = { ...result.data[index], favorite: !data.favorite };
+        let refetchLinkArr = [...result.data];
+        refetchLinkArr[index] = refetchLink;
+        queryClient.setQueryData(['links', folderId], (prev: any) => {
+          return {
+            ...prev,
+            data: refetchLinkArr,
+          };
+        });
+      } else {
+        const result = queryClient.getQueryData<any>(['links']);
+        const refetchLink = { ...result.data[index], favorite: !data.favorite };
+        let refetchLinkArr = [...result.data];
+        refetchLinkArr[index] = refetchLink;
+        queryClient.setQueryData(['links'], (prev: any) => {
+          return {
+            ...prev,
+            data: refetchLinkArr,
+          };
+        });
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['links', folderId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['links'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['links', favoriteFolder],
+      });
+    },
+  });
 
   const createdText = `${createdAt.time} ${createdAt.result} ago`;
 
@@ -53,12 +104,12 @@ function Card({
           {isActive && (
             <S.StarIcon
               onClick={(e) => {
-                setLike(!like);
                 e.preventDefault();
+                mutate({ linkId: String(item.id), favorite: item.favorite });
               }}
             >
               <Image
-                src={like ? '/full_star.svg' : '/star.svg'}
+                src={item.favorite ? '/full_star.svg' : '/star.svg'}
                 alt="별 이미지"
                 fill
               />

@@ -31,11 +31,12 @@ function Folder() {
   const router = useRouter();
   const { deBounceValue } = useDebounce(searchKeyword, 500);
   const folderId = router.query.folderId as string;
-  const { linkList, allFolderLoading, singleFolderLoading } = useGetFolder(
-    deBounceValue,
-    folderId
-  );
-  const { folderList, isPending: folderLoading } = useGetFolderList();
+  const { linkList, linkLoading } = useGetFolder(deBounceValue, folderId);
+  const {
+    folderList,
+    isPending: folderLoading,
+    favoriteFolder,
+  } = useGetFolderList();
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
 
@@ -56,17 +57,17 @@ function Folder() {
     if (!access) {
       router.replace('/signin');
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(handleObserver);
-    if (!allFolderLoading && obsRef.current) {
+    if (!linkLoading && obsRef.current) {
       observer.observe(obsRef.current);
     }
     return () => {
       observer.disconnect();
     };
-  }, [allFolderLoading, folderId]);
+  }, [linkLoading, folderId]);
 
   useEffect(() => {
     for (let i = 0; i < folderList.length; i++) {
@@ -81,9 +82,7 @@ function Folder() {
 
   return (
     <>
-      {(allFolderLoading ||
-        folderLoading ||
-        (folderId && singleFolderLoading)) && (
+      {(linkLoading || folderLoading) && (
         <ModalPortal>
           <Loading />
         </ModalPortal>
@@ -133,19 +132,21 @@ function Folder() {
           <>
             <S.FolderModalContainer>
               <p>{folderId ? onSelect.name : '전체'}</p>
-              {folderId && (
+              {folderId != favoriteFolder && folderId && (
                 <FolderModals id={onSelect.id} name={onSelect.name} />
               )}
             </S.FolderModalContainer>
             <ContentsContainer content={linkList.length}>
-              {linkList.length > 0 ? (
-                linkList.map((item: LinkData) => (
+              {linkList[0] ? (
+                linkList.map((item: LinkData, index) => (
                   <Card
                     item={item}
                     key={item.id}
                     setUrl={setUrl}
                     setLinkId={setLinkId}
                     isActive={true}
+                    index={index}
+                    favoriteFolder={favoriteFolder}
                   />
                 ))
               ) : (

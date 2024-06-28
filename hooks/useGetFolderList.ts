@@ -14,6 +14,7 @@ export interface Folder {
 export interface Folders extends Array<Folder> {}
 
 function useGetFolderList() {
+  const [favoriteFolder, setFavoriteFolder] = useState('');
   const { data: list, isPending } = useQuery({
     queryKey: ['folder'],
     queryFn: () => getFolder(),
@@ -22,9 +23,16 @@ function useGetFolderList() {
 
   const folderList = list?.data ?? [];
 
+  useEffect(() => {
+    if (list) {
+      setFavoriteFolder(list?.data[0]?.id);
+    }
+  }, [list]);
+
   return {
     folderList,
     isPending,
+    favoriteFolder,
   };
 }
 export default useGetFolderList;
