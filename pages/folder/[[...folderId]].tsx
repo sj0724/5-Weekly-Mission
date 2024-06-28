@@ -32,7 +32,11 @@ function Folder() {
   const { deBounceValue } = useDebounce(searchKeyword, 500);
   const folderId = router.query.folderId as string;
   const { linkList, linkLoading } = useGetFolder(deBounceValue, folderId);
-  const { folderList, isPending: folderLoading } = useGetFolderList();
+  const {
+    folderList,
+    isPending: folderLoading,
+    favoriteFolder,
+  } = useGetFolderList();
   const { modalState, openModal } = useModal();
   const obsRef = useRef(null);
 
@@ -128,12 +132,12 @@ function Folder() {
           <>
             <S.FolderModalContainer>
               <p>{folderId ? onSelect.name : '전체'}</p>
-              {folderId && (
+              {folderId != favoriteFolder && folderId && (
                 <FolderModals id={onSelect.id} name={onSelect.name} />
               )}
             </S.FolderModalContainer>
             <ContentsContainer content={linkList.length}>
-              {linkList.length > 0 ? (
+              {linkList[0] ? (
                 linkList.map((item: LinkData, index) => (
                   <Card
                     item={item}
@@ -142,6 +146,7 @@ function Folder() {
                     setLinkId={setLinkId}
                     isActive={true}
                     index={index}
+                    favoriteFolder={favoriteFolder}
                   />
                 ))
               ) : (

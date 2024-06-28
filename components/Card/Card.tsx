@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { changeDate, calculateDate } from '../../util/util';
 import * as S from './Card.styled';
 import KebabMenu from '../KebabMenu/KebabMenu';
-import { LinkData, Links } from '../../hooks/useGetFolder';
+import { LinkData } from '../../hooks/useGetFolder';
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '@/public/logo.svg';
@@ -14,12 +14,14 @@ function Card({
   item,
   isActive,
   index,
+  favoriteFolder,
   setUrl,
   setLinkId,
 }: {
   item: LinkData;
   isActive: boolean;
   index: number;
+  favoriteFolder: string;
   setUrl?: Dispatch<SetStateAction<string>>;
   setLinkId?: Dispatch<SetStateAction<number>>;
 }) {
@@ -72,7 +74,7 @@ function Card({
         queryKey: ['links'],
       });
       queryClient.invalidateQueries({
-        queryKey: ['links', 1579],
+        queryKey: ['links', favoriteFolder],
       });
     },
   });
