@@ -51,13 +51,13 @@ export async function getFolderData(folderId: string) {
 }
 
 export async function getFolderList(folderId: string) {
-  const query = `/${folderId}/links`;
-  const result = await axios.get(`/folders${query}`);
-  return result;
-}
-
-export async function getUserLinks() {
-  const result = await axios.get('/links');
+  let query;
+  if (folderId) {
+    query = `/folders/${folderId}/links`;
+  } else {
+    query = '/links';
+  }
+  const result = await axios.get(`${query}`);
   return result;
 }
 

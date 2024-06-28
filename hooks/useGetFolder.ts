@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getFolderList, getUserLinks } from '../api/api';
+import { getFolderList } from '../api/api';
 import { useQuery } from '@tanstack/react-query';
 
 export type LinkData = {
@@ -17,30 +17,18 @@ export interface Links extends Array<LinkData> {}
 
 function useGetFolder(deBounceValue: string, folderId: string) {
   const [linkList, setLinkList] = useState<Links>([]);
-  const {
-    data: link,
-    isPending: singleFolderLoading,
-    isSuccess: singleFolderSuccess,
-  } = useQuery({
-    queryKey: ['links', folderId],
-    queryFn: ({ queryKey }) => getFolderList(queryKey[1]),
-    enabled: !!folderId,
-    staleTime: 60 * 1000 * 60,
-  });
 
   const {
-    data: allLink,
-    isPending: allFolderLoading,
-    isSuccess: allFolderSuccess,
+    data: link,
+    isPending: linkLoading,
+    isSuccess: linkSuccess,
   } = useQuery({
-    queryKey: ['links'],
-    queryFn: () => getUserLinks(),
+    queryKey: folderId ? ['links', folderId] : ['links'],
+    queryFn: () => getFolderList(folderId),
     staleTime: 60 * 1000 * 60,
   });
 
   const linkArr = link?.data ?? [];
-
-  const allLinkArr = allLink?.data ?? [];
 
   const search = (list: Links) => {
     if (list) {
@@ -55,30 +43,20 @@ function useGetFolder(deBounceValue: string, folderId: string) {
   };
 
   useEffect(() => {
-    if (!folderId) {
-      if (allLinkArr && allFolderSuccess) {
-        setLinkList(allLinkArr);
-      }
+    if (linkArr && linkSuccess) {
+      setLinkList(linkArr);
     }
-  }, [allLinkArr, allFolderSuccess, folderId]);
-
-  useEffect(() => {
-    if (folderId) {
-      if (linkArr && singleFolderSuccess) {
-        setLinkList(linkArr);
-      }
-    }
-  }, [linkArr, singleFolderSuccess, folderId]);
+  }, [linkArr, linkSuccess, folderId]);
 
   useEffect(() => {
     if (!deBounceValue) {
-      setLinkList(folderId ? linkArr : allLinkArr);
+      setLinkList(linkArr);
     } else {
       search(linkList);
     }
   }, [deBounceValue]);
 
-  return { linkList, allFolderLoading, singleFolderLoading };
+  return { linkList, linkLoading };
 }
 
 export default useGetFolder;
