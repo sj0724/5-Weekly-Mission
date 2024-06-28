@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { changeDate, calculateDate } from '../../util/util';
 import * as S from './Card.styled';
 import KebabMenu from '../KebabMenu/KebabMenu';
@@ -22,8 +22,8 @@ function Card({
   isActive: boolean;
   index: number;
   favoriteFolder?: string;
-  setUrl?: Dispatch<SetStateAction<string>>;
-  setLinkId?: Dispatch<SetStateAction<number>>;
+  setUrl: Dispatch<SetStateAction<string>>;
+  setLinkId: Dispatch<SetStateAction<number>>;
 }) {
   const [createdAt, setCreatedAt] = useState({ time: 0, result: '' });
   const [fullDate, setFullDate] = useState('');
@@ -32,6 +32,7 @@ function Card({
   const folderId = router.query.folderId as string;
   const { url, description, id, image_source, title } = item;
   const [imageUrl, setImageUrl] = useState(image_source);
+  const kebabIconRef = useRef<HTMLImageElement>(null);
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: async (data: { linkId: string; favorite: boolean }) => {
@@ -82,11 +83,13 @@ function Card({
   const createdText = `${createdAt.time} ${createdAt.result} ago`;
 
   const handleKebab = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-    setKebabView(!kebabView);
-    if (setLinkId) {
-      setLinkId(id);
-    }
     e.preventDefault();
+    if (!kebabView) {
+      setKebabView(true);
+      setLinkId(id);
+    } else {
+      setKebabView(false);
+    }
   };
 
   useEffect(() => {
@@ -137,6 +140,7 @@ function Card({
                 src="/kebab.svg"
                 alt="kebabIcon"
                 onClick={handleKebab}
+                ref={kebabIconRef}
               />
             )}
             <S.ItemDate>{createdText}</S.ItemDate>
@@ -150,6 +154,7 @@ function Card({
               id={id}
               setKebabView={setKebabView}
               kebabView={kebabView}
+              kebabIconRef={kebabIconRef}
             />
           )}
         </S.ItemCard>
