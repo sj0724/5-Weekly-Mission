@@ -17,7 +17,7 @@ function KebabMenu({
 }: {
   url: string;
   id: number;
-  setUrl: Dispatch<SetStateAction<string>>;
+  setUrl?: Dispatch<SetStateAction<string>>;
   setKebabView: Dispatch<SetStateAction<boolean>>;
   kebabView: boolean;
   kebabIconRef: RefObject<HTMLImageElement>;
@@ -28,7 +28,7 @@ function KebabMenu({
   const handleAddKebab = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     openModal('add');
-    setUrl(url);
+    setUrl && setUrl(url);
   };
 
   const handleDeleteKebab = (

@@ -22,8 +22,8 @@ function Card({
   isActive: boolean;
   index: number;
   favoriteFolder?: string;
-  setUrl: Dispatch<SetStateAction<string>>;
-  setLinkId: Dispatch<SetStateAction<number>>;
+  setUrl?: Dispatch<SetStateAction<string>>;
+  setLinkId?: Dispatch<SetStateAction<number>>;
 }) {
   const [createdAt, setCreatedAt] = useState({ time: 0, result: '' });
   const [fullDate, setFullDate] = useState('');
@@ -86,7 +86,7 @@ function Card({
     e.preventDefault();
     if (!kebabView) {
       setKebabView(true);
-      setLinkId(id);
+      setLinkId && setLinkId(id);
     } else {
       setKebabView(false);
     }

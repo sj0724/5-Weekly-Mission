@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, useEffect } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import * as S from './Button.styled';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
