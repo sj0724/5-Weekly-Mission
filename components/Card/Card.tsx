@@ -21,7 +21,7 @@ function Card({
   item: LinkData;
   isActive: boolean;
   index: number;
-  favoriteFolder: string;
+  favoriteFolder?: string;
   setUrl?: Dispatch<SetStateAction<string>>;
   setLinkId?: Dispatch<SetStateAction<number>>;
 }) {
@@ -43,7 +43,7 @@ function Card({
     },
     onMutate: async (data: { linkId: string; favorite: boolean }) => {
       if (folderId) {
-        const result = queryClient.getQueryData(['links', folderId]);
+        const result = queryClient.getQueryData<any>(['links', folderId]);
         const refetchLink = { ...result.data[index], favorite: !data.favorite };
         let refetchLinkArr = [...result.data];
         refetchLinkArr[index] = refetchLink;
@@ -54,7 +54,7 @@ function Card({
           };
         });
       } else {
-        const result = queryClient.getQueryData(['links']);
+        const result = queryClient.getQueryData<any>(['links']);
         const refetchLink = { ...result.data[index], favorite: !data.favorite };
         let refetchLinkArr = [...result.data];
         refetchLinkArr[index] = refetchLink;

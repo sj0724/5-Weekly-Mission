@@ -16,7 +16,7 @@ function Shared() {
   const router = useRouter();
   const folderId = router.query.folderId as string;
   const { deBounceValue } = useDebounce(searchKeyword, 500);
-  const { linkList, allFolderLoading } = useGetFolder(deBounceValue, folderId);
+  const { linkList, linkLoading } = useGetFolder(deBounceValue, folderId);
   const { data: folderInfo } = useQuery({
     queryKey: ['sharedFolder'],
     queryFn: () => getFolderData(folderId),
@@ -33,7 +33,7 @@ function Shared() {
 
   return (
     <>
-      {allFolderLoading && <Loading />}
+      {linkLoading && <Loading />}
       <S.OwnerProfile>
         <Image
           src={owner?.data[0].image_source}
@@ -56,8 +56,8 @@ function Shared() {
         )}
         <ContentsContainer content={linkList.length}>
           {linkList.length > 0 ? (
-            linkList.map((item) => (
-              <Card item={item} key={item.id} isActive={false} />
+            linkList.map((item, index) => (
+              <Card item={item} key={item.id} isActive={false} index={index} />
             ))
           ) : (
             <S.EmptyFolder>저장된 링크가 없습니다.</S.EmptyFolder>
