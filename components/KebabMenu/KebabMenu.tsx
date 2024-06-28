@@ -1,4 +1,10 @@
-import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
+import React, {
+  Dispatch,
+  RefObject,
+  SetStateAction,
+  useEffect,
+  useRef,
+} from 'react';
 import { useModal } from '@/contexts/ModalContext';
 import * as S from './KebabMenu.styled';
 
@@ -7,12 +13,14 @@ function KebabMenu({
   setUrl,
   setKebabView,
   kebabView,
+  kebabIconRef,
 }: {
   url: string;
   id: number;
   setUrl?: Dispatch<SetStateAction<string>>;
   setKebabView: Dispatch<SetStateAction<boolean>>;
   kebabView: boolean;
+  kebabIconRef: RefObject<HTMLImageElement>;
 }) {
   const kebabRef = useRef<HTMLObjectElement>(null);
   const { openModal } = useModal();
@@ -20,9 +28,7 @@ function KebabMenu({
   const handleAddKebab = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     openModal('add');
-    if (setUrl) {
-      setUrl(url);
-    }
+    setUrl && setUrl(url);
   };
 
   const handleDeleteKebab = (
@@ -34,12 +40,11 @@ function KebabMenu({
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (
-        kebabView &&
-        kebabRef.current &&
-        !kebabRef.current.contains(e.target as Node)
-      ) {
-        setKebabView(!kebabView);
+      if (kebabRef.current && !kebabRef.current.contains(e.target as Node)) {
+        if (kebabIconRef.current?.contains(e.target as Node)) {
+          return;
+        }
+        setKebabView(false);
       }
     }
 

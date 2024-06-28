@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import * as S from './AddModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import { Folder, Folders } from '../../../hooks/useGetFolderList';
@@ -8,6 +8,12 @@ import { postLink } from '@/api/api';
 import { useRouter } from 'next/router';
 import { useModal } from '@/contexts/ModalContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+
+interface AddModalProps {
+  link: Folders;
+  url: string;
+  setUrl: Dispatch<SetStateAction<string>>;
+}
 
 function FolderButton({
   item,
@@ -40,7 +46,7 @@ function FolderButton({
   );
 }
 
-function AddModal({ link, url }: { link: Folders; url: string }) {
+function AddModal({ link, url, setUrl }: AddModalProps) {
   const queryClient = useQueryClient();
   const [folderSelected, setFolderSelected] = useState<string[]>([]);
   const [selectedId, setSelectedId] = useState('');
@@ -54,6 +60,7 @@ function AddModal({ link, url }: { link: Folders; url: string }) {
       queryClient.invalidateQueries({ queryKey: ['folder'] });
     },
     onSettled: () => {
+      setUrl('');
       closeModal('add');
       router.push(`/folder/${selectedId}`);
     },

@@ -157,7 +157,7 @@ function Folder() {
         )}
         {modalState.add && (
           <ModalPortal>
-            <AddModal link={folderList} url={url} />
+            <AddModal link={folderList} url={url} setUrl={setUrl} />
           </ModalPortal>
         )}
         {modalState.deleteLink && (
