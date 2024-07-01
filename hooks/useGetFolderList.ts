@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getFolder } from '../api/api';
+import { getFolder } from '../service/api';
 import { useQuery } from '@tanstack/react-query';
 
 export interface Folder {

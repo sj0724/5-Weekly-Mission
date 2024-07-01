@@ -3,7 +3,7 @@ import BaseModal from '../BaseModal/BaseModal';
 import { Button } from '@/components/Button/Button';
 import Input, { FormValueTypes } from '@/components/Input/Input';
 import { Controller, useForm } from 'react-hook-form';
-import { putFolder } from '@/api/api';
+import { putFolder } from '@/service/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useModal } from '@/contexts/ModalContext';
 

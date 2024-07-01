@@ -1,7 +1,7 @@
 import * as S from '../EditModal/EditModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
 import Input, { FormValueTypes } from '@/components/Input/Input';
-import { postFolder } from '@/api/api';
+import { postFolder } from '@/service/api';
 import { Controller, useForm } from 'react-hook-form';
 import { useModal } from '@/contexts/ModalContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';

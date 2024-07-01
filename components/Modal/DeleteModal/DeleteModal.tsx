@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './DeleteModal.styled';
 import BaseModal from '../BaseModal/BaseModal';
-import { deleteFolder } from '@/api/api';
+import { deleteFolder } from '@/service/api';
 import { useModal } from '@/contexts/ModalContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';

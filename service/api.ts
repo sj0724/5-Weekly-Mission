@@ -77,11 +77,16 @@ export async function getUserData(id: string) {
 }
 
 export async function postSignIn(id: string, password: string) {
-  const { data } = await axios.post('/auth/sign-in', {
-    email: id,
-    password: password,
-  });
-  localStorage.setItem('token', data.accessToken);
+  const data = await axios.post(
+    '/auth/sign-in',
+    {
+      email: id,
+      password: password,
+    },
+    {
+      headers: { 'exclude-access-token': true },
+    }
+  );
   return data;
 }
 
