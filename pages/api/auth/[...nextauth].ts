@@ -1,15 +1,15 @@
-import { postSignIn } from '@/service/api';
-import NextAuth, { Session, User } from 'next-auth';
-import { JWT } from 'next-auth/jwt';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import { postSignIn } from "@/service/api";
+import NextAuth, { Session, User } from "next-auth";
+import { JWT } from "next-auth/jwt";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOption = {
   providers: [
     CredentialsProvider({
-      name: 'Credentials',
+      name: "Credentials",
       credentials: {
-        id: { label: 'id', type: 'text' },
-        password: { label: 'password', type: 'password' },
+        id: { label: "id", type: "text" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials) return null;
@@ -23,7 +23,7 @@ export const authOption = {
   secret: process.env.NEXTAUTH_SECRET,
 
   pages: {
-    signIn: '/signin',
+    signIn: "/login",
   },
 
   session: {
