@@ -8,7 +8,7 @@ import Link from 'next/link';
 import logo from '@/public/logo.svg';
 import { useRouter } from 'next/router';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { putLinkLike } from '@/api/api';
+import { putLinkLike } from '@/service/api';
 
 function Card({
   item,

@@ -3,16 +3,13 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/Button/Button';
-import { postSignIn } from '../api/api';
 import { Controller, useForm } from 'react-hook-form';
 import { emailPattern } from '@/util/util';
 import { useRouter } from 'next/router';
 import { useLoadUser } from '@/contexts/UserContext';
 import AuthInput from '@/components/Input/AuthInput';
-import { useMutation } from '@tanstack/react-query';
 import Toast from '@/components/Toast/Toast';
-import Loading from '@/components/Loading/Loading';
-import ModalPortal from '@/Portal';
+import { signIn } from 'next-auth/react';
 
 export interface FormValueType {
   id: string;
@@ -32,26 +29,24 @@ function SignIn() {
   const router = useRouter();
   const { user } = useLoadUser();
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: (user: { id: string; password: string }) =>
-      postSignIn(user.id, user.password),
-    onSuccess: () => (window.location.href = '/folder'),
-    onError: () => {
-      setToast(true);
+  const formAction = async (data: FormValueType) => {
+    const result = await signIn('credentials', {
+      id: data.id,
+      password: data.password,
+      redirect: false,
+    });
+    if (result?.ok) {
+      router.push('/folder');
+    } else if (result?.error) {
       setError('id', {
         type: 'manual',
-        message: '이메일을 확인해주세요!',
+        message: '아이디를 다시 확인해주세요!',
       });
       setError('password', {
         type: 'manual',
-        message: '비밀번호를 확인해주세요!',
+        message: '비밀번호를 다시 확인해주세요!',
       });
-    },
-  });
-
-  const formAction = async (data: FormValueType) => {
-    const userInfo = { id: data.id, password: data.password };
-    mutate(userInfo);
+    }
   };
 
   const hiddenText = () => {
@@ -66,11 +61,6 @@ function SignIn() {
 
   return (
     <>
-      {isPending && (
-        <ModalPortal>
-          <Loading />
-        </ModalPortal>
-      )}
       <S.SignBody>
         <S.SignContent>
           <S.SignFormBody>

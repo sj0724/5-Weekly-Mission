@@ -1,12 +1,7 @@
-import { getUser } from '@/api/api';
+import { getUser } from '@/service/api';
 import { useQuery } from '@tanstack/react-query';
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { useSession } from 'next-auth/react';
+import { ReactNode, createContext, useContext } from 'react';
 
 export interface User {
   id: string;
@@ -27,20 +22,14 @@ export const UserContext = createContext({
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const [isLogin, setIsLogin] = useState(false);
+  const session = useSession();
 
   const { data: user } = useQuery({
     queryKey: ['user'],
     queryFn: () => getUser(),
     staleTime: 60 * 1000 * 60,
-    enabled: !!isLogin,
+    enabled: session.status === 'authenticated',
   });
-
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      setIsLogin(!isLogin);
-    }
-  }, []);
 
   return (
     <UserContext.Provider value={user?.[0]}>{children}</UserContext.Provider>

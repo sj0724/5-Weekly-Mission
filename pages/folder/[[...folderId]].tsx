@@ -53,13 +53,6 @@ function Folder() {
   };
 
   useEffect(() => {
-    const access = localStorage.getItem('token');
-    if (!access) {
-      router.replace('/signin');
-    }
-  }, [router]);
-
-  useEffect(() => {
     const observer = new IntersectionObserver(handleObserver);
     if (!linkLoading && obsRef.current) {
       observer.observe(obsRef.current);

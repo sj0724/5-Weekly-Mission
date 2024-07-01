@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Dispatch, useState } from 'react';
 import Image from 'next/image';
 import { User, useLoadUser } from '@/contexts/UserContext';
+import { signOut } from 'next-auth/react';
 
 function NavUser({
   user,
@@ -15,8 +16,7 @@ function NavUser({
   setToggle: Dispatch<React.SetStateAction<boolean>>;
 }) {
   const isLogout = () => {
-    localStorage.clear();
-    window.location.href = '/';
+    signOut();
   };
 
   return (

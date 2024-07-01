@@ -4,7 +4,7 @@ import BaseModal from '../BaseModal/BaseModal';
 import { Folder, Folders } from '../../../hooks/useGetFolderList';
 import { Button } from '../../Button/Button';
 import Image from 'next/image';
-import { postLink } from '@/api/api';
+import { postLink } from '@/service/api';
 import { useRouter } from 'next/router';
 import { useModal } from '@/contexts/ModalContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';

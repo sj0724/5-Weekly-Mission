@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import * as S from '../../styles/shared.styled';
-import { getFolderData, getUserData } from '../../api/api';
+import { getFolderData, getUserData } from '../../service/api';
 import Card from '../../components/Card/Card';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import Image from 'next/image';
