@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/Button/Button";
 import { Controller, useForm } from "react-hook-form";
 import { emailPattern } from "@/util/util";
-import { useLoadUser } from "@/contexts/UserContext";
 import AuthInput from "@/components/Input/AuthInput";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
@@ -27,7 +26,6 @@ export default function LoginForm() {
     formState: { isValid },
   } = useForm<FormValueType>({ mode: "onChange" });
   const router = useRouter();
-  const { user } = useLoadUser();
 
   const formAction = async (data: FormValueType) => {
     const result = await signIn("credentials", {
@@ -52,12 +50,6 @@ export default function LoginForm() {
   const hiddenText = () => {
     setTextHidden(!textHidden);
   };
-
-  useEffect(() => {
-    if (user) {
-      router.replace("/folder");
-    }
-  }, [user, router]);
 
   return (
     <form
