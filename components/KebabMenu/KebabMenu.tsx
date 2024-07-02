@@ -4,9 +4,9 @@ import React, {
   SetStateAction,
   useEffect,
   useRef,
-} from 'react';
-import { useModal } from '@/contexts/ModalContext';
-import * as S from './KebabMenu.styled';
+} from "react";
+import { useModal } from "@/contexts/ModalContext";
+import * as S from "./KebabMenu.styled";
 
 function KebabMenu({
   url,
@@ -27,15 +27,15 @@ function KebabMenu({
 
   const handleAddKebab = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
-    openModal('add');
+    openModal("add");
     setUrl && setUrl(url);
   };
 
   const handleDeleteKebab = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     e.preventDefault();
-    openModal('deleteLink');
+    openModal("deleteLink");
   };
 
   useEffect(() => {
@@ -48,11 +48,11 @@ function KebabMenu({
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [setKebabView, kebabView]);
+  }, [setKebabView, kebabView, kebabIconRef]);
 
   return (
     <>

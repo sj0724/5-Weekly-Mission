@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import * as S from './BaseModal.styled';
-import { useModal } from '@/contexts/ModalContext';
+import React, { useEffect, useRef } from "react";
+import * as S from "./BaseModal.styled";
+import { useModal } from "@/contexts/ModalContext";
 
 function BaseModal({
   children,
@@ -21,17 +21,17 @@ function BaseModal({
         closeModal(`${state}`);
       }
     };
-    document.addEventListener('click', handleClickOutside);
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal(`${state}`);
+    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal(`${state}`);
     });
     return () => {
-      document.removeEventListener('click', handleClickOutside);
-      document.removeEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal(`${state}`);
+      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal(`${state}`);
       });
     };
-  }, []);
+  }, [closeModal, state]);
 
   return (
     <S.Background>
