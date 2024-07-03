@@ -41,7 +41,7 @@ function Nav() {
   return (
     <S.NavBar>
       <S.NavModal>
-        <Link href="/">
+        <Link href="/folder">
           <Image
             src="/logo.svg"
             alt="네이게이션 로고"

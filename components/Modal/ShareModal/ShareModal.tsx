@@ -48,7 +48,7 @@ function ShareModal({
   const shareFacebook = () => {
     const title = "페이스북 공유하기";
     window.open(
-      `https://www.facebook.com/sharer.php?u=${process.env.NEXT_PUBLIC_BASE_URL}/shared/${folderId}?userId=${user.id}`,
+      `https://www.facebook.com/sharer.php?u=${process.env.NEXT_PUBLIC_BASE_URL}/sharedFolder/${folderId}`,
       title,
       "toolbar=0,status=0,width=655,height=520",
     );
